@@ -1,0 +1,74 @@
+<div *ngIf="showForm && !isLoading">
+    <div class="modal-header">
+        <h4 class="modal-title">Dodaj pracownika</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="employeeForm" (ngSubmit)="onSaveClicked()">
+            <div>
+                <label>
+                    Imię
+                    <input type="text" formControlName="firstName">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Drugie imię
+                    <input type="text" formControlName="middleName">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Nazwisko
+                    <input type="text" formControlName="lastName">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Data zatrudnienia
+                    <input type="date" formControlName="employmentDate">
+                </label>
+            </div>
+            <div>  
+                <label>
+                    <input type="radio" [value]="withoutAccount" formControlName="employeeStatus">Bez własnego konta
+                </label>
+                <label>
+                    <input type="radio" [value]="withAccount" formControlName="employeeStatus">Z kontem
+                </label>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss()">Anuluj</button>
+        <button type="submit" class="btn btn-success" (click)="onSaveClicked()">Zapisz</button>
+    </div>
+</div>
+<div *ngIf="isLoading" class="loading-modal">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>
+<div *ngIf="showLink && !isLoading">
+    <div class="modal-header">
+        <h4 class="modal-title">Pracownik dodany</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            Pracownik dodany pomyślnie. Wyślij pracownikowi poniższy link, aby uzupełnił on swoje dane do logowania:
+        </div>
+        <div class="invitation-link-input">
+            <label>
+                <input class="invitation-link-input" type="text" disabled [(ngModel)]="invitationLink">
+            </label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="onInvitatationLinkCloseClicked()">Zamknij</button>
+    </div>
+</div>
+

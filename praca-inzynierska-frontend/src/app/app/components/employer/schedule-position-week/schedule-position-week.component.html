@@ -1,0 +1,22 @@
+<div>
+    {{position.name}}
+    <button (click)="onPositionScheduleEditClicked(position.id)">
+        Edytuj
+    </button>
+</div>
+<div *ngIf="!requiredStaffLoaded; else week">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>
+<ng-template #week>
+    <div class="days-container">
+        <schedule-position-day [date]="daysAfter(firstDay, 0)" [requiredStaff]="requiredStaff"></schedule-position-day>
+        <schedule-position-day [date]="daysAfter(firstDay, 1)" [requiredStaff]="requiredStaff"></schedule-position-day>
+        <schedule-position-day [date]="daysAfter(firstDay, 2)" [requiredStaff]="requiredStaff"></schedule-position-day>
+        <schedule-position-day [date]="daysAfter(firstDay, 3)" [requiredStaff]="requiredStaff"></schedule-position-day>
+        <schedule-position-day [date]="daysAfter(firstDay, 4)" [requiredStaff]="requiredStaff"></schedule-position-day>
+        <schedule-position-day [date]="daysAfter(firstDay, 5)" [requiredStaff]="requiredStaff"></schedule-position-day>
+        <schedule-position-day [date]="daysAfter(firstDay, 6)" [requiredStaff]="requiredStaff"></schedule-position-day>
+    </div>
+</ng-template>
+

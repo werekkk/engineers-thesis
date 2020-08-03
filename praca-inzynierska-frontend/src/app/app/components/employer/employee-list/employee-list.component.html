@@ -1,0 +1,59 @@
+<div>
+    Pracodawca: {{ employer?.firstName }} {{ employer?.lastName }}
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Pracownik</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container  *ngFor="let e of employees; let i = index">
+            <tr (click)="onRowClicked(i)">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{ e.account.firstName }} {{ e.account.lastName }}</td>
+                <td>{{ e.employeeStatus }}</td>
+                <div>
+                </div>
+            </tr>
+            <tr >
+                <td class="hidden-row" colspan="3">
+                    <div *ngIf="isCollapsed[i]">
+                        <div>
+                            Data zatrudnienia: {{e.employmentDate ? e.employmentDate : '---'}}
+                        </div>
+                        <div>
+                            Data zwolnienia: {{e.dischargeDate ? e.dischargeDate : '---'}}
+                        </div>
+                        <div *ngIf="e.employeeStatus === 'INVITED'">
+                            Link aktywacyjny: {{e | invitationLink}}
+                        </div>
+                        <div>
+                            Stanowiska:
+                            <ng-container *ngIf="e.positions.length == 0;else positions">
+                                BRAK
+                            </ng-container>
+                            <ng-template #positions>
+                                <span *ngFor="let p of e.positions">{{p.name}} </span>
+                            </ng-template>
+                        </div>
+                        <div>
+                            <button (click)="onEditPositionsClicked(e)">
+                                Edytuj stanowiska
+                            </button>
+                            <button (click)="onDischargeClicked(e)" [disabled]="e.employeeStatus === 'DISCHARGED'">
+                                Zwolnij
+                            </button>
+                            <button (click)="onDeleteClicked(e)">
+                                Usuń
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </ng-container>
+            
+    </tbody>
+</table>

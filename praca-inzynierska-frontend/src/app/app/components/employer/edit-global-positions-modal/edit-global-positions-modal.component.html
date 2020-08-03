@@ -1,0 +1,19 @@
+<div *ngIf="!isLoading">
+    <div class="modal-header">
+        Edytuj stanowiska
+    </div>
+    <div class="modal-body">   
+        <div *ngFor="let position of positions">
+            {{position.name}}
+            <button (click)="onDeletePositionClicked(position)">Usuń</button>
+        </div> 
+        <div>
+            <input type="text" [(ngModel)]="newPositionName">
+            <button (click)="onAddPositionClicked()">Dodaj stanowisko</button>
+        </div>
+    </div> 
+</div>
+<div *ngIf="isLoading" class="loading-modal">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>

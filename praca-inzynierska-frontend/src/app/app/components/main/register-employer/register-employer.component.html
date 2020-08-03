@@ -1,0 +1,57 @@
+<form [formGroup]="employerForm" (ngSubmit)="onRegisterClicked()">
+    <div formGroupName="employer">
+        <div>
+            <label>
+                Nazwa użytkownika:
+                <input type="text" formControlName="username">
+            </label>
+        </div>
+        <div>
+            <label>
+                Hasło:
+                <input type="password" formControlName="password">
+            </label>
+        </div>
+        <div>
+            <label>
+                Powtórz hasło:
+                <input type="password" formControlName="repeatPassword">
+            </label>
+        </div>
+        <div>
+            <label>
+                Adres e-mail:
+                <input type="email" formControlName="email">
+            </label>
+        </div>
+        <div>
+            <label>
+                Imię:
+                <input type="text" formControlName="firstName">
+            </label>
+        </div>
+        <div>
+            <label>
+                Drugie imię (opcjonalne):
+                <input type="text" formControlName="middleName">
+            </label>
+        </div>
+        <div>
+            <label>
+                Nazwisko:
+                <input type="text" formControlName="lastName">
+            </label>
+        </div>
+    </div>
+    <div>
+        <label>
+            Nazwa zakładu pracy:
+            <input type="text" formControlName="workplaceName">
+        </label>
+    </div>
+    <div>
+        <button type="submit" [disabled]="!employerForm.valid">
+            Zarejestruj
+        </button>
+    </div>
+</form>

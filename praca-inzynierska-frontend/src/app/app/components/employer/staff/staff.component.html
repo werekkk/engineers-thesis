@@ -1,0 +1,18 @@
+<div *ngIf="isPositionsLoading; else ngbNavContainer" >
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>
+<ng-template #ngbNavContainer>
+    <ul ngbNav #nav="ngbNav" [(activeId)]="activeId" class="nav-tabs">
+        <ng-container *ngFor="let position of positions; let i = index">
+            <li [ngbNavItem]="i">
+                <a ngbNavLink>{{position.name}}</a>
+                <ng-template ngbNavContent>
+                    <staff-requirements [position]="position"></staff-requirements>
+                </ng-template>
+            </li>
+        </ng-container>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+</ng-template>
+

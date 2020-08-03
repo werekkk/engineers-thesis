@@ -1,0 +1,28 @@
+{{position?.name}}
+<div *ngIf="!employeesLoaded; else schedule">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>
+
+<ng-template #schedule>
+    <div class="schedule_container">
+        <table class="schedule_table">
+        <tr>
+            <th>Pracownik</th>
+            <ng-container *ngFor="let day of days">
+                <th>{{day | date : 'dd.MM'}}</th>
+            </ng-container>
+        </tr> 
+        <ng-container *ngFor="let employee of employees">
+                <tr>
+                    <td>{{employee.account.firstName}} {{employee.account.lastName}}</td>
+                    <ng-container *ngFor="let day of days">
+                        <td>
+                            <schedule-employee-day-cell></schedule-employee-day-cell>
+                        </td>
+                    </ng-container>
+                </tr>
+        </ng-container>
+        </table>
+    </div>
+</ng-template>

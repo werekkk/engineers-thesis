@@ -1,0 +1,6 @@
+<div *ngFor="let period of timePeriods; let i = index" (mouseenter)="onMouseEnterPeriod(i)" (mouseleave)="onMouseLeave()">
+    {{period.timePeriod.start | time}} - {{period.timePeriod.finish | time}}. Liczba pracowników: {{period.employeeCount}}
+    <button (click)="onDeletePeriodClicked(i)">
+        Usuń
+    </button>
+</div>

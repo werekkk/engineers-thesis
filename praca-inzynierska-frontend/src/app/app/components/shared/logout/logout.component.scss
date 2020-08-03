@@ -1,0 +1,35 @@
+.logout {
+    display: inline-block;
+    flex-direction: column;
+    background-color: #FFF;
+    border-radius: 8px;
+    position: relative;
+}
+
+.logout_logged-as {
+    font-size: small;
+}
+
+.logout_user-info-container {
+    display: inline-flex;
+}
+
+.logout_user-info {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.logout_chevron {
+    display: inline-flex;
+    align-items: center;
+    padding: 0px 8px 0px 8px;
+}
+
+.logout_options-container {
+    padding: 8px;
+    background-color: white;
+    border-radius: 0 0 8px 8px;
+    width: 100%;
+    position: absolute;
+}

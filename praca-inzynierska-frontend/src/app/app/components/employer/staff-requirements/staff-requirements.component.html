@@ -1,0 +1,24 @@
+<div *ngIf="isLoading; else requirements">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>
+
+<ng-template #requirements>
+    <div>
+        <button (click)="onSaveClicked()">Zapisz</button>
+        <h5>Poniedziałek</h5>
+        <staff-requirements-day [(timePeriods)]="staffRequirements.mondayStaff.timePeriods"></staff-requirements-day>
+        <h5>Wtorek</h5>
+        <staff-requirements-day [(timePeriods)]="staffRequirements.tuesdayStaff.timePeriods"></staff-requirements-day>
+        <h5>Środa</h5>
+        <staff-requirements-day [(timePeriods)]="staffRequirements.wednesdayStaff.timePeriods"></staff-requirements-day>
+        <h5>Czwartek</h5>
+        <staff-requirements-day [(timePeriods)]="staffRequirements.thursdayStaff.timePeriods"></staff-requirements-day>
+        <h5>Piątek</h5>
+        <staff-requirements-day [(timePeriods)]="staffRequirements.fridayStaff.timePeriods"></staff-requirements-day>
+        <h5>Sobota</h5>
+        <staff-requirements-day [(timePeriods)]="staffRequirements.saturdayStaff.timePeriods"></staff-requirements-day>
+        <h5>Niedziela</h5>
+        <staff-requirements-day [(timePeriods)]="staffRequirements.sundayStaff.timePeriods"></staff-requirements-day>
+    </div>
+</ng-template>

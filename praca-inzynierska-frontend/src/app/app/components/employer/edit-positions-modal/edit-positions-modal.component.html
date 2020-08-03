@@ -1,0 +1,20 @@
+<div *ngIf="!isLoading">
+    <div class="modal-header">
+        {{fromParent.employee.account.firstName}} {{fromParent.employee.account.lastName}} - stanowiska
+    </div>
+    <div class="modal-body">
+        <div *ngFor="let position of positions; let i = index">
+            <input type="checkbox" [(ngModel)]="positionSelected[i]">
+            {{position.name}}
+        </div>
+        <div>
+            <button (click)="onSavePositionsClicked()">
+                Zapisz
+            </button>
+        </div>
+    </div>
+</div>
+<div *ngIf="isLoading" class="loading-modal">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>

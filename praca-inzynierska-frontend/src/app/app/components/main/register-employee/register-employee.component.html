@@ -1,0 +1,41 @@
+<div>
+    <div>
+        Pracownik:
+    </div>
+    <div>
+        {{employee?.firstName}} {{employee?.lastName}}
+    </div>
+</div>
+<div>
+    <form [formGroup]="employeeForm" (ngSubmit)="onRegisterClicked()">
+        <div>
+            <label>
+                Nazwa użytkownika:
+                <input type="text" formControlName="username">
+            </label>
+        </div>
+        <div>
+            <label>
+                Hasło:
+                <input type="password" formControlName="password">
+            </label>
+        </div>
+        <div>
+            <label>
+                Powtórz hasło:
+                <input type="password" formControlName="repeatPassword">
+            </label>
+        </div>
+        <div>
+            <label>
+                Adres e-mail:
+                <input type="email" formControlName="email">
+            </label>
+        </div>
+        <div>
+            <button type="submit" [disabled]="!employeeForm.valid">
+                Zarejestruj
+            </button>
+        </div>
+    </form>
+</div>

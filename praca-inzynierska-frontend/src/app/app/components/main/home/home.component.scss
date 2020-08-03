@@ -1,0 +1,31 @@
+.login-box-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box {
+    background-color: #FFF;
+    display: inline-flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 4px 4px 5px 2px rgba(0, 0, 0, 0.1);
+    min-width: 350px;
+}
+
+.login-box_header {
+    text-align: center;
+}
+
+.login-box_segment {
+    margin-top: 8px;
+}
+
+.login-box_segment, label {
+    text-align: center;
+}
+
+.login-box_segment, input {
+    text-align: center;
+}

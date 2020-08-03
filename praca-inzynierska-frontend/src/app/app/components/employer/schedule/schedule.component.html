@@ -1,0 +1,11 @@
+<div *ngIf="!positionsLoaded; else schedules">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>
+<ng-template #schedules>
+    <ng-container *ngFor="let position of positions">
+        <div>
+            <schedule-position-week [position]="position" [firstDate]="firstDate"></schedule-position-week>
+        </div>
+    </ng-container>
+</ng-template>
