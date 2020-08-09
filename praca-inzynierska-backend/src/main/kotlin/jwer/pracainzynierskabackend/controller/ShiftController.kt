@@ -26,6 +26,14 @@ class ShiftController @Autowired constructor(
         return ControllerUtils.createResponse(shiftService.getShiftsByPosition(principal, positionId, firstDay, days))
     }
 
+    @GetMapping("/employee")
+    fun getShiftsByEmployee(
+            principal: Principal,
+            @RequestParam(name = "firstDay") @DateTimeFormat(pattern = "ddMMyyyy") firstDay: LocalDate,
+            @RequestParam(name = "days", defaultValue = "7") days: Int): ResponseEntity<ShiftsDto> {
+        return ControllerUtils.createResponse(shiftService.getEmployeeShifts(principal, firstDay, days))
+    }
+
     @PostMapping()
     fun saveShift(principal: Principal, @RequestBody shift: ShiftDto): ResponseEntity<ShiftDto> {
         return ControllerUtils.createResponse(shiftService.saveShift(principal, shift))

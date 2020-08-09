@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ShiftDto } from 'src/app/app/model/dto/ShiftDto';
 import { ShiftService } from 'src/app/app/services/shift.service';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
@@ -25,11 +25,18 @@ export class ScheduleEmployeeDayCellComponent implements OnInit {
   day: Date
 
   showPopup = false
+  showPopupEvent: EventEmitter<boolean> = new EventEmitter()
 
   constructor(
     private shiftService : ShiftService
   ) { 
     shiftService.hideAllPopups.subscribe(() => this.showPopup = false)
+    this.showPopupEvent.subscribe(val => {
+      if (val) {
+        shiftService.hideAllPopups.emit(null)
+      }
+      this.showPopup = val
+    })
   }
 
   ngOnInit(): void {
@@ -42,5 +49,10 @@ export class ScheduleEmployeeDayCellComponent implements OnInit {
       this.shiftService.hideAllPopups.emit(null)
       this.showPopup = true
     }
+  }
+
+  handleShowPopupChange(newValue: boolean) {
+    console.log(newValue)
+    this.showPopup = newValue
   }
 }

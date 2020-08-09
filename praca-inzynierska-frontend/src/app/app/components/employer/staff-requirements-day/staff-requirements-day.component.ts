@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RequiredStaffTimePeriodDto } from 'src/app/app/model/dto/RequiredStaffTimePeriodDto';
 import { Utils } from 'src/app/app/shared/Utils';
+import { TimeStep } from 'src/app/app/model/TimeStep';
 
 @Component({
   selector: 'staff-requirements-day',
@@ -8,6 +9,9 @@ import { Utils } from 'src/app/app/shared/Utils';
   styleUrls: ['./staff-requirements-day.component.scss']
 })
 export class StaffRequirementsDayComponent{
+
+  @Input('timeStep')
+  timeStep: TimeStep
 
   @Input('timePeriods')
   timePeriods: RequiredStaffTimePeriodDto[] = []

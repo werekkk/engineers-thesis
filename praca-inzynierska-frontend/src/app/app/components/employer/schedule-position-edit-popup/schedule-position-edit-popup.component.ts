@@ -34,6 +34,9 @@ export class SchedulePositionEditPopupComponent implements OnInit {
   @Output('shiftsChange')
   shiftsChange: EventEmitter<ShiftDto[]> = new EventEmitter()
 
+  @Input('showPopup')
+  showPopup: EventEmitter<boolean> = new EventEmitter()
+
   @Input('position')
   position: PositionDto
 
@@ -70,6 +73,7 @@ export class SchedulePositionEditPopupComponent implements OnInit {
     let shiftIndex = this.shifts.length
     this.shifts.push(newShift)
     this.emitShiftChange()
+    this.showPopup.emit(false)
     this.shiftService.saveShift(newShift)
     .subscribe(savedShift => {
       this.shifts[shiftIndex].id = savedShift.id
@@ -77,6 +81,7 @@ export class SchedulePositionEditPopupComponent implements OnInit {
     }, err => {
       this.shifts.splice(shiftIndex, 1)
       this.emitShiftChange()
+      this.showPopup.emit(true)
     })
   }
 
@@ -84,10 +89,12 @@ export class SchedulePositionEditPopupComponent implements OnInit {
     let shiftToBeDeleted = this.shifts[shiftIndex]
     this.shifts.splice(shiftIndex, 1)
     this.emitShiftChange()
+    this.showPopup.emit(false)
     this.shiftService.deleteShift(shiftToBeDeleted.id)
     .subscribe(null, err => {
       this.shifts.splice(Math.max(this.shifts.length, shiftIndex), 0, shiftToBeDeleted)
       this.emitShiftChange()
+      this.showPopup.emit(true)
     })
   }
 

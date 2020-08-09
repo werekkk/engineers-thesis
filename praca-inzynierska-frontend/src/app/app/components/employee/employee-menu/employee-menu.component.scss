@@ -1,0 +1,16 @@
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.btn {
+    width: 15%;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background-color: #DDD;
+}

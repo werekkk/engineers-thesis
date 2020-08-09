@@ -6,9 +6,12 @@ import { InvitationLinkPipe } from '../../pipes/invitation-link.pipe'
 import { DayOfWeekPipe } from '../../pipes/day-of-week.pipe'
 import { TimePipe } from '../../pipes/time.pipe';
 import { TimePickerComponent } from './time-picker/time-picker.component'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimePickerSuggestionsComponent } from './time-picker-suggestions/time-picker-suggestions.component';
 import { TimePeriodPickerComponent } from './time-period-picker/time-period-picker.component';
+import { WeekDatePickerComponent } from './week-date-picker/week-date-picker.component';
+import { TimeStepPickerComponent } from './time-step-picker/time-step-picker.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,11 +21,15 @@ import { TimePeriodPickerComponent } from './time-period-picker/time-period-pick
     DayOfWeekPipe,
     TimePickerComponent,
     TimePickerSuggestionsComponent,
-    TimePeriodPickerComponent
+    TimePeriodPickerComponent,
+    WeekDatePickerComponent,
+    TimeStepPickerComponent
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule
   ],
   exports: [
     LogoutComponent,
@@ -30,7 +37,9 @@ import { TimePeriodPickerComponent } from './time-period-picker/time-period-pick
     TimePipe,
     DayOfWeekPipe,
     TimePickerComponent,
-    TimePeriodPickerComponent
+    TimePeriodPickerComponent,
+    WeekDatePickerComponent,
+    TimeStepPickerComponent
   ]
 })
 export class SharedModule { }

@@ -5,6 +5,14 @@ import * as moment from 'moment'
 
 export class Utils {
 
+    static weekFrom(a: Date): Date[] {
+        let week: Date[] = []
+        for (let index = 0; index < 7; index++) {
+            week.push(moment(a).add(index, 'day').toDate())            
+        }
+        return week
+    }
+
     static daysDiff(a: Date, b: Date): number {
         return moment(b).startOf('day').diff(moment(a).startOf('day'), 'days')
     }

@@ -18,4 +18,7 @@ interface EmployeeRepository : JpaRepository<Employee, Long> {
     @Query("SELECT e FROM Employee e WHERE e.account.id = ?1 AND e.workplace.id = ?2")
     fun findByAccountIdAndWorkplaceId(accountId: Long, workplaceId: Long): Employee?
 
+    @Query("SELECT e FROM Employee e JOIN Credentials c ON e.account.id = c.account.id WHERE c.username = ?1")
+    fun findByUsername(username: String): Employee?
+
 }

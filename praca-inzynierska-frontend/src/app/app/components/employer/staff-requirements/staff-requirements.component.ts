@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import { StaffRequirementsService } from '../../../services/staff-requirements.service'
 import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
+import { TimeStep } from 'src/app/app/model/TimeStep';
 
 @Component({
   selector: 'staff-requirements',
@@ -14,6 +15,12 @@ export class StaffRequirementsComponent implements OnInit {
 
   @Input('position')
   position: PositionDto
+
+  @Input('timeStep')
+  timeStep: TimeStep
+
+  @Output('timeStepChange')
+  timeStepChange: EventEmitter<TimeStep> = new EventEmitter()
 
   staffRequirements: RequiredStaffDto
 
@@ -38,4 +45,5 @@ export class StaffRequirementsComponent implements OnInit {
       this.staffRequirements = rs
     }, err => {this.isLoading = false})
   }
+
 }

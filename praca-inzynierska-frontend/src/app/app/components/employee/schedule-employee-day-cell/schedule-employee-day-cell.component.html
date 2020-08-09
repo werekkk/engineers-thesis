@@ -1,0 +1,8 @@
+<div *ngIf="shifts.length == 0; else shiftList" class="no-shifts unselectable">
+    WOLNE
+</div>
+<ng-template #shiftList>
+    <div *ngFor="let shift of shifts">
+        {{shift.period.start | time:'hh:mm'}} - {{shift.period.finish | time:'hh:mm'}}
+    </div>
+</ng-template>

@@ -104,6 +104,12 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
   constructor() { }
 
   ngAfterViewInit() {
+    this.adjustWidthAndCreateCanvas()
+  }
+
+  adjustWidthAndCreateCanvas() {
+    this.canvasElement.nativeElement.style.width = "100%"
+    this.canvasElement.nativeElement.width = this.canvasElement.nativeElement.offsetWidth
     this.initCanvas()
   }
 
@@ -174,7 +180,8 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
   }
 
   isAboveHighestWorkerCountLine(): boolean {
-    return this.getWorkerCountFromY(this.latestMove.offsetY) > this.maxWorkers
+    let y = this.latestMove.clientY - this.canvas.canvas.offsetTop // alternatively: y = latestMove.offsetY (but doesn't work for Firefox)
+    return this.getWorkerCountFromY(y) > this.maxWorkers
   }
 
   updateCreatedBlockFinish(ev: MouseEvent) {

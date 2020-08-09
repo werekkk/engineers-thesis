@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PositionService } from 'src/app/app/services/position.service';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
+import { TimeStep } from 'src/app/app/model/TimeStep';
 @Component({
   selector: 'staff',
   templateUrl: './staff.component.html',
@@ -10,6 +11,8 @@ export class StaffComponent implements OnInit {
 
   isPositionsLoading: boolean = undefined
   positions: PositionDto[] = []
+
+  timeStep: TimeStep = TimeStep.DEFAULT
 
   activeId = 0
 

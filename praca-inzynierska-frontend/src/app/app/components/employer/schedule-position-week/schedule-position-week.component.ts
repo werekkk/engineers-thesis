@@ -14,11 +14,20 @@ import { ShiftService } from 'src/app/app/services/shift.service';
 })
 export class SchedulePositionWeekComponent implements OnInit {
 
+  
+
   @Input('position')
   position: PositionDto
 
+  _firstDay: Date
+  get firstDay(): Date {
+    return this._firstDay
+  }
   @Input('firstDate')
-  firstDay: Date
+  set firstDay(newVal: Date) {
+    this._firstDay = newVal
+    this.reloadStaffRequirements()
+  }
 
   requiredStaffLoaded = false
 
@@ -30,6 +39,9 @@ export class SchedulePositionWeekComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+  
+  reloadStaffRequirements() {
     this.requiredStaffLoaded = false
     this.staffRequirementsService.getPositionRequirements(this.position.id).subscribe(rs => {
       this.handleRequiredStaffResponse(rs)

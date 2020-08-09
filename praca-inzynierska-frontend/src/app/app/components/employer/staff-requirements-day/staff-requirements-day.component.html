@@ -1,7 +1,8 @@
 <staff-requirements-day-editor 
 [timePeriods]="timePeriods" 
 (timePeriodsChange)="handleNewTimePeriods($event)"
-[highlightedPeriodIndex]="highlightedPeriodIndex"></staff-requirements-day-editor>
+[highlightedPeriodIndex]="highlightedPeriodIndex"
+[timeStep]="timeStep"></staff-requirements-day-editor>
 <staff-requirements-period-list 
 [(timePeriods)]="timePeriods" 
 (timePeriodsChange)="handleNewTimePeriods($event)"

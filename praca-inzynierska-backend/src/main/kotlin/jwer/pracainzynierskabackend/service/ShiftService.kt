@@ -39,6 +39,18 @@ class ShiftService @Autowired constructor(
         )
     }
 
+    fun getEmployeeShifts(employeePrincipal: Principal, startingDay: LocalDate, days: Int = 7): ShiftsDto? {
+        employeeService.getByEmployeePrincipal(employeePrincipal)?.let {
+            val shifts = shiftRepository.getShiftsByEmployeeAndPeriod(
+                    it.id,
+                    startingDay.atStartOfDay(),
+                    startingDay.plusDays(days.toLong()).atStartOfDay()
+            )
+            return ShiftsDto(shifts.map { s -> ShiftDto(s) })
+        }
+        return null
+    }
+
     @Transactional
     fun saveShift(principal: Principal, shift: ShiftDto): ShiftDto? {
         if (canPersistShift(principal, shift)) {

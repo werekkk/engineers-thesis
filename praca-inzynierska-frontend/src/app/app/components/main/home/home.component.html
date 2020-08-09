@@ -1,16 +1,16 @@
 <div class="full-height login-box-container" (keyup.enter)="onEnterPressed()">
     <div class="login-box form-group">
-        <div class="login-box_header">
+        <div class="login-box_header unselectable">
             <h3>
                 Logowanie
             </h3>
         </div>
         <div class="login-box_segment">
-            <label for="usernameInput">Nazwa użytkownika / adres e-mail</label>
+            <label for="usernameInput unselectable">Nazwa użytkownika / adres e-mail</label>
             <input class="form-control" type="text" placeholder="Nazwa użytkownika / adres e-mail" id="usernameInput" [(ngModel)]="loginInput">
         </div>
         <div class="login-box_segment">
-            <label for="passwordInput">Hasło</label>
+            <label for="passwordInput unselectable">Hasło</label>
             <input class="form-control" type="password" placeholder="Hasło" id="passwordInput" [(ngModel)]="passwordInput">
         </div>
         <div class="login-box_segment">

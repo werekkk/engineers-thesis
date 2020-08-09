@@ -1,14 +1,17 @@
 <div class="employees">
-    <div>
-        <button type="button" class="btn btn-success" (click)="onAddEmployeeClicked()">
-            Dodaj pracownika
-        </button>
+    <div class="top-options">
+        <div>
+            <button type="button" class="btn btn-success" (click)="onAddEmployeeClicked()">
+                Dodaj pracownika
+            </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success" (click)="onEditPositionsClicked()">
+                Edytuj stanowiska
+            </button>
+        </div>
     </div>
-    <div>
-        <button type="button" class="btn btn-success" (click)="onEditPositionsClicked()">
-            Edytuj stanowiska
-        </button>
-    </div>
+    
     <div>
         <employee-list></employee-list>
     </div>

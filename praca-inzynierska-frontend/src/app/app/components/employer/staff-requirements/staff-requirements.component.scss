@@ -2,3 +2,17 @@
 h5 {
     @extend .unselectable;
 }
+
+.top-options {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;  
+}
+
+.top-options > div {
+    padding-right: 20px;
+}
+
+.editors-container {
+    margin: 0 20px 0 20px;
+}

@@ -9,7 +9,7 @@
     </div>
 </div>
 <ng-template #week>
-    <div class="days-container">
+    <div class="days-container" (click)="onPositionScheduleEditClicked(position.id)">
         <schedule-position-day [date]="daysAfter(firstDay, 0)" [requiredStaff]="requiredStaff"></schedule-position-day>
         <schedule-position-day [date]="daysAfter(firstDay, 1)" [requiredStaff]="requiredStaff"></schedule-position-day>
         <schedule-position-day [date]="daysAfter(firstDay, 2)" [requiredStaff]="requiredStaff"></schedule-position-day>

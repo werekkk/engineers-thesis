@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PositionService } from 'src/app/app/services/position.service';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
+import * as moment from 'moment';
 
 @Component({
   selector: 'schedule',
@@ -13,10 +14,9 @@ export class ScheduleComponent implements OnInit {
   positions: PositionDto[]
   positionsLoaded = false
 
-  firstDate: Date = new Date()
+  firstDate: Date = moment().startOf('isoWeek').toDate()
 
   constructor(
-    private router: Router,
     private positionService: PositionService
   ) { 
     positionService.positions.subscribe(newPositions => {

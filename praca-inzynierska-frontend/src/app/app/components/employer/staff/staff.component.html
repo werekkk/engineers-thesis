@@ -8,7 +8,7 @@
             <li [ngbNavItem]="i">
                 <a ngbNavLink>{{position.name}}</a>
                 <ng-template ngbNavContent>
-                    <staff-requirements [position]="position"></staff-requirements>
+                    <staff-requirements [position]="position" [(timeStep)]="timeStep"></staff-requirements>
                 </ng-template>
             </li>
         </ng-container>

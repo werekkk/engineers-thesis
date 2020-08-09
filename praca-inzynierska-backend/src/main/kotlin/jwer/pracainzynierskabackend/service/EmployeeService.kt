@@ -100,4 +100,10 @@ class EmployeeService @Autowired constructor(
         return employeeRepository.getById(employeeId)
     }
 
+    fun getByEmployeePrincipal(employeePrincipal: Principal): Employee? {
+        userService.getAccount(employeePrincipal).let {
+            return employeeRepository.findByUsername(it.username!!)
+        }
+    }
+
 }

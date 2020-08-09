@@ -1,0 +1,29 @@
+<div *ngIf="!shiftsLoaded; else schedule">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>
+<ng-template #schedule>
+    <div class="schedule_container">
+        <table class="schedule_table">
+        <tr>
+            <ng-container *ngFor="let day of days">
+                <th>
+                    <div>
+                        {{day | date : 'dd.MM'}}
+                    </div>
+                    <div>
+                        {{day | dayOfWeek}}
+                    </div>
+                </th>
+            </ng-container>
+        </tr> 
+        <tr>
+            <ng-container *ngFor="let day of days; let dayIndex = index">
+                <td>
+                    <schedule-employee-day-cell [shifts]="shiftsTable[dayIndex]"></schedule-employee-day-cell>
+                </td>
+            </ng-container>
+        </tr>
+        </table>
+    </div>
+</ng-template>

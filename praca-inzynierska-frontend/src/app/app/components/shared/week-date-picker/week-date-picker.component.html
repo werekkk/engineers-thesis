@@ -1,0 +1,9 @@
+<button (click)="handlePreviousWeekClicked()">
+    Poprzedni tydzień
+</button>
+{{ date | date:'dd.MM'}}
+ - 
+{{ lastDate | date:'dd.MM'}}
+<button (click)="handleNextWeekClicked()">
+    Następny tydzień
+</button>

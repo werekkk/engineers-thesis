@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'employee',
@@ -11,5 +12,7 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
 
 }

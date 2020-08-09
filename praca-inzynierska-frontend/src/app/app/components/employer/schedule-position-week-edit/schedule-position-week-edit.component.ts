@@ -24,6 +24,7 @@ export class SchedulePositionWeekEditComponent implements OnInit {
 
   position: PositionDto
 
+  dataLoaded = false
   employeesLoaded = false
   shiftsLoaded = false
   employees: EmployeeDto[]
@@ -42,24 +43,37 @@ export class SchedulePositionWeekEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dataLoaded = false
     this.loadTableData()
+    if (this.dataLoaded) {
+      this.initDays()
+      this.loadEmployees().pipe(
+        tap(() => this.initShiftsTableSize()),
+        flatMap(() => this.loadShifts()),
+      ).subscribe()
+    }
+  }
+
+  handleNewFirstDay() {
     this.initDays()
-    this.loadEmployees().pipe(
-      tap(() => this.initShiftsTableSize()),
-      flatMap(() => this.loadShifts()),
-    ).subscribe()
+    this.initShiftsTableSize()
+    this.loadShifts().subscribe()
   }
 
   private loadTableData() {
     let data: SchedulePostitionWeekData = history.state.data || this.shiftService.lastSchedulePositionWeekData
     if (!data) {
       this.router.navigate(['employer'])
-      return
     } else {
       this.position = data.position
       this.firstDay = data.firstDay
       this.shiftService.lastSchedulePositionWeekData = data
+      this.dataLoaded = true
     }
+  }
+
+  private initDays() {
+    this.days = Utils.weekFrom(this.firstDay)
   }
 
   private loadEmployees(): Observable<any> {
@@ -109,13 +123,6 @@ export class SchedulePositionWeekEditComponent implements OnInit {
         this.shiftsLoaded = true
       })
     )
-  }
-
-  private initDays() {
-    this.days = []
-    for (let index = 0; index < 7; index++) {
-      this.days.push(Utils.daysAfter(this.firstDay, index))
-    }
   }
 
   private handleNewShifts(shifts: ShiftDto[]) {

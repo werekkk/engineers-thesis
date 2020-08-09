@@ -1,3 +1,13 @@
 .employees {
     margin: 8px;
 }
+
+.top-options {
+    display: inline-flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.top-options > div {
+    margin-right: 20px;
+}

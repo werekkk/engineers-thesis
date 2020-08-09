@@ -5,6 +5,7 @@
 <div *ngIf="shiftService.operationsPerformed == 0">
     Zapisano
 </div>
+<week-date-picker [(date)]="firstDay" (dateChange)="handleNewFirstDay()"></week-date-picker>
 
 <div *ngIf="!(employeesLoaded && shiftsLoaded); else schedule">
     <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
@@ -17,7 +18,14 @@
         <tr>
             <th>Pracownik</th>
             <ng-container *ngFor="let day of days">
-                <th>{{day | date : 'dd.MM'}}</th>
+                <th>
+                    <div>
+                        {{day | date : 'dd.MM'}}
+                    </div>
+                    <div>
+                        {{day | dayOfWeek}}
+                    </div>
+                </th>
             </ng-container>
         </tr> 
         <ng-container *ngFor="let employee of employeesWithPosition; let employeeIndex = index">

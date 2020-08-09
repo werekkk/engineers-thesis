@@ -24,6 +24,19 @@ export class ShiftService {
     private http: HttpClient
   ) { }
 
+  getLoggedInEmployeeShifts(firstDay: Date = new Date(), days: number = 7): Observable<ShiftsDto> {
+    let params = new HttpParams()
+    .append('firstDay', moment(firstDay).format('DDMMyyyy'))
+    .append('days', days+'')
+    return this.http.get(`${environment.serverUrl}/shift/employee`, {params: params, withCredentials: true})
+    .pipe(
+      map((s: ShiftsDto) => {
+        s.shifts = s.shifts.map(s => ShiftDto.copy(s)).sort((a, b) => a.start.getTime() - b.start.getTime())
+        return s
+      })
+    ) as Observable<ShiftsDto>
+  }
+
   getShiftsInWeekByPositionId(positionId: number, firstDay: Date = new Date()): Observable<ShiftsDto> {
     let params = new HttpParams()
     .append('positionId', positionId+'')
@@ -31,7 +44,7 @@ export class ShiftService {
     return this.http.get(`${environment.serverUrl}/shift/week`, {params: params, withCredentials: true})
     .pipe(
       map((s: ShiftsDto) => {
-        s.shifts = s.shifts.map(s => ShiftDto.copy(s))
+        s.shifts = s.shifts.map(s => ShiftDto.copy(s)).sort((a, b) => a.start.getTime() - b.start.getTime())
         return s
       })
     ) as Observable<ShiftsDto>

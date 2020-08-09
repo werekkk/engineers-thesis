@@ -11,6 +11,8 @@ export enum TimeStep {
 
 export namespace TimeStep {
 
+    export const DEFAULT: TimeStep = TimeStep.FIFTEEN_MINUTES
+
     export function transformTimeDtoToTimeStep(time: TimeDto, step: TimeStep) {
         let newTime = TimeStep.toTimeDto(step, this.toDayPercentage())
         time.hour = newTime.hour

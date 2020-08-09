@@ -1,0 +1,24 @@
+.schedule_container {
+    display: flex;
+    justify-content: center;
+}
+
+.schedule_table {
+    table-layout: fixed;
+    width: 90%;
+}
+
+.schedule_table td,
+.schedule_table th {
+    border: 1px solid black;
+    padding: 0px;
+}
+
+.schedule_table th {
+    text-align: center;
+}
+
+.schedule_cell {
+    display: flex;
+    justify-content: center;
+}

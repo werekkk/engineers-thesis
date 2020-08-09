@@ -1,0 +1,17 @@
+<div class="btn-group btn-group-toggle" ngbRadioGroup [(ngModel)]="timeStep" (ngModelChange)="timeStepChange.emit($event)" name="time-step-picker">
+    <label ngbButtonLabel class="btn-outline-primary btn-sm">
+        <input ngbButton type="radio" [value]="5">5 minut
+    </label>
+    <label ngbButtonLabel class="btn-outline-primary btn-sm">
+        <input ngbButton type="radio" [value]="10">10 minut
+    </label>
+    <label ngbButtonLabel class="btn-outline-primary btn-sm">
+        <input ngbButton type="radio" [value]="15">15 minut
+    </label>
+    <label ngbButtonLabel class="btn-outline-primary btn-sm">
+        <input ngbButton type="radio" [value]="30">30 minut
+    </label>
+    <label ngbButtonLabel class="btn-outline-primary btn-sm">
+        <input ngbButton type="radio" [value]="60">1 godzina
+    </label>
+</div>
