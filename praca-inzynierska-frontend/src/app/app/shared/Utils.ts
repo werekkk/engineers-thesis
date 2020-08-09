@@ -1,13 +1,22 @@
 import { BehaviorSubject } from 'rxjs'
 import { RequiredStaffTimePeriodDto } from '../model/dto/RequiredStaffTimePeriodDto'
 import { TimePeriodDto } from '../model/dto/TimePeriodDto'
+import * as moment from 'moment'
 
 export class Utils {
+
+    static daysDiff(a: Date, b: Date): number {
+        return moment(b).startOf('day').diff(moment(a).startOf('day'), 'days')
+    }
 
     static daysAfter(day: Date, days: number): Date {
         let newDate = new Date(day)
         newDate.setDate(newDate.getDate() + days)
         return newDate
+    }
+
+    static fixDateToBackendFormat(date: Date): Date {
+        return moment(date).utc(true).toDate()
     }
 
     static emptyBooleanArray(length: number): boolean[] {

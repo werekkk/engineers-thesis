@@ -1,1 +1,20 @@
-<p>schedule-employee-day-cell works!</p>
+<div class="popup_container" >
+    <div class="cell_container" (click)="handleOnDetailsClicked()">
+        <div *ngIf="shifts.length == 0; else shiftList" class="no-shifts unselectable">
+            WOLNE
+        </div>
+        <ng-template #shiftList>
+            <div *ngFor="let shift of shifts">
+                {{shift.period.start | time:'hh:mm'}} - {{shift.period.finish | time:'hh:mm'}}
+            </div>
+        </ng-template>
+    </div>
+    <div *ngIf="showPopup" class="popup_component">
+        <schedule-position-edit-popup
+            [(shifts)]="shifts"
+            [position]="position"
+            [employee]="employee"
+            [date]="day"
+        ></schedule-position-edit-popup>
+    </div>
+</div>

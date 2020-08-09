@@ -1,0 +1,11 @@
+<div *ngFor="let period of periods; let i = index">
+    <time-period-picker [(period)]="periods[i]"></time-period-picker>
+    <button (click)="handleDeleteShiftClicked(i)">
+        Usuń
+    </button>
+</div>
+<div>
+    Nowa zmiana:
+    <time-period-picker [(period)]="newPeriod"></time-period-picker>
+    <button (click)="handleAddShiftClicked()">Dodaj</button>
+</div>

@@ -1,25 +1,39 @@
 package jwer.pracainzynierskabackend.controller
 
+import jwer.pracainzynierskabackend.model.dto.ShiftDto
 import jwer.pracainzynierskabackend.model.dto.ShiftsDto
+import jwer.pracainzynierskabackend.service.ShiftService
+import jwer.pracainzynierskabackend.utils.ControllerUtils
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.security.Principal
 import java.time.LocalDate
 
 @RestController
 @RequestMapping("/shift")
-class ShiftController {
+class ShiftController @Autowired constructor(
+        private val shiftService: ShiftService
+) {
 
     @GetMapping("/week")
-    fun getShiftsByPositionAndWeek(
+    fun getShiftsByPosition(
             principal: Principal,
             @RequestParam(name = "positionId") positionId: Long,
-            @RequestParam(name = "firstDay") @DateTimeFormat(style = "ddMMyyyy") firstDay: LocalDate): ResponseEntity<ShiftsDto> {
-        TODO()
+            @RequestParam(name = "firstDay") @DateTimeFormat(pattern = "ddMMyyyy") firstDay: LocalDate,
+            @RequestParam(name = "days", defaultValue = "7") days: Int): ResponseEntity<ShiftsDto> {
+        return ControllerUtils.createResponse(shiftService.getShiftsByPosition(principal, positionId, firstDay, days))
+    }
+
+    @PostMapping()
+    fun saveShift(principal: Principal, @RequestBody shift: ShiftDto): ResponseEntity<ShiftDto> {
+        return ControllerUtils.createResponse(shiftService.saveShift(principal, shift))
+    }
+
+    @DeleteMapping("/{id}")
+    fun deleteShift(principal: Principal, @PathVariable("id") shiftId: Long): ResponseEntity<ShiftDto> {
+        return ControllerUtils.createResponse(shiftService.deleteShift(principal, shiftId))
     }
 
 }

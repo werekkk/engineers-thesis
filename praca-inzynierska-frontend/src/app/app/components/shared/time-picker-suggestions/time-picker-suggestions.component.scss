@@ -1,0 +1,16 @@
+.container {
+    max-width: 10em;
+    min-width: 5em;
+    background-color: white;
+    padding: 0;
+    max-height: 220px;
+    overflow: auto;
+}
+
+.option {
+    padding-left: 10px;
+}
+
+.highlighted {
+    background-color: #CCC;
+}

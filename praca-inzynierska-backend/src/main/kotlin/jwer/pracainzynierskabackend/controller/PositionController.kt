@@ -19,7 +19,7 @@ class PositionController @Autowired constructor(
 
     @GetMapping("/all")
     fun getAllPositions(principal: Principal): ResponseEntity<PositionsDto> {
-        return ControllerUtils.createResponse(positionService.getPositionsDtoByEmployee(principal))
+        return ControllerUtils.createResponse(positionService.getPositionsDtoByEmployer(principal))
     }
 
     @PostMapping

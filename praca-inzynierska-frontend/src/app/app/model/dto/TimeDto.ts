@@ -1,3 +1,5 @@
+import * as moment from 'moment'
+
 export class TimeDto {   
 
     constructor(
@@ -21,8 +23,19 @@ export class TimeDto {
         }
     }
 
+    static fromDate(date: Date): TimeDto {
+        let hours = date.getHours()
+        let minutes = date.getMinutes()
+        let seconds = date.getSeconds()
+        if (hours == 23 && minutes == 59 && seconds == 59) {
+            return new TimeDto(24, 0, 0)
+        } else {
+            return new TimeDto(hours, minutes, seconds)
+        }
+    }
+
     toString(): string {
-        if (this.hour == 24 && this.minute == 0 && this.second == 0) {
+        if (this.isMidnight()) {
             return '23:59:59'
         } else {
             return `${this.hour<10?0:''}${this.hour}:${this.minute<10?0:''}${this.minute}:${this.second<10?0:''}${this.second}`
@@ -43,5 +56,17 @@ export class TimeDto {
 
     equals(other: TimeDto): boolean {
         return (other) && (this.hour == other.hour && this.minute == other.minute && this.second == other.second)
+    }
+
+    isMidnight() {
+        return this.hour == 24 && this.minute == 0 && this.second == 0
+    }
+
+    createDateTime(date: Date): Date {
+        if (this.isMidnight()) {
+            return moment(date).hour(23).minute(59).second(59).millisecond(0).toDate()
+        } else {
+            return moment(date).hour(this.hour).minute(this.minute).second(this.second).millisecond(0).toDate()
+        }
     }
 }

@@ -26,4 +26,8 @@ data class Workplace (
         @JoinColumn(name = "working_hours_id", nullable = false)
         val workingHours: WorkingHours = WorkingHours(0)
 
-)
+) {
+        override fun toString(): String {
+                return "<Workplace>{id: ${id}; name: ${name}; ...}"
+        }
+}

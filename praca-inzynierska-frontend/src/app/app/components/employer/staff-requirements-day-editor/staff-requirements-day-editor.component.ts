@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, HostListener, Output, EventEmitter } from '@angular/core';
 import { Canvas, createHiDPICanvas, getHiDPIparam } from './Canvas';
 import { RequiredStaffTimePeriodDto } from '../../../model/dto/RequiredStaffTimePeriodDto'
-import { TimeStep } from './TimeStep'
+import { TimeStep } from '../../../model/TimeStep'
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
 import { TimePeriod } from 'src/app/app/model/TimePeriod';
 import { TimePeriodDto } from 'src/app/app/model/dto/TimePeriodDto';

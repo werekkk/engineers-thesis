@@ -96,8 +96,8 @@ class EmployeeService @Autowired constructor(
         return null
     }
 
-
-
-
+    fun getById(employeeId: Long): Employee? {
+        return employeeRepository.getById(employeeId)
+    }
 
 }

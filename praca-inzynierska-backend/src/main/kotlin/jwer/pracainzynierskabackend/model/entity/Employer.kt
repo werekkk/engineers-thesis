@@ -19,4 +19,8 @@ data class Employer(
         @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
         @JoinColumn(name = "workplace_id")
         val workplace: Workplace
-)
+) {
+        override fun toString(): String {
+                return "<Employer>{id: ${id}; account:${account}; workplace: {id: ${workplace.id}; name: ${workplace.name}; ...}}"
+        }
+}

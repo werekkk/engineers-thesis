@@ -25,7 +25,7 @@ data class Employee(
         @JoinColumn(name = "workplace_id")
         val workplace: Workplace,
 
-        @ManyToMany(fetch = FetchType.EAGER, mappedBy = "employees")
+        @ManyToMany(fetch = FetchType.EAGER)
         val positions: List<Position>,
 
         @Column(name = "invitation_token", nullable = true, unique = true)
@@ -36,5 +36,9 @@ data class Employee(
 ) {
         companion object {
                 const val INVITATION_TOKEN_LENGTH = 50
+        }
+
+        override fun toString(): String {
+                return "<Employer>{id: ${id}; account:${account}; workplace: {id: ${workplace.id}; name: ${workplace.name}; ...}}"
         }
 }

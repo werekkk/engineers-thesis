@@ -5,6 +5,7 @@ import { StaffRequirementsService } from 'src/app/app/services/staff-requirement
 import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
 import { Router } from '@angular/router';
 import { SchedulePostitionWeekData } from '../schedule-position-week-edit/schedule-position-week-edit.component';
+import { ShiftService } from 'src/app/app/services/shift.service';
 
 @Component({
   selector: 'schedule-position-week',

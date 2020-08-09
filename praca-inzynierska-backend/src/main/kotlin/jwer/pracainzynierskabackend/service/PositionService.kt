@@ -9,6 +9,7 @@ import jwer.pracainzynierskabackend.repository.EmployeeRepository
 import jwer.pracainzynierskabackend.repository.PositionRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.security.Principal
 
 @Service
@@ -19,15 +20,15 @@ class PositionService @Autowired constructor(
         private val employeeRepository: EmployeeRepository
 ) {
 
-    fun getPositionsDtoByEmployee(principal: Principal): PositionsDto? {
-        return getPositionsByEmployee(principal)
+    fun getPositionsDtoByEmployer(principal: Principal): PositionsDto? {
+        return getPositionsByEmployer(principal)
                 .map { p -> PositionDto(p) }
                 .let {
                     PositionsDto(it)
                 }
     }
 
-    private fun getPositionsByEmployee(principal: Principal): List<Position> {
+    fun getPositionsByEmployer(principal: Principal): List<Position> {
         userService.getAccount(principal).let {
             return positionRepository.getPositionByEmployerUsername(it.username!!)
         }
@@ -35,7 +36,7 @@ class PositionService @Autowired constructor(
 
     fun savePosition(principal: Principal, position: PositionDto): PositionDto? {
         workplaceService.getWorkplaceByEmployer(principal)?.let {
-            val position = Position(position.id?:0, position.name, "", it, listOf())
+            val position = Position(position.id?:0, position.name, "", it)
             val savedPosition = positionRepository.save(position)
             return PositionDto(savedPosition)
         }
@@ -43,7 +44,7 @@ class PositionService @Autowired constructor(
     }
 
     fun deletePosition(principal: Principal, positionId: Long): PositionDto? {
-        getPositionsByEmployee(principal).find { p -> p.id == positionId }?.let {
+        getPositionsByEmployer(principal).find { p -> p.id == positionId }?.let {
                 positionRepository.delete(it)
                 return PositionDto(it)
         }
@@ -53,11 +54,10 @@ class PositionService @Autowired constructor(
     fun setEmployeePositions(principal: Principal, positionDetails: SetPositionsDto): EmployeeDto? {
         workplaceService.getWorkplaceByEmployer(principal)?.let { w ->
             employeeRepository.findByAccountIdAndWorkplaceId(positionDetails.employeeId, w.id)?.let {
-                val newPositions = positionDetails.positionIds.mapNotNull {
-                    positionRepository.getById(it)
+                val newPositions = positionDetails.positionIds.mapNotNull { posId ->
+                    positionRepository.getById(posId)
                 }
-                val updatedEmployee = it.copy(positions = newPositions)
-                val savedEmployee = employeeRepository.save(updatedEmployee)
+                val savedEmployee = employeeRepository.save(it.copy(positions = newPositions))
                 return EmployeeDto(savedEmployee)
             }
         }
@@ -69,5 +69,9 @@ class PositionService @Autowired constructor(
             val positions = positionRepository.getEmployeePositionsByUsername(it.username!!)
             return PositionsDto(positions.map { p -> PositionDto(p) })
         }
+    }
+
+    fun getById(positionId: Long): Position? {
+        return positionRepository.getById(positionId)
     }
 }

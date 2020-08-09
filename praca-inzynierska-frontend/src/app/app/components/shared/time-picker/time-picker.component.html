@@ -1,0 +1,17 @@
+<div class="picker-container">
+    <input [(ngModel)]="currentValue" 
+    (click)="$event.target.select()"
+    list="hours"
+    maxlength="10"
+    (focus)="handleFocusIn()"
+    (focusout)="handleFocusOut($event)"
+    >
+    <div *ngIf="showSuggestions" class="suggestions">
+        <time-picker-suggestions 
+        (mouseOver)="isMouseOverSuggestions = $event"
+        [allHours]="allHours"
+        [userInput]="currentValue"
+        (hourSelected)="handleHourSelected($event)"
+        ></time-picker-suggestions>
+    </div>
+</div>

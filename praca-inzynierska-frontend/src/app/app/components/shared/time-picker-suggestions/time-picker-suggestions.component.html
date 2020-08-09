@@ -1,0 +1,13 @@
+<div class="container unselectable"
+    (mouseenter)="onMouseEnter()"
+    (mouseleave)="onMouseLeave()"
+>
+    <div *ngFor="let hour of allHours; let i = index" 
+    (click)="selectHour(i)" 
+    class="option" 
+    [id]="hour" 
+    [class.highlighted]="hour == highlightedHour"
+    (mouseenter)="highlightedHour = hour">
+        {{hour}}
+    </div>
+</div>

@@ -25,4 +25,8 @@ data class RequiredStaffTimePeriod(
 ) {
         constructor(dto: RequiredStaffTimePeriodDto, day: RequiredStaffDay)
         : this(dto.id, day, dto.employeeCount, dto.timePeriod)
+
+        override fun toString(): String {
+                return "<RequiredStaffTimePeriod>{id: ${id}; employeeCount: ${employeeCount}; day_id: ${day.id}; timePeriod: ${timePeriod}}"
+        }
 }

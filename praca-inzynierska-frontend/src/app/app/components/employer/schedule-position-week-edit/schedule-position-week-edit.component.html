@@ -1,5 +1,12 @@
 {{position?.name}}
-<div *ngIf="!employeesLoaded; else schedule">
+<div *ngIf="shiftService.operationsPerformed > 0">
+    Zapisuję...
+</div>
+<div *ngIf="shiftService.operationsPerformed == 0">
+    Zapisano
+</div>
+
+<div *ngIf="!(employeesLoaded && shiftsLoaded); else schedule">
     <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
     </div>
 </div>
@@ -13,12 +20,17 @@
                 <th>{{day | date : 'dd.MM'}}</th>
             </ng-container>
         </tr> 
-        <ng-container *ngFor="let employee of employees">
+        <ng-container *ngFor="let employee of employeesWithPosition; let employeeIndex = index">
                 <tr>
                     <td>{{employee.account.firstName}} {{employee.account.lastName}}</td>
-                    <ng-container *ngFor="let day of days">
+                    <ng-container *ngFor="let day of days; let dayIndex = index">
                         <td>
-                            <schedule-employee-day-cell></schedule-employee-day-cell>
+                            <schedule-employee-day-cell 
+                            [shifts]="shiftsTable[employeeIndex][dayIndex]"
+                            [position]="position"
+                            [employee]="employee"
+                            [day]="day"
+                            ></schedule-employee-day-cell>
                         </td>
                     </ng-container>
                 </tr>
