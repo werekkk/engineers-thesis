@@ -1,7 +1,7 @@
 import { ShiftType } from "../ShiftType";
 import { TimePeriodDto } from './TimePeriodDto';
 import { TimeDto } from './TimeDto';
-import { Utils } from '../../shared/Utils';
+import { Utils } from '../../shared/utils';
 
 export class ShiftDto {
 

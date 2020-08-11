@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { interval } from 'rxjs';
 import { TimeStep } from 'src/app/app/model/TimeStep';
-import { HourInputUtils } from 'src/app/app/shared/HourInputUtils';
+import { HourInputUtils } from 'src/app/app/shared/hour-input-utils';
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
 import { Time } from '@angular/common';
 import * as moment from 'moment';

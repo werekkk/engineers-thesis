@@ -8,14 +8,14 @@ import { EmployerComponent } from './employer/employer.component';
 import { EmployerMenuComponent } from './employer-menu/employer-menu.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { WorkingHoursComponent } from './working-hours/working-hours.component';
-import { NewEmployeeModalComponent } from './new-employee-modal/new-employee-modal.component';
+import { EmployeesNewEmployeeModalComponent } from './employees-new-employee-modal/employees-new-employee-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { EmployeesListComponent } from './employees-list/employees-list.component';
 import { WorkingHoursEditorComponent } from './working-hours-editor/working-hours-editor.component';
 import { WorkingHoursSliderComponent } from './working-hours-slider/working-hours-slider.component';
-import { EditPositionsModalComponent } from './edit-positions-modal/edit-positions-modal.component';
-import { EditGlobalPositionsModalComponent } from './edit-global-positions-modal/edit-global-positions-modal.component';
+import { EmployeesEditEmployeePositionsModalComponent } from './employees-edit-employee-positions-modal/employees-edit-employee-positions-modal.component';
+import { EmployeesEditGlobalPositionsModalComponent } from './employees-edit-global-positions-modal/employees-edit-global-positions-modal.component';
 import { StaffRequirementsDayComponent } from './staff-requirements-day/staff-requirements-day.component';
 import { StaffRequirementsPeriodListComponent } from './staff-requirements-period-list/staff-requirements-period-list.component';
 import { StaffRequirementsDayEditorComponent } from './staff-requirements-day-editor/staff-requirements-day-editor.component';
@@ -35,12 +35,12 @@ import { SchedulePositionEditPopupComponent } from './schedule-position-edit-pop
     EmployerMenuComponent,
     ScheduleComponent,
     WorkingHoursComponent,
-    NewEmployeeModalComponent,
-    EmployeeListComponent,
+    EmployeesNewEmployeeModalComponent,
+    EmployeesListComponent,
     WorkingHoursEditorComponent,
     WorkingHoursSliderComponent,
-    EditPositionsModalComponent,
-    EditGlobalPositionsModalComponent,
+    EmployeesEditEmployeePositionsModalComponent,
+    EmployeesEditGlobalPositionsModalComponent,
     StaffRequirementsDayComponent,
     StaffRequirementsPeriodListComponent,
     StaffRequirementsDayEditorComponent,

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HourInputUtils } from '../../../shared/HourInputUtils'
+import { HourInputUtils } from '../../../shared/hour-input-utils'
 
 @Component({
   selector: 'time-picker-suggestions',

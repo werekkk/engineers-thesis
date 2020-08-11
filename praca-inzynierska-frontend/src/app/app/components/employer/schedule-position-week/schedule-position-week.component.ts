@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
-import { Utils } from 'src/app/app/shared/Utils';
+import { Utils } from 'src/app/app/shared/utils';
 import { StaffRequirementsService } from 'src/app/app/services/staff-requirements.service';
 import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
 import { Router } from '@angular/router';

@@ -8,10 +8,18 @@ import { EmployeeMenuComponent } from './employee-menu/employee-menu.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ScheduleEmployeeWeekComponent } from './schedule-employee-week/schedule-employee-week.component';
 import { ScheduleEmployeeDayCellComponent } from './schedule-employee-day-cell/schedule-employee-day-cell.component';
+import { PreferencesComponent } from './preferences/preferences.component';
 
 
 @NgModule({
-  declarations: [EmployeeComponent, EmployeeMenuComponent, ScheduleComponent, ScheduleEmployeeWeekComponent, ScheduleEmployeeDayCellComponent],
+  declarations: [
+    EmployeeComponent, 
+    EmployeeMenuComponent, 
+    ScheduleComponent, 
+    ScheduleEmployeeWeekComponent, 
+    ScheduleEmployeeDayCellComponent, 
+    PreferencesComponent
+  ],
   imports: [
     CommonModule,
     EmployeeRoutingModule,

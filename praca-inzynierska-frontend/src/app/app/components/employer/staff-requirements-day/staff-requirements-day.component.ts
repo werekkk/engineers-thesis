@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RequiredStaffTimePeriodDto } from 'src/app/app/model/dto/RequiredStaffTimePeriodDto';
-import { Utils } from 'src/app/app/shared/Utils';
+import { PeriodUtils } from 'src/app/app/shared/period-utils';
 import { TimeStep } from 'src/app/app/model/TimeStep';
 
 @Component({
@@ -24,7 +24,7 @@ export class StaffRequirementsDayComponent{
   handleNewTimePeriods(newPeriods: RequiredStaffTimePeriodDto[]) {
     if (newPeriods.length > 0) {
       let lastP = newPeriods.pop()
-      newPeriods = Utils.insertRequirementAndOptimize(newPeriods, lastP)
+      newPeriods = PeriodUtils.insertRequirementAndOptimize(newPeriods, lastP)
     }
     this.timePeriods = newPeriods
     this.timePeriodsChange.emit(newPeriods)

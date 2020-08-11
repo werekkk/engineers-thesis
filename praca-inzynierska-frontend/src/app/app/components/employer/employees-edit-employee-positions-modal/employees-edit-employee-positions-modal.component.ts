@@ -2,15 +2,15 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
 import { PositionService } from 'src/app/app/services/position.service';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
-import { Utils } from 'src/app/app/shared/Utils';
+import { Utils } from 'src/app/app/shared/utils';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'edit-positions-modal',
-  templateUrl: './edit-positions-modal.component.html',
-  styleUrls: ['./edit-positions-modal.component.scss']
+  selector: 'employees-edit-employee-positions-modal',
+  templateUrl: './employees-edit-employee-positions-modal.component.html',
+  styleUrls: ['./employees-edit-employee-positions-modal.component.scss']
 })
-export class EditPositionsModalComponent implements OnInit {
+export class EmployeesEditEmployeePositionsModalComponent implements OnInit {
 
   isLoading = false
 

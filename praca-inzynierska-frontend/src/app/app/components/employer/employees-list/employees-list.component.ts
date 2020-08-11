@@ -3,14 +3,14 @@ import { EmployeeService } from 'src/app/app/services/employee.service';
 import { AccountDto } from 'src/app/app/model/dto/AccountDto';
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EditPositionsModalComponent } from '../edit-positions-modal/edit-positions-modal.component';
+import { EmployeesEditEmployeePositionsModalComponent } from '../employees-edit-employee-positions-modal/employees-edit-employee-positions-modal.component';
 
 @Component({
-  selector: 'employee-list',
-  templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.scss']
+  selector: 'employees-list',
+  templateUrl: './employees-list.component.html',
+  styleUrls: ['./employees-list.component.scss']
 })
-export class EmployeeListComponent implements OnInit {
+export class EmployeesListComponent implements OnInit {
 
   employer: AccountDto
   employees: EmployeeDto[]
@@ -39,7 +39,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   onEditPositionsClicked(employee: EmployeeDto) {
-    let modalRef = this.modalService.open(EditPositionsModalComponent, {windowClass: 'modal-appear', size: 'lg'})
+    let modalRef = this.modalService.open(EmployeesEditEmployeePositionsModalComponent, {windowClass: 'modal-appear', size: 'lg'})
     modalRef.componentInstance.fromParent = {
       employee: employee
     }

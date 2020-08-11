@@ -7,7 +7,7 @@ import { AddEmployeeDto } from '../model/dto/AddEmployeeDto';
 import { AccountDto } from '../model/dto/AccountDto';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Utils } from '../shared/Utils';
+import { Utils } from '../shared/utils';
 import { trimTrailingNulls } from '@angular/compiler/src/render3/view/util';
 import { SetPositionsDto } from '../model/dto/SetPositionsDto';
 

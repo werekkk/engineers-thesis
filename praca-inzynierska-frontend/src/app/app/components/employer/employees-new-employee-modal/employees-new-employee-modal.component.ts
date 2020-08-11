@@ -7,11 +7,11 @@ import { EmployeeService } from '../../../services/employee.service'
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
 
 @Component({
-  selector: 'new-employee-modal',
-  templateUrl: './new-employee-modal.component.html',
-  styleUrls: ['./new-employee-modal.component.scss']
+  selector: 'employees-new-employee-modal',
+  templateUrl: './employees-new-employee-modal.component.html',
+  styleUrls: ['./employees-new-employee-modal.component.scss']
 })
-export class NewEmployeeModalComponent implements OnInit {
+export class EmployeesNewEmployeeModalComponent implements OnInit {
 
   showForm = true
   showLink = false

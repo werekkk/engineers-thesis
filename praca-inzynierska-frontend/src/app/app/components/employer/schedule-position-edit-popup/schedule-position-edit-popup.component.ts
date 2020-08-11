@@ -7,7 +7,7 @@ import { TimePeriodDto } from 'src/app/app/model/dto/TimePeriodDto';
 import { ShiftsDto } from 'src/app/app/model/dto/ShiftsDto';
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
 import { ShiftType } from 'src/app/app/model/ShiftType';
-import { Utils } from 'src/app/app/shared/Utils';
+import { Utils } from 'src/app/app/shared/utils';
 
 @Component({
   selector: 'schedule-position-edit-popup',

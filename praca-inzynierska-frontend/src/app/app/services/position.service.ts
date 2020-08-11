@@ -9,7 +9,7 @@ import { map, tap } from 'rxjs/operators';
 import { EmployeeService } from './employee.service'
 import { SetPositionsDto } from '../model/dto/SetPositionsDto';
 import { EmployeeDto } from '../model/dto/EmployeeDto';
-import { Utils } from '../shared/Utils'
+import { Utils } from '../shared/utils'
 
 @Injectable({
   providedIn: 'root'
