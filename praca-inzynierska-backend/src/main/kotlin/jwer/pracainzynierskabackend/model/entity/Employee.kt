@@ -2,7 +2,6 @@ package jwer.pracainzynierskabackend.model.entity
 
 import jwer.pracainzynierskabackend.model.auth.Account
 import java.time.LocalDate
-import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -32,7 +31,14 @@ data class Employee(
         var invitationToken: String?,
 
         @Column(name = "employee_status")
-        var employeeStatus: EmployeeStatus
+        var employeeStatus: EmployeeStatus,
+
+        @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], mappedBy = "employee")
+        val oneTimeHourPreferences: MutableList<OneTimeHourPreference> = mutableListOf(),
+
+        @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+        @JoinColumn(name = "preferences_week_id")
+        val preferencesWeek: PreferencesWeek = PreferencesWeek()
 ) {
         companion object {
                 const val INVITATION_TOKEN_LENGTH = 50

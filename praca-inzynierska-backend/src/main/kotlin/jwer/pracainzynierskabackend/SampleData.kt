@@ -64,19 +64,14 @@ class SampleData @Autowired constructor(
         )
     }
 
-    @EventListener
-    fun appReady(event: ApplicationReadyEvent) {
-        initSampleData()
-    }
-
-    private fun initSampleData() {
+    fun initSampleData() {
+        println("Sample data initialization started...")
         initSampleWorkplace()
         login()
         initSampleWorkplacePositions()
         initSampleWorkers()
-        test()
         logout()
-        print("Sample data initialization finished.")
+        println("Sample data initialization finished.")
     }
 
     private fun initSampleWorkplace() {
@@ -110,9 +105,6 @@ class SampleData @Autowired constructor(
                 employeeController.addEmployee(it, principal)
             }
         }
-    }
-
-    fun test() {
     }
 
     private fun logout() {

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { RequiredStaffDto } from '../model/dto/RequiredStaffDto'
-import { RequiredStaffBackendDto } from '../model/dto/RequiredStaffBackendDto';
+import { RequiredStaffBackendDto } from '../model/dto/backend/RequiredStaffBackendDto';
 
 @Injectable({
   providedIn: 'root'

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { WorkingHoursBackendDto } from '../model/dto/WorkingHoursBackendDto'
+import { WorkingHoursBackendDto } from '../model/dto/backend/WorkingHoursBackendDto'
 import { WorkingHoursDto } from '../model/dto/WorkingHoursDto'
 import { map } from 'rxjs/operators';
 

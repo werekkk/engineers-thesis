@@ -6,7 +6,12 @@ export class TimePeriodDto {
     constructor(
         public start: TimeDto,
         public finish: TimeDto 
-    ) {}
+    ) {
+        if (start.toSeconds() > finish.toSeconds()) {
+            this.finish = start
+            this.start = finish
+        }
+    }
     
     overlaps(other: TimePeriodDto): boolean {
         return other.start.toSeconds() < this.finish.toSeconds() 
@@ -15,6 +20,10 @@ export class TimePeriodDto {
 
     hours(): number {
         return (this.finish.toSeconds() - this.start.toSeconds()) / 3600
+    }
+
+    compare(other: TimePeriodDto): number {
+        return this.start.toSeconds() - other.start.toSeconds() || this.finish.toSeconds() - other.finish.toSeconds()
     }
 
     static of(timePeriod: TimePeriod): TimePeriodDto {

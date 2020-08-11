@@ -43,4 +43,21 @@ export namespace Utils {
         return array
     }
 
+    export function assignAndCheckForChange<T>(oldValue: T, newValue: T, assign: (value: T) => void, equals?: (a: T, b?: T) => boolean): boolean {
+        if (equals && oldValue ? !equals(oldValue, newValue) : newValue != oldValue) {
+            assign(newValue)
+            return true
+        } else {
+            return false
+        }
+    }
+
+    export function coerceIn(val: number, min: number, max: number): number {
+        if (val < min)
+            return min
+        if (val > max)
+            return max
+        else
+            return val
+    }
 }

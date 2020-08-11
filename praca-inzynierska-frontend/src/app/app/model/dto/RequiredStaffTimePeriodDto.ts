@@ -1,8 +1,13 @@
-import { TimePeriodDto } from "./TimePeriodDto";
-import { RequiredStaffTimePeriodBackendDto } from "./RequiredStaffTimePeriodBackendDto";
+import { TimePeriodDto } from './TimePeriodDto';
+import { RequiredStaffTimePeriodBackendDto } from './backend/RequiredStaffTimePeriodBackendDto';
+import { HasTimePeriod } from '../HasTimePeriod'
 
-export class RequiredStaffTimePeriodDto {
+export class RequiredStaffTimePeriodDto implements HasTimePeriod {
     
+    get periodType(): number {
+        return this.employeeCount
+    }
+
     constructor(
         public id: number = 0,
         public employeeCount: number,
@@ -18,5 +23,13 @@ export class RequiredStaffTimePeriodDto {
 
     hours() {
         return this.timePeriod.hours() * this.employeeCount
+    }
+
+    doNotKeep() {
+        return this.employeeCount == 0
+    }
+
+    withNewPeriod(newPeriod: TimePeriodDto): HasTimePeriod {
+        return new RequiredStaffTimePeriodDto(0, this.employeeCount, newPeriod)
     }
 }

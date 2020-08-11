@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HourPreferenceService } from '../../../services/hour-preference.service'
 
 @Component({
   selector: 'preferences',

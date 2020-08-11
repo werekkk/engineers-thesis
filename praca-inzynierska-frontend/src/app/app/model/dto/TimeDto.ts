@@ -69,4 +69,8 @@ export class TimeDto {
             return moment(date).hour(this.hour).minute(this.minute).second(this.second).millisecond(0).toDate()
         }
     }
+
+    copy(): TimeDto {
+        return new TimeDto(this.hour, this.minute, this.second)
+    }
 }

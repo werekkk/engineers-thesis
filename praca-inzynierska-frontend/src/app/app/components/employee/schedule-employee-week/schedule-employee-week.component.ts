@@ -53,7 +53,6 @@ export class ScheduleEmployeeWeekComponent implements OnInit {
       this.loadingShiftSubscription.unsubscribe()
     }
     this.shiftsLoaded = false
-    console.log('a')
     this.loadingShiftSubscription = this.shiftService.getLoggedInEmployeeShifts(this.firstDay, 7)
     .subscribe(s => {
       this.handleNewShifts(s.shifts)

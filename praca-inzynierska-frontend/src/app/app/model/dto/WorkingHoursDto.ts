@@ -1,5 +1,5 @@
 import { TimePeriodDto } from './TimePeriodDto'
-import { WorkingHoursBackendDto } from './WorkingHoursBackendDto'
+import { WorkingHoursBackendDto } from './backend/WorkingHoursBackendDto'
 
 export class WorkingHoursDto {
     

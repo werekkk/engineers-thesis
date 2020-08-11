@@ -1,5 +1,5 @@
-import { RequiredStaffDayBackendDto } from "./RequiredStaffDayBackendDto";
-import { RequiredStaffDto } from './RequiredStaffDto';
+import { RequiredStaffDayBackendDto } from './RequiredStaffDayBackendDto';
+import { RequiredStaffDto } from '../RequiredStaffDto';
 
 /**
  * Corresponds with the `RequiredStaffDto` in the backend application.

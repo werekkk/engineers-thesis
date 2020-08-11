@@ -1,5 +1,5 @@
-import { TimePeriod } from '../TimePeriod'
-import { RequiredStaffTimePeriodDto } from './RequiredStaffTimePeriodDto';
+import { TimePeriod } from '../../TimePeriod'
+import { RequiredStaffTimePeriodDto } from '../RequiredStaffTimePeriodDto';
 
 /**
  * Corresponds with the `RequiredStaffTimePeriodDto` in the backend application.

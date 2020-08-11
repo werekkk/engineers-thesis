@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, HostListener, Output, EventEmitter } from '@angular/core';
-import { Canvas, createHiDPICanvas, getHiDPIparam } from './Canvas';
+import { Component, Input, ViewChild, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { RequiredStaffTimePeriodDto } from '../../../model/dto/RequiredStaffTimePeriodDto'
 import { TimeStep } from '../../../model/TimeStep'
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
-import { TimePeriod } from 'src/app/app/model/TimePeriod';
 import { TimePeriodDto } from 'src/app/app/model/dto/TimePeriodDto';
-import { interval, timer } from 'rxjs';
+import { timer } from 'rxjs';
+import { CanvasUtils } from 'src/app/app/shared/canvas-utils';
+
+type Canvas = CanvasUtils.Canvas
 
 @Component({
   selector: 'staff-requirements-day-editor',
@@ -13,6 +14,7 @@ import { interval, timer } from 'rxjs';
   styleUrls: ['./staff-requirements-day-editor.component.scss']
 })
 export class StaffRequirementsDayEditorComponent implements AfterViewInit {
+
 
   @Input('timeStep')
   timeStep: TimeStep = TimeStep.FIFTEEN_MINUTES
@@ -104,23 +106,23 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
   constructor() { }
 
   ngAfterViewInit() {
-    this.adjustWidthAndCreateCanvas()
-  }
-
-  adjustWidthAndCreateCanvas() {
-    this.canvasElement.nativeElement.style.width = "100%"
-    this.canvasElement.nativeElement.width = this.canvasElement.nativeElement.offsetWidth
+    this.adjustCanvasWidth()
     this.initCanvas()
   }
 
+  adjustCanvasWidth() {
+    this.canvasElement.nativeElement.style.width = "100%"
+    this.canvasElement.nativeElement.width = this.canvasElement.nativeElement.offsetWidth
+  }
+
   initCanvas() {
-    let hiDpiCanvas = createHiDPICanvas(this.canvasElement.nativeElement.width, this.totalCanvasHeight)
+    let hiDpiCanvas = CanvasUtils.createHiDPICanvas(this.canvasElement.nativeElement.width, this.totalCanvasHeight)
     if (!this.canvas) {
       this.canvasElement.nativeElement.replaceWith(hiDpiCanvas)
     } else {
       this.canvas.canvas.replaceWith(hiDpiCanvas)
     }
-    this.canvas = new Canvas(hiDpiCanvas)
+    this.canvas = new CanvasUtils.Canvas(hiDpiCanvas)
     this.canvas.context.translate(0, this.yTranslate)
     this.canvas.context.lineWidth = 0.5
     this.canvas.context.strokeStyle = '#AAA'

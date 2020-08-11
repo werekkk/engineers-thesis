@@ -19,4 +19,8 @@ export class EmployeeMenuComponent implements OnInit {
     this.router.navigate(['employee', 'schedule'])
   }
 
+  onPreferencesClicked() {
+    this.router.navigate(['employee', 'preferences'])
+  }
+
 }

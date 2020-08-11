@@ -52,7 +52,6 @@ export class ScheduleEmployeeDayCellComponent implements OnInit {
   }
 
   handleShowPopupChange(newValue: boolean) {
-    console.log(newValue)
     this.showPopup = newValue
   }
 }

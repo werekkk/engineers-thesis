@@ -1,5 +1,5 @@
-import { TimePeriod } from '../TimePeriod';
-import { WorkingHoursDto } from './WorkingHoursDto';
+import { TimePeriod } from '../../TimePeriod';
+import { WorkingHoursDto } from '../WorkingHoursDto';
 
 /**
  * Corresponds with the `WorkingHoursDto` class in the backend application.

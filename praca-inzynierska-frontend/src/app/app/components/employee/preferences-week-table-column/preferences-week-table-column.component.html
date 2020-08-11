@@ -1,0 +1,10 @@
+<div class="period-card">
+    <div class="period-card_day">
+        {{ day | dayOfWeek }}
+    </div>
+    <div *ngFor="let preference of preferencesDay.preferences">
+        <div class="period-card_preference" [style]="'background-color: ' + getTypeColor(preference) + ';'">
+            {{preference.timePeriod.start | time:'hh:mm'}} - {{preference.timePeriod.finish | time:'hh:mm'}}
+        </div>
+    </div>
+</div>

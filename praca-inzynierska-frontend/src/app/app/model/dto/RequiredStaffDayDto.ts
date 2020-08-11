@@ -1,5 +1,5 @@
 import { RequiredStaffTimePeriodDto } from './RequiredStaffTimePeriodDto'
-import { RequiredStaffDayBackendDto } from './RequiredStaffDayBackendDto';
+import { RequiredStaffDayBackendDto } from './backend/RequiredStaffDayBackendDto';
 
 export class RequiredStaffDayDto {
 

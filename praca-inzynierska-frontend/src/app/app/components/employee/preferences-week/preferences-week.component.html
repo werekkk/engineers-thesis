@@ -1,0 +1,23 @@
+<div *ngIf="!preferencesLoaded; else editor">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>
+<ng-template #editor>
+    <div>
+        <button (click)="onSaveClicked()">
+            Zapisz
+        </button>
+        <time-step-picker [(timeStep)]="timeStep"></time-step-picker>
+        <preference-type-picker [(preferenceType)]="selectedPreferenceType"></preference-type-picker>
+    </div>
+    <div>
+        <preferences-week-editor 
+        [preferencesWeek]="preferencesWeek" 
+        [timeStep]="timeStep" 
+        [preferenceType]="selectedPreferenceType"
+        (newPreferenceCreated)="handleNewPreferenceCreated($event)"></preferences-week-editor>
+    </div>
+    <div>
+        <preferences-week-table [preferencesWeek]="preferencesWeek"></preferences-week-table>
+    </div>
+</ng-template>

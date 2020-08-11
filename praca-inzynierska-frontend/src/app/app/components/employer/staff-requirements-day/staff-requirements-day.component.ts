@@ -24,7 +24,7 @@ export class StaffRequirementsDayComponent{
   handleNewTimePeriods(newPeriods: RequiredStaffTimePeriodDto[]) {
     if (newPeriods.length > 0) {
       let lastP = newPeriods.pop()
-      newPeriods = PeriodUtils.insertRequirementAndOptimize(newPeriods, lastP)
+      newPeriods = PeriodUtils.insertPeriodAndOptimize(newPeriods, lastP) as RequiredStaffTimePeriodDto[]
     }
     this.timePeriods = newPeriods
     this.timePeriodsChange.emit(newPeriods)

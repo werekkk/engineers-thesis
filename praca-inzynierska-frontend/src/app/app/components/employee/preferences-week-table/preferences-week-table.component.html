@@ -1,0 +1,7 @@
+<div class="container-fluid">
+    <div class="row">
+        <div *ngFor="let day of days" class="col">
+            <preferences-week-table-column [day]="day" [preferencesDay]="preferencesWeek.getDay(day)"></preferences-week-table-column>
+        </div>
+    </div>
+</div>

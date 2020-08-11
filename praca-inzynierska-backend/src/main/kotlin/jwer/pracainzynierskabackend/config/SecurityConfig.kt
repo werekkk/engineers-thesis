@@ -29,6 +29,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
                 ?.antMatchers("/position/**")?.hasRole(AccountRole.EMPLOYER)
                 ?.antMatchers("/shift/employee")?.hasRole(AccountRole.EMPLOYEE)
                 ?.antMatchers("/shift/**")?.hasRole(AccountRole.EMPLOYER)
+                ?.antMatchers("/preference/**")?.hasRole(AccountRole.EMPLOYEE)
                 ?.antMatchers("/staff-requirements/**")?.hasRole(AccountRole.EMPLOYER)
                 ?.antMatchers(HttpMethod.GET, "/working-hours")?.hasAnyRole(AccountRole.EMPLOYEE, AccountRole.EMPLOYER)
                 ?.antMatchers(HttpMethod.POST, "/working-hours")?.hasAnyRole(AccountRole.EMPLOYER)
