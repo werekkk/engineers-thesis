@@ -34,14 +34,11 @@ export class PreferencesWeekEditorComponent implements AfterViewInit {
   @ViewChild('canvas', {static: false})
   canvasElement: ElementRef<HTMLCanvasElement>
   
-  _timeStep: TimeStep
-  get timeStep(): TimeStep {
-    return this._timeStep
-  }
   @Input('timeStep')
-  set timeStep(val: TimeStep) {
-    this._timeStep = val
-  }
+  timeStep: TimeStep
+
+  @Input('preferenceType')
+  preferenceType: PreferenceType
 
   preferenceBlocks: PreferenceBlock[]
 
@@ -62,17 +59,14 @@ export class PreferencesWeekEditorComponent implements AfterViewInit {
   @Output('newPreferenceCreated')
   newPreferenceCreated: EventEmitter<PreferenceCreatedEvent> = new EventEmitter()
 
-  @Input('preferenceType')
-  preferenceType: PreferenceType
-
   highlightedDay: number = undefined
   highlightedHour: TimeDto = undefined
 
-  labelFontSize = 12
+  labelFontSize: number = 12
 
-  verticalPadding = 2
-  horizontalPadding = 16
-  yTranslate = this.verticalPadding
+  verticalPadding: number = 2
+  horizontalPadding: number = 16
+  yTranslate: number = this.verticalPadding
   dayNamesColumnWidth: number = 110
   rowHeight: number = 40
   highlightedHourLabelHeight: number = 20
@@ -91,7 +85,7 @@ export class PreferencesWeekEditorComponent implements AfterViewInit {
   }
 
   adjustCanvasWidth() {
-    this.canvasElement.nativeElement.style.width = "100%"
+    this.canvasElement.nativeElement.style.width = '100%'
     this.canvasElement.nativeElement.width = this.canvasElement.nativeElement.offsetWidth
   }
 

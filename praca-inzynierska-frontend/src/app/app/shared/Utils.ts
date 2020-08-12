@@ -2,6 +2,7 @@ import { BehaviorSubject } from 'rxjs'
 import { RequiredStaffTimePeriodDto } from '../model/dto/RequiredStaffTimePeriodDto'
 import { TimePeriodDto } from '../model/dto/TimePeriodDto'
 import * as moment from 'moment'
+import { TimeDto } from '../model/dto/TimeDto'
 
 export namespace Utils {
 
@@ -43,6 +44,12 @@ export namespace Utils {
         return array
     }
 
+    export function copyArray<T>(array: T[]): T[] {
+        let newArr: T[] = []
+        array.forEach(item => newArr.push(item))
+        return newArr
+    }
+
     export function assignAndCheckForChange<T>(oldValue: T, newValue: T, assign: (value: T) => void, equals?: (a: T, b?: T) => boolean): boolean {
         if (equals && oldValue ? !equals(oldValue, newValue) : newValue != oldValue) {
             assign(newValue)
@@ -60,4 +67,28 @@ export namespace Utils {
         else
             return val
     }
+
+    export function getDateArrayForCalendar(month: moment.Moment): Date[][] {
+        let startingDay = moment(month).startOf('month').startOf('isoWeek').startOf('day')
+        let calendar: Date[][] = []
+        let week = getWeekFromDate(startingDay)
+        let endOfMonth = moment(month).endOf('month').endOf('day')
+        while (moment(week[0]).isBefore(endOfMonth)) {
+            calendar.push(week)
+            startingDay = startingDay.add(1, 'week')
+            week = getWeekFromDate(startingDay)
+        }
+        return calendar
+    }
+
+    function getWeekFromDate(day: moment.Moment): Date[] {
+        let currentDay = moment(day)
+        let week: Date[] = []
+        for (let i = 0; i < 7; i++) {
+            week.push(currentDay.toDate())
+            currentDay = currentDay.add(1, 'day')
+        }
+        return week
+    }
+
 }

@@ -6,7 +6,7 @@ import jwer.pracainzynierskabackend.model.entity.PreferenceType
 import java.time.LocalDateTime
 
 data class OneTimeHourPreferenceDto(
-        val id: Long = 0,
+        var id: Long = 0,
         val type: PreferenceType,
         val start: LocalDateTime,
         val finish: LocalDateTime

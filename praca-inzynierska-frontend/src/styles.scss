@@ -48,6 +48,11 @@ body, html {
     100% {transform: scale(1);}
 }
 
+.wide-modal .modal-lg {
+    max-width: 80%;
+    width: 80%;
+}
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;

@@ -38,10 +38,6 @@ export namespace CanvasUtils {
 
     const ratio = CanvasUtils.RATIO
 
-    export function getHiDPIparam(x: number): number {
-        return ratio * x
-    }
-
     export function createHiDPICanvas(w: number, h: number) {
         var can = document.createElement('canvas')
         resizeCanvas(w, h, can)

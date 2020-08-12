@@ -22,16 +22,28 @@ export class PreferencesWeekComponent implements OnInit {
 
   constructor(
     public hourPreferencesService: HourPreferenceService
-  ) { }
+  ) {
+    hourPreferencesService.preferencesWeek.subscribe(newWeek => {
+      if (newWeek) {
+        this.preferencesWeek = newWeek.copy()
+      } else {
+        this.preferencesWeek = newWeek
+      }
+    })
+  }
 
   ngOnInit(): void {
-    this.loadPreferences()
+    if (!this.hourPreferencesService.preferencesWeekLoaded) {
+      this.loadPreferences()
+    } else {
+      this.preferencesWeek = this.hourPreferencesService.preferencesWeek.value.copy()
+      this.preferencesLoaded = true
+    }
   }
 
   loadPreferences() {
     this.preferencesLoaded = false
     this.hourPreferencesService.getPreferencesWeek().subscribe(w => {
-      this.preferencesWeek = w
       this.preferencesLoaded = true
     })
   }
@@ -39,7 +51,6 @@ export class PreferencesWeekComponent implements OnInit {
   onSaveClicked() {
     this.preferencesLoaded = false
     this.hourPreferencesService.savePreferencesWeek(this.preferencesWeek).subscribe(w => {
-      this.preferencesWeek = w
       this.preferencesLoaded = true
     })
   }

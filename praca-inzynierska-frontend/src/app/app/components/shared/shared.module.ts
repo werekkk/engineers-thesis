@@ -12,6 +12,9 @@ import { TimePeriodPickerComponent } from './time-period-picker/time-period-pick
 import { WeekDatePickerComponent } from './week-date-picker/week-date-picker.component';
 import { TimeStepPickerComponent } from './time-step-picker/time-step-picker.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MonthPickerComponent } from './month-picker/month-picker.component';
+import { StringsPipe } from '../../pipes/strings.pipe';
+import { DateToTimePipe } from '../../pipes/date-to-time.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TimePickerSuggestionsComponent,
     TimePeriodPickerComponent,
     WeekDatePickerComponent,
-    TimeStepPickerComponent
+    TimeStepPickerComponent,
+    MonthPickerComponent,
+    StringsPipe,
+    DateToTimePipe
   ],
   imports: [
     CommonModule,
@@ -39,7 +45,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TimePickerComponent,
     TimePeriodPickerComponent,
     WeekDatePickerComponent,
-    TimeStepPickerComponent
+    TimeStepPickerComponent,
+    MonthPickerComponent,
+    StringsPipe,
+    DateToTimePipe
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,37 @@
+<div *ngIf="!weekLoaded; else modal" class="loading-modal">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>
+
+<ng-template #modal>
+    <div class="modal-header">
+        <h4>{{day.format('D MMMM')}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <time-step-picker [(timeStep)]="timeStep"></time-step-picker>
+        <preference-type-picker [(preferenceType)]="selectedPreferenceType"></preference-type-picker>
+        <div>
+            <preferences-one-time-day-editor
+            [timeStep]="timeStep"
+            [preferenceType]="selectedPreferenceType"
+            [preferencesWeek]="preferencesWeek"
+            [oneTimePreferences]="preferences"
+            [day]="day.toDate()"
+            (onPreferenceCreated)="handlePreferenceCreated($event)"
+            ></preferences-one-time-day-editor>
+        </div>
+        Preferencje jednorazowe:
+        <div *ngFor="let pref of preferences; let i = index" class="preference" [style]="'background-color: ' + getTypeColor(pref) + ';'">
+            {{pref.start | dateToTime | time:'hh:mm'}} - {{pref.finish | dateToTime | time:'hh:mm'}}
+            <span (click)="onDeletePreferenceClicked(i)">[X]</span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss()">Powrót</button>
+        <button type="submit" class="btn btn-success" (click)="onSaveClicked()">Zapisz</button>
+    </div>
+</ng-template>
+

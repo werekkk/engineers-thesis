@@ -26,6 +26,10 @@ export class TimePeriodDto {
         return this.start.toSeconds() - other.start.toSeconds() || this.finish.toSeconds() - other.finish.toSeconds()
     }
 
+    copy(): TimePeriodDto {
+        return new TimePeriodDto(this.start.copy(), this.finish.copy())
+    }
+
     static of(timePeriod: TimePeriod): TimePeriodDto {
         if (timePeriod) {
             return new TimePeriodDto(TimeDto.of(timePeriod.start), TimeDto.of(timePeriod.finish))

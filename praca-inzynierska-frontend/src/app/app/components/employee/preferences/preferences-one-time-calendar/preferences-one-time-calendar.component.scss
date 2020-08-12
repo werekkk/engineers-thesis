@@ -1,0 +1,34 @@
+@import './../../../../../../styles.scss';
+
+.calendar {
+    min-height: 500px;
+    height: 70vh;
+}
+
+.day-card {
+    margin: 2px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 1.5px 0.5px rgba(0, 0, 0, 0.2);
+}
+
+.day-card_label {
+    @extend .unselectable;
+    text-align: center;
+}
+
+.day-card_label--current-month {
+    font-weight: bold;
+}
+
+.preference_container {
+    width: inherit;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preference {
+    width: fit-content;
+    border-radius: 5px;
+    margin-bottom: 3px;
+}

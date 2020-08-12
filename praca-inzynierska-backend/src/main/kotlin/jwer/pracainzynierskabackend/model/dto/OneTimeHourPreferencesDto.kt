@@ -1,6 +1,7 @@
 package jwer.pracainzynierskabackend.model.dto
 
 import jwer.pracainzynierskabackend.model.entity.OneTimeHourPreference
+import java.time.LocalDate
 
 data class OneTimeHourPreferencesDto(
         val preferences: List<OneTimeHourPreferenceDto>
@@ -10,4 +11,8 @@ data class OneTimeHourPreferencesDto(
     constructor(ps: List<OneTimeHourPreference>, @Suppress("UNUSED_PARAMETER") a:Any? = null) : this(
             ps.map { p -> OneTimeHourPreferenceDto(p) }
     )
+
+    fun areInDay(day: LocalDate): Boolean {
+        return preferences.fold(true, { acc, p -> return acc && p.start.toLocalDate() == day && p.finish.toLocalDate() == day})
+    }
 }

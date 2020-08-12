@@ -1,5 +1,6 @@
 package jwer.pracainzynierskabackend.model.entity
 
+import jwer.pracainzynierskabackend.model.dto.OneTimeHourPreferenceDto
 import jwer.pracainzynierskabackend.model.embeddable.DateTimePeriod
 import javax.persistence.*
 
@@ -21,4 +22,8 @@ data class OneTimeHourPreference(
         @Column(name = "time_period")
         val period: DateTimePeriod
 
-)
+) {
+        constructor(othp: OneTimeHourPreferenceDto, employee: Employee) : this(
+                othp.id, employee, othp.type, DateTimePeriod(othp.start, othp.finish)
+        )
+}

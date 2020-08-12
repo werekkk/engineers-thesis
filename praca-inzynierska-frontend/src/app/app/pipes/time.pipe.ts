@@ -6,7 +6,7 @@ import { TimeDto } from '../model/dto/TimeDto';
 })
 
 export class TimePipe implements PipeTransform {
-    transform(time: TimeDto, ...args: string[]): any {
+    transform(time: TimeDto, ...args: string[]): string {
         if (time) {
             if (args && args.length > 0 && args[0].toLowerCase()=='hh:mm') {
                 return `${time.hour < 10 ? '0' : ''}${time.hour}:${time.minute < 10 ? '0' : ''}${time.minute}`

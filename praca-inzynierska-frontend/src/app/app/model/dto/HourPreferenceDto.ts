@@ -27,7 +27,7 @@ export class HourPreferenceDto implements HasTimePeriod {
     }
 
     copy(): HourPreferenceDto {
-        return new HourPreferenceDto(this.type, this.timePeriod)
+        return new HourPreferenceDto(this.type, this.timePeriod.copy())
     }
 
 }

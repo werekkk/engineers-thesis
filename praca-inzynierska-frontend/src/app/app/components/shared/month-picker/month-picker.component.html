@@ -1,0 +1,9 @@
+<div>
+    <button (click)="onPreviousMonthClicked()">
+        Poprzedni miesiąc
+    </button>
+    {{month.format('MMMM YYYY') | strings:'capitalizeFirst'}}
+    <button (click)="onNextMonthClicked()">
+        Następny miesiąc
+    </button>
+</div>

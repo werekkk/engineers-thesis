@@ -1,6 +1,8 @@
-import { PreferencesWeekDto } from '../../../model/dto/PreferencesWeekDto'
-import { PreferencesDayDto } from '../../../model/dto/PreferencesDayDto'
-import { PreferenceType } from '../../../model/PreferenceType'
+import { PreferencesWeekDto } from '../../../../model/dto/PreferencesWeekDto'
+import { PreferencesDayDto } from '../../../../model/dto/PreferencesDayDto'
+import { PreferenceType } from '../../../../model/PreferenceType'
+import { OneTimeHourPreferenceDto } from 'src/app/app/model/dto/OneTimeHourPreferenceDto'
+import { TimeDto } from 'src/app/app/model/dto/TimeDto'
 
 export class PreferenceBlock {
 
@@ -24,7 +26,7 @@ export class PreferenceBlock {
         return blocks
     }
 
-    private static fromPreferencesDay(day: PreferencesDayDto, x: number, w: number, y1: number, y2: number): PreferenceBlock[] {
+    static fromPreferencesDay(day: PreferencesDayDto, x: number, w: number, y1: number, y2: number): PreferenceBlock[] {
         let blocks = []
         day.preferences.forEach(p => {
             blocks.push(new PreferenceBlock(
@@ -36,5 +38,15 @@ export class PreferenceBlock {
             ))
         })
         return blocks
+    }
+
+    static fromOneTimePreference(preference: OneTimeHourPreferenceDto, x: number, w: number, y1: number, y2: number): PreferenceBlock {
+        return new PreferenceBlock(
+            x + TimeDto.fromDate(preference.start).toDayPercentage()*w,
+            x + TimeDto.fromDate(preference.finish).toDayPercentage()*w,
+            y1,
+            y2,
+            PreferenceType.toColor(preference.type)
+        )
     }
 }

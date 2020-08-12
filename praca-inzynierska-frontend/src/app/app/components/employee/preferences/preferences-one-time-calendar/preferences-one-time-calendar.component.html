@@ -1,0 +1,24 @@
+<div *ngIf="!preferencesLoaded; else calendar">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>
+<ng-template #calendar>
+    <div class="container-fluid calendar d-flex flex-column">
+        <div *ngFor="let week of calendarDays; let weekIndex = index" class="row flex-fill">
+            <div *ngFor="let day of week; let dayIndex = index" 
+            class="col day-card" 
+            (click)="onDayClicked({weekIndex: weekIndex, dayIndex: dayIndex})">
+                <div class="day-card_label" 
+                [class.day-card_label--current-month]="day.getMonth() == month.month()">
+                    {{day.getDate()}}
+                </div>
+                <div class="preference_container">
+                    <div *ngFor="let pref of oneTimeHourPreferences[weekIndex][dayIndex]" class="preference" [style]="'background-color: ' + getTypeColor(pref) + ';'">
+                        {{pref.start | dateToTime | time:'hh:mm'}} - {{pref.finish | dateToTime | time:'hh:mm'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+

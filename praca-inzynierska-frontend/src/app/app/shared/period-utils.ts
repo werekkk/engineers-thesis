@@ -1,6 +1,7 @@
 import { RequiredStaffTimePeriodDto } from '../model/dto/RequiredStaffTimePeriodDto'
 import { TimePeriodDto } from '../model/dto/TimePeriodDto'
 import { HasTimePeriod } from '../model/HasTimePeriod'
+import { TimeDto } from '../model/dto/TimeDto'
 
 export namespace PeriodUtils {
 
@@ -19,7 +20,12 @@ export namespace PeriodUtils {
      *  
      * @returns Optimized `reqs` array
      */
-    export function insertPeriodAndOptimize(pers: HasTimePeriod[], newPer: HasTimePeriod): HasTimePeriod[] {
+    export function insertPeriodAndOptimize(
+        pers: HasTimePeriod[], 
+        newPer: HasTimePeriod, 
+        startSetter?: (period: HasTimePeriod, newStart: TimeDto) => void,
+        finishSetter?: (period: HasTimePeriod, newFinish: TimeDto) => void
+        ): HasTimePeriod[] {
         if (newPer.timePeriod.start.equals(newPer.timePeriod.finish)) {
             return pers
         }
@@ -33,31 +39,30 @@ export namespace PeriodUtils {
                    && currentReq.timePeriod.finish.toSeconds() <= newPer.timePeriod.finish.toSeconds()) {
                        pers.splice(currentId, 1)
                    } else if (currentReq.timePeriod.start.toSeconds() >= newPer.timePeriod.start.toSeconds()) {
-                       currentReq.timePeriod.start = newPer.timePeriod.finish
+                       applyStartSetter(currentReq, newPer.timePeriod.finish, startSetter)
                        break
                    } else if (currentReq.timePeriod.finish.toSeconds() <= newPer.timePeriod.finish.toSeconds()) {
-                       currentReq.timePeriod.finish = newPer.timePeriod.start
+                       applyFinishSetter(currentReq, newPer.timePeriod.start, finishSetter)
                        currentId++
                    } else {
                        pers.splice(
-                           currentId + 1, 
-                           0, 
-                           currentReq.withNewPeriod(new TimePeriodDto(newPer.timePeriod.finish, currentReq.timePeriod.finish))
-                        )
-                       currentReq.timePeriod.finish = newPer.timePeriod.start
+                          currentId + 1, 
+                          0, 
+                          currentReq.withNewPeriod(new TimePeriodDto(newPer.timePeriod.finish, currentReq.timePeriod.finish))
+                       )
+                       applyFinishSetter(currentReq, newPer.timePeriod.start, finishSetter)
                        break
                    }
                }
             }
         }
-        pers.filter(req => !req.timePeriod.start.equals(req.timePeriod.finish))
         if (!newPer.doNotKeep()) {
-            pers = insertPeriodInGap(pers, newPer)
+            pers = insertPeriodInGap(pers, newPer, finishSetter)
         }
         return pers
     }
 
-    function insertPeriodInGap(pers: HasTimePeriod[], newPer: HasTimePeriod): HasTimePeriod[] {
+    function insertPeriodInGap(pers: HasTimePeriod[], newPer: HasTimePeriod, finishSetter?: (period: HasTimePeriod, newFinish: TimeDto) => void): HasTimePeriod[] {
         let insertPosition = 0
         let shouldInsert = true
         while (pers.length > insertPosition &&
@@ -67,19 +72,41 @@ export namespace PeriodUtils {
         if (insertPosition > 0 && pers.length > insertPosition-1
         && pers[insertPosition-1].periodType == newPer.periodType
         && pers[insertPosition-1].timePeriod.finish.equals(newPer.timePeriod.start)) {
-            pers[insertPosition-1].timePeriod.finish = newPer.timePeriod.finish
+            applyFinishSetter(pers[insertPosition-1], newPer.timePeriod.finish, finishSetter)
             newPer = pers[insertPosition-1]
             shouldInsert = false
         }
         if (insertPosition < pers.length
         && pers[insertPosition].periodType == newPer.periodType
         && pers[insertPosition].timePeriod.start.equals(newPer.timePeriod.finish)) {
-            newPer.timePeriod.finish = pers[insertPosition].timePeriod.finish
+            applyFinishSetter(newPer, pers[insertPosition].timePeriod.finish, finishSetter)
             pers.splice(insertPosition, 1)
         }
         if (shouldInsert) {
             pers.splice(insertPosition, 0, newPer)
         }
         return pers
+    }
+
+    function applyStartSetter(
+        period: HasTimePeriod, 
+        newStart: TimeDto, 
+        startSetter?: (period: HasTimePeriod, newStart: TimeDto) => void) {
+        if (startSetter) {
+            startSetter(period, newStart)
+        } else {
+            period.timePeriod.start = newStart
+        }
+    }
+
+    function applyFinishSetter(
+        period: HasTimePeriod, 
+        newFinish: TimeDto, 
+        finishSetter?: (period: HasTimePeriod, newFinish: TimeDto) => void) {
+        if (finishSetter) {
+            finishSetter(period, newFinish)
+        } else {
+            period.timePeriod.finish = newFinish
+        }
     }
 }
