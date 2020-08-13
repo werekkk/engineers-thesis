@@ -10,6 +10,8 @@ import * as moment from 'moment';
 import { mergeAll, tap, map, flatMap } from 'rxjs/operators';
 import { merge, Observable, of, noop } from 'rxjs';
 import { EmployeesDto } from 'src/app/app/model/dto/EmployeesDto';
+import { StaffRequirementsService } from 'src/app/app/services/staff-requirements.service';
+import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
 
 @Component({
   selector: 'schedule-position-week-edit',
@@ -27,15 +29,18 @@ export class SchedulePositionWeekEditComponent implements OnInit {
   dataLoaded = false
   employeesLoaded = false
   shiftsLoaded = false
+  requiredStaffLoaded = false
+
   employees: EmployeeDto[]
   employeesWithPosition: EmployeeDto[]
-
   shiftsTable: ShiftDto[][][] = []
+  requiredStaff: RequiredStaffDto = undefined 
 
   constructor(
     private router: Router,
     private employeeService: EmployeeService,
-    public shiftService: ShiftService
+    public shiftService: ShiftService,
+    private staffRequirementsService: StaffRequirementsService
   ) { 
     this.employeeService.employees.subscribe(newEmployees => {
       this.employees = newEmployees
@@ -50,7 +55,8 @@ export class SchedulePositionWeekEditComponent implements OnInit {
       this.loadEmployees().pipe(
         tap(() => this.initShiftsTableSize()),
         flatMap(() => this.loadShifts()),
-      ).subscribe()
+        ).subscribe()
+      this.loadRequirements()
     }
   }
 
@@ -98,6 +104,14 @@ export class SchedulePositionWeekEditComponent implements OnInit {
 
   private getEmployees() {
     this.employeesWithPosition = this.employees.filter(e => e.positions.some(p => p.id == this.position.id))
+  }
+
+  private loadRequirements() {
+    this.requiredStaffLoaded = false
+    this.staffRequirementsService.getPositionRequirements(this.position.id).subscribe(rs => {
+      this.requiredStaff = rs
+      this.requiredStaffLoaded = true
+    })
   }
 
   private initShiftsTableSize() {
@@ -152,8 +166,6 @@ export class SchedulePositionWeekEditComponent implements OnInit {
     return map
   }
 }
-
-
 
 export type SchedulePostitionWeekData = {
   position: PositionDto,

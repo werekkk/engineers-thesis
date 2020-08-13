@@ -15,6 +15,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MonthPickerComponent } from './month-picker/month-picker.component';
 import { StringsPipe } from '../../pipes/strings.pipe';
 import { DateToTimePipe } from '../../pipes/date-to-time.pipe';
+import { TimePeriodCellComponent } from './time-period-cell/time-period-cell.component';
+import { ClickOutsideDirective } from '../../directives/click-outside.directive'
+import { PeriodLengthPipe } from '../../pipes/period-length.pipe'
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { DateToTimePipe } from '../../pipes/date-to-time.pipe';
     TimeStepPickerComponent,
     MonthPickerComponent,
     StringsPipe,
-    DateToTimePipe
+    DateToTimePipe,
+    TimePeriodCellComponent,
+    ClickOutsideDirective,
+    PeriodLengthPipe
   ],
   imports: [
     CommonModule,
@@ -48,7 +54,10 @@ import { DateToTimePipe } from '../../pipes/date-to-time.pipe';
     TimeStepPickerComponent,
     MonthPickerComponent,
     StringsPipe,
-    DateToTimePipe
+    DateToTimePipe,
+    TimePeriodCellComponent,
+    ClickOutsideDirective,
+    PeriodLengthPipe
   ]
 })
 export class SharedModule { }

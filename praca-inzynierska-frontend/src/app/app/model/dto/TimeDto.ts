@@ -51,7 +51,7 @@ export class TimeDto {
     }
 
     toSeconds(): number {
-        return (this.hour * 60 * 60) + (this.minute * 60) + this.second
+        return this.isMidnight() ? 86400 : (this.hour * 3600) + (this.minute * 60) + this.second
     }
 
     equals(other: TimeDto): boolean {

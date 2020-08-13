@@ -1,0 +1,39 @@
+.delete-period-button {
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    background-color: #ff6969;
+    padding: 3px 8px;
+    border-radius: 12px;
+    height: fit-content;
+    cursor: pointer;
+}
+
+.delete-period-button:hover {
+    background-color: #e93535;
+}
+
+.period {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.period-info {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.period-info_length {
+    font-size: 13px;
+    margin-top: -6px;
+}
+
+.new-period {
+    display: flex;
+    justify-content: space-between;
+}

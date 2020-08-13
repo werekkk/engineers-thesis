@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { ShiftDto } from 'src/app/app/model/dto/ShiftDto';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
@@ -8,6 +8,9 @@ import { ShiftsDto } from 'src/app/app/model/dto/ShiftsDto';
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
 import { ShiftType } from 'src/app/app/model/ShiftType';
 import { Utils } from 'src/app/app/shared/utils';
+import { interval } from 'rxjs';
+import { ClickService } from 'src/app/app/services/click.service';
+import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
 
 @Component({
   selector: 'schedule-position-edit-popup',
@@ -46,9 +49,15 @@ export class SchedulePositionEditPopupComponent implements OnInit {
   @Input('date')
   date: Date
 
+  @Input('requiredStaff')
+  requiredStaff: RequiredStaffDto
+
+  mouseIn: boolean = false
+
   constructor(
     private shiftService: ShiftService
-  ) { }
+  ) { 
+  }
 
   ngOnInit(): void {
   }

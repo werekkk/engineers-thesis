@@ -39,6 +39,14 @@ export class OneTimeHourPreferenceDto implements HasTimePeriod {
         );
     }
 
+    setStartTime(newStart: TimeDto) {
+        this.start = newStart.createDateTime(this.start)
+    }
+
+    setFinishTime(newFinish: TimeDto) {
+        this.finish = newFinish.createDateTime(this.finish)
+    }
+
     datesToBackend() {
         this.start = Utils.fixDateToBackendFormat(this.start)
         this.finish = Utils.fixDateToBackendFormat(this.finish)

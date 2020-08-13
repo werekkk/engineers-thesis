@@ -8,8 +8,15 @@ import { TimeDto } from '../model/dto/TimeDto';
 export class TimePipe implements PipeTransform {
     transform(time: TimeDto, ...args: string[]): string {
         if (time) {
-            if (args && args.length > 0 && args[0].toLowerCase()=='hh:mm') {
-                return `${time.hour < 10 ? '0' : ''}${time.hour}:${time.minute < 10 ? '0' : ''}${time.minute}`
+            if (args && args.length == 1) {
+                switch(args[0].toLowerCase()) {
+                    case 'hh:mm':
+                        return `${time.hour < 10 ? '0' : ''}${time.hour}:${time.minute < 10 ? '0' : ''}${time.minute}`
+                    case 'h':
+                        return `${time.hour}`
+                    case 'mm':
+                        return `${time.minute < 10 ? '0' : ''}${time.minute}`
+                }
             } else {
                 return `${time.hour}:${time.minute < 10 ? '0' : ''}${time.minute}`
             }

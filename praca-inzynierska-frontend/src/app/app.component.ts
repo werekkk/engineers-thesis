@@ -1,9 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { TimeDto } from './app/model/dto/TimeDto';
-import { TimePeriodDto } from './app/model/dto/TimePeriodDto';
-import { RequiredStaffTimePeriodDto } from './app/model/dto/RequiredStaffTimePeriodDto';
-import { Utils } from './app/shared/utils';
-import { interval } from 'rxjs';
+import { Component } from '@angular/core';
+import { ClickService } from './app/services/click.service'
 
 @Component({
   selector: 'app-root',
@@ -12,4 +8,5 @@ import { interval } from 'rxjs';
 })
 export class AppComponent {
   title = 'praca-inzynierska-frontend';
+
 }

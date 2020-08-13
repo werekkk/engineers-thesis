@@ -71,10 +71,7 @@ export class PreferencesOneTimeDayModalComponent implements OnInit {
   }
 
   handlePreferenceCreated(newPreference: OneTimeHourPreferenceDto) {
-    this.preferences = PeriodUtils.insertPeriodAndOptimize(this.preferences, newPreference,
-      (period, newStart) => (period as OneTimeHourPreferenceDto).start = newStart.createDateTime((period as OneTimeHourPreferenceDto).start),
-      (period, newFinish) => (period as OneTimeHourPreferenceDto).finish = newFinish.createDateTime((period as OneTimeHourPreferenceDto).finish)
-      ) as OneTimeHourPreferenceDto[]
+    this.preferences = PeriodUtils.insertPeriodAndOptimize(this.preferences, newPreference) as OneTimeHourPreferenceDto[]
     this.preferences = this.preferences.map(p => p)
   }
 

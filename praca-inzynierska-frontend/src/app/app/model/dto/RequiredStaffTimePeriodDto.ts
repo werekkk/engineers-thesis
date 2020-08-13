@@ -1,6 +1,7 @@
 import { TimePeriodDto } from './TimePeriodDto';
 import { RequiredStaffTimePeriodBackendDto } from './backend/RequiredStaffTimePeriodBackendDto';
 import { HasTimePeriod } from '../HasTimePeriod'
+import { TimeDto } from './TimeDto';
 
 export class RequiredStaffTimePeriodDto implements HasTimePeriod {
     
@@ -31,5 +32,13 @@ export class RequiredStaffTimePeriodDto implements HasTimePeriod {
 
     withNewPeriod(newPeriod: TimePeriodDto): HasTimePeriod {
         return new RequiredStaffTimePeriodDto(0, this.employeeCount, newPeriod)
+    }
+
+    setStartTime(newStart: TimeDto) {
+        this.timePeriod.start = newStart
+    }
+
+    setFinishTime(newFinish: TimeDto) {
+        this.timePeriod.finish = newFinish
     }
 }

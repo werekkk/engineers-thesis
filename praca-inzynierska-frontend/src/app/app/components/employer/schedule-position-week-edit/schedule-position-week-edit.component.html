@@ -7,7 +7,7 @@
 </div>
 <week-date-picker [(date)]="firstDay" (dateChange)="handleNewFirstDay()"></week-date-picker>
 
-<div *ngIf="!(employeesLoaded && shiftsLoaded); else schedule">
+<div *ngIf="!(employeesLoaded && shiftsLoaded && requiredStaffLoaded); else schedule">
     <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
     </div>
 </div>
@@ -17,20 +17,22 @@
         <table class="schedule_table">
         <tr>
             <th>Pracownik</th>
-            <ng-container *ngFor="let day of days">
+            <ng-container *ngFor="let day of days; let i = index">
                 <th>
-                    <div>
-                        {{day | date : 'dd.MM'}}
-                    </div>
-                    <div>
-                        {{day | dayOfWeek}}
-                    </div>
+                    <schedule-position-day-label-cell 
+                    [day]="day" 
+                    [requiredStaff]="requiredStaff"
+                    [dayIndex]="i"
+                    [shiftsTable]="shiftsTable"></schedule-position-day-label-cell>
                 </th>
             </ng-container>
         </tr> 
         <ng-container *ngFor="let employee of employeesWithPosition; let employeeIndex = index">
-                <tr>
-                    <td>{{employee.account.firstName}} {{employee.account.lastName}}</td>
+                <tr class="data-row">
+                    <td>
+                        <div class="employee-label_first-name">{{employee.account.firstName}}</div>
+                        <div class="employee-label_last-name">{{employee.account.lastName}}</div>
+                    </td>
                     <ng-container *ngFor="let day of days; let dayIndex = index">
                         <td>
                             <schedule-employee-day-cell 
@@ -38,6 +40,7 @@
                             [position]="position"
                             [employee]="employee"
                             [day]="day"
+                            [requiredStaff]="requiredStaff"
                             ></schedule-employee-day-cell>
                         </td>
                     </ng-container>

@@ -30,8 +30,7 @@ export class SchedulePositionDayComponent implements OnInit {
 
   loadDayStaff() {
     this.requiredDayStaff = this.requiredWeekStaff.getDayStaff(this.date)
-    this.requiredHours = this.requiredDayStaff.timePeriods.map(tp => tp.hours())
-    .reduceRight((prev, cur) => cur + prev)
+    this.requiredHours = this.requiredDayStaff.totalRequiredHours()
   }
 
 }

@@ -20,12 +20,7 @@ export namespace PeriodUtils {
      *  
      * @returns Optimized `reqs` array
      */
-    export function insertPeriodAndOptimize(
-        pers: HasTimePeriod[], 
-        newPer: HasTimePeriod, 
-        startSetter?: (period: HasTimePeriod, newStart: TimeDto) => void,
-        finishSetter?: (period: HasTimePeriod, newFinish: TimeDto) => void
-        ): HasTimePeriod[] {
+    export function insertPeriodAndOptimize(pers: HasTimePeriod[], newPer: HasTimePeriod): HasTimePeriod[] {
         if (newPer.timePeriod.start.equals(newPer.timePeriod.finish)) {
             return pers
         }
@@ -39,10 +34,10 @@ export namespace PeriodUtils {
                    && currentReq.timePeriod.finish.toSeconds() <= newPer.timePeriod.finish.toSeconds()) {
                        pers.splice(currentId, 1)
                    } else if (currentReq.timePeriod.start.toSeconds() >= newPer.timePeriod.start.toSeconds()) {
-                       applyStartSetter(currentReq, newPer.timePeriod.finish, startSetter)
+                       currentReq.setStartTime(newPer.timePeriod.finish)
                        break
                    } else if (currentReq.timePeriod.finish.toSeconds() <= newPer.timePeriod.finish.toSeconds()) {
-                       applyFinishSetter(currentReq, newPer.timePeriod.start, finishSetter)
+                       currentReq.setFinishTime(newPer.timePeriod.start)
                        currentId++
                    } else {
                        pers.splice(
@@ -50,19 +45,19 @@ export namespace PeriodUtils {
                           0, 
                           currentReq.withNewPeriod(new TimePeriodDto(newPer.timePeriod.finish, currentReq.timePeriod.finish))
                        )
-                       applyFinishSetter(currentReq, newPer.timePeriod.start, finishSetter)
+                       currentReq.setFinishTime(newPer.timePeriod.start)
                        break
                    }
                }
             }
         }
         if (!newPer.doNotKeep()) {
-            pers = insertPeriodInGap(pers, newPer, finishSetter)
+            pers = insertPeriodInGap(pers, newPer)
         }
         return pers
     }
 
-    function insertPeriodInGap(pers: HasTimePeriod[], newPer: HasTimePeriod, finishSetter?: (period: HasTimePeriod, newFinish: TimeDto) => void): HasTimePeriod[] {
+    function insertPeriodInGap(pers: HasTimePeriod[], newPer: HasTimePeriod): HasTimePeriod[] {
         let insertPosition = 0
         let shouldInsert = true
         while (pers.length > insertPosition &&
@@ -72,41 +67,19 @@ export namespace PeriodUtils {
         if (insertPosition > 0 && pers.length > insertPosition-1
         && pers[insertPosition-1].periodType == newPer.periodType
         && pers[insertPosition-1].timePeriod.finish.equals(newPer.timePeriod.start)) {
-            applyFinishSetter(pers[insertPosition-1], newPer.timePeriod.finish, finishSetter)
+            pers[insertPosition-1].setFinishTime(newPer.timePeriod.finish)
             newPer = pers[insertPosition-1]
             shouldInsert = false
         }
         if (insertPosition < pers.length
         && pers[insertPosition].periodType == newPer.periodType
         && pers[insertPosition].timePeriod.start.equals(newPer.timePeriod.finish)) {
-            applyFinishSetter(newPer, pers[insertPosition].timePeriod.finish, finishSetter)
+            newPer.setFinishTime(pers[insertPosition].timePeriod.finish)
             pers.splice(insertPosition, 1)
         }
         if (shouldInsert) {
             pers.splice(insertPosition, 0, newPer)
         }
         return pers
-    }
-
-    function applyStartSetter(
-        period: HasTimePeriod, 
-        newStart: TimeDto, 
-        startSetter?: (period: HasTimePeriod, newStart: TimeDto) => void) {
-        if (startSetter) {
-            startSetter(period, newStart)
-        } else {
-            period.timePeriod.start = newStart
-        }
-    }
-
-    function applyFinishSetter(
-        period: HasTimePeriod, 
-        newFinish: TimeDto, 
-        finishSetter?: (period: HasTimePeriod, newFinish: TimeDto) => void) {
-        if (finishSetter) {
-            finishSetter(period, newFinish)
-        } else {
-            period.timePeriod.finish = newFinish
-        }
     }
 }
