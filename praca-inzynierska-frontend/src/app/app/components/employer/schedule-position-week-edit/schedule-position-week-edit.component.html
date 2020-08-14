@@ -37,10 +37,12 @@
                         <td>
                             <schedule-employee-day-cell 
                             [shifts]="shiftsTable[employeeIndex][dayIndex]"
+                            [shiftsTable]="shiftsTable"
                             [position]="position"
                             [employee]="employee"
                             [day]="day"
                             [requiredStaff]="requiredStaff"
+                            [dayIndex]="dayIndex"
                             ></schedule-employee-day-cell>
                         </td>
                     </ng-container>

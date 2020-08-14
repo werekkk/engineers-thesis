@@ -21,6 +21,10 @@ export class RequiredStaffTimePeriodDto implements HasTimePeriod {
             requiredStaff.employeeCount, 
             TimePeriodDto.of(requiredStaff.timePeriod))
     }
+    
+    seconds() {
+        return this.timePeriod.seconds() * this.employeeCount
+    }
 
     hours() {
         return this.timePeriod.hours() * this.employeeCount

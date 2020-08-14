@@ -1,5 +1,6 @@
-.container {
-    max-width: 10em;
+.suggestions-container {
+    max-width: 20em;
+    width: 20em;
     min-width: 5em;
     background-color: white;
     padding: 0;
@@ -13,4 +14,20 @@
 
 .highlighted {
     background-color: #CCC;
+}
+
+.no-requirements {
+    color: grey;
+}
+
+.not-filled {
+    color: red;
+}
+
+.filled {
+    color: orange;
+}
+
+.full {
+    color: green;
 }

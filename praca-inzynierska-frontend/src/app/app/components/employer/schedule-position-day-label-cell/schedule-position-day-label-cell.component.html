@@ -4,6 +4,11 @@
 <div>
     {{day | dayOfWeek}}
 </div>
-<div>
+<div 
+class="hour-counter"
+[class.day-not-filled]="!isDayFilled"
+[class.day-filled]="isDayFilled"
+[class.day-full]="allocatedHours == totalRequiredHours"
+>
     {{allocatedHours | number:'1.0-3':'pl'}} / {{totalRequiredHours | number:'1.0-3':'pl'}} godz.
 </div>

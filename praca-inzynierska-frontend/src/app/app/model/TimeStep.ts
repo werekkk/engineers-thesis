@@ -52,11 +52,34 @@ export namespace TimeStep {
         }
     }
 
+    export function getAllTimeDtosByStep(timeStep: TimeStep) {
+        switch (timeStep) {
+            case TimeStep.ONE_HOUR:
+                return oneHourTimeDtos
+            case TimeStep.THIRTY_MINUTES:
+                return thirtyMinutesTimeDtos
+            case TimeStep.FIFTEEN_MINUTES:
+                return fifteenMinutesTimeDtos
+            case TimeStep.TEN_MINUTES:
+                return tenMinutesTimeDtos
+            case TimeStep.FIVE_MINUTES:
+                return fiveMinutesTimeDtos
+            default:
+                return []
+        }
+    }
+
     const oneHourHours: string[] = _getAllHoursByStep(TimeStep.ONE_HOUR)
     const thirtyMinutesHours: string[] = _getAllHoursByStep(TimeStep.THIRTY_MINUTES)
     const fifteenMinutesHours: string[] = _getAllHoursByStep(TimeStep.FIFTEEN_MINUTES)
     const tenMinutesHours: string[] = _getAllHoursByStep(TimeStep.TEN_MINUTES)
     const fiveMinutesHours: string[] = _getAllHoursByStep(TimeStep.FIVE_MINUTES)
+
+    const oneHourTimeDtos: TimeDto[] = _getAllTimeDtosByStep(TimeStep.ONE_HOUR)
+    const thirtyMinutesTimeDtos: TimeDto[] = _getAllTimeDtosByStep(TimeStep.THIRTY_MINUTES)
+    const fifteenMinutesTimeDtos: TimeDto[] = _getAllTimeDtosByStep(TimeStep.FIFTEEN_MINUTES)
+    const tenMinutesTimeDtos: TimeDto[] = _getAllTimeDtosByStep(TimeStep.TEN_MINUTES)
+    const fiveMinutesTimeDtos: TimeDto[] = _getAllTimeDtosByStep(TimeStep.FIVE_MINUTES)
 
     function _getAllHoursByStep(step: TimeStep): string[] {
         let m = moment('00:00', 'HH:mm')
@@ -67,6 +90,18 @@ export namespace TimeStep {
             m = m.add(step, 'minutes')            
         }
         hours.push('24:00')
+        return hours
+    }
+
+    function _getAllTimeDtosByStep(step: TimeStep): TimeDto[] {
+        let m = moment('00:00', 'HH:mm')
+        let iterations = (24 * 60) / step
+        let hours: TimeDto[] = []
+        for (let index = 0; index < iterations; index++) {
+            hours.push(new TimeDto(m.hours(), m.minutes(), 0))
+            m = m.add(step, 'minutes')            
+        }
+        hours.push(new TimeDto(24, 0, 0))
         return hours
     }
 

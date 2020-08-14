@@ -2,8 +2,8 @@ import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, Output,
 import { TimeStep } from 'src/app/app/model/TimeStep';
 import { PreferenceType } from 'src/app/app/model/PreferenceType';
 import { PreferencesWeekDto } from 'src/app/app/model/dto/PreferencesWeekDto';
-import { CanvasUtils } from 'src/app/app/shared/canvas-utils';
-import { Utils } from 'src/app/app/shared/utils';
+import { CanvasUtils } from 'src/app/app/shared/utils/canvas-utils';
+import { Utils } from 'src/app/app/shared/utils/utils';
 import { PreferenceCreatedEvent } from '../preferences-week-editor/preferences-week-editor.component';
 import { HourPreferenceDto } from 'src/app/app/model/dto/HourPreferenceDto';
 import { TimePeriodDto } from 'src/app/app/model/dto/TimePeriodDto';

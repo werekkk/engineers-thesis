@@ -1,13 +1,23 @@
-<div class="container unselectable"
+<div class="suggestions-container unselectable"
     (mouseenter)="onMouseEnter()"
     (mouseleave)="onMouseLeave()"
 >
-    <div *ngFor="let hour of allHours; let i = index" 
+    <div *ngFor="let hour of allHours; let i = index"
     (click)="selectHour(i)" 
     class="option" 
-    [id]="hour" 
+    [id]="hour.toHHMMString()" 
     [class.highlighted]="hour == highlightedHour"
+    [class.no-requirements]="requiredEmployees[i] == 0"
     (mouseenter)="highlightedHour = hour">
-        {{hour}}
+        <span>
+            {{hour.toHHMMString()}}
+        </span>
+        <span
+        [class.not-filled]="assignedEmployees[i] == 0 && requiredEmployees[i] > 0"
+        [class.filled]="assignedEmployees[i] > 0 && assignedEmployees[i] < requiredEmployees[i]"
+        [class.full]="assignedEmployees[i] > 0 && assignedEmployees[i] >= requiredEmployees[i]"
+        >
+               {{assignedEmployees[i]}}/{{requiredEmployees[i]}}
+        </span>
     </div>
 </div>

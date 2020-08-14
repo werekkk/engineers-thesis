@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ShiftDto } from 'src/app/app/model/dto/ShiftDto';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
 import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
+import { ShiftService } from 'src/app/app/services/shift.service';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'schedule-employee-day-cell',
@@ -13,6 +15,9 @@ export class ScheduleEmployeeDayCellComponent {
 
   @Input('shifts')
   shifts: ShiftDto[]
+
+  @Input('shiftsTable')
+  shiftsTable: ShiftDto[][][]
 
   @Input('position')
   position: PositionDto
@@ -25,6 +30,9 @@ export class ScheduleEmployeeDayCellComponent {
 
   @Input('day')
   day: Date
+
+  @Input('dayIndex')
+  dayIndex: number
 
   showPopup = false
 

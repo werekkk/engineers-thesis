@@ -18,8 +18,12 @@ export class TimePeriodDto {
         && this.start.toSeconds() < other.finish.toSeconds()
     }
 
+    seconds(): number {
+        return this.finish.toSeconds() - this.start.toSeconds()
+    }
+
     hours(): number {
-        return (this.finish.toSeconds() - this.start.toSeconds()) / 3600
+        return this.seconds() / 3600
     }
 
     compare(other: TimePeriodDto): number {

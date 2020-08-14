@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
 import { EmployeeService } from 'src/app/app/services/employee.service';
 import { ShiftService } from '../../../services/shift.service'
-import { Utils } from 'src/app/app/shared/utils';
+import { Utils } from 'src/app/app/shared/utils/utils';
 import { ShiftDto } from 'src/app/app/model/dto/ShiftDto';
 import * as moment from 'moment';
 import { mergeAll, tap, map, flatMap } from 'rxjs/operators';
@@ -165,6 +165,7 @@ export class SchedulePositionWeekEditComponent implements OnInit {
     })
     return map
   }
+
 }
 
 export type SchedulePostitionWeekData = {

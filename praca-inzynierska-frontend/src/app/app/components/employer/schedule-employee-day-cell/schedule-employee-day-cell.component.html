@@ -1,5 +1,5 @@
 <div class="popup_container" >
-    <div class="cell_container" (click)="handleOnDetailsClicked()">
+    <div class="cell_container" (click)="handleOnDetailsClicked()" (onEscapePressed)="this.showPopup = false">
         <div *ngIf="shifts.length == 0; else shiftList" class="no-shifts unselectable">
             <div>
                 WOLNE
@@ -21,6 +21,8 @@
             [employee]="employee"
             [date]="day"
             [requiredStaff]="requiredStaff"
+            [shiftsTable]="shiftsTable"
+            [dayIndex]="dayIndex"
         ></schedule-position-edit-popup>
         </div>
     </div>

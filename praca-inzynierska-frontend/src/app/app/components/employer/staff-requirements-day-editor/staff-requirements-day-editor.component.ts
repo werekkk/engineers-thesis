@@ -4,7 +4,7 @@ import { TimeStep } from '../../../model/TimeStep'
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
 import { TimePeriodDto } from 'src/app/app/model/dto/TimePeriodDto';
 import { timer } from 'rxjs';
-import { CanvasUtils } from 'src/app/app/shared/canvas-utils';
+import { CanvasUtils } from 'src/app/app/shared/utils/canvas-utils';
 
 type Canvas = CanvasUtils.Canvas
 

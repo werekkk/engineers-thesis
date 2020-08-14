@@ -19,6 +19,7 @@ export class ShiftService {
   lastSchedulePositionWeekData: SchedulePostitionWeekData
 
   hideAllPopups: EventEmitter<null> = new EventEmitter()
+  updateShifts: EventEmitter<Date> = new EventEmitter()
 
   constructor(
     private http: HttpClient

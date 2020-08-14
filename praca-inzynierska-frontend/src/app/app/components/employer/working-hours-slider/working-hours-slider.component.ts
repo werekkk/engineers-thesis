@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TimePeriodDto } from 'src/app/app/model/dto/TimePeriodDto';
-import { Utils } from '../../../shared/utils'
+import { Utils } from '../../../shared/utils/utils'
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
 
 @Component({

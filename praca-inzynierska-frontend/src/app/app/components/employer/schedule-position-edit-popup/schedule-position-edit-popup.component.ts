@@ -7,7 +7,7 @@ import { TimePeriodDto } from 'src/app/app/model/dto/TimePeriodDto';
 import { ShiftsDto } from 'src/app/app/model/dto/ShiftsDto';
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
 import { ShiftType } from 'src/app/app/model/ShiftType';
-import { Utils } from 'src/app/app/shared/utils';
+import { Utils } from 'src/app/app/shared/utils/utils';
 import { interval } from 'rxjs';
 import { ClickService } from 'src/app/app/services/click.service';
 import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
@@ -34,9 +34,6 @@ export class SchedulePositionEditPopupComponent implements OnInit {
   
   periods: TimePeriodDto[] = []
 
-  @Output('shiftsChange')
-  shiftsChange: EventEmitter<ShiftDto[]> = new EventEmitter()
-
   @Input('showPopup')
   showPopup: EventEmitter<boolean> = new EventEmitter()
 
@@ -49,8 +46,14 @@ export class SchedulePositionEditPopupComponent implements OnInit {
   @Input('date')
   date: Date
 
+  @Input('dayIndex')
+  dayIndex: number
+
   @Input('requiredStaff')
   requiredStaff: RequiredStaffDto
+
+  @Input('shiftsTable')
+  shiftsTable: ShiftDto[][][]
 
   mouseIn: boolean = false
 
@@ -67,28 +70,30 @@ export class SchedulePositionEditPopupComponent implements OnInit {
   }
 
   handleAddShiftClicked() {
-    let newShift = new ShiftDto(0, 
-      this.employee.employeeId, 
-      this.position.id,
-      this.newPeriod.start.createDateTime(this.date),
-      this.newPeriod.finish.createDateTime(this.date), 
-      null, 
-      ShiftType.MANUALLY_ASSIGNED
-    )
-    this.saveShift(newShift)
+    if (this.newPeriod.start.toSeconds() < this.newPeriod.finish.toSeconds()) {
+      let newShift = new ShiftDto(0, 
+        this.employee.employeeId, 
+        this.position.id,
+        this.newPeriod.start.createDateTime(this.date),
+        this.newPeriod.finish.createDateTime(this.date), 
+        null, 
+        ShiftType.MANUALLY_ASSIGNED
+      )
+      this.saveShift(newShift)
+    }
   }
 
   private saveShift(newShift: ShiftDto) {
-    let shiftIndex = this.shifts.length
     this.shifts.push(newShift)
+    this.shifts = this.shifts.sort((a, b) => a.period.compare(b.period))
     this.emitShiftChange()
     this.showPopup.emit(false)
     this.shiftService.saveShift(newShift)
     .subscribe(savedShift => {
-      this.shifts[shiftIndex].id = savedShift.id
+      this.shifts[this.shifts.findIndex(s => s.equalPeriods(newShift))].id = savedShift.id
       this.emitShiftChange()
     }, err => {
-      this.shifts.splice(shiftIndex, 1)
+      this.shifts.splice(this.shifts.findIndex(s => s.equalPeriods(newShift)), 1)
       this.emitShiftChange()
       this.showPopup.emit(true)
     })
@@ -101,7 +106,8 @@ export class SchedulePositionEditPopupComponent implements OnInit {
     this.showPopup.emit(false)
     this.shiftService.deleteShift(shiftToBeDeleted.id)
     .subscribe(null, err => {
-      this.shifts.splice(Math.max(this.shifts.length, shiftIndex), 0, shiftToBeDeleted)
+      this.shifts.push(shiftToBeDeleted)
+      this.shifts = this.shifts.sort((a, b) => a.period.compare(b.period))
       this.emitShiftChange()
       this.showPopup.emit(true)
     })
@@ -109,7 +115,7 @@ export class SchedulePositionEditPopupComponent implements OnInit {
 
   private emitShiftChange() {
     this.handleNewShifts(this.shifts)
-    this.shiftsChange.emit(this.shifts)
+    this.shiftService.updateShifts.emit(this.date)
   }
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
 import { PositionService } from 'src/app/app/services/position.service';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
-import { Utils } from 'src/app/app/shared/utils';
+import { Utils } from 'src/app/app/shared/utils/utils';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

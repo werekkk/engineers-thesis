@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'moment';
 import { ShiftService } from 'src/app/app/services/shift.service';
-import { Utils } from 'src/app/app/shared/utils';
+import { Utils } from 'src/app/app/shared/utils/utils';
 import { ShiftDto } from 'src/app/app/model/dto/ShiftDto';
 import { Subscription } from 'rxjs';
 

@@ -1,4 +1,5 @@
 import * as moment from 'moment'
+import { TimeDto } from '../../model/dto/TimeDto'
 
 export namespace HourInputUtils {
 
@@ -29,7 +30,7 @@ export namespace HourInputUtils {
           }
     }
 
-    export function stringToClosestHour(str: string, allHours: string[]): string {
+    export function stringToClosestHour(str: string, allHours: TimeDto[]): TimeDto {
         while (str && !str.charAt(0).match(/[0-9]/g)) {
           str = str.substring(1, str.length)
         }
@@ -50,7 +51,7 @@ export namespace HourInputUtils {
         
       }
     
-      function findClosestHour(hour: string, minute: string, allHours: string[]): string {
+      function findClosestHour(hour: string, minute: string, allHours: TimeDto[]): TimeDto {
         let possibleHours = findAllHoursWithHour(+hour, allHours)
         if (!minute) {
           return possibleHours.length > 0 ? possibleHours[0] : null
@@ -59,15 +60,15 @@ export namespace HourInputUtils {
         }
       }
     
-      function findAllHoursWithHour(hour: number, allHours: string[]): string[] {
-        return allHours.filter(h => +h.substr(0, 2) == hour)
+      function findAllHoursWithHour(hour: number, allHours: TimeDto[]): TimeDto[] {
+        return allHours.filter(h => h.hour == hour)
       }
     
-      function findHourMatchingMinutes(hours: string[], minutes: string): string {
+      function findHourMatchingMinutes(hours: TimeDto[], minutes: string): TimeDto {
         if (minutes.length == 1) {
-          return hours.find(h => +h.substr(3,1) == +minutes) || hours[0] || null
+          return hours.find(h => Math.floor(h.minute / 10) == +minutes) || hours[0] || null
         } else {
-          return hours.find(h => +h.substr(3,2) == +minutes) || hours[0] || null
+          return hours.find(h => h.minute == +minutes) || hours[0] || null
         }
       }
 

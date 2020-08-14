@@ -1,1 +1,20 @@
-<time-picker [(time)]="period.start" (timeChange)="onTimeChange()"></time-picker> - <time-picker [(time)]="period.finish" (timeChange)="onTimeChange()"></time-picker>
+<time-picker 
+[(time)]="period.start" 
+(timeChange)="onTimeChange()"
+[pickerType]="'shiftStart'"
+[day]="day"
+[dayIndex]="dayIndex"
+[employee]="employee"
+[shiftsTable]="shiftsTable"
+[requiredStaff]="requiredStaff"></time-picker>
+ - 
+<time-picker 
+[(time)]="period.finish" 
+[beginTime]="beginTime"
+(timeChange)="onTimeChange()"
+[pickerType]="'shiftFinish'"
+[day]="day"
+[dayIndex]="dayIndex"
+[employee]="employee"
+[shiftsTable]="shiftsTable"
+[requiredStaff]="requiredStaff"></time-picker>

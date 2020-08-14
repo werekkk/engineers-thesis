@@ -17,7 +17,8 @@ import { StringsPipe } from '../../pipes/strings.pipe';
 import { DateToTimePipe } from '../../pipes/date-to-time.pipe';
 import { TimePeriodCellComponent } from './time-period-cell/time-period-cell.component';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive'
-import { PeriodLengthPipe } from '../../pipes/period-length.pipe'
+import { PeriodLengthPipe } from '../../pipes/period-length.pipe';
+import { OnEscapePressedDirective } from '../../directives/on-escape-pressed.directive';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PeriodLengthPipe } from '../../pipes/period-length.pipe'
     DateToTimePipe,
     TimePeriodCellComponent,
     ClickOutsideDirective,
-    PeriodLengthPipe
+    PeriodLengthPipe,
+    OnEscapePressedDirective
   ],
   imports: [
     CommonModule,
@@ -57,7 +59,8 @@ import { PeriodLengthPipe } from '../../pipes/period-length.pipe'
     DateToTimePipe,
     TimePeriodCellComponent,
     ClickOutsideDirective,
-    PeriodLengthPipe
+    PeriodLengthPipe,
+    OnEscapePressedDirective
   ]
 })
 export class SharedModule { }

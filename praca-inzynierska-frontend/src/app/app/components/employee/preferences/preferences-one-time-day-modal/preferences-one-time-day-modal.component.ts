@@ -7,9 +7,9 @@ import { TimeStep } from 'src/app/app/model/TimeStep';
 import { PreferenceType } from 'src/app/app/model/PreferenceType';
 import { HourPreferenceService } from 'src/app/app/services/hour-preference.service';
 import { PreferencesWeekDto } from 'src/app/app/model/dto/PreferencesWeekDto';
-import { PeriodUtils } from 'src/app/app/shared/period-utils';
+import { PeriodUtils } from 'src/app/app/shared/utils/period-utils';
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
-import { Utils } from '../../../../shared/utils'
+import { Utils } from '../../../../shared/utils/utils'
 
 export type FromParentData = {
   day: Date,

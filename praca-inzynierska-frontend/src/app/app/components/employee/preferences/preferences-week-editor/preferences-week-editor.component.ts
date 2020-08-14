@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { PreferencesWeekDto } from 'src/app/app/model/dto/PreferencesWeekDto';
 import { TimeStep } from 'src/app/app/model/TimeStep';
-import { CanvasUtils } from 'src/app/app/shared/canvas-utils';
+import { CanvasUtils } from 'src/app/app/shared/utils/canvas-utils';
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
 import { DayOfWeekPipe } from 'src/app/app/pipes/day-of-week.pipe';
-import { Utils } from 'src/app/app/shared/utils';
+import { Utils } from 'src/app/app/shared/utils/utils';
 import { PreferenceType } from 'src/app/app/model/PreferenceType';
 import { PreferenceBlock } from './PreferenceBlock'
 import { HourPreferenceDto } from 'src/app/app/model/dto/HourPreferenceDto';

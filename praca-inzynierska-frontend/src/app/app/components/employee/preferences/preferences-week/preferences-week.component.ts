@@ -4,7 +4,7 @@ import { PreferencesWeekDto } from 'src/app/app/model/dto/PreferencesWeekDto';
 import { TimeStep } from 'src/app/app/model/TimeStep';
 import { PreferenceType } from 'src/app/app/model/PreferenceType';
 import { PreferenceCreatedEvent } from '../preferences-week-editor/preferences-week-editor.component';
-import { PeriodUtils } from 'src/app/app/shared/period-utils';
+import { PeriodUtils } from 'src/app/app/shared/utils/period-utils';
 import { HourPreferenceDto } from 'src/app/app/model/dto/HourPreferenceDto';
 
 @Component({

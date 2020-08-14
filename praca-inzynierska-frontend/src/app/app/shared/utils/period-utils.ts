@@ -1,7 +1,7 @@
-import { RequiredStaffTimePeriodDto } from '../model/dto/RequiredStaffTimePeriodDto'
-import { TimePeriodDto } from '../model/dto/TimePeriodDto'
-import { HasTimePeriod } from '../model/HasTimePeriod'
-import { TimeDto } from '../model/dto/TimeDto'
+import { RequiredStaffTimePeriodDto } from '../../model/dto/RequiredStaffTimePeriodDto'
+import { TimePeriodDto } from '../../model/dto/TimePeriodDto'
+import { HasTimePeriod } from '../../model/HasTimePeriod'
+import { TimeDto } from '../../model/dto/TimeDto'
 
 export namespace PeriodUtils {
 

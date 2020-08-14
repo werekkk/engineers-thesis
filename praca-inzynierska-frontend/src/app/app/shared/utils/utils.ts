@@ -1,8 +1,8 @@
 import { BehaviorSubject } from 'rxjs'
-import { RequiredStaffTimePeriodDto } from '../model/dto/RequiredStaffTimePeriodDto'
-import { TimePeriodDto } from '../model/dto/TimePeriodDto'
+import { RequiredStaffTimePeriodDto } from '../../model/dto/RequiredStaffTimePeriodDto'
+import { TimePeriodDto } from '../../model/dto/TimePeriodDto'
 import * as moment from 'moment'
-import { TimeDto } from '../model/dto/TimeDto'
+import { TimeDto } from '../../model/dto/TimeDto'
 
 export namespace Utils {
 

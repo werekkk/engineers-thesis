@@ -1,10 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { interval } from 'rxjs';
 import { TimeStep } from 'src/app/app/model/TimeStep';
-import { HourInputUtils } from 'src/app/app/shared/hour-input-utils';
+import { HourInputUtils } from 'src/app/app/shared/utils/hour-input-utils';
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
 import { Time } from '@angular/common';
 import * as moment from 'moment';
+import { ShiftDto } from 'src/app/app/model/dto/ShiftDto';
+import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
+import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
+
+export type PickerType = 'shiftStart' | 'shiftFinish'
 
 @Component({
   selector: 'time-picker',
@@ -12,6 +17,27 @@ import * as moment from 'moment';
   styleUrls: ['./time-picker.component.scss']
 })
 export class TimePickerComponent implements OnInit {
+
+  @Input('pickerType')
+  pickerType: PickerType
+
+  @Input('shiftsTable')
+  shiftsTable: ShiftDto[][][]
+
+  @Input('employee')
+  employee: EmployeeDto
+
+  @Input('day')
+  day: Date
+
+  @Input('dayIndex')
+  dayIndex: number
+
+  @Input('requiredStaff')
+  requiredStaff: RequiredStaffDto
+
+  @Input('beginTime')
+  beginTime: TimeDto
 
   _time: TimeDto = new TimeDto(0, 0, 0)
   @Input('time')
@@ -35,7 +61,7 @@ export class TimePickerComponent implements OnInit {
   currentValue: string = '00:00'
   previousValue: string
 
-  allHours = TimeStep.getAllHoursByStep(this.timeStep)
+  allHours = TimeStep.getAllTimeDtosByStep(this.timeStep)
 
   showSuggestions: boolean = false
 
@@ -46,12 +72,12 @@ export class TimePickerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleHourSelected(selectedHour: string) {
+  handleHourSelected(selectedHour: TimeDto) {
     this.showSuggestions = false
     this.isMouseOverSuggestions = false
     if (selectedHour) {
-      this.previousValue = selectedHour
-      this.currentValue = selectedHour
+      this.previousValue = selectedHour.toHHMMString()
+      this.currentValue = selectedHour.toHHMMString()
       this.emitTimeChange()
     }
   }
@@ -75,7 +101,7 @@ export class TimePickerComponent implements OnInit {
   }
 
   emitTimeChange() {
-    if (this.currentValue != this.time.toHHMMString()) {
+    if (this.currentValue != undefined && this.currentValue != this.time.toHHMMString()) {
       let newTime = new TimeDto(+this.currentValue.substr(0, 2), +this.currentValue.substr(3, 2))
       this.timeChange.emit(newTime)
     }

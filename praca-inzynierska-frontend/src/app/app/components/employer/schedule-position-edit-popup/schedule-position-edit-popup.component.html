@@ -12,7 +12,14 @@
         <span class="delete-period-button" (click)="handleDeleteShiftClicked(i)">USUŃ</span>
     </div>
     <div class="new-period">
-        <time-period-picker [(period)]="newPeriod"></time-period-picker>
+        <time-period-picker 
+        [(period)]="newPeriod"
+        [shiftsTable]="shiftsTable"
+        [day]="date"
+        [requiredStaff]="requiredStaff"
+        [employee]="employee"
+        [dayIndex]="dayIndex"
+        ></time-period-picker>
         <button class="btn btn-sm btn-success" (click)="handleAddShiftClicked()">Dodaj</button>
     </div>
 </div>

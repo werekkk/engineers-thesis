@@ -53,7 +53,7 @@ class ShiftService @Autowired constructor(
 
     @Transactional
     fun saveShift(principal: Principal, shift: ShiftDto): ShiftDto? {
-        if (canPersistShift(principal, shift)) {
+        if (canPersistShift(principal, shift) && !areShiftsOverlapping(shift)) {
             val savedShift = shiftRepository.save(createShiftFromDto(shift, ShiftType.MANUALLY_ASSIGNED))
             return ShiftDto(savedShift)
         }
@@ -72,12 +72,16 @@ class ShiftService @Autowired constructor(
     }
 
     private fun canPersistShift(employerPrincipal: Principal, shift: ShiftDto): Boolean {
-        if (shift.finish.isBefore(shift.start)) return false
+        if (shift.finish.isBefore(shift.start) || shift.finish.isEqual(shift.start)) return false
         workplaceService.getWorkplaceByEmployer(employerPrincipal)?.let {
             return it.employees.any { e -> e.id == shift.employeeId }
                     && it.positions.any { p -> p.id == shift.positionId }
         }
         return false
+    }
+
+    private fun areShiftsOverlapping(shift: ShiftDto): Boolean {
+        return !shiftRepository.getOverlappingShifts(shift.employeeId, shift.start, shift.finish).isEmpty()
     }
 
     private fun createShiftFromDto(shift: ShiftDto, defaultShiftType: ShiftType): Shift {

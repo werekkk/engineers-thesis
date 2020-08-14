@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RequiredStaffTimePeriodDto } from 'src/app/app/model/dto/RequiredStaffTimePeriodDto';
-import { PeriodUtils } from 'src/app/app/shared/period-utils';
+import { PeriodUtils } from 'src/app/app/shared/utils/period-utils';
 import { TimeStep } from 'src/app/app/model/TimeStep';
 
 @Component({

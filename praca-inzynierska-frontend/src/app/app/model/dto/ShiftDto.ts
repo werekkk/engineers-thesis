@@ -1,7 +1,7 @@
 import { ShiftType } from "../ShiftType";
 import { TimePeriodDto } from './TimePeriodDto';
 import { TimeDto } from './TimeDto';
-import { Utils } from '../../shared/utils';
+import { Utils } from '../../shared/utils/utils';
 
 export class ShiftDto {
 
@@ -43,4 +43,7 @@ export class ShiftDto {
         )
     }
 
+    equalPeriods(other: ShiftDto) {
+        return this.period.compare(other.period) == 0
+    }
 }

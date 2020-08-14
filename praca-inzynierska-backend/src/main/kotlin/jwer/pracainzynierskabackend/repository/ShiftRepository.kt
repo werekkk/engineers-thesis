@@ -16,6 +16,9 @@ interface ShiftRepository : JpaRepository<Shift, Long> {
     @Query("SELECT s FROM Shift s WHERE s.employee.id = ?1 AND s.period.finish >= ?2 AND s.period.start < ?3")
     fun getShiftsByEmployeeAndPeriod(employeeId: Long, start: LocalDateTime, finish: LocalDateTime): List<Shift>
 
+    @Query("SELECT s FROM Shift s WHERE s.employee.id = ?1 AND NOT (s.period.finish <= ?2 OR s.period.start >= ?3)")
+    fun getOverlappingShifts(employeeId: Long, start: LocalDateTime, finish: LocalDateTime): List<Shift>
+
     fun getById(shiftId: Long): Shift?
 
 }

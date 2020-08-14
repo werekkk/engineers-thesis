@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Moment } from 'moment';
-import { Utils } from 'src/app/app/shared/utils';
+import { Utils } from 'src/app/app/shared/utils/utils';
 import * as moment from 'moment';
 import { OneTimeHourPreferenceDto } from 'src/app/app/model/dto/OneTimeHourPreferenceDto';
 import { HourPreferenceService } from 'src/app/app/services/hour-preference.service';
