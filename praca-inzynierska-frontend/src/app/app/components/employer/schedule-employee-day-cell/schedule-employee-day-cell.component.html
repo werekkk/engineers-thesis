@@ -17,6 +17,7 @@
         <div (clickOutside)="handleOutsideClicked()">
             <schedule-position-edit-popup
             [(shifts)]="shifts"
+            (shiftsChange)="shiftsChange.emit($event)"
             [position]="position"
             [employee]="employee"
             [date]="day"

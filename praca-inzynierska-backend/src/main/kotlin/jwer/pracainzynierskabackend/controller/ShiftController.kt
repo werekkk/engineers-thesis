@@ -1,5 +1,6 @@
 package jwer.pracainzynierskabackend.controller
 
+import jwer.pracainzynierskabackend.model.dto.SavedShiftResponseDto
 import jwer.pracainzynierskabackend.model.dto.ShiftDto
 import jwer.pracainzynierskabackend.model.dto.ShiftsDto
 import jwer.pracainzynierskabackend.service.ShiftService
@@ -35,7 +36,7 @@ class ShiftController @Autowired constructor(
     }
 
     @PostMapping()
-    fun saveShift(principal: Principal, @RequestBody shift: ShiftDto): ResponseEntity<ShiftDto> {
+    fun saveShift(principal: Principal, @RequestBody shift: ShiftDto): ResponseEntity<SavedShiftResponseDto> {
         return ControllerUtils.createResponse(shiftService.saveShift(principal, shift))
     }
 

@@ -1,5 +1,28 @@
-.preference {
-    width: fit-content;
-    border-radius: 5px;
+.preference-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     margin-bottom: 3px;
+}
+
+.preference {
+    width: 100px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.delete-preference-button {
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    background-color: #ff6969;
+    padding: 3px 8px;
+    border-radius: 12px;
+    height: fit-content;
+    cursor: pointer;
+    margin-left: 4px;
+}
+
+.delete-preference-button:hover {
+    background-color: #e93535;
 }

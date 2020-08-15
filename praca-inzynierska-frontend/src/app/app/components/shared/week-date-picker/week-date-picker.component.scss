@@ -1,0 +1,37 @@
+.week-picker-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 0px;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.week-name {
+    font-weight: 500;
+    font-size: 20px;
+    width: 250px;
+    text-align: center;
+}
+
+.year-name {
+    font-size: 15px;
+    margin-top: -4px;
+}
+
+.week-navigation-button {
+    cursor: pointer;
+    font-size: 15px;
+    color: #4287f5;
+    transition: 0.2s;
+}
+
+.week-navigation-button:hover {
+    color: blue;
+}

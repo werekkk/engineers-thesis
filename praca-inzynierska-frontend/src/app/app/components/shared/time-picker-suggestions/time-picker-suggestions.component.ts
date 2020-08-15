@@ -88,7 +88,7 @@ export class TimePickerSuggestionsComponent implements OnInit, AfterViewInit {
     let shiftFinishPenalty = this.pickerType == 'shiftFinish' ? 1 : 0
     this.requiredStaffIntervals = new IntegratedIntervals()
     this.requiredStaff.getDayStaff(this.day).timePeriods.forEach(rs => {
-      this.requiredStaffIntervals.add(rs.timePeriod.start.toSeconds(), rs.timePeriod.finish.toSeconds() + shiftFinishPenalty, rs.employeeCount)
+      this.requiredStaffIntervals.add(rs.timePeriod.start.toSeconds() + shiftFinishPenalty, rs.timePeriod.finish.toSeconds() + shiftFinishPenalty, rs.employeeCount)
     })
     this.requiredEmployees = []
     this.allHours.forEach(h => this.requiredEmployees.push(this.requiredStaffIntervals.sum(h.toSeconds())))
@@ -99,7 +99,7 @@ export class TimePickerSuggestionsComponent implements OnInit, AfterViewInit {
     this.assignedStaffIntervals = new IntegratedIntervals()
     this.getAllShiftsForDay().forEach(shift => {
       let period = shift.period
-      this.assignedStaffIntervals.add(period.start.toSeconds() + shiftFinishPenalty, period.finish.toSeconds(), 1)
+      this.assignedStaffIntervals.add(period.start.toSeconds() + shiftFinishPenalty, period.finish.toSeconds() + shiftFinishPenalty, 1)
     })
     this.assignedEmployees = []
     this.allHours.forEach(h => this.assignedEmployees.push(this.assignedStaffIntervals.sum(h.toSeconds())))

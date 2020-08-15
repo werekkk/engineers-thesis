@@ -10,13 +10,11 @@ import jwer.pracainzynierskabackend.model.entity.Workplace
 import jwer.pracainzynierskabackend.repository.AccountRepository
 import jwer.pracainzynierskabackend.repository.CredentialsRepository
 import jwer.pracainzynierskabackend.repository.EmployeeRepository
-import jwer.pracainzynierskabackend.repository.WorkplaceRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.security.Principal
 import java.time.LocalDate
-import java.time.LocalTime
 
 @Service
 class EmployeeService @Autowired constructor(
@@ -57,9 +55,9 @@ class EmployeeService @Autowired constructor(
         return EmployeeDto(employeeRepository.save(newEmployee))
     }
 
-    fun getAllEmployees(principal: Principal): EmployeesDto? {
-        val workplace = workplaceService.getWorkplaceByPrincipal(principal)
-        val employer = userService.getAccount(principal)
+    fun getAllEmployees(employerPrincipal: Principal): EmployeesDto? {
+        val workplace = workplaceService.getWorkplaceByEmployer(employerPrincipal)
+        val employer = userService.getAccount(employerPrincipal)
         workplace?.let {
             val employees = employeeRepository.findAllByWorkplaceId(it.id)
                     .map { e -> EmployeeDto(e) }

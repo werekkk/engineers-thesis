@@ -1,9 +1,18 @@
-<button (click)="handlePreviousWeekClicked()">
-    Poprzedni tydzień
-</button>
-{{ date | date:'dd.MM'}}
- - 
-{{ lastDate | date:'dd.MM'}}
-<button (click)="handleNextWeekClicked()">
-    Następny tydzień
-</button>
+<div class="week-picker-container unselectable">
+    <div class="week-navigation-button" (click)="handlePreviousWeekClicked()">
+        &lt;&lt;&lt;  Poprzedni tydzień  &lt;&lt;&lt;    
+    </div>
+    <div class="text">
+        <div class="week-name">
+            {{ date | date:'dd.MM'}}
+             - 
+            {{ lastDate | date:'dd.MM'}}
+        </div>
+        <div class="year-name">
+            {{ date.getFullYear() }}<span *ngIf="date.getFullYear() != lastDate.getFullYear()"> / {{lastDate.getFullYear()}}</span>
+        </div>
+    </div>
+    <div class="week-navigation-button" (click)="handleNextWeekClicked()">
+        &gt;&gt;&gt;  Następny tydzień  &gt;&gt;&gt;    
+    </div>
+</div>

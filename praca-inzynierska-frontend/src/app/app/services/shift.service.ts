@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, noop, of } from 'rxjs';
 import { ShiftsDto } from '../model/dto/ShiftsDto'
+import { SavedShiftResponseDto } from '../model/dto/SavedShiftResponseDto'
 import { environment } from 'src/environments/environment';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
@@ -51,14 +52,14 @@ export class ShiftService {
     ) as Observable<ShiftsDto>
   }
 
-  saveShift(shift: ShiftDto): Observable<ShiftDto> {
+  saveShift(shift: ShiftDto): Observable<SavedShiftResponseDto> {
     return of(null)
     .pipe(
       tap(() => this.operationsPerformed++),
       mergeMap(() => this.http.post(`${environment.serverUrl}/shift`, shift.addTimeZoneToDates(), {withCredentials: true})),
-      map((s: ShiftDto) => ShiftDto.copy(s)),
+      tap((s: SavedShiftResponseDto) => s.savedShift = ShiftDto.copy(s.savedShift)),
       tap(() => this.operationsPerformed--, () => this.operationsPerformed--)
-    ) as Observable<ShiftDto>
+    ) as Observable<SavedShiftResponseDto>
   }
 
   deleteShift(shiftId: number): Observable<ShiftDto> {

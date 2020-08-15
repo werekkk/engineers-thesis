@@ -8,8 +8,8 @@ data class ShiftDto (
         val id: Long = 0,
         val employeeId: Long,
         val positionId: Long,
-        val start: LocalDateTime,
-        val finish: LocalDateTime,
+        var start: LocalDateTime,
+        var finish: LocalDateTime,
         val creationDate: LocalDateTime?,
         val shiftType: ShiftType?
 ) {

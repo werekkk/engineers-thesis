@@ -76,8 +76,8 @@ export class TimePickerComponent implements OnInit {
     this.showSuggestions = false
     this.isMouseOverSuggestions = false
     if (selectedHour) {
-      this.previousValue = selectedHour.toHHMMString()
-      this.currentValue = selectedHour.toHHMMString()
+      this.previousValue = selectedHour.toString()
+      this.currentValue = selectedHour.toString()
       this.emitTimeChange()
     }
   }

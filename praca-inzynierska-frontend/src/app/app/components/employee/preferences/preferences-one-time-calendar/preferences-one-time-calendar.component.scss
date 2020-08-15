@@ -2,13 +2,18 @@
 
 .calendar {
     min-height: 500px;
-    height: 70vh;
 }
 
 .day-card {
     margin: 2px;
     border-radius: 6px;
     box-shadow: 0px 0px 1.5px 0.5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.day-card:hover {
+    box-shadow: 0px 0px 10px 2px rgb(43 179 92 / 40%)
 }
 
 .day-card_label {
@@ -25,6 +30,7 @@
     display: inline-flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
 }
 
 .preference {

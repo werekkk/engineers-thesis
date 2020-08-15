@@ -1,6 +1,6 @@
 .suggestions-container {
     max-width: 20em;
-    width: 20em;
+    width: max-content;
     min-width: 5em;
     background-color: white;
     padding: 0;
@@ -10,6 +10,9 @@
 
 .option {
     padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .highlighted {
@@ -30,4 +33,18 @@
 
 .full {
     color: green;
+}
+
+.hour {
+    width: 3em;
+    text-align: center;
+}
+
+.employees {
+    width: 3em;
+    text-align: center;
+}
+
+.duration {
+    font-size: small;
 }

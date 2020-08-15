@@ -20,7 +20,7 @@ export class RequiredStaffDayDto {
     }
 
     totalRequiredHours(): number {
-        return this.timePeriods.map(p => p.hours()).reduce((prev, cur) => prev + cur)
+        return this.timePeriods.map(p => p.hours()).reduce((prev, cur) => prev + cur, 0)
     }
 
     countAllocatedShiftHours(shifts: ShiftDto[]): AllocatedHours {

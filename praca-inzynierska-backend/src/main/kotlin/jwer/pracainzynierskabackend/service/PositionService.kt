@@ -7,6 +7,7 @@ import jwer.pracainzynierskabackend.model.dto.SetPositionsDto
 import jwer.pracainzynierskabackend.model.entity.Position
 import jwer.pracainzynierskabackend.repository.EmployeeRepository
 import jwer.pracainzynierskabackend.repository.PositionRepository
+import jwer.pracainzynierskabackend.repository.ShiftRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -16,6 +17,7 @@ import java.security.Principal
 class PositionService @Autowired constructor(
         private val userService: UserService,
         private val workplaceService: WorkplaceService,
+        private val shiftRepository: ShiftRepository,
         private val positionRepository: PositionRepository,
         private val employeeRepository: EmployeeRepository
 ) {
@@ -43,10 +45,16 @@ class PositionService @Autowired constructor(
         return null
     }
 
+    @Transactional
     fun deletePosition(principal: Principal, positionId: Long): PositionDto? {
         getPositionsByEmployer(principal).find { p -> p.id == positionId }?.let {
-                positionRepository.delete(it)
-                return PositionDto(it)
+            positionRepository.getEmployeesByPosition(it.id).forEach { emp ->
+                val updatedEmp = emp.copy(positions = emp.positions.filter { p -> p.id != it.id })
+                employeeRepository.save(updatedEmp)
+            }
+            positionRepository.delete(it)
+            shiftRepository.getAllByPositionId(it.id).forEach { shiftRepository.delete(it) }
+            return PositionDto(it)
         }
         return null
     }

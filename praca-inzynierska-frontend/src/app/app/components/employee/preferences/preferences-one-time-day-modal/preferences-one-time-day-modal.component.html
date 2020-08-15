@@ -24,9 +24,15 @@
             ></preferences-one-time-day-editor>
         </div>
         Preferencje jednorazowe:
-        <div *ngFor="let pref of preferences; let i = index" class="preference" [style]="'background-color: ' + getTypeColor(pref) + ';'">
-            {{pref.start | dateToTime | time:'hh:mm'}} - {{pref.finish | dateToTime | time:'hh:mm'}}
-            <span (click)="onDeletePreferenceClicked(i)">[X]</span>
+        <div *ngFor="let pref of preferences; let i = index">
+            <div class="preference-container">
+                <div class="preference" [style]="'background-color: ' + getTypeColor(pref) + ';'">
+                    {{pref.start | dateToTime | time:'hh:mm'}} - {{pref.finish | dateToTime | time:'hh:mm'}}
+                </div>
+                <div class="delete-preference-button" (click)="onDeletePreferenceClicked(i)">
+                    USUŃ
+                </div>
+            </div>
         </div>
     </div>
     <div class="modal-footer">

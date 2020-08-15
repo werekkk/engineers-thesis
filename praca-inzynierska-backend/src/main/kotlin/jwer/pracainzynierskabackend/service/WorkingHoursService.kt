@@ -3,7 +3,6 @@ package jwer.pracainzynierskabackend.service
 import jwer.pracainzynierskabackend.model.dto.WorkingHoursDto
 import jwer.pracainzynierskabackend.model.entity.WorkingHours
 import jwer.pracainzynierskabackend.repository.WorkingHoursRepository
-import jwer.pracainzynierskabackend.repository.WorkplaceRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.security.Principal

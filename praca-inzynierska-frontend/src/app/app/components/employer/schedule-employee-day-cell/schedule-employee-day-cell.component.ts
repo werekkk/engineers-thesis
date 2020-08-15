@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ShiftDto } from 'src/app/app/model/dto/ShiftDto';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
@@ -15,6 +15,9 @@ export class ScheduleEmployeeDayCellComponent {
 
   @Input('shifts')
   shifts: ShiftDto[]
+
+  @Output('shiftsChange')
+  shiftsChange: EventEmitter<ShiftDto[]> = new EventEmitter()
 
   @Input('shiftsTable')
   shiftsTable: ShiftDto[][][]
@@ -43,4 +46,5 @@ export class ScheduleEmployeeDayCellComponent {
   handleOutsideClicked() {
     this.showPopup = false
   }
+
 }

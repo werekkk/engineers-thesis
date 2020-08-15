@@ -1,9 +1,11 @@
-<div>
-    <button (click)="onPreviousMonthClicked()">
-        Poprzedni miesiąc
-    </button>
-    {{month.format('MMMM YYYY') | strings:'capitalizeFirst'}}
-    <button (click)="onNextMonthClicked()">
-        Następny miesiąc
-    </button>
+<div class="month-picker-container unselectable">
+    <div class="month-navigation-button" (click)="onPreviousMonthClicked()">
+        &lt;&lt;&lt;  Poprzedni miesiąc  &lt;&lt;&lt;    
+    </div>
+    <div class="month-name">
+        {{month.format('MMMM YYYY') | strings:'capitalizeFirst'}}
+    </div>
+    <div class="month-navigation-button" (click)="onNextMonthClicked()">
+        &gt;&gt;&gt;  Następny miesiąc  &gt;&gt;&gt;    
+    </div>
 </div>

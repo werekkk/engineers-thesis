@@ -30,6 +30,9 @@ export class SchedulePositionEditPopupComponent implements OnInit {
     this.handleNewShifts(val)
   }
 
+  @Output('shiftsChange')
+  shiftsChange: EventEmitter<ShiftDto[]> = new EventEmitter()
+
   newPeriod: TimePeriodDto = new TimePeriodDto(new TimeDto(0, 0), new TimeDto(0, 0))
   
   periods: TimePeriodDto[] = []
@@ -89,8 +92,15 @@ export class SchedulePositionEditPopupComponent implements OnInit {
     this.emitShiftChange()
     this.showPopup.emit(false)
     this.shiftService.saveShift(newShift)
-    .subscribe(savedShift => {
-      this.shifts[this.shifts.findIndex(s => s.equalPeriods(newShift))].id = savedShift.id
+    .subscribe(response => {
+      let shift = this.shifts[this.shifts.findIndex(s => s.equalPeriods(newShift))]
+      shift.id = response.savedShift.id
+      shift.start = response.savedShift.start
+      shift.finish = response.savedShift.finish
+      response.deletedShiftsIds.forEach(id => 
+        this.shifts.splice(this.shifts.findIndex(s => s.id == id), 1)
+      )
+      this.shifts = this.shifts.filter(s => !response.deletedShiftsIds.some(id => s.id == id))
       this.emitShiftChange()
     }, err => {
       this.shifts.splice(this.shifts.findIndex(s => s.equalPeriods(newShift)), 1)
@@ -115,6 +125,7 @@ export class SchedulePositionEditPopupComponent implements OnInit {
 
   private emitShiftChange() {
     this.handleNewShifts(this.shifts)
+    this.shiftsChange.emit(this.shifts)
     this.shiftService.updateShifts.emit(this.date)
   }
 

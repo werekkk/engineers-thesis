@@ -1,5 +1,6 @@
 package jwer.pracainzynierskabackend.repository
 
+import jwer.pracainzynierskabackend.model.entity.Employee
 import jwer.pracainzynierskabackend.model.entity.Position
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
@@ -15,4 +16,7 @@ interface PositionRepository : JpaRepository<Position, Long> {
     fun getEmployeePositionsByUsername(username: String): List<Position>
 
     fun getById(id: Long): Position?
+
+    @Query("SELECT e FROM Employee e JOIN e.positions p WHERE p.id = ?1")
+    fun getEmployeesByPosition(positionId: Long): List<Employee>
 }

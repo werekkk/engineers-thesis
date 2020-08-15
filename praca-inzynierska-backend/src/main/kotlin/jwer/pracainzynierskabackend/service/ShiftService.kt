@@ -1,5 +1,6 @@
 package jwer.pracainzynierskabackend.service
 
+import jwer.pracainzynierskabackend.model.dto.SavedShiftResponseDto
 import jwer.pracainzynierskabackend.model.dto.ShiftDto
 import jwer.pracainzynierskabackend.model.dto.ShiftsDto
 import jwer.pracainzynierskabackend.model.embeddable.DateTimePeriod
@@ -12,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional
 import java.security.Principal
 import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.ZoneOffset
 
 @Service
 class ShiftService @Autowired constructor(
@@ -52,10 +52,16 @@ class ShiftService @Autowired constructor(
     }
 
     @Transactional
-    fun saveShift(principal: Principal, shift: ShiftDto): ShiftDto? {
-        if (canPersistShift(principal, shift) && !areShiftsOverlapping(shift)) {
+    fun saveShift(principal: Principal, shift: ShiftDto): SavedShiftResponseDto? {
+        if (canPersistShift(principal, shift) && shift.start.isBefore(shift.finish)) {
+            val shiftsToBeDeleted = getOverlappingShifts(shift)
+            shiftsToBeDeleted.forEach { s -> run{
+                if (s.period.start.isBefore(shift.start)) shift.start = s.period.start
+                if (s.period.finish.isAfter(shift.finish)) shift.finish = s.period.finish
+                shiftRepository.delete(s)
+            } }
             val savedShift = shiftRepository.save(createShiftFromDto(shift, ShiftType.MANUALLY_ASSIGNED))
-            return ShiftDto(savedShift)
+            return SavedShiftResponseDto(ShiftDto(savedShift), shiftsToBeDeleted.map { s -> s.id })
         }
         return null
     }
@@ -72,7 +78,6 @@ class ShiftService @Autowired constructor(
     }
 
     private fun canPersistShift(employerPrincipal: Principal, shift: ShiftDto): Boolean {
-        if (shift.finish.isBefore(shift.start) || shift.finish.isEqual(shift.start)) return false
         workplaceService.getWorkplaceByEmployer(employerPrincipal)?.let {
             return it.employees.any { e -> e.id == shift.employeeId }
                     && it.positions.any { p -> p.id == shift.positionId }
@@ -80,8 +85,8 @@ class ShiftService @Autowired constructor(
         return false
     }
 
-    private fun areShiftsOverlapping(shift: ShiftDto): Boolean {
-        return !shiftRepository.getOverlappingShifts(shift.employeeId, shift.start, shift.finish).isEmpty()
+    private fun getOverlappingShifts(shift: ShiftDto): List<Shift> {
+        return shiftRepository.getOverlappingShifts(shift.employeeId, shift.start, shift.finish)
     }
 
     private fun createShiftFromDto(shift: ShiftDto, defaultShiftType: ShiftType): Shift {

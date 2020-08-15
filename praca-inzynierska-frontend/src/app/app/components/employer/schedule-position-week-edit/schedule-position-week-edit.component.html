@@ -7,7 +7,7 @@
 </div>
 <week-date-picker [(date)]="firstDay" (dateChange)="handleNewFirstDay()"></week-date-picker>
 
-<div *ngIf="!(employeesLoaded && shiftsLoaded && requiredStaffLoaded); else schedule">
+<div *ngIf="!(employeesLoaded && shiftsLoaded && requiredStaffLoaded); else schedule" class="spinner">
     <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
     </div>
 </div>
@@ -36,7 +36,7 @@
                     <ng-container *ngFor="let day of days; let dayIndex = index">
                         <td>
                             <schedule-employee-day-cell 
-                            [shifts]="shiftsTable[employeeIndex][dayIndex]"
+                            [(shifts)]="shiftsTable[employeeIndex][dayIndex]"
                             [shiftsTable]="shiftsTable"
                             [position]="position"
                             [employee]="employee"
