@@ -1,0 +1,42 @@
+<div *ngIf="!(positionsLoaded && employeesLoaded); else generatorConfig">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>
+<ng-template #generatorConfig>
+        <div>
+            Pierwszy dzień grafiku:
+            <input 
+            type="date" 
+            [ngModel]="startDate | date:'yyyy-MM-dd'" 
+            (ngModelChange)="startDate = $event; onDurationChange()">
+            Ostatni dzień grafiku:
+            <input 
+            type="date" 
+            [ngModel]="finishDate | date:'yyyy-MM-dd'" 
+            (ngModelChange)="finishDate = $event; onDurationChange()">
+            {{durationInDays}} dni
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div *ngFor="let position of positionService.positions.value; let i = index">
+                        <label>
+                            <input type="checkbox" [(ngModel)]="positionChecked[i]">
+                            {{position.name}}
+                        </label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div *ngFor="let employee of employeeService.employees.value; let i = index">
+                        <label>
+                            <input type="checkbox" [(ngModel)]="employeeChecked[i]">
+                            {{employee.account.firstName}} {{employee.account.lastName}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-success" (click)="onGenerateClicked()">Generuj</button>
+        </div>
+</ng-template>

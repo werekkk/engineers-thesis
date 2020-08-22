@@ -10,6 +10,7 @@ class ScheduleGenerator {
     }
 
     fun generate(config: GeneratorConfig): Schedule {
+        return RandomScheduleGenerator.generate(config)
         TODO()
     }
 

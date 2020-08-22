@@ -23,9 +23,7 @@ class PreferenceService @Autowired constructor(
 
     fun getPreferencesByEmployeePrincipal(employeePrincipal: Principal): PreferencesWeekDto? {
         employeeService.getByEmployeePrincipal(employeePrincipal)?.let { e ->
-            getPreferencesByEmployeeId(e.id)?.let {
-                return PreferencesWeekDto(it)
-            }
+            return getPreferencesWeekDtoByEmployeeId(e.id)
         }
         return null
     }
@@ -48,16 +46,33 @@ class PreferenceService @Autowired constructor(
         return null
     }
 
+    fun getPreferencesWeekDtoByEmployeeId(employeeId: Long): PreferencesWeekDto? {
+        getPreferencesByEmployeeId(employeeId)?.let { return PreferencesWeekDto(it) }
+        return null
+    }
+
     private fun getPreferencesByEmployeeId(employeeId: Long): PreferencesWeek? {
         return preferencesWeekRepository.findByEmployeeId(employeeId)
     }
 
+    /**
+     * @param start (inclusive)
+     * @param finish (inclusive)
+     */
     fun getOneTimeHourPreferencesInPeriod(employeePrincipal: Principal, start: LocalDate, finish: LocalDate): OneTimeHourPreferencesDto? {
         employeeService.getByEmployeePrincipal(employeePrincipal)?.let {
-            val prefs = getOneTimeHourPreferencesByEmployeeAndPeriod(it.id, start, finish)
-            return OneTimeHourPreferencesDto(prefs.map { p -> OneTimeHourPreferenceDto(p) })
+            return getOneTimeHourPreferencesInPeriod(it.id, start, finish)
         }
         return null
+    }
+
+    /**
+     * @param start (inclusive)
+     * @param finish (inclusive)
+     */
+    fun getOneTimeHourPreferencesInPeriod(employeeId: Long, start: LocalDate, finish: LocalDate): OneTimeHourPreferencesDto? {
+        val prefs = getOneTimeHourPreferencesByEmployeeAndPeriod(employeeId, start, finish)
+        return OneTimeHourPreferencesDto(prefs.map { p -> OneTimeHourPreferenceDto(p) })
     }
 
     @Transactional
@@ -77,6 +92,10 @@ class PreferenceService @Autowired constructor(
         return null
     }
 
+    /**
+     * @param start (inclusive)
+     * @param finish (inclusive)
+     */
     private fun getOneTimeHourPreferencesByEmployeeAndPeriod(employeeId: Long, start: LocalDate, finish: LocalDate = start): List<OneTimeHourPreference> {
         return oneTimeHourPreferenceRepository.findByEmployeeAndPeriod(
                 employeeId,

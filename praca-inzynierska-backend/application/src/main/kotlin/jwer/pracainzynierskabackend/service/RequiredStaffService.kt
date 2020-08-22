@@ -1,6 +1,8 @@
 package jwer.pracainzynierskabackend.service
 
+import jwer.pracainzynierskabackend.model.auth.Account
 import jwer.pracainzynierskabackend.model.auth.AccountType
+import jwer.pracainzynierskabackend.model.dto.AccountDto
 import jwer.pracainzynierskabackend.model.dto.RequiredStaffDto
 import jwer.pracainzynierskabackend.model.entity.RequiredStaff
 import jwer.pracainzynierskabackend.repository.PositionRepository
@@ -17,14 +19,8 @@ class RequiredStaffService @Autowired constructor(
 ){
 
     fun getRequiredStaffByPrincipalAndPositionId(principal: Principal, positionId: Long): RequiredStaffDto? {
-        userService.getAccount(principal).let { ac ->
-            if (ac.accountType == AccountType.EMPLOYER) {
-                requiredStaffRepository.findByPositionIdAndEmployerUsername(positionId, ac.username!!)?.let {
-                    return RequiredStaffDto(it)
-                }
-            }
-        }
-        return null
+        val account = userService.getAccount(principal)
+        return getRequiredStaffByEmployerAccountAndPositionId(account, positionId)
     }
 
     fun saveRequiredStaffByPrincipalAndPositionId(principal: Principal, positionId: Long, newRequiredStaff: RequiredStaffDto): RequiredStaffDto? {
@@ -35,6 +31,15 @@ class RequiredStaffService @Autowired constructor(
                     val savedPosition = positionRepository.save(updatedPosition)
                     return RequiredStaffDto(savedPosition.requiredStaff)
                 }
+            }
+        }
+        return null
+    }
+
+    fun getRequiredStaffByEmployerAccountAndPositionId(account: AccountDto, positionId: Long): RequiredStaffDto? {
+        if (account.accountType == AccountType.EMPLOYER) {
+            requiredStaffRepository.findByPositionIdAndEmployerUsername(positionId, account.username!!)?.let {
+                return RequiredStaffDto(it)
             }
         }
         return null

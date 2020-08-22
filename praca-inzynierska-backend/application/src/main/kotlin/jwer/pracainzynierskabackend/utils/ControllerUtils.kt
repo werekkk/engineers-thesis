@@ -3,6 +3,13 @@ package jwer.pracainzynierskabackend.utils
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
+fun <T> T?.createResponse(): ResponseEntity<T> {
+    this?.let {
+        TODO() // zrobić coś z tym
+    }
+    return ControllerUtils.createResponse(this)
+}
+
 class ControllerUtils {
 
     companion object {

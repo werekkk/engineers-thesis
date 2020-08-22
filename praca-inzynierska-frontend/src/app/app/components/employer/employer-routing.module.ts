@@ -7,6 +7,8 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { WorkingHoursComponent } from './working-hours/working-hours.component';
 import { StaffComponent } from './staff/staff.component';
 import { SchedulePositionWeekEditComponent } from './schedule-position-week-edit/schedule-position-week-edit.component';
+import { ScheduleGeneratorComponent } from './schedule-generator/schedule-generator.component';
+import { ScheduleGeneratorResultComponent } from './schedule-generator-result/schedule-generator-result.component';
 
 const routes: Routes = [
   {
@@ -15,6 +17,8 @@ const routes: Routes = [
       {path: 'employees', component: EmployeesComponent},
       {path: 'schedule/position/:id/week', component: SchedulePositionWeekEditComponent},
       {path: 'schedule', component: ScheduleComponent},
+      {path: 'schedule-generator', component: ScheduleGeneratorComponent},
+      {path: 'schedule-generator-result', component: ScheduleGeneratorResultComponent},
       {path: 'working-hours', component: WorkingHoursComponent},
       {path: 'staff', component: StaffComponent}
     ]

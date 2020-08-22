@@ -1,6 +1,7 @@
 package jwer.pracainzynierskabackend.service
 
 import jwer.pracainzynierskabackend.model.auth.Account
+import jwer.pracainzynierskabackend.model.dto.AccountDto
 import jwer.pracainzynierskabackend.model.dto.AddEmployeeDto
 import jwer.pracainzynierskabackend.model.dto.EmployeeDto
 import jwer.pracainzynierskabackend.model.dto.EmployeesDto
@@ -102,6 +103,10 @@ class EmployeeService @Autowired constructor(
         userService.getAccount(employeePrincipal).let {
             return employeeRepository.findByUsername(it.username!!)
         }
+    }
+
+    fun isEmployeeOf(employeeId: Long, employerAccountDto: AccountDto): Boolean {
+        return employeeRepository.findByEmployeeIdAndEmployerUsername(employeeId, employerAccountDto.username!!) != null
     }
 
 }

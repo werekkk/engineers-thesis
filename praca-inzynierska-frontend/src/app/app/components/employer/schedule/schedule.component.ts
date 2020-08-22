@@ -17,8 +17,10 @@ export class ScheduleComponent implements OnInit {
   firstDate: Date = moment().startOf('isoWeek').toDate()
 
   constructor(
-    private positionService: PositionService
+    private positionService: PositionService,
+    private router: Router
   ) { 
+    
     positionService.positions.subscribe(newPositions => {
       this.positions = newPositions
     })
@@ -32,6 +34,10 @@ export class ScheduleComponent implements OnInit {
     } else {
       this.positionsLoaded = true
     }
+  }
+
+  onGenerateScheduleClicked() {
+    this.router.navigate(['employer', 'schedule-generator'])
   }
 
 }

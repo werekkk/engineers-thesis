@@ -27,6 +27,8 @@ import { SchedulePositionWeekEditComponent } from './schedule-position-week-edit
 import { ScheduleEmployeeDayCellComponent } from './schedule-employee-day-cell/schedule-employee-day-cell.component';
 import { SchedulePositionEditPopupComponent } from './schedule-position-edit-popup/schedule-position-edit-popup.component';
 import { SchedulePositionDayLabelCellComponent } from './schedule-position-day-label-cell/schedule-position-day-label-cell.component';
+import { ScheduleGeneratorComponent } from './schedule-generator/schedule-generator.component';
+import { ScheduleGeneratorResultComponent } from './schedule-generator-result/schedule-generator-result.component';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { SchedulePositionDayLabelCellComponent } from './schedule-position-day-l
     SchedulePositionWeekEditComponent,
     ScheduleEmployeeDayCellComponent,
     SchedulePositionEditPopupComponent,
-    SchedulePositionDayLabelCellComponent
+    SchedulePositionDayLabelCellComponent,
+    ScheduleGeneratorComponent,
+    ScheduleGeneratorResultComponent
   ],
   imports: [
     CommonModule,

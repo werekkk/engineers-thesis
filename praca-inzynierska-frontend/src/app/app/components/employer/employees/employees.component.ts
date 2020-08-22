@@ -20,8 +20,10 @@ export class EmployeesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.employeeService.getAllEmployees().subscribe()
-    this.positionService.getAllPositions().subscribe()
+    if (!this.employeeService.employeesLoaded)
+      this.employeeService.getAllEmployees().subscribe()
+    if (!this.positionService.positionsLoaded)
+      this.positionService.getAllPositions().subscribe()
   }
 
   onAddEmployeeClicked() {

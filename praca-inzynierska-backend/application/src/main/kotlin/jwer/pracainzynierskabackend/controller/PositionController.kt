@@ -37,9 +37,4 @@ class PositionController @Autowired constructor(
         return ControllerUtils.createResponse(positionService.setEmployeePositions(principal, positions))
     }
 
-    @GetMapping("/employee")
-    fun getPositionByEmployeePrincipal(principal: Principal): ResponseEntity<PositionsDto> {
-        TODO()
-    }
-
 }

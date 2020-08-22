@@ -1,6 +1,8 @@
 package jwer.pracainzynierskabackend.model.dto
 
+import jwer.pracainzynierskabackend.model.TimePointArray
 import jwer.pracainzynierskabackend.model.entity.OneTimeHourPreference
+import jwer.pracainzynierskabackend.model.entity.PreferenceType
 import java.time.LocalDate
 
 data class OneTimeHourPreferencesDto(
@@ -14,5 +16,17 @@ data class OneTimeHourPreferencesDto(
 
     fun areInDay(day: LocalDate): Boolean {
         return preferences.fold(true, { acc, p -> return acc && p.start.toLocalDate() == day && p.finish.toLocalDate() == day})
+    }
+
+    /**
+     * @param start (inclusive)
+     * @param finish (inclusive)
+     */
+    fun toPreferencesArray(preferencesWeekArray: Array<Int>, start: LocalDate, finish: LocalDate): Array<Int> {
+        val array = TimePointArray<PreferenceType>(start, finish, { it.toNumber() }, preferencesWeekArray)
+        preferences.forEach {
+            array[it.start, it.finish] = it.type
+        }
+        return array.array
     }
 }
