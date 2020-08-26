@@ -2,7 +2,6 @@ package jwer.schedulegenerator
 
 import jwer.schedulegenerator.generator.ConstraintedRandomScheduleGenerator
 import jwer.schedulegenerator.generator.GeneratorConfig
-import jwer.schedulegenerator.generator.HalfRandomScheduleGenerator
 import jwer.schedulegenerator.generator.RandomScheduleGenerator
 import jwer.schedulegenerator.generator.model.Employee
 import jwer.schedulegenerator.generator.model.Position
@@ -48,25 +47,6 @@ class RandomScheduleGeneratorTests {
         assert(true)
     }
 
-
-    @Test
-    fun testHalfRandomScheduleGeneration() {
-        repeat(1000) {
-            val generatedSchedule = HalfRandomScheduleGenerator.generate(CONFIGURATION_1)
-            assert(generatedSchedule.isValidWithEmployeePreferences(EMPLOYEES_1))
-        }
-        println(CONFIGURATION_1.withScheduleToString(HalfRandomScheduleGenerator.generate(CONFIGURATION_1)))
-        println()
-        println(CONFIGURATION_1.withScheduleToString(HalfRandomScheduleGenerator.generate(CONFIGURATION_1)))
-        println()
-        println(CONFIGURATION_1.withScheduleToString(HalfRandomScheduleGenerator.generate(CONFIGURATION_1)))
-        println()
-        println(CONFIGURATION_1.withScheduleToString(HalfRandomScheduleGenerator.generate(CONFIGURATION_1)))
-        println()
-        println(CONFIGURATION_1.withScheduleToString(HalfRandomScheduleGenerator.generate(CONFIGURATION_1)))
-        println()
-    }
-
     @Test
     fun testConstrainedRandomScheduleGenerator() {
         repeat(1000) {
@@ -88,7 +68,7 @@ class RandomScheduleGeneratorTests {
     @Test
     fun findExistingCompleteSchedule() {
         repeat(100000) {
-            val generatedSchedule = HalfRandomScheduleGenerator.generate(CONFIGURATION_1)
+            val generatedSchedule = ConstraintedRandomScheduleGenerator.generate(CONFIGURATION_1)
             if (generatedSchedule.isComplete(CONFIGURATION_1)) {
                 assert(true)
                 println(CONFIGURATION_1.withScheduleToString(generatedSchedule))

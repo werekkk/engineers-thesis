@@ -18,13 +18,13 @@ data class ShiftsDto(
                 var posStart = 0
                 array.forEachIndexed { i, posId ->
                     if (array[i] != array[posStart]) {
-                        posStart = i
-                        if (array[posStart] != null) {
+                        if (array[posStart] != null && array[posStart] != 0L) {
                             shifts.add(newShift(posStart, i, startDate, empId, array[posStart]!!))
                         }
+                        posStart = i
                     }
                 }
-                if (array[posStart] != null) {
+                if (array[posStart] != null && array[posStart] != 0L) {
                     shifts.add(newShift(posStart, array.size - 1, startDate, empId, array[posStart]!!))
                 }
             }

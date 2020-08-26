@@ -26,13 +26,9 @@ data class PreferencesWeekDto(
             PreferencesDayDto(pw.sundayPreferences)
     )
 
-    /**
-     * @param start (inclusive)
-     * @param finish (inclusive)
-     */
-    fun toPreferenceArray(start: LocalDate, finish: LocalDate): Array<Int> {
-        val array = TimePointArray<PreferenceType>(start, finish, { it.toNumber() }, initialValue = PreferenceType.AVAILABLE.toNumber())
-        for (date in start..finish) {
+    fun toPreferenceArray(firstDay: LocalDate, lastDay: LocalDate): Array<Int> {
+        val array = TimePointArray<PreferenceType>(firstDay, lastDay, { it.toNumber() }, initialValue = PreferenceType.AVAILABLE.toNumber())
+        for (date in firstDay..lastDay) {
             getPreferenceByDate(date).preferences.forEach {
                 array[it.timePeriod.atDate(date)] = it.type
             }

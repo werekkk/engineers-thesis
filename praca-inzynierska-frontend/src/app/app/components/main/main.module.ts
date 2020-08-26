@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { RegisterEmployeeComponent } from './register-employee/register-employee.component';
 import { RegisterEmployerComponent } from './register-employer/register-employer.component';
 import { MainComponent } from './main/main.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { MainComponent } from './main/main.component';
     RegisterComponent,
     RegisterEmployeeComponent,
     RegisterEmployerComponent,
-    MainComponent
+    MainComponent,
+    UnauthorizedComponent
   ],
   imports: [
     CommonModule,

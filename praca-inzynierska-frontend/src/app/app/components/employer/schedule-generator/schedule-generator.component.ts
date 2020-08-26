@@ -7,7 +7,7 @@ import { Utils } from 'src/app/app/shared/utils/utils';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
 import { Router } from '@angular/router';
-import { GeneratorRequest, GeneratorState } from '../schedule-generator-result/schedule-generator-result.component';
+import { GeneratorState } from '../schedule-generator-result/schedule-generator-result.component';
 import { GeneratorConfigDto } from 'src/app/app/model/dto/GeneratorConfigDto';
 
 
@@ -18,8 +18,8 @@ import { GeneratorConfigDto } from 'src/app/app/model/dto/GeneratorConfigDto';
 })
 export class ScheduleGeneratorComponent implements OnInit {
 
-  startDate: Date = moment().startOf('day').toDate()
-  finishDate: Date = moment().startOf('day').toDate()
+  startDate: Date = new Date()
+  finishDate: Date = new Date()
 
   positionsLoaded: boolean = false
   employeesLoaded: boolean = false
@@ -69,7 +69,7 @@ export class ScheduleGeneratorComponent implements OnInit {
     let employees: EmployeeDto[] = []
     this.positionChecked.forEach((val, i) => {if (val) positions.push(this.positionService.positions.value[i])})
     this.employeeChecked.forEach((val, i) => {if (val) employees.push(this.employeeService.employees.value[i])})
-    let state: GeneratorState = { config: new GeneratorConfigDto(employees, positions, this.startDate, this.finishDate) }
+    let state: GeneratorState = { config: new GeneratorConfigDto(employees, positions, Utils.fixDateToBackendFormat(this.startDate), Utils.fixDateToBackendFormat(this.finishDate)) }
     this.router.navigate(['employer','schedule-generator-result'], {state: state})
   }
 

@@ -50,7 +50,7 @@ class TimePointArray<T> constructor(
         val start = dateToIndex(periodStart)
         val finish = dateToIndex(periodFinish)
         val numVal = transform(newValue)
-        for (i in start..finish) {
+        for (i in start until finish) {
             array[i] = numVal
         }
     }

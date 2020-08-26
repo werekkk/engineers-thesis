@@ -3,7 +3,7 @@ import { RequiredStaffTimePeriodDto } from '../../../model/dto/RequiredStaffTime
 import { TimeStep } from '../../../model/TimeStep'
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
 import { TimePeriodDto } from 'src/app/app/model/dto/TimePeriodDto';
-import { timer } from 'rxjs';
+import { timer, interval } from 'rxjs';
 import { CanvasUtils } from 'src/app/app/shared/utils/canvas-utils';
 
 type Canvas = CanvasUtils.Canvas
@@ -108,6 +108,7 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.adjustCanvasWidth()
     this.initCanvas()
+    // interval(1000).subscribe(() => console.log(this.latestMove, this.latestMove?.offsetY))
   }
 
   adjustCanvasWidth() {
@@ -182,7 +183,12 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
   }
 
   isAboveHighestWorkerCountLine(): boolean {
-    let y = this.latestMove.clientY - this.canvas.canvas.offsetTop // alternatively: y = latestMove.offsetY (but doesn't work for Firefox)
+    let y: number
+    if (this.canvas.canvas.offsetTop > this.latestMove['layerY']) { 
+      y = this.latestMove['layerY']                                   // Firefox
+    } else {
+      y = this.latestMove['layerY'] - this.canvas.canvas.offsetTop    // Chrome
+    }
     return this.getWorkerCountFromY(y) > this.maxWorkers
   }
 

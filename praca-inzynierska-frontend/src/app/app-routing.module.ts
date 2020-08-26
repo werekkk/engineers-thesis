@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AccountTypeGuard } from './app/services/guards/account-type-guard.service'
 import { IsLoggedInGuard } from './app/services/guards/is-logged-in-guard.service'
 import { AccountType } from './app/model/AccountType';
-import { UnauthorizedComponent } from './app/components/shared/unauthorized/unauthorized.component'
 
 const routes: Routes = [
   {
@@ -21,8 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./app/components/employee/employee.module').then(m => m.EmployeeModule),
     canActivate: [AccountTypeGuard],
     data: { accountType: AccountType.EMPLOYEE }
-  },
-  { path: 'unauthorized', component: UnauthorizedComponent }
+  }
 ];
 
 @NgModule({

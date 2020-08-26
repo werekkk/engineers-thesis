@@ -10,7 +10,7 @@ class ScheduleGenerator {
     }
 
     fun generate(config: GeneratorConfig): Schedule {
-        return RandomScheduleGenerator.generate(config)
+        return ConstraintedRandomScheduleGenerator.generate(config)
         TODO()
     }
 
