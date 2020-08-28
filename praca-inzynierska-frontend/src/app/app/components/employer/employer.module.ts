@@ -21,7 +21,6 @@ import { StaffRequirementsPeriodListComponent } from './staff-requirements-perio
 import { StaffRequirementsDayEditorComponent } from './staff-requirements-day-editor/staff-requirements-day-editor.component';
 import { StaffComponent } from './staff/staff.component';
 import { StaffRequirementsComponent } from './staff-requirements/staff-requirements.component';
-import { SchedulePositionWeekComponent } from './schedule-position-week/schedule-position-week.component';
 import { SchedulePositionDayComponent } from './schedule-position-day/schedule-position-day.component';
 import { SchedulePositionWeekEditComponent } from './schedule-position-week-edit/schedule-position-week-edit.component';
 import { ScheduleEmployeeDayCellComponent } from './schedule-employee-day-cell/schedule-employee-day-cell.component';
@@ -29,6 +28,7 @@ import { SchedulePositionEditPopupComponent } from './schedule-position-edit-pop
 import { SchedulePositionDayLabelCellComponent } from './schedule-position-day-label-cell/schedule-position-day-label-cell.component';
 import { ScheduleGeneratorComponent } from './schedule-generator/schedule-generator.component';
 import { ScheduleGeneratorResultComponent } from './schedule-generator-result/schedule-generator-result.component';
+import { ScheduleGeneratorResultPositionComponent } from './schedule-generator-result-position/schedule-generator-result-position.component';
 
 
 @NgModule({
@@ -49,14 +49,14 @@ import { ScheduleGeneratorResultComponent } from './schedule-generator-result/sc
     StaffRequirementsDayEditorComponent,
     StaffComponent,
     StaffRequirementsComponent,
-    SchedulePositionWeekComponent,
     SchedulePositionDayComponent,
     SchedulePositionWeekEditComponent,
     ScheduleEmployeeDayCellComponent,
     SchedulePositionEditPopupComponent,
     SchedulePositionDayLabelCellComponent,
     ScheduleGeneratorComponent,
-    ScheduleGeneratorResultComponent
+    ScheduleGeneratorResultComponent,
+    ScheduleGeneratorResultPositionComponent
   ],
   imports: [
     CommonModule,

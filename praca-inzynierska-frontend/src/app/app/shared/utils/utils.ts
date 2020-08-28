@@ -6,12 +6,23 @@ import { TimeDto } from '../../model/dto/TimeDto'
 
 export namespace Utils {
 
+    export function createMap<K, V>(objects: V[], extractKey: (object: V) => K): Map<K, V> {
+        let map = new Map()
+        objects.forEach(v => map.set(extractKey(v), v))
+        return map
+    }
+
     export function weekFrom(a: Date): Date[] {
+        a = firstDayOfWeekFrom(a)
         let week: Date[] = []
         for (let index = 0; index < 7; index++) {
             week.push(moment(a).add(index, 'day').toDate())            
         }
         return week
+    }
+
+    export function firstDayOfWeekFrom(a: Date): Date {
+        return moment(a).isoWeekday('monday').toDate()
     }
 
     export function daysDiff(a: Date, b: Date): number {

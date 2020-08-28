@@ -15,7 +15,6 @@ const routes: Routes = [
     path: '', component: EmployerComponent, children: [
       {path: '', pathMatch: 'full', redirectTo: 'schedule'},
       {path: 'employees', component: EmployeesComponent},
-      {path: 'schedule/position/:id/week', component: SchedulePositionWeekEditComponent},
       {path: 'schedule', component: ScheduleComponent},
       {path: 'schedule-generator', component: ScheduleGeneratorComponent},
       {path: 'schedule-generator-result', component: ScheduleGeneratorResultComponent},

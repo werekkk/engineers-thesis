@@ -1,0 +1,46 @@
+{{position.name}}
+<div *ngIf="!(requiredStaffLoaded); else schedule" class="spinner">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    </div>
+</div>
+<ng-template #schedule>
+    <table>
+        <div class="schedule_container">
+            <table class="schedule_table">
+            <tr>
+                <th>Pracownik</th>
+                <ng-container *ngFor="let day of days; let i = index">
+                    <th>
+                        <schedule-position-day-label-cell 
+                        [day]="day" 
+                        [requiredStaff]="requiredStaff"
+                        [dayIndex]="i"
+                        [shiftsTable]="shiftsTable"></schedule-position-day-label-cell>
+                    </th>
+                </ng-container>
+            </tr> 
+            <ng-container *ngFor="let employee of employeesWithPosition; let employeeIndex = index">
+                    <tr class="data-row">
+                        <td>
+                            <div class="employee-label_first-name">{{employee.account.firstName}}</div>
+                            <div class="employee-label_last-name">{{employee.account.lastName}}</div>
+                        </td>
+                        <ng-container *ngFor="let day of days; let dayIndex = index">
+                            <td>
+                                <schedule-employee-day-cell 
+                                [(shifts)]="shiftsTable[employeeIndex][dayIndex]"
+                                [shiftsTable]="shiftsTable"
+                                [position]="position"
+                                [employee]="employee"
+                                [day]="day"
+                                [requiredStaff]="requiredStaff"
+                                [dayIndex]="dayIndex"
+                                ></schedule-employee-day-cell>
+                            </td>
+                        </ng-container>
+                    </tr>
+            </ng-container>
+            </table>
+        </div>
+    </table>
+</ng-template>

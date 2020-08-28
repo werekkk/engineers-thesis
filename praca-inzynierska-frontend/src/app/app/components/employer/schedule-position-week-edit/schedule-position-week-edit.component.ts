@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import { Router } from '@angular/router';
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
@@ -20,11 +20,20 @@ import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
 })
 export class SchedulePositionWeekEditComponent implements OnInit {
 
-  firstDay: Date
+  _firstDay: Date
+  get firstDay(): Date {
+    return this._firstDay
+  }
+  @Input('firstDay')
+  set firstDay(val: Date) {
+    this._firstDay = val
+    this.handleNewFirstDay()
+  }
+
+  @Input('position')
+  position: PositionDto
 
   days: Date[] = []
-
-  position: PositionDto
 
   dataLoaded = false
   employeesLoaded = false
@@ -37,7 +46,6 @@ export class SchedulePositionWeekEditComponent implements OnInit {
   requiredStaff: RequiredStaffDto = undefined 
 
   constructor(
-    private router: Router,
     private employeeService: EmployeeService,
     public shiftService: ShiftService,
     private staffRequirementsService: StaffRequirementsService
@@ -48,34 +56,17 @@ export class SchedulePositionWeekEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataLoaded = false
-    this.loadTableData()
-    if (this.dataLoaded) {
-      this.initDays()
-      this.loadEmployees().pipe(
-        tap(() => this.initShiftsTableSize()),
-        flatMap(() => this.loadShifts()),
-        ).subscribe()
-      this.loadRequirements()
-    }
+    this.loadRequirements()
   }
 
   handleNewFirstDay() {
-    this.initDays()
-    this.initShiftsTableSize()
-    this.loadShifts().subscribe()
-  }
-
-  private loadTableData() {
-    let data: SchedulePostitionWeekData = history.state.data || this.shiftService.lastSchedulePositionWeekData
-    if (!data) {
-      this.router.navigate(['employer'])
-    } else {
-      this.position = data.position
-      this.firstDay = data.firstDay
-      this.shiftService.lastSchedulePositionWeekData = data
-      this.dataLoaded = true
-    }
+    this.loadEmployees().pipe(
+      tap(() => {
+        this.initDays()
+        this.initShiftsTableSize()
+        this.loadShifts().subscribe()
+      })
+    ).subscribe()
   }
 
   private initDays() {
@@ -83,23 +74,26 @@ export class SchedulePositionWeekEditComponent implements OnInit {
   }
 
   private loadEmployees(): Observable<any> {
-    this.employeesLoaded = this.employeeService.employeesLoaded
     if (!this.employeesLoaded) {
-      return this.employeeService.getAllEmployees()
-      .pipe(
-        tap((emps: EmployeesDto) => {
-          this.employeesLoaded = true
-          this.employees = emps.employees
-          this.getEmployees()
-        })
-      )
-    } else {
-      return of(null).pipe(
-        tap(() => {
-          this.getEmployees()
-        })
-      )
+      this.employeesLoaded = this.employeeService.employeesLoaded
+      if (!this.employeesLoaded) {
+        return this.employeeService.getAllEmployees()
+        .pipe(
+          tap((emps: EmployeesDto) => {
+            this.employeesLoaded = true
+            this.employees = emps.employees
+            this.getEmployees()
+          })
+        )
+      } else {
+        return of(null).pipe(
+          tap(() => {
+            this.getEmployees()
+          })
+        )
+      }
     }
+    return of(null)
   }
 
   private getEmployees() {

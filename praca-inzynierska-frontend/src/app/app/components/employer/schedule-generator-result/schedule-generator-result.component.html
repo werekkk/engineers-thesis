@@ -3,5 +3,8 @@
     </div>
 </div>
 <ng-template #results>
-
+    <week-date-picker [(date)]="weekStart" [periodStart]="config.firstDay" [periodFinish]="config.lastDay"></week-date-picker>
+    <div *ngFor="let position of positions; let i = index">
+        <schedule-generator-result-position [position]="position" [shifts]="shiftsByPosition[i]" [employees]="config.employees" [firstDay]="weekStart"></schedule-generator-result-position>
+    </div>
 </ng-template>

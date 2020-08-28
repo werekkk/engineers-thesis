@@ -15,7 +15,7 @@ class GeneratorConfig(
     val employees = employees.map { e -> e.filterPositions(positions)}
 
     init {
-        if (!(days in 1..14 && timePointsPerDay in 1..288 && shortestShift in 1..timePointsPerDay
+        if (!(days in 1..30 && timePointsPerDay in 1..288 && shortestShift in 1..timePointsPerDay
             && !employees.any { e -> !e.isCorrect(days, timePointsPerDay) }
             && !positions.any { p -> !p.isCorrect(days, timePointsPerDay)})) {
             throw Exception("Generator config initialized with incorrect data!")
