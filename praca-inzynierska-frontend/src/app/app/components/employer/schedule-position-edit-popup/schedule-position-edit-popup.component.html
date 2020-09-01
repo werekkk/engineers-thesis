@@ -9,7 +9,7 @@
                 ({{period | periodLength}})
             </div>
         </div>
-        <span class="delete-period-button" (click)="handleDeleteShiftClicked(i)">USUŃ</span>
+        <span class="delete-period-button unselectable" (click)="handleDeleteShiftClicked(i)">USUŃ</span>
     </div>
     <div class="new-period">
         <time-period-picker 
@@ -20,6 +20,6 @@
         [employee]="employee"
         [dayIndex]="dayIndex"
         ></time-period-picker>
-        <button class="btn btn-sm btn-success" (click)="handleAddShiftClicked()">Dodaj</button>
+        <button class="btn btn-sm btn-success unselectable" (click)="handleAddShiftClicked()">Dodaj</button>
     </div>
 </div>

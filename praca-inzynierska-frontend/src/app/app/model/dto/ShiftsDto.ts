@@ -6,4 +6,8 @@ export class ShiftsDto {
         public shifts: ShiftDto[]
     ) {}
 
+    addTimezoneToDates(): ShiftsDto {
+        return new ShiftsDto(this.shifts.map(s => s.addTimeZoneToDates()))
+    }
+
 }

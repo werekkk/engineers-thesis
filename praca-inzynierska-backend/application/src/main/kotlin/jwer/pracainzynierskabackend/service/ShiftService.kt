@@ -3,9 +3,11 @@ package jwer.pracainzynierskabackend.service
 import jwer.pracainzynierskabackend.model.dto.SavedShiftResponseDto
 import jwer.pracainzynierskabackend.model.dto.ShiftDto
 import jwer.pracainzynierskabackend.model.dto.ShiftsDto
+import jwer.pracainzynierskabackend.model.dto.ShiftsWithGeneratorConfigDto
 import jwer.pracainzynierskabackend.model.embeddable.DateTimePeriod
 import jwer.pracainzynierskabackend.model.entity.Shift
 import jwer.pracainzynierskabackend.model.entity.ShiftType
+import jwer.pracainzynierskabackend.model.entity.Workplace
 import jwer.pracainzynierskabackend.repository.ShiftRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional
 import java.security.Principal
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 
 @Service
 class ShiftService @Autowired constructor(
@@ -52,16 +55,51 @@ class ShiftService @Autowired constructor(
     }
 
     @Transactional
-    fun saveShift(principal: Principal, shift: ShiftDto): SavedShiftResponseDto? {
+    fun saveGeneratedShifts(principal: Principal, shifts: ShiftsWithGeneratorConfigDto): ShiftsDto? {
+        workplaceService.getWorkplaceByEmployer(principal)?.let { w ->
+            shifts.generatorConfig.employees.forEach {
+                deleteShiftsByPeriodAndEmployee(w, it.employeeId, shifts.generatorConfig.firstDay, shifts.generatorConfig.lastDay)
+            }
+            shifts.shifts.shifts.forEach {
+                saveShift(principal, it, ShiftType.GENERATED)
+            }
+            return shifts.shifts
+        }
+        return null
+    }
+
+    @Transactional
+    fun deleteShiftsByPeriodAndEmployee(workplace: Workplace, employeeId: Long, firstDay: LocalDate, lastDay: LocalDate) {
+        if (workplace.employees.any { it.id == employeeId }) {
+            shiftRepository
+                    .getShiftsByEmployeeAndPeriod(employeeId, firstDay.atStartOfDay(), lastDay.atTime(LocalTime.MIDNIGHT))
+                    .forEach { shiftRepository.delete(it) }
+        }
+    }
+
+    @Transactional
+    fun deleteShiftsByPeriodAndPosition(workplace: Workplace, positionId: Long, firstDay: LocalDate, lastDay: LocalDate) {
+        if (workplace.positions.any { it.id == positionId }) {
+            shiftRepository
+                    .getShiftsByPositionAndPeriod(positionId, firstDay.atStartOfDay(), lastDay.atTime(LocalTime.MIDNIGHT))
+                    .forEach { shiftRepository.delete(it) }
+        }
+    }
+
+    @Transactional
+    fun saveShift(principal: Principal, shift: ShiftDto, type: ShiftType = ShiftType.MANUALLY_ASSIGNED): SavedShiftResponseDto? {
         if (canPersistShift(principal, shift) && shift.start.isBefore(shift.finish)) {
             val shiftsToBeDeleted = getOverlappingShifts(shift)
-            shiftsToBeDeleted.forEach { s -> run{
-                if (s.period.start.isBefore(shift.start)) shift.start = s.period.start
-                if (s.period.finish.isAfter(shift.finish)) shift.finish = s.period.finish
-                shiftRepository.delete(s)
-            } }
-            val savedShift = shiftRepository.save(createShiftFromDto(shift, ShiftType.MANUALLY_ASSIGNED))
-            return SavedShiftResponseDto(ShiftDto(savedShift), shiftsToBeDeleted.map { s -> s.id })
+            if (shiftsToBeDeleted.any {it.position.id != shift.positionId}) {
+                return null
+            }
+            shiftsToBeDeleted.forEach {
+                if (it.period.start.isBefore(shift.start)) shift.start = it.period.start
+                if (it.period.finish.isAfter(shift.finish)) shift.finish = it.period.finish
+                shiftRepository.delete(it)
+            }
+            val savedShift = shiftRepository.save(createShiftFromDto(shift, type))
+            return SavedShiftResponseDto(ShiftDto(savedShift), shiftsToBeDeleted.map { it.id })
         }
         return null
     }

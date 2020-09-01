@@ -9,6 +9,8 @@ import * as moment from 'moment';
 import { ShiftDto } from '../model/dto/ShiftDto';
 import { SchedulePostitionWeekData } from '../components/employer/schedule-position-week-edit/schedule-position-week-edit.component';
 import { subscribeOn, tap, mergeMap, map } from 'rxjs/operators';
+import { GeneratorConfigDto } from '../model/dto/GeneratorConfigDto';
+import { ShiftsWithGeneratorConfigDto } from '../model/dto/ShiftsWithGeneratorConfigDto';
 
 @Injectable({
   providedIn: 'root'
@@ -68,6 +70,11 @@ export class ShiftService {
       map((s: ShiftDto) => ShiftDto.copy(s)),
       tap(() => this.operationsPerformed--, () => this.operationsPerformed--)
     ) as Observable<ShiftDto>
+  }
+
+  saveGeneratedShifts(shifts: ShiftDto[], config: GeneratorConfigDto): Observable<ShiftsDto> {
+    let obj = new ShiftsWithGeneratorConfigDto(new ShiftsDto(shifts).addTimezoneToDates(), config)
+    return this.http.post(`${environment.serverUrl}/shift/generated`, obj, {withCredentials: true}) as Observable<ShiftsDto>
   }
 
 }

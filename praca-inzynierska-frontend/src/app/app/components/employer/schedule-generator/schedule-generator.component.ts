@@ -18,8 +18,8 @@ import { GeneratorConfigDto } from 'src/app/app/model/dto/GeneratorConfigDto';
 })
 export class ScheduleGeneratorComponent implements OnInit {
 
-  startDate: Date = new Date()
-  finishDate: Date = new Date()
+  startDate: Date = moment().startOf('day').toDate()
+  finishDate: Date = moment().startOf('day').toDate()
 
   positionsLoaded: boolean = false
   employeesLoaded: boolean = false

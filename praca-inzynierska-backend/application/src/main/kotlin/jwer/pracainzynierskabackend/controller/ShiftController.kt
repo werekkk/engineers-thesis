@@ -3,6 +3,7 @@ package jwer.pracainzynierskabackend.controller
 import jwer.pracainzynierskabackend.model.dto.SavedShiftResponseDto
 import jwer.pracainzynierskabackend.model.dto.ShiftDto
 import jwer.pracainzynierskabackend.model.dto.ShiftsDto
+import jwer.pracainzynierskabackend.model.dto.ShiftsWithGeneratorConfigDto
 import jwer.pracainzynierskabackend.service.ShiftService
 import jwer.pracainzynierskabackend.utils.ControllerUtils
 import org.springframework.beans.factory.annotation.Autowired
@@ -38,6 +39,11 @@ class ShiftController @Autowired constructor(
     @PostMapping()
     fun saveShift(principal: Principal, @RequestBody shift: ShiftDto): ResponseEntity<SavedShiftResponseDto> {
         return ControllerUtils.createResponse(shiftService.saveShift(principal, shift))
+    }
+
+    @PostMapping("/generated")
+    fun saveShifts(principal: Principal, @RequestBody shifts: ShiftsWithGeneratorConfigDto): ResponseEntity<ShiftsDto> {
+        return ControllerUtils.createResponse(shiftService.saveGeneratedShifts(principal, shifts))
     }
 
     @DeleteMapping("/{id}")

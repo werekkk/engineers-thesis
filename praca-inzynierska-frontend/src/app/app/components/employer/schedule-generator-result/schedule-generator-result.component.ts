@@ -7,6 +7,7 @@ import { ScheduleGeneratorService } from 'src/app/app/services/schedule-generato
 import { ShiftDto } from 'src/app/app/model/dto/ShiftDto';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import { Utils } from 'src/app/app/shared/utils/utils';
+import { ShiftService } from 'src/app/app/services/shift.service';
 
 export type GeneratorState = { config: GeneratorConfigDto }
 
@@ -25,12 +26,16 @@ export class ScheduleGeneratorResultComponent implements OnInit {
 
   scheduleGenerated: boolean = false
 
+  generatedShifts: ShiftDto[] = []
   positions: PositionDto[] = []
   shiftsByPosition: ShiftDto[][] = []
 
+  savingShifts: boolean = false
+
   constructor(
     private router: Router,
-    private scheduleGeneratorService: ScheduleGeneratorService
+    private scheduleGeneratorService: ScheduleGeneratorService,
+    private shfitService: ShiftService
   ) { }
 
   ngOnInit(): void {
@@ -38,18 +43,23 @@ export class ScheduleGeneratorResultComponent implements OnInit {
     if (request.config == null) {
       this.router.navigate([''])
     } else {
-      this.scheduleGenerated = false
       this.config = request.config
       this.weekStart = Utils.firstDayOfWeekFrom(this.config.firstDay)
-      this.scheduleGeneratorService.generateSchedule(this.config).subscribe(shifts => {
-        this.handleGeneratedShifts(shifts.shifts)
-        this.scheduleGenerated = true
-      })
+      this.generateSchedule()
     }
+  }
+
+  private generateSchedule() {
+    this.scheduleGenerated = false
+    this.scheduleGeneratorService.generateSchedule(this.config).subscribe(shifts => {
+      this.handleGeneratedShifts(shifts.shifts)
+      this.scheduleGenerated = true
+    })
   }
 
   private handleGeneratedShifts(shifts: ShiftDto[]) {
     this.positions = this.config.positions
+    this.generatedShifts = shifts
     this.shiftsByPosition = []
     this.positions.forEach(() => this.shiftsByPosition.push([]))
     
@@ -63,4 +73,20 @@ export class ScheduleGeneratorResultComponent implements OnInit {
     return map
   }
 
+  onBackPressed() {
+    this.router.navigate(['employer', 'schedule-generator'])
+  }
+
+  onGeneratePressed() {
+    this.generateSchedule()
+  }
+
+  onSavePressed() {
+    this.savingShifts = true
+    this.shfitService.saveGeneratedShifts(this.generatedShifts, this.config)
+    .subscribe(() => {
+      this.savingShifts = false
+      this.router.navigate([''])
+    })
+  }
 }

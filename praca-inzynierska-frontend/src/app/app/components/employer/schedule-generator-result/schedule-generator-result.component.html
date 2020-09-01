@@ -1,8 +1,19 @@
-<div *ngIf="!scheduleGenerated; else results">
+<div *ngIf="!scheduleGenerated || savingShifts; else results">
     <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
     </div>
 </div>
 <ng-template #results>
+    <div>
+        <button class="btn btn-primary" (click)="onBackPressed()">
+            Powrót
+        </button>
+        <button class="btn btn-primary" (click)="onGeneratePressed()">
+            Wygeneruj ponownie
+        </button>
+        <button class="btn btn-success" (click)="onSavePressed()">
+            Zapisz
+        </button>
+    </div>
     <week-date-picker [(date)]="weekStart" [periodStart]="config.firstDay" [periodFinish]="config.lastDay"></week-date-picker>
     <div *ngFor="let position of positions; let i = index">
         <schedule-generator-result-position [position]="position" [shifts]="shiftsByPosition[i]" [employees]="config.employees" [firstDay]="weekStart"></schedule-generator-result-position>
