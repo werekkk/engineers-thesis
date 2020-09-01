@@ -10,8 +10,8 @@ import { Credentials } from 'src/app/app/model/Credentials';
 })
 export class HomeComponent implements OnInit {
 
-  loginInput = ''
-  passwordInput = ''
+  loginInput = 'test'
+  passwordInput = 'test'
 
   constructor(
     private authenticationService: AuthenticationService,

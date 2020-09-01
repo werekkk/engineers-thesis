@@ -8,14 +8,15 @@ class GeneratorConfig(
         employees: List<Employee>,
         val positions: List<Position>,
         val days: Int,
-        val timePointsPerDay: Int,
-        val shortestShift: Int = 1
+        val timePointsPerDay: Int
 ) {
 
     val employees = employees.map { e -> e.filterPositions(positions)}
 
+    val totalTimePoints get() = days * timePointsPerDay
+
     init {
-        if (!(days in 1..30 && timePointsPerDay in 1..288 && shortestShift in 1..timePointsPerDay
+        if (!(days in 1..30 && timePointsPerDay in 1..288
             && !employees.any { e -> !e.isCorrect(days, timePointsPerDay) }
             && !positions.any { p -> !p.isCorrect(days, timePointsPerDay)})) {
             throw Exception("Generator config initialized with incorrect data!")
@@ -26,9 +27,9 @@ class GeneratorConfig(
         return "Schedule:\n${schedule}\nPositions:\n" +
                 positions.joinToString( "\n", transform = { p ->
                     var assignedHours = 0
-                    schedule.employeeSchedule.forEach { entry -> assignedHours += entry.value.count { h -> h == p.id } }
+                    schedule.schedule.forEach { entry -> assignedHours += entry.count { h -> h == p.id } }
                     val requiredHours = p.staffRequirements.reduce { acc, i -> acc + i }
-                    "${p.id}: ${assignedHours}/${requiredHours}, Redundant hours: ${p.countRedundantHours(schedule)}"
-        } ) + "\nRedundant hours: ${schedule.countRedundantHours(this)}"
+                    "${p.id}: ${assignedHours}/${requiredHours}, Redundant hours: ${p.countHours(schedule).redundantHours}"
+        } ) + "\nRedundant hours: ${schedule.hourCount.redundantHours}"
     }
 }
