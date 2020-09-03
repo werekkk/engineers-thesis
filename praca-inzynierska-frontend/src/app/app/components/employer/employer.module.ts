@@ -7,13 +7,10 @@ import { EmployeesComponent } from './employees/employees.component';
 import { EmployerComponent } from './employer/employer.component';
 import { EmployerMenuComponent } from './employer-menu/employer-menu.component';
 import { ScheduleComponent } from './schedule/schedule.component';
-import { WorkingHoursComponent } from './working-hours/working-hours.component';
 import { EmployeesNewEmployeeModalComponent } from './employees-new-employee-modal/employees-new-employee-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { EmployeesListComponent } from './employees-list/employees-list.component';
-import { WorkingHoursEditorComponent } from './working-hours-editor/working-hours-editor.component';
-import { WorkingHoursSliderComponent } from './working-hours-slider/working-hours-slider.component';
 import { EmployeesEditEmployeePositionsModalComponent } from './employees-edit-employee-positions-modal/employees-edit-employee-positions-modal.component';
 import { EmployeesEditGlobalPositionsModalComponent } from './employees-edit-global-positions-modal/employees-edit-global-positions-modal.component';
 import { StaffRequirementsDayComponent } from './staff-requirements-day/staff-requirements-day.component';
@@ -37,11 +34,8 @@ import { ScheduleGeneratorResultPositionComponent } from './schedule-generator-r
     EmployerComponent,
     EmployerMenuComponent,
     ScheduleComponent,
-    WorkingHoursComponent,
     EmployeesNewEmployeeModalComponent,
     EmployeesListComponent,
-    WorkingHoursEditorComponent,
-    WorkingHoursSliderComponent,
     EmployeesEditEmployeePositionsModalComponent,
     EmployeesEditGlobalPositionsModalComponent,
     StaffRequirementsDayComponent,

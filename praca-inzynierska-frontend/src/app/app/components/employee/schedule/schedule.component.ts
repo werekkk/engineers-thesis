@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'schedule',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScheduleComponent implements OnInit {
 
-  firstDay: Date = new Date()
+  firstDay: Date = moment().startOf('isoWeek').toDate()
 
   constructor() { }
 

@@ -1,5 +1,8 @@
 package jwer.schedulegenerator.generator.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class PreferenceType {
     UNAVAILABLE,
     UNWILLING,

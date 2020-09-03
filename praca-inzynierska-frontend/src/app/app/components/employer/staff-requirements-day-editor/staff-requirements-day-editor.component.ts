@@ -434,7 +434,7 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
   }
 
   setLabelFont(context: CanvasRenderingContext2D, style: string = '', fontSize: number = null) {
-    context.font = `${style} ${fontSize ? fontSize: this.labelFontSize}px Helvetica`
+    context.font = `${style} ${fontSize ? fontSize: this.labelFontSize}px "Segoe UI"`
     context.textAlign = 'center'
   }
 

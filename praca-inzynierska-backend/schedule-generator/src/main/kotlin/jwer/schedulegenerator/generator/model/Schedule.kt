@@ -3,15 +3,18 @@ package jwer.schedulegenerator.generator.model
 import jwer.schedulegenerator.generator.GeneratorConfig
 import jwer.schedulegenerator.generator.utils.isTruthy
 
-data class Schedule(
+class Schedule(
         val configuration: GeneratorConfig,
         val schedule: Array<Array<Long?>> = Array(configuration.employees.size) { Array(configuration.totalTimePoints) {null} }
 ) {
 
-    var hourCount = HourCount()
+    var hourCount = HourCount(schedule.size)
 
     val scheduleIndexToEmployee = HashMap<Int, Employee>()
     val employeeToScheduleIndex = HashMap<Employee, Int>()
+
+    val employeesByPosition: Map<Long, List<Employee>> = configuration.createEmployeesByPositionMap()
+    val positionsWithPossibleTakeovers: List<Long> = employeesByPosition.filter { it.value.size >= 2 }.keys.toList()
 
     init {
         configuration.employees.forEachIndexed { i, e ->
@@ -62,16 +65,18 @@ data class Schedule(
     }
 
     fun hourCountOnPeriod(start: Int, finish: Int): HourCount {
-        val hourCount = HourCount()
+        val hourCount = HourCount(schedule.size)
         configuration.positions.forEach { hourCount += it.countHoursOnPeriod(this, start, finish) }
         hourCount.shifts = countShiftsOnPeriod(start, finish)
+        hourCount += countEmployeeHoursAndPreferencesOnPeriod(start, finish)
         return hourCount
     }
 
     fun recalcHourCount() {
-        hourCount = HourCount()
+        hourCount = HourCount(schedule.size)
         configuration.positions.forEach { hourCount += it.countHours(this) }
         hourCount.shifts = countShiftsOnPeriod(0, configuration.totalTimePoints - 1)
+        hourCount += countEmployeeHoursAndPreferencesOnPeriod(0, configuration.totalTimePoints - 1)
     }
 
     private fun countShiftsOnPeriod(start: Int, finish: Int): Int {
@@ -91,5 +96,26 @@ data class Schedule(
         }
 
         return shifts
+    }
+
+    private fun countEmployeeHoursAndPreferencesOnPeriod(start: Int, finish: Int): HourCount {
+        val hours: Array<Int> = Array(schedule.size) {0}
+        val hourCount = HourCount(schedule.size)
+        schedule.forEachIndexed { index, arr ->
+            val employee = scheduleIndexToEmployee[index]!!
+            for (i in start..finish) {
+                if (arr[i].isTruthy()) {
+                    hours[index]++
+                    when(employee.preferences[i]) {
+                        PreferenceType.UNAVAILABLE -> hourCount.unavailableHours++
+                        PreferenceType.UNWILLING -> hourCount.unwillingHours++
+                        PreferenceType.AVAILABLE -> hourCount.availableHours++
+                        PreferenceType.WILLING -> hourCount.willingHours++
+                    }
+                }
+            }
+        }
+        hourCount.hoursByEmployee = hours
+        return hourCount
     }
 }

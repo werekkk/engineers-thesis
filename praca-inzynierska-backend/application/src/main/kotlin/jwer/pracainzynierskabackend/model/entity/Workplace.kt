@@ -22,10 +22,6 @@ data class Workplace (
         @OneToMany(fetch = FetchType.LAZY, mappedBy = "workplace", cascade = [CascadeType.ALL])
         val positions: List<Position>,
 
-        @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-        @JoinColumn(name = "working_hours_id", nullable = false)
-        val workingHours: WorkingHours = WorkingHours(0)
-
 ) {
         override fun toString(): String {
                 return "<Workplace>{id: ${id}; name: ${name}; ...}"

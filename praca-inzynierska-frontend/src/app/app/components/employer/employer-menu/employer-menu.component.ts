@@ -23,10 +23,6 @@ export class EmployerMenuComponent implements OnInit {
     this.router.navigate(['employer', 'employees'])
   }
 
-  onWorkingHoursClicked() {
-    this.router.navigate(['employer', 'working-hours'])
-  }
-
   onStaffClicked() {
     this.router.navigate(['employer', 'staff'])
   }

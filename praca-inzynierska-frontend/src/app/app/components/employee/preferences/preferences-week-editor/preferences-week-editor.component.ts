@@ -248,7 +248,7 @@ export class PreferencesWeekEditorComponent implements AfterViewInit {
     for (let i = 0; i <= 7; i++) {
       let y = i*this.rowHeight + this.highlightedHourLabelHeight
       ctx.beginPath()
-      ctx.moveTo(this.horizontalPadding, y)
+      ctx.moveTo(this.horizontalPadding + this.dayNamesColumnWidth, y)
       ctx.lineTo(this.canvas.width - this.horizontalPadding, y)
       ctx.stroke()
     }
@@ -277,10 +277,10 @@ export class PreferencesWeekEditorComponent implements AfterViewInit {
 
   drawColumnLines() {
     let ctx = this.canvas.context
-    ctx.beginPath()
-    ctx.moveTo(this.horizontalPadding, this.highlightedHourLabelHeight)
-    ctx.lineTo(this.horizontalPadding, this.rowHeight*7 + this.highlightedHourLabelHeight)
-    ctx.stroke()
+    // ctx.beginPath()
+    // ctx.moveTo(this.horizontalPadding, this.highlightedHourLabelHeight)
+    // ctx.lineTo(this.horizontalPadding, this.rowHeight*7 + this.highlightedHourLabelHeight)
+    // ctx.stroke()
     this.drawHourLines()
   }
 
@@ -348,7 +348,7 @@ export class PreferencesWeekEditorComponent implements AfterViewInit {
   }
 
   setFont(context: CanvasRenderingContext2D, style: string = '', fontSize: number = null) {
-    context.font = `${style} ${fontSize ? fontSize : this.labelFontSize}px Helvetica`
+    context.font = `${style} ${fontSize ? fontSize : this.labelFontSize}px "Segoe UI"`
     context.textAlign = 'center'
   }
 

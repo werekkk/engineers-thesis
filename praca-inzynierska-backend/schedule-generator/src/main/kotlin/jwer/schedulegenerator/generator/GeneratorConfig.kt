@@ -5,7 +5,7 @@ import jwer.schedulegenerator.generator.model.Position
 import jwer.schedulegenerator.generator.model.Schedule
 import kotlinx.serialization.Serializable
 
-@Serializable
+
 class GeneratorConfig(
         employees: List<Employee>,
         val positions: List<Position>,
@@ -34,4 +34,13 @@ class GeneratorConfig(
                     "${p.id}: ${assignedHours}/${requiredHours}, Redundant hours: ${p.countHours(schedule).redundantHours}"
         } ) + "\nRedundant hours: ${schedule.hourCount.redundantHours}"
     }
+
+    fun createEmployeesByPositionMap(): Map<Long, List<Employee>> {
+        val map = HashMap<Long, List<Employee>>()
+        positions.forEach {
+            map[it.id] = employees.filter { e -> e.positions.any { p -> p.id == it.id } }
+        }
+        return map
+    }
 }
+

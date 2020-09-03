@@ -17,7 +17,7 @@ data class Position (
     }
 
     fun countHoursOnPeriod(schedule: Schedule, start: Int, finish: Int): HourCount {
-        val hourCount = HourCount()
+        val hourCount = HourCount(schedule.schedule.size)
         for (i in start..finish) {
             var assignedHours = 0
             val requiredHours = staffRequirements[i]

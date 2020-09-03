@@ -1,21 +1,35 @@
 package jwer.schedulegenerator.generator
 
 import jwer.schedulegenerator.generator.model.Schedule
+import jwer.schedulegenerator.generator.model.ShiftTakeoverTransition
 import jwer.schedulegenerator.generator.model.SingleBlockChangeTransition
 import jwer.schedulegenerator.generator.model.Transition
+import jwer.schedulegenerator.generator.utils.RandomSelector
+import jwer.schedulegenerator.generator.utils.standardDeviation
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import java.io.File
 import kotlin.math.exp
 import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
-private val W_REDUNDANT_HOURS = 10L
-private val W_UNASSIGNED_HOURS = 10L
-private val W_SHIFTS = 6L
+private const val W_REDUNDANT_HOURS = 20.0
+private const val W_UNASSIGNED_HOURS = 20.0
+private const val W_SHIFTS = 16.0
+private const val W_HOUR_COUNT_STANDARD_DEVIATION = 1.0
+private const val W_UNAVAILABLE_HOURS = 30.0
+private const val W_UNWILLING_HOURS = 10.0
+private const val W_AVAILABLE_HOURS = 4.0
+private const val W_WILLING_HOURS = 0.0
 
-private val ITERATIONS = 5000000
+private const val ITERATIONS = 3000000
 
-private val TEMP_START: Double = 24.0
-private val TEMP_FINAL: Double = 0.75
+private const val TEMP_START: Double = 9.7
+private const val TEMP_FINAL: Double = 0.1
 
 // http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.589.3061&rep=rep1&type=pdf - strona 5, 3.3
 private val E: Double = (TEMP_FINAL / TEMP_START).pow(1.0 / ITERATIONS)
@@ -39,6 +53,10 @@ fun sa(config: GeneratorConfig,
     var lastPercent = 0
     while (temperature >= tempFinal) {
         if (log && (100.0 * it / iterations) >= lastPercent) {
+            schedule.recalcHourCount()
+            if (cost != cost(schedule)) {
+                println("COST CALCULATION ERROR! \\/")
+            }
             println("${(100.0 * it / iterations).roundToInt()}%, current cost: ${cost}")
             lastPercent += 5
         }
@@ -59,13 +77,47 @@ fun sa(config: GeneratorConfig,
     return schedule
 }
 
-fun cost(schedule: Schedule): Long {
+fun cost(schedule: Schedule): Double {
     val hourCount = schedule.hourCount
     return hourCount.redundantHours * W_REDUNDANT_HOURS +
     hourCount.unassignedHours * W_UNASSIGNED_HOURS +
-    hourCount.shifts * W_SHIFTS
+    hourCount.shifts * W_SHIFTS +
+    hourCount.hoursByEmployee.standardDeviation() * W_HOUR_COUNT_STANDARD_DEVIATION +
+    hourCount.unavailableHours * W_UNAVAILABLE_HOURS +
+    hourCount.unwillingHours * W_UNWILLING_HOURS +
+    hourCount.availableHours * W_AVAILABLE_HOURS +
+    hourCount.willingHours * W_WILLING_HOURS
 }
 
+private val transitionSelector: RandomSelector<(Schedule) -> Transition> = RandomSelector(
+        listOf(
+                {s -> SingleBlockChangeTransition.randomFrom(s)},
+                {s -> ShiftTakeoverTransition.randomFrom(s)}
+        ), listOf(99, 1)
+)
+
 private fun createTransition(schedule: Schedule): Transition {
-    return SingleBlockChangeTransition.randomFrom(schedule)
+    return transitionSelector.getRandom().invoke(schedule)
+}
+
+fun main() {
+    println("tempFinish;tempStart;costMin;costMax;costAvg")
+    val config = Json.decodeFromString<SerializableGeneratorConfig>(
+            File("sprzatajacy.json").readText()
+    ).toConfig()
+    val tempFinal: Double = 0.1
+    val multiplier: Double = 1.1
+    var tempStart: Double = tempFinal * multiplier
+    while (tempStart < 100000) {
+        val deferred = (1..20).map {
+            GlobalScope.async {
+                cost(sa(config, tempStart = tempStart, tempFinal = tempFinal, log = false)).toDouble()
+            }
+        }
+        runBlocking {
+            var costs = deferred.map { it.await() }
+            println("${tempFinal};${tempStart};${costs.sorted()[0]};${costs.sortedDescending()[0]};${costs.average()}")
+        }
+        tempStart *= multiplier
+    }
 }
