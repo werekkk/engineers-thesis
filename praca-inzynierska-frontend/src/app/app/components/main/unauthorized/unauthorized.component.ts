@@ -6,16 +6,21 @@ import { Router } from '@angular/router';
   templateUrl: './unauthorized.component.html',
   styleUrls: ['./unauthorized.component.scss']
 })
-export class UnauthorizedComponent implements OnInit {
+export class UnauthorizedComponent {
 
   constructor(
     private router: Router
   ) { }
 
-  ngOnInit(): void {
+  onEnterPressed() {
+    this.navigateToLoginPage()
   }
 
   onReturnClicked() {
+    this.navigateToLoginPage()
+  }
+
+  private navigateToLoginPage() {
     this.router.navigate(['./'])
   }
 }

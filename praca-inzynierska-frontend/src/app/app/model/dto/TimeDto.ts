@@ -46,6 +46,10 @@ export class TimeDto {
         return `${this.hour}:${this.minute<10?0:''}${this.minute}`
     }
 
+    toDisplayHHMMString(): string {
+        return this.isMidnight() ? '24:00' : this.toHHMMString()
+    }
+
     toDayPercentage(): number {
         return this.toSeconds() / 86400
     }

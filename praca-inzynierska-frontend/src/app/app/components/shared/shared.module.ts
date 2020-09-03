@@ -19,6 +19,7 @@ import { TimePeriodCellComponent } from './time-period-cell/time-period-cell.com
 import { ClickOutsideDirective } from '../../directives/click-outside.directive'
 import { PeriodLengthPipe } from '../../pipes/period-length.pipe';
 import { OnEscapePressedDirective } from '../../directives/on-escape-pressed.directive';
+import { OnEnterPressedDirective } from '../../directives/on-enter-pressed.directive';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { OnEscapePressedDirective } from '../../directives/on-escape-pressed.dir
     TimePeriodCellComponent,
     ClickOutsideDirective,
     PeriodLengthPipe,
-    OnEscapePressedDirective
+    OnEscapePressedDirective,
+    OnEnterPressedDirective
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { OnEscapePressedDirective } from '../../directives/on-escape-pressed.dir
     TimePeriodCellComponent,
     ClickOutsideDirective,
     PeriodLengthPipe,
-    OnEscapePressedDirective
+    OnEscapePressedDirective,
+    OnEnterPressedDirective
   ]
 })
 export class SharedModule { }

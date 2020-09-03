@@ -14,7 +14,7 @@ class ConstraintedRandomScheduleGenerator {
                 val employeesWithPosition = config.employees.filter { e -> e.positions.any { it.id == p.id } }
                 repeat(config.totalTimePoints) { i ->
                     val availableEmployees = employeesWithPosition.filter { e -> e.preferences[i] != PreferenceType.UNAVAILABLE &&
-                            schedule.schedule[schedule.employeeToScheduleIndex[e]!!]!![i] == null }
+                            schedule.schedule[schedule.employeeToScheduleIndex[e]!!][i] == null }
                     val requiredEmployees = p.staffRequirements[i]
                     availableEmployees.shuffled().subList(0, minOf(requiredEmployees, availableEmployees.size)).forEach { e ->
                         schedule.schedule[schedule.employeeToScheduleIndex[e]!!][i] = p.id

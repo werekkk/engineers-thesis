@@ -1,4 +1,4 @@
-<div class="suggestions-container unselectable"
+<div #suggestions class="suggestions-container unselectable"
     (mouseenter)="onMouseEnter()"
     (mouseleave)="onMouseLeave()"
 >
@@ -10,7 +10,7 @@
     [class.no-requirements]="requiredEmployees[i] == 0"
     (mouseenter)="highlightedHour = hour">
         <span class="hour">
-            {{hour.toHHMMString()}}
+            {{hour.toDisplayHHMMString()}}
         </span>
         <span class="employees"
         [class.not-filled]="assignedEmployees[i] == 0 && requiredEmployees[i] > 0"

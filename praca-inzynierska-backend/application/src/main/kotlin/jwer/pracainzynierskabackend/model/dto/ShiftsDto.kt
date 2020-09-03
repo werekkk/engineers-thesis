@@ -2,9 +2,7 @@ package jwer.pracainzynierskabackend.model.dto
 
 import jwer.pracainzynierskabackend.model.TimePointArray
 import jwer.pracainzynierskabackend.model.entity.ShiftType
-import jwer.pracainzynierskabackend.utils.isMidnigtht
-import jwer.pracainzynierskabackend.utils.isSavedAsMidnight
-import jwer.pracainzynierskabackend.utils.toMap
+import jwer.pracainzynierskabackend.utils.isMidnight
 import jwer.schedulegenerator.generator.model.Schedule
 import java.time.LocalDate
 
@@ -36,7 +34,7 @@ data class ShiftsDto(
         private inline fun newShift(start: Int, finish: Int, startDate: LocalDate, empId: Long, posId: Long): ShiftDto {
             val startTime = TimePointArray.timePointToDate(startDate, start)
             var finishTime = TimePointArray.timePointToDate(startDate, finish)
-            if (finishTime.isMidnigtht()) {
+            if (finishTime.isMidnight()) {
                 finishTime = finishTime.minusSeconds(1)
             }
             return ShiftDto(0, empId, posId, startTime, finishTime, null, ShiftType.GENERATED)

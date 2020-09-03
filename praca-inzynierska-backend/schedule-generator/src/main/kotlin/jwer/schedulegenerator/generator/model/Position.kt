@@ -1,5 +1,8 @@
 package jwer.schedulegenerator.generator.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Position (
         val id: Long,
         val staffRequirements: Array<Int>
@@ -20,7 +23,9 @@ data class Position (
             val requiredHours = staffRequirements[i]
             @Suppress("JavaMapForEach") // Performance
             schedule.schedule.forEach { empSchedule ->
-                if (empSchedule[i] == id) assignedHours++
+                if (empSchedule[i] == id) {
+                    assignedHours++
+                }
             }
             hourCount.redundantHours += maxOf(0, assignedHours - requiredHours)
             hourCount.unassignedHours += maxOf(0, requiredHours - assignedHours)

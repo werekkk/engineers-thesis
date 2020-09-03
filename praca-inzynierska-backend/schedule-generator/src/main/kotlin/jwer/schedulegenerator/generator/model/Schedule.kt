@@ -1,14 +1,8 @@
 package jwer.schedulegenerator.generator.model
 
 import jwer.schedulegenerator.generator.GeneratorConfig
-import kotlin.random.Random
+import jwer.schedulegenerator.generator.utils.isTruthy
 
-/**
- * @param employeeSchedule Generated schedule represented as key-value pairs where
- * the key is the employees id and its value is an array of positions' ids assigned
- * to the employee in the time points included in the schedule. The null value
- * in the array indicates the time off.
- */
 data class Schedule(
         val configuration: GeneratorConfig,
         val schedule: Array<Array<Long?>> = Array(configuration.employees.size) { Array(configuration.totalTimePoints) {null} }
@@ -40,14 +34,14 @@ data class Schedule(
         transition.revertFromSchedule(this)
     }
 
-    fun isValidWithEmployeePreferences(employees: List<Employee>): Boolean {
+    fun isValidWithEmployeePreferences(): Boolean {
         var isValid = true
         schedule.forEachIndexed { empIndex, empSchedule ->
             run {
                 val emp = scheduleIndexToEmployee[empIndex]!!
                 empSchedule.forEachIndexed { index: Int, l: Long? ->
                     run {
-                        if (l != null && l != 0L) {
+                        if (l.isTruthy()) {
                             isValid = isValid && emp.positions.any { p -> p.id == l } && emp.preferences[index] != PreferenceType.UNAVAILABLE
                         }
                     }
@@ -70,11 +64,32 @@ data class Schedule(
     fun hourCountOnPeriod(start: Int, finish: Int): HourCount {
         val hourCount = HourCount()
         configuration.positions.forEach { hourCount += it.countHoursOnPeriod(this, start, finish) }
+        hourCount.shifts = countShiftsOnPeriod(start, finish)
         return hourCount
     }
 
     fun recalcHourCount() {
         hourCount = HourCount()
         configuration.positions.forEach { hourCount += it.countHours(this) }
+        hourCount.shifts = countShiftsOnPeriod(0, configuration.totalTimePoints - 1)
+    }
+
+    private fun countShiftsOnPeriod(start: Int, finish: Int): Int {
+        var shifts = 0
+        val rangeStart = if (start > 0) start - 1 else start
+        val rangeFinish = if (finish < configuration.totalTimePoints - 1) finish + 1 else finish
+
+        schedule.forEach {
+            var currentPosition: Long? = it[rangeStart]
+            for (i in rangeStart..rangeFinish) {
+                if (it[i] != currentPosition) {
+                    if (currentPosition.isTruthy() && !it[i].isTruthy()) shifts++
+                    currentPosition = it[i]
+                }
+            }
+            if (currentPosition.isTruthy()) shifts++
+        }
+
+        return shifts
     }
 }

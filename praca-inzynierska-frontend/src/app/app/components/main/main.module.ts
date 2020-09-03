@@ -9,6 +9,7 @@ import { RegisterEmployeeComponent } from './register-employee/register-employee
 import { RegisterEmployerComponent } from './register-employer/register-employer.component';
 import { MainComponent } from './main/main.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MainRoutingModule
+    MainRoutingModule,
+    SharedModule
   ]
 })
 export class MainModule { }

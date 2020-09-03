@@ -1,7 +1,9 @@
 package jwer.schedulegenerator.generator.model
 
+import kotlinx.serialization.Serializable
 import kotlin.random.Random
 
+@Serializable
 data class Employee (
         val id: Long,
         val positions: List<Position>,

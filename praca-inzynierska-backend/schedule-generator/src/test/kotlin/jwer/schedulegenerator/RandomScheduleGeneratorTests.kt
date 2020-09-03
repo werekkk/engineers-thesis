@@ -51,7 +51,7 @@ class RandomScheduleGeneratorTests {
     fun testConstrainedRandomScheduleGenerator() {
         repeat(1000) {
             val generatedSchedule = ConstraintedRandomScheduleGenerator.generate(CONFIGURATION_1)
-            assert(generatedSchedule.isValidWithEmployeePreferences(EMPLOYEES_1))
+            assert(generatedSchedule.isValidWithEmployeePreferences())
         }
         println(CONFIGURATION_1.withScheduleToString(ConstraintedRandomScheduleGenerator.generate(CONFIGURATION_1)))
         println()

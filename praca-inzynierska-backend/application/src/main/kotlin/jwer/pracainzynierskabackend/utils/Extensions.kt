@@ -14,12 +14,6 @@ fun LocalDateTime.isSavedAsMidnight(): Boolean {
     return hour == 23 && minute == 59 && second == 59
 }
 
-fun LocalDateTime.isMidnigtht(): Boolean {
+fun LocalDateTime.isMidnight(): Boolean {
     return hour == 0 && minute == 0 && second == 0
-}
-
-fun <K, V> List<V>.toMap(extractKey: (V) -> K): Map<K, V> {
-    val map = HashMap<K, V>()
-    forEach { elem -> map[extractKey(elem)] = elem }
-    return map
 }

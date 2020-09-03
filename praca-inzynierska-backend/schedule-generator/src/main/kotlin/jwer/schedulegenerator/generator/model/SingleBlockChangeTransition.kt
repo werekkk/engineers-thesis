@@ -3,21 +3,21 @@ package jwer.schedulegenerator.generator.model
 import kotlin.random.Random
 
 class SingleBlockChangeTransition(
-        val emp: Int,
-        val timePoint: Int,
-        val previousPosition: Long?,
-        val newPosition: Long?
+        private val emp: Int,
+        private val timePoint: Int,
+        private val previousPosition: Long?,
+        private val newPosition: Long?
 ) : Transition {
 
-    lateinit var hourCountBeforeTransition: HourCount
-    lateinit var hourCountAfterTransition: HourCount
+    private lateinit var hourCountBeforeTransition: HourCount
+    private lateinit var hourCountAfterTransition: HourCount
 
     companion object {
 
         fun randomFrom(schedule: Schedule): SingleBlockChangeTransition {
             val emp = Random.nextInt(schedule.schedule.size)
-            val timePoint = Random.nextInt(schedule.schedule[emp]!!.size)
-            val previousPosition = schedule.schedule[emp]!![timePoint]
+            val timePoint = Random.nextInt(schedule.schedule[emp].size)
+            val previousPosition = schedule.schedule[emp][timePoint]
             val currentPosition = schedule.scheduleIndexToEmployee[emp]!!.randomPosition()?.id
             return SingleBlockChangeTransition(emp, timePoint, previousPosition, currentPosition)
         }

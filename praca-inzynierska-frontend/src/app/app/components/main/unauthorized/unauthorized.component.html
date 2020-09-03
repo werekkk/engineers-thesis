@@ -1,8 +1,25 @@
-<div>
-    Brak uprawnień!
-</div>
-<div>
-    <button (click)="onReturnClicked()">
-        Powrót do strony głownej
-    </button>
+<div class="full-height unauthorized-box-container">
+    <div class="unauthorized-box form-group">
+        <div class="unauthorized-box_header">
+            <div>
+                <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-lock-fill" fill="#e45959" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"/>
+                    <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
+                  </svg>
+            </div>
+            <div>
+                <h4>
+                    Brak uprawnień!
+                </h4>
+            </div>
+        </div>
+        <div>
+            Nie posiadasz wystarczających uprawnień aby obejrzeć tę stronę.
+        </div>
+        <div class="unauthorized-box_segment">
+            <button class="btn btn-secondary btn-block" (click)="onReturnClicked()">
+                Powrót do strony głownej
+            </button>
+        </div>
+    </div>
 </div>

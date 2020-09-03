@@ -30,14 +30,14 @@
     align-items: center;
     flex-direction: row;
     justify-content: center;
-    box-shadow: inset 0px 1.8px 6px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     border-radius: 5px;
 }
 
 .no-shifts:hover {
     cursor: pointer;
-    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0px 0px 0px 2px rgba(0, 0, 0, 0.2);
 }
 
 .shifts {
@@ -48,7 +48,7 @@
     background: linear-gradient(180deg, #36f9a5, #71c8bd);
     color: white;
     text-shadow: 0.8px 0.8px 3px #333;
-    box-shadow: inset 0px -3px 3px 3px rgb(0 0 0 / 10%);
+    box-shadow: inset 0px 0px 0px 3px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,6 +63,6 @@
 
 .shifts:not(.shifts--selected):hover {
     cursor: pointer;
-    box-shadow: inset 0px -6px 11px 3px rgb(0 0 0 / 17%);
+    box-shadow: inset 0px 0px 0px 4.5px rgba(0, 0, 0, 0.1);
     text-shadow: 0.8px 0.8px 3px #000;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { HourInputUtils } from '../../../shared/utils/hour-input-utils'
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
 import { IntegratedIntervals } from 'src/app/app/shared/utils/integrated-intervals';
@@ -13,6 +13,9 @@ import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
   styleUrls: ['./time-picker-suggestions.component.scss']
 })
 export class TimePickerSuggestionsComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('suggestions')
+  suggestionsDiv: ElementRef<HTMLDivElement>
 
   @Output('mouseOver')
   mouseOver: EventEmitter<boolean> = new EventEmitter()
@@ -126,7 +129,7 @@ export class TimePickerSuggestionsComponent implements OnInit, AfterViewInit {
     let elem = document.getElementById(hour ? hour.toHHMMString() : '') as HTMLElement
     if (elem) {
       this.highlightedHour = hour
-      elem.scrollIntoView({behavior:'auto', block: 'start'})
+      this.suggestionsDiv.nativeElement.scrollTop = elem.offsetTop
     } else {
       this.highlightedHour = null
     }

@@ -3,7 +3,9 @@ package jwer.schedulegenerator.generator
 import jwer.schedulegenerator.generator.model.Employee
 import jwer.schedulegenerator.generator.model.Position
 import jwer.schedulegenerator.generator.model.Schedule
+import kotlinx.serialization.Serializable
 
+@Serializable
 class GeneratorConfig(
         employees: List<Employee>,
         val positions: List<Position>,
