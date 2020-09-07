@@ -6,11 +6,20 @@
     border-radius: 8px;
 }
 
-.btn {
+.option {
     width: 25%;
     font-weight: 600;
 }
 
-.btn:hover {
+button.option:hover {
     background-color: #DDD;
+}
+
+.option > button {
+    width: 100%;
+    font-weight: 600;
+}
+
+.option:hover > button {
+    background-color: #DDD;    
 }

@@ -1,0 +1,17 @@
+.spinner {
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editor {
+    margin: 0 16px;
+}
+
+.editor-toolbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}

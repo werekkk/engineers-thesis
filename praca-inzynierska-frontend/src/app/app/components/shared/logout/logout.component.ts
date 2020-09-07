@@ -1,19 +1,17 @@
 import { Component } from '@angular/core';
 import { AccountDto } from 'src/app/app/model/dto/AccountDto';
 import { AuthenticationService } from 'src/app/app/services/authentication.service';
-import { Router } from '@angular/router';
 import { UserService } from 'src/app/app/services/user.service';
+import { trigger, state, style, transition, animate } from '@angular/animations'
 
 @Component({
   selector: 'logout',
   templateUrl: './logout.component.html',
-  styleUrls: ['./logout.component.scss']
+  styleUrls: ['./logout.component.scss'],
 })
 export class LogoutComponent {
 
   user: AccountDto
-
-  displayOptions = false
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -22,10 +20,6 @@ export class LogoutComponent {
     userService.user.subscribe(newUser => {
       this.user = newUser
     })
-  }
-
-  onChevronClicked() {
-    this.displayOptions = !this.displayOptions
   }
 
   onLogoutClicked() {

@@ -1,4 +1,4 @@
-<div *ngIf="!preferencesLoaded; else calendar" class="spinner">
+<div *ngIf="!shiftsLoaded; else calendar" class="spinner">
     <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
     </div>
 </div>
@@ -15,19 +15,15 @@
         </div>
         <div *ngFor="let week of calendarDays; let weekIndex = index" class="row flex-fill">
             <div *ngFor="let day of week; let dayIndex = index" 
-            class="col day-card" [class.day-card--current-date]="day.getMonth() == today.getMonth() && day.getDate() == today.getDate() && day.getFullYear() == today.getFullYear()"
-            (click)="onDayClicked({weekIndex: weekIndex, dayIndex: dayIndex})">
+            class="col day-card" [class.day-card--current-date]="day.getMonth() == today.getMonth() && day.getDate() == today.getDate() && day.getFullYear() == today.getFullYear()" >
                 <div class="day-card_label" 
                 [class.day-card_label--current-month]="day.getMonth() == month.month()">
                     {{day.getDate()}}
                 </div>
-                <div class="preference_container">
-                    <div *ngFor="let pref of oneTimeHourPreferences[weekIndex][dayIndex]" class="preference" [style]="'background-color: ' + getTypeColor(pref) + ';'">
-                        {{pref.start | dateToTime | time:'hh:mm'}} - {{pref.finish | dateToTime | time:'hh:mm'}}
-                    </div>
+                <div class="day-card_shifts">
+                    <schedule-calendar-cell [shifts]="shifts[weekIndex][dayIndex]"> </schedule-calendar-cell>
                 </div>
             </div>
         </div>
     </div>
 </ng-template>
-

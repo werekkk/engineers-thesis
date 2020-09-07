@@ -1,0 +1,28 @@
+.cell_container {
+    height: 100%;
+}
+
+.no-shifts {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.shifts {
+    height: 100%;
+    width: 100%;
+    padding: 4px 0 4px 0;
+    border-radius: 5px;
+    background: linear-gradient(180deg, #36f9a5, #71c8bd);
+    color: white;
+    text-shadow: 0.8px 0.8px 3px #333;
+    box-shadow: inset 0px 0px 0px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

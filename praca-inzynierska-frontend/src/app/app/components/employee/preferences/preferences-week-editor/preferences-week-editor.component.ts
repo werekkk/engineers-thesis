@@ -65,7 +65,7 @@ export class PreferencesWeekEditorComponent implements AfterViewInit {
   labelFontSize: number = 12
 
   verticalPadding: number = 2
-  horizontalPadding: number = 16
+  horizontalPadding: number = 0
   yTranslate: number = this.verticalPadding
   dayNamesColumnWidth: number = 110
   rowHeight: number = 40

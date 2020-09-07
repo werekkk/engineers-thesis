@@ -10,6 +10,8 @@ import { ScheduleEmployeeWeekComponent } from './schedule-employee-week/schedule
 import { ScheduleEmployeeDayCellComponent } from './schedule-employee-day-cell/schedule-employee-day-cell.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
+import { ScheduleCalendarCellComponent } from './schedule-calendar-cell/schedule-calendar-cell.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,7 @@ import { FormsModule } from '@angular/forms';
     EmployeeMenuComponent, 
     ScheduleComponent, 
     ScheduleEmployeeWeekComponent, 
-    ScheduleEmployeeDayCellComponent
+    ScheduleEmployeeDayCellComponent, ScheduleCalendarComponent, ScheduleCalendarCellComponent
   ],
   imports: [
     CommonModule,

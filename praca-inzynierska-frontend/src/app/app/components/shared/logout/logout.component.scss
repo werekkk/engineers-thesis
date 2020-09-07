@@ -1,9 +1,10 @@
 .logout {
-    display: inline-block;
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
     background-color: #FFF;
     border-radius: 8px;
     position: relative;
+    margin-right: 4px;
 }
 
 .logout_logged-as {
@@ -11,6 +12,7 @@
 }
 
 .logout_user-info-container {
+    background-color: #FFF;
     display: inline-flex;
 }
 
@@ -20,16 +22,8 @@
     align-items: flex-end;
 }
 
-.logout_chevron {
-    display: inline-flex;
-    align-items: center;
-    padding: 0px 8px 0px 8px;
-}
-
 .logout_options-container {
     padding: 8px;
     background-color: white;
     border-radius: 0 0 8px 8px;
-    width: 100%;
-    position: absolute;
 }

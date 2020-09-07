@@ -22,7 +22,6 @@ type CalendarDayClickedEvent = {
 })
 export class PreferencesOneTimeCalendarComponent {
 
-
   month: Moment
   preferencesLoaded: boolean = false
 
@@ -36,6 +35,8 @@ export class PreferencesOneTimeCalendarComponent {
 
   calendarDays: Date[][] = []
   oneTimeHourPreferences: OneTimeHourPreferenceDto[][][] = []  
+
+  today: Date = new Date()
 
   constructor(
     private hourPreferenceService: HourPreferenceService,

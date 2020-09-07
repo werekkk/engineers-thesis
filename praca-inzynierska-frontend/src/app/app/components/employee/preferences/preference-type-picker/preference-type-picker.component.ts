@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PreferenceType } from 'src/app/app/model/PreferenceType';
+import { HourPreferenceDto } from 'src/app/app/model/dto/HourPreferenceDto';
 
 @Component({
   selector: 'preference-type-picker',
@@ -24,4 +25,7 @@ export class PreferenceTypePickerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getTypeColor(type: PreferenceType): string {
+    return PreferenceType.toColor(type)
+  }
 }

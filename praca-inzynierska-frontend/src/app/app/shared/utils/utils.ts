@@ -3,6 +3,7 @@ import { RequiredStaffTimePeriodDto } from '../../model/dto/RequiredStaffTimePer
 import { TimePeriodDto } from '../../model/dto/TimePeriodDto'
 import * as moment from 'moment'
 import { TimeDto } from '../../model/dto/TimeDto'
+import { Moment } from 'moment'
 
 export namespace Utils {
 
@@ -79,7 +80,7 @@ export namespace Utils {
             return val
     }
 
-    export function getDateArrayForCalendar(month: moment.Moment): Date[][] {
+    export function getDateArrayForCalendar(month: Moment): Date[][] {
         let startingDay = moment(month).startOf('month').startOf('isoWeek').startOf('day')
         let calendar: Date[][] = []
         let week = getWeekFromDate(startingDay)

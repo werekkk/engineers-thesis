@@ -29,7 +29,7 @@
                 <div class="preference" [style]="'background-color: ' + getTypeColor(pref) + ';'">
                     {{pref.start | dateToTime | time:'hh:mm'}} - {{pref.finish | dateToTime | time:'hh:mm'}}
                 </div>
-                <div class="delete-preference-button" (click)="onDeletePreferenceClicked(i)">
+                <div class="delete-preference-button unselectable" (click)="onDeletePreferenceClicked(i)">
                     USUŃ
                 </div>
             </div>

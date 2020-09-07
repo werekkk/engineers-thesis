@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MainModule } from './app/components/main/main.module';
 import { EmployeeModule } from './app/components/employee/employee.module';
 import { EmployerModule } from './app/components/employer/employer.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NoBasicAuthPopupInterceptor } from './app/interceptors/no-basic-auth-popup.interceptor';
 import { SharedModule } from './app/components/shared/shared.module';
@@ -19,6 +20,7 @@ registerLocaleData(localePl)
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     MainModule,

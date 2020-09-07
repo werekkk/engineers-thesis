@@ -1,10 +1,16 @@
 <div class="menu">
-    <button class="btn" (click)="onScheduleClicked()">
-        Grafik
-    </button>
-    <button class="btn" (click)="onPreferencesClicked()">
-        Preferencje godzinowe
-    </button>
+    <div class="option">
+        <button class="btn" (click)="onScheduleClicked()">
+            Grafik
+        </button>
+    </div>
+    <div ngbDropdown class="option">
+        <button class="btn" id="hour-preferences" ngbDropdownToggle>Preferencje godzinowe</button>
+        <div ngbDropdownMenu aria-labelledby="hour-preferences">
+          <button ngbDropdownItem (click)="onPreferenceWeekClicked()">Preferencje tygodniowe</button>
+          <button ngbDropdownItem (click)="onOneTimePreferencesClicked()">Preferencje jednorazowe</button>
+        </div>
+      </div>
     <div class="justify-end">
         <logout></logout>
     </div>

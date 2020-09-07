@@ -1,0 +1,14 @@
+<div class="cell_container">
+        <div *ngIf="shifts.length == 0; else shiftList" class="no-shifts unselectable">
+            <div>
+                WOLNE
+            </div>
+        </div>
+        <ng-template #shiftList>
+            <div class="shifts">
+                <div *ngFor="let shift of shifts">
+                    <time-period-cell [timePeriod]="shift.period"></time-period-cell>
+                </div>
+            </div>
+        </ng-template>
+</div>

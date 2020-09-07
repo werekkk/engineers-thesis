@@ -1,14 +1,18 @@
-<div class="btn-group btn-group-toggle" ngbRadioGroup [(ngModel)]="preferenceType" (ngModelChange)="preferenceTypeChange.emit($event)" name="preference-type-picker">
+<div class="btn-group btn-group-toggle labels" ngbRadioGroup [(ngModel)]="preferenceType" (ngModelChange)="preferenceTypeChange.emit($event)" name="preference-type-picker">
     <label ngbButtonLabel class="btn-outline-primary btn-sm">
+        <span class="type-square" [style]="'background-color: ' + getTypeColor(willing) + ';'"></span>
         <input ngbButton type="radio" [value]="willing">Chętny
     </label>
     <label ngbButtonLabel class="btn-outline-primary btn-sm">
+        <span class="type-square" [style]="'background-color: ' + getTypeColor(available) + ';'"></span>
         <input ngbButton type="radio" [value]="available">Dostępny
     </label>
     <label ngbButtonLabel class="btn-outline-primary btn-sm">
+        <span class="type-square" [style]="'background-color: ' + getTypeColor(unwilling) + ';'"></span>
         <input ngbButton type="radio" [value]="unwilling">Niechętny
     </label>
     <label ngbButtonLabel class="btn-outline-primary btn-sm">
+        <span class="type-square" [style]="'background-color: ' + getTypeColor(unavailable) + ';'"></span>
         <input ngbButton type="radio" [value]="unavailable">Niedostępny
     </label>
 </div>

@@ -1,0 +1,18 @@
+.type-square {
+    border: 1.5px solid;
+    border-color: black;
+    border-width: 2px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+}
+
+label.active > .type-square,label:hover > .type-square {
+    border-color: white;
+}
+
+.labels > label {
+    display: flex;
+    align-items: center;
+}
