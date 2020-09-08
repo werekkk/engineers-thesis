@@ -21,4 +21,12 @@ class AuthenticationService @Autowired constructor(
         }
     }
 
+    fun userWithUsernameExists(username: String): Boolean {
+        return credentialsRepository.findByUsername(username) != null
+    }
+
+    fun userWithEmailExists(email: String): Boolean {
+        return credentialsRepository.findByEmail(email) != null
+    }
+
 }

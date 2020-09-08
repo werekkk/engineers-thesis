@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
 import { RegisterEmployeeComponent } from './register-employee/register-employee.component';
 import { RegisterEmployerComponent } from './register-employer/register-employer.component';
 import { MainComponent } from './main/main.component';
@@ -15,7 +14,6 @@ import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [
     HomeComponent,
-    RegisterComponent,
     RegisterEmployeeComponent,
     RegisterEmployerComponent,
     MainComponent,

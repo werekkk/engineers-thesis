@@ -2,6 +2,7 @@ package jwer.pracainzynierskabackend.controller
 
 import jwer.pracainzynierskabackend.model.dto.AccountDto
 import jwer.pracainzynierskabackend.model.dto.RegisterEmployeeDetailsDto
+import jwer.pracainzynierskabackend.model.dto.RegisterResponseDto
 import jwer.pracainzynierskabackend.model.dto.RegisterWorkplaceDetailsDto
 import jwer.pracainzynierskabackend.service.UserService
 import jwer.pracainzynierskabackend.utils.ControllerUtils
@@ -17,7 +18,7 @@ class UserController @Autowired constructor(
 ){
 
     @PostMapping("/register-workplace")
-    fun registerWorkplace(@RequestBody registerDetails: RegisterWorkplaceDetailsDto): ResponseEntity<AccountDto> {
+    fun registerWorkplace(@RequestBody registerDetails: RegisterWorkplaceDetailsDto): ResponseEntity<RegisterResponseDto> {
         return ControllerUtils.createResponse(userService.registerWorkplace(registerDetails))
     }
 
@@ -27,10 +28,7 @@ class UserController @Autowired constructor(
     }
 
     @PostMapping("/register-employee")
-    fun registerEmployee(@RequestBody registerDetails: RegisterEmployeeDetailsDto): ResponseEntity<Any> {
-        userService.registerEmployee(registerDetails)?.let {
-            return ResponseEntity(HttpStatus.OK)
-        }
-        return ResponseEntity(HttpStatus.BAD_REQUEST)
+    fun registerEmployee(@RequestBody registerDetails: RegisterEmployeeDetailsDto): ResponseEntity<AccountDto> {
+        return ControllerUtils.createResponse(userService.registerEmployee(registerDetails))
     }
 }

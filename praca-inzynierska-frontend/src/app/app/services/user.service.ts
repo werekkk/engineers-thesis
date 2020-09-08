@@ -8,6 +8,7 @@ import { Observable, BehaviorSubject, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { RegisterWorkplaceDetailsDto } from '../model/dto/RegisterWorkplaceDetailsDto';
 import { RegisterEmployeeDetailsDto } from '../model/dto/RegisterEmployeeDetailsDto';
+import { RegisterResponseDto } from '../model/dto/RegisterResponseDto';
 
 @Injectable({
   providedIn: 'root'
@@ -82,11 +83,11 @@ export class UserService {
    * 
    * @param registerDetails Register details of the employer and the workplace.
    */
-  registerWorkplace(registerDetails: RegisterWorkplaceDetailsDto): Observable<AccountDto> {
+  registerWorkplace(registerDetails: RegisterWorkplaceDetailsDto): Observable<RegisterResponseDto> {
     return this.http.post(
       `${environment.serverUrl}/user/register-workplace`, 
       registerDetails
-    ) as Observable<AccountDto>
+    ) as Observable<RegisterResponseDto>
   }
 
   /**
@@ -103,10 +104,10 @@ export class UserService {
     ) as Observable<AccountDto>
   }
 
-  registerEmployee(registerDetails: RegisterEmployeeDetailsDto) {
+  registerEmployee(registerDetails: RegisterEmployeeDetailsDto): Observable<AccountDto> {
     return this.http.post(
       `${environment.serverUrl}/user/register-employee`,
       registerDetails
-    ) as Observable<null>
+    ) as Observable<AccountDto>
   }
 }

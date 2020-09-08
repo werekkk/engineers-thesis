@@ -97,6 +97,8 @@ private val transitionSelector: RandomSelector<(Schedule) -> Transition> = Rando
 )
 
 private fun createTransition(schedule: Schedule): Transition {
+//    TODO ładniej tutaj \/
+    if (schedule.positionsWithPossibleTakeovers.isEmpty()) return SingleBlockChangeTransition.randomFrom(schedule)
     return transitionSelector.getRandom().invoke(schedule)
 }
 

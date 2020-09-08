@@ -1,0 +1,67 @@
+.form-box-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-box {
+    background-color: #FFF;
+    display: inline-flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 4px 4px 5px 2px rgba(0, 0, 0, 0.1);
+    min-width: 350px;
+}
+
+.form-box > form > div:not(:last-child) {
+    margin-bottom: 16px;
+}
+
+.form-sections {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.form-sections > div {
+    flex-grow: 1;
+}
+
+.form-sections > div:not(:last-child) {
+    margin-right: 40px;
+    position: relative;
+}
+
+.form-sections > div:not(:last-child)::after {
+    content: '';
+    background-color: #888;
+    border-radius: 20px;
+    position: absolute;
+    right: -20px;
+    top: 0%;
+    width: 1px;
+    height: 100%;
+}
+
+.form-group {
+    margin: 0 0;
+}
+
+.form-errors {
+    margin-top: -8px;
+    max-width: fit-content;
+    color: red;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.footer > div:not(:last-child) {
+    margin-left: 20px;
+}

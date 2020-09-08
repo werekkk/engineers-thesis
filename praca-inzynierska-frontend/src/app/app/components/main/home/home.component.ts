@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   onRegisterClicked() {
-    this.router.navigate(['register'])
+    this.router.navigate(['register-employer'])
   }
 
   onEnterPressed() {

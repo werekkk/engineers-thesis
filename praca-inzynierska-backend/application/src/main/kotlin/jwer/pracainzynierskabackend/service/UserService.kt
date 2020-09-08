@@ -4,13 +4,12 @@ import jwer.pracainzynierskabackend.model.auth.Account
 import jwer.pracainzynierskabackend.model.auth.AccountRole
 import jwer.pracainzynierskabackend.model.auth.AccountType
 import jwer.pracainzynierskabackend.model.auth.Credentials
-import jwer.pracainzynierskabackend.model.dto.AccountDto
-import jwer.pracainzynierskabackend.model.dto.RegisterEmployeeDetailsDto
-import jwer.pracainzynierskabackend.model.dto.RegisterWorkplaceDetailsDto
+import jwer.pracainzynierskabackend.model.dto.*
 import jwer.pracainzynierskabackend.model.entity.*
 import jwer.pracainzynierskabackend.repository.CredentialsRepository
 import jwer.pracainzynierskabackend.repository.EmployeeRepository
 import jwer.pracainzynierskabackend.repository.EmployerRepository
+import org.apache.commons.validator.routines.EmailValidator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -39,8 +38,14 @@ class UserService @Autowired constructor(
     }
 
     @Transactional
-    fun registerWorkplace(registerDetails: RegisterWorkplaceDetailsDto): AccountDto? {
-        // TODO is username/email taken
+    fun registerWorkplace(registerDetails: RegisterWorkplaceDetailsDto): RegisterResponseDto {
+        when {
+            !registerDetails.isValid() -> return RegisterResponseDto(RegisterError.INVALID_FIELDS)
+            !EmailValidator.getInstance().isValid(registerDetails.employer.email) -> return RegisterResponseDto(RegisterError.INVALID_EMAIL)
+            authenticationService.userWithUsernameExists(registerDetails.employer.username) -> return RegisterResponseDto(RegisterError.USERNAME_TAKEN)
+            authenticationService.userWithEmailExists(registerDetails.employer.email) -> return RegisterResponseDto(RegisterError.EMAIL_TAKEN)
+        }
+
         val employerDetails = registerDetails.employer
         val encodedPassword = passwordEncoder.encode(employerDetails.password)
 
@@ -66,9 +71,11 @@ class UserService @Autowired constructor(
 
         val savedEmployer = employerRepository.save(employer)
 
-        return AccountDto(
+        return RegisterResponseDto(
+            account = AccountDto(
                 savedCredentials,
                 savedEmployer.account
+            )
         )
     }
 

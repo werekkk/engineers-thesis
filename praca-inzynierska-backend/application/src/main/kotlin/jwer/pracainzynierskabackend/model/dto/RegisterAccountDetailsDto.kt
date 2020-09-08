@@ -6,7 +6,7 @@ data class RegisterAccountDetailsDto(
         val email: String,
 
         val firstName: String,
-        val middleName: String,
+        val middleName: String?,
         val lastName: String
 ) {
 }
