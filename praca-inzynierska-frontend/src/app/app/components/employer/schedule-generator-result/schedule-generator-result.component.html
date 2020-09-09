@@ -3,7 +3,7 @@
     </div>
 </div>
 <ng-template #results>
-    <div>
+    <div class="options">
         <button class="btn btn-primary" (click)="onBackPressed()">
             Powrót
         </button>
@@ -16,6 +16,12 @@
     </div>
     <week-date-picker [(date)]="weekStart" [periodStart]="config.firstDay" [periodFinish]="config.lastDay"></week-date-picker>
     <div *ngFor="let position of positions; let i = index">
-        <schedule-generator-result-position [position]="position" [shifts]="shiftsByPosition[i]" [employees]="config.employees" [firstDay]="weekStart"></schedule-generator-result-position>
+        <schedule-generator-result-position 
+        [position]="position" 
+        [shifts]="shiftsByPosition[i]" 
+        [employees]="config.employees" 
+        [firstDay]="weekStart"
+        [config]="config"
+        (shiftsTableChange)="shiftsTablesByPosition[i]=$event"></schedule-generator-result-position>
     </div>
 </ng-template>

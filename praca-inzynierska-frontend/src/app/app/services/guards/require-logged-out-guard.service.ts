@@ -21,6 +21,8 @@ export class RequireLoggedOutGuard implements CanActivate {
         return of(true)
       }),
       mergeMap(user => {
+        if (!user)
+        return of(true)
         return this.authenticationService.logout().pipe(
           catchError(() => {
             return of(true)

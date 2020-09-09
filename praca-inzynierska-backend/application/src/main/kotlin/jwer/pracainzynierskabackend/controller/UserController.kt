@@ -28,7 +28,7 @@ class UserController @Autowired constructor(
     }
 
     @PostMapping("/register-employee")
-    fun registerEmployee(@RequestBody registerDetails: RegisterEmployeeDetailsDto): ResponseEntity<AccountDto> {
+    fun registerEmployee(@RequestBody registerDetails: RegisterEmployeeDetailsDto): ResponseEntity<RegisterResponseDto> {
         return ControllerUtils.createResponse(userService.registerEmployee(registerDetails))
     }
 }

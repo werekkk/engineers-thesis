@@ -1,17 +1,19 @@
 <div class="popup_container" >
-    <div class="cell_container" (click)="handleOnDetailsClicked()" (onEscapePressed)="this.showPopup = false">
-        <div *ngIf="shifts.length == 0; else shiftList" class="no-shifts unselectable">
-            <div>
-                WOLNE
-            </div>
-        </div>
-        <ng-template #shiftList>
-            <div class="shifts" [class.shifts--selected]="showPopup">
-                <div *ngFor="let shift of shifts">
-                    <time-period-cell [timePeriod]="shift.period"></time-period-cell>
+    <div class="cell_container" [class.cell_container--disabled]="disabled" (click)="handleOnDetailsClicked()" (onEscapePressed)="this.showPopup = false">
+        <ng-container *ngIf="!disabled">
+            <div *ngIf="shifts.length == 0; else shiftList" class="no-shifts unselectable">
+                <div>
+                    WOLNE
                 </div>
             </div>
-        </ng-template>
+            <ng-template #shiftList>
+                <div class="shifts" [class.shifts--selected]="showPopup">
+                    <div *ngFor="let shift of shifts">
+                        <time-period-cell [timePeriod]="shift.period"></time-period-cell>
+                    </div>
+                </div>
+            </ng-template>
+        </ng-container>
     </div>
     <div *ngIf="showPopup" class="popup_component">
         <div (clickOutside)="handleOutsideClicked()">
@@ -24,6 +26,7 @@
             [requiredStaff]="requiredStaff"
             [shiftsTable]="shiftsTable"
             [dayIndex]="dayIndex"
+            [instantUpdate]="instantUpdate"
         ></schedule-position-edit-popup>
         </div>
     </div>

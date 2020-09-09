@@ -80,9 +80,14 @@ class UserService @Autowired constructor(
     }
 
     @Transactional
-    fun registerEmployee(registerDetails: RegisterEmployeeDetailsDto): AccountDto? {
+    fun registerEmployee(registerDetails: RegisterEmployeeDetailsDto): RegisterResponseDto? {
         findEmployeeByInvitationToken(registerDetails.invitationToken)?.let {
-            if (!credentialsRepository.existsByUsernameOrEmail(registerDetails.username, registerDetails.email)) {
+            when {
+                !registerDetails.isValid() -> return RegisterResponseDto(RegisterError.INVALID_FIELDS)
+                !EmailValidator.getInstance().isValid(registerDetails.email) -> return RegisterResponseDto(RegisterError.INVALID_EMAIL)
+                authenticationService.userWithUsernameExists(registerDetails.username) -> return RegisterResponseDto(RegisterError.USERNAME_TAKEN)
+                authenticationService.userWithEmailExists(registerDetails.email) -> return RegisterResponseDto(RegisterError.EMAIL_TAKEN)
+            }
                 val employeeCredentials = Credentials(
                         0,
                         registerDetails.username,
@@ -98,8 +103,9 @@ class UserService @Autowired constructor(
 
                 val savedCredentials = credentialsRepository.save(employeeCredentials)
                 val savedEmployee = employeeRepository.save(it)
-                return AccountDto(savedCredentials, savedEmployee.account)
-            }
+                return RegisterResponseDto(
+                        account = AccountDto(savedCredentials, savedEmployee.account)
+                )
         }
         return null
     }

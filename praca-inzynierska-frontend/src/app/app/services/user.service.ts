@@ -104,10 +104,10 @@ export class UserService {
     ) as Observable<AccountDto>
   }
 
-  registerEmployee(registerDetails: RegisterEmployeeDetailsDto): Observable<AccountDto> {
+  registerEmployee(registerDetails: RegisterEmployeeDetailsDto): Observable<RegisterResponseDto> {
     return this.http.post(
       `${environment.serverUrl}/user/register-employee`,
       registerDetails
-    ) as Observable<AccountDto>
+    ) as Observable<RegisterResponseDto>
   }
 }

@@ -8,6 +8,4 @@ interface CredentialsRepository : JpaRepository<Credentials, Long> {
     fun findByEmail(email: String): Credentials?
 
     fun removeByAccountId(accountId: Long)
-
-    fun existsByUsernameOrEmail(username: String, email: String): Boolean
 }

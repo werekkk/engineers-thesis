@@ -37,10 +37,18 @@ export class ScheduleEmployeeDayCellComponent {
   @Input('dayIndex')
   dayIndex: number
 
+  @Input('instantUpdate')
+  instantUpdate: boolean = true
+
+  @Input('disabled')
+  disabled: boolean = false
+
   showPopup = false
 
   handleOnDetailsClicked() {
-    this.showPopup = !this.showPopup
+    if (!this.disabled) {
+      this.showPopup = !this.showPopup
+    }
   }
 
   handleOutsideClicked() {

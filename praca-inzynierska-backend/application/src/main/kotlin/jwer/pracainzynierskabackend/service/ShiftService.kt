@@ -61,7 +61,7 @@ class ShiftService @Autowired constructor(
                 deleteShiftsByPeriodAndEmployee(w, it.employeeId, shifts.generatorConfig.firstDay, shifts.generatorConfig.lastDay)
             }
             shifts.shifts.shifts.forEach {
-                saveShift(principal, it, ShiftType.GENERATED)
+                saveShift(principal, it, it.shiftType ?: ShiftType.GENERATED)
             }
             return shifts.shifts
         }

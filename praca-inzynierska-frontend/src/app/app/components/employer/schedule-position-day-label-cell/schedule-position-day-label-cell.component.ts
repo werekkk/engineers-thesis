@@ -23,6 +23,9 @@ export class SchedulePositionDayLabelCellComponent implements OnInit, OnDestroy 
   @Input('shiftsTable')
   shiftsTable: ShiftDto[][][]
 
+  @Input('disabled')
+  disabled: boolean = false
+
   allocatedHours: number
   totalRequiredHours: number
 

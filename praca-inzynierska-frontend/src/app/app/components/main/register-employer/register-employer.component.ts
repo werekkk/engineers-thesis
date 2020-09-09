@@ -68,7 +68,6 @@ export class RegisterEmployerComponent implements OnInit {
           case RegisterError.EMAIL_TAKEN: this.emailTakenError = true; break
           case RegisterError.USERNAME_TAKEN: this.usernameTakenError = true; break
         }
-        console.log(this.invalidEmailError, this.emailTakenError, this.usernameTakenError)
         this.isRegistering = false
         if (!response.error && response.account) {
           this.router.navigate([''])

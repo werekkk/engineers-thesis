@@ -58,6 +58,9 @@ export class SchedulePositionEditPopupComponent implements OnInit {
   @Input('shiftsTable')
   shiftsTable: ShiftDto[][][]
 
+  @Input('instantUpdate')
+  instantUpdate: boolean = true
+
   mouseIn: boolean = false
 
   constructor(
@@ -91,22 +94,24 @@ export class SchedulePositionEditPopupComponent implements OnInit {
     this.shifts = this.shifts.sort((a, b) => a.period.compare(b.period))
     this.emitShiftChange()
     this.showPopup.emit(false)
-    this.shiftService.saveShift(newShift)
-    .subscribe(response => {
-      let shift = this.shifts[this.shifts.findIndex(s => s.equalPeriods(newShift))]
-      shift.id = response.savedShift.id
-      shift.start = response.savedShift.start
-      shift.finish = response.savedShift.finish
-      response.deletedShiftsIds.forEach(id => 
-        this.shifts.splice(this.shifts.findIndex(s => s.id == id), 1)
-      )
-      this.shifts = this.shifts.filter(s => !response.deletedShiftsIds.some(id => s.id == id))
-      this.emitShiftChange()
-    }, err => {
-      this.shifts.splice(this.shifts.findIndex(s => s.equalPeriods(newShift)), 1)
-      this.emitShiftChange()
-      this.showPopup.emit(true)
-    })
+    if (this.instantUpdate) {
+      this.shiftService.saveShift(newShift)
+      .subscribe(response => {
+        let shift = this.shifts[this.shifts.findIndex(s => s.equalPeriods(newShift))]
+        shift.id = response.savedShift.id
+        shift.start = response.savedShift.start
+        shift.finish = response.savedShift.finish
+        response.deletedShiftsIds.forEach(id => 
+          this.shifts.splice(this.shifts.findIndex(s => s.id == id), 1)
+        )
+        this.shifts = this.shifts.filter(s => !response.deletedShiftsIds.some(id => s.id == id))
+        this.emitShiftChange()
+      }, err => {
+        this.shifts.splice(this.shifts.findIndex(s => s.equalPeriods(newShift)), 1)
+        this.emitShiftChange()
+        this.showPopup.emit(true)
+      })
+    }
   }
 
   handleDeleteShiftClicked(shiftIndex: number) {
@@ -114,13 +119,15 @@ export class SchedulePositionEditPopupComponent implements OnInit {
     this.shifts.splice(shiftIndex, 1)
     this.emitShiftChange()
     this.showPopup.emit(false)
-    this.shiftService.deleteShift(shiftToBeDeleted.id)
-    .subscribe(null, err => {
-      this.shifts.push(shiftToBeDeleted)
-      this.shifts = this.shifts.sort((a, b) => a.period.compare(b.period))
-      this.emitShiftChange()
-      this.showPopup.emit(true)
-    })
+    if (this.instantUpdate) {
+      this.shiftService.deleteShift(shiftToBeDeleted.id)
+      .subscribe(null, err => {
+        this.shifts.push(shiftToBeDeleted)
+        this.shifts = this.shifts.sort((a, b) => a.period.compare(b.period))
+        this.emitShiftChange()
+        this.showPopup.emit(true)
+      })
+    }
   }
 
   private emitShiftChange() {

@@ -78,7 +78,7 @@ class ScheduleGeneratorService @Autowired constructor(
     }
 
     private fun shiftsFromSchedule(schedule: Schedule, configDto: GeneratorConfigDto): ShiftsDto {
-        return ShiftsDto.fromGeneratedSchedule(schedule, configDto.employees, configDto.positions, configDto.firstDay)
+        return ShiftsDto.fromGeneratedSchedule(schedule, configDto.firstDay)
     }
 
 }

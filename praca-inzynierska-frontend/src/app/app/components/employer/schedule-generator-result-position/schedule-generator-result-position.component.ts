@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PositionDto } from '../../../model/dto/PositionDto'
 import { ShiftDto } from '../../../model/dto/ShiftDto'
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
@@ -6,6 +6,7 @@ import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
 import { StaffRequirementsService } from 'src/app/app/services/staff-requirements.service';
 import { Utils } from 'src/app/app/shared/utils/utils';
 import * as moment from 'moment';
+import { GeneratorConfigDto } from 'src/app/app/model/dto/GeneratorConfigDto';
 
 @Component({
   selector: 'schedule-generator-result-position',
@@ -38,12 +39,18 @@ export class ScheduleGeneratorResultPositionComponent implements OnInit {
   @Input('employees')
   employees: EmployeeDto[]
 
+  @Input('config')
+  config: GeneratorConfigDto
+
   employeesWithPosition: EmployeeDto[]
 
   requiredStaffLoaded: boolean = false
   requiredStaff: RequiredStaffDto = undefined
 
   shiftsTable: ShiftDto[][][] = undefined
+
+  @Output('shiftsTableChange')
+  shiftsTableChange: EventEmitter<ShiftDto[][][]> = new EventEmitter()
 
   constructor(
     private staffRequirementsService: StaffRequirementsService
@@ -76,6 +83,8 @@ export class ScheduleGeneratorResultPositionComponent implements OnInit {
         this.shiftsTable[empId][dayId].push(s)
       }
     })
+
+    this.shiftsTableChange.emit(this.shiftsTable)
   }
 
   private initShiftsTableSize() {

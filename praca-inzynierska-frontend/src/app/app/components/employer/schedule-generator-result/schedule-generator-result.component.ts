@@ -29,6 +29,7 @@ export class ScheduleGeneratorResultComponent implements OnInit {
   generatedShifts: ShiftDto[] = []
   positions: PositionDto[] = []
   shiftsByPosition: ShiftDto[][] = []
+  shiftsTablesByPosition: ShiftDto[][][][] = []
 
   savingShifts: boolean = false
 
@@ -43,8 +44,10 @@ export class ScheduleGeneratorResultComponent implements OnInit {
     if (request.config == null) {
       this.router.navigate([''])
     } else {
-      this.config = request.config
+      this.config = GeneratorConfigDto.copyOf(request.config)
       this.weekStart = Utils.firstDayOfWeekFrom(this.config.firstDay)
+      this.shiftsTablesByPosition = []
+      this.config.positions.forEach(() => this.shiftsTablesByPosition.push([]))
       this.generateSchedule()
     }
   }
@@ -58,10 +61,11 @@ export class ScheduleGeneratorResultComponent implements OnInit {
   }
 
   private handleGeneratedShifts(shifts: ShiftDto[]) {
+    this.shiftsByPosition = []
+    this.config.positions.forEach(() => this.shiftsByPosition.push([]))
+
     this.positions = this.config.positions
     this.generatedShifts = shifts
-    this.shiftsByPosition = []
-    this.positions.forEach(() => this.shiftsByPosition.push([]))
     
     let positionMap = this.createPositionIdToIndexMap(this.positions)
     shifts.forEach(s => this.shiftsByPosition[positionMap[s.positionId]].push(s))
@@ -83,7 +87,9 @@ export class ScheduleGeneratorResultComponent implements OnInit {
 
   onSavePressed() {
     this.savingShifts = true
-    this.shfitService.saveGeneratedShifts(this.generatedShifts, this.config)
+    let shiftsToSave: ShiftDto[] = []
+    this.shiftsTablesByPosition.forEach(s => s.forEach(s => s.forEach(s => s.forEach(s => shiftsToSave.push(s)))))
+    this.shfitService.saveGeneratedShifts(shiftsToSave, this.config)
     .subscribe(() => {
       this.savingShifts = false
       this.router.navigate([''])

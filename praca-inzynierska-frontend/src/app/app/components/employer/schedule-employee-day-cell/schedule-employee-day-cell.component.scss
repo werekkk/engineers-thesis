@@ -9,6 +9,11 @@
     height: 100%;
 }
 
+.cell_container--disabled {
+    background-color: #EEE;
+    border-radius: 8px;
+}
+
 .popup_component {
     position: absolute;
     background-color: white;

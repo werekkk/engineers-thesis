@@ -1,10 +1,12 @@
-<div>
-    {{day | date : 'dd.MM'}}
+<div [class.disabled]="disabled">
+    <div>
+        {{day | date : 'dd.MM'}}
+    </div>
+    <div>
+        {{day | dayOfWeek}}
+    </div>
 </div>
-<div>
-    {{day | dayOfWeek}}
-</div>
-<div 
+<div *ngIf="!disabled"
 class="hour-counter"
 [class.day-not-filled]="!isDayFilled"
 [class.day-filled]="isDayFilled"

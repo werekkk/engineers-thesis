@@ -12,7 +12,7 @@ data class ShiftsDto(
 
     companion object {
 
-        fun fromGeneratedSchedule(schedule: Schedule, employees: List<EmployeeDto>, positions: List<PositionDto>, startDate: LocalDate): ShiftsDto {
+        fun fromGeneratedSchedule(schedule: Schedule, startDate: LocalDate): ShiftsDto {
             val shifts = mutableListOf<ShiftDto>()
             schedule.schedule.mapIndexed{ i, arr -> Pair(schedule.scheduleIndexToEmployee[i]!!.id, arr)}.forEach { (empId, array) ->
                 var posStart = 0

@@ -15,7 +15,8 @@
                         [day]="day" 
                         [requiredStaff]="requiredStaff"
                         [dayIndex]="i"
-                        [shiftsTable]="shiftsTable"></schedule-position-day-label-cell>
+                        [shiftsTable]="shiftsTable"
+                        [disabled]="!config.isDateInPeriod(day)"></schedule-position-day-label-cell>
                     </th>
                 </ng-container>
             </tr> 
@@ -29,12 +30,15 @@
                             <td>
                                 <schedule-employee-day-cell 
                                 [(shifts)]="shiftsTable[employeeIndex][dayIndex]"
+                                (shiftsChange)="shiftsTableChange.emit(shiftsTable)"
                                 [shiftsTable]="shiftsTable"
                                 [position]="position"
                                 [employee]="employee"
                                 [day]="day"
                                 [requiredStaff]="requiredStaff"
                                 [dayIndex]="dayIndex"
+                                [instantUpdate]="false"
+                                [disabled]="!config.isDateInPeriod(day)"
                                 ></schedule-employee-day-cell>
                             </td>
                         </ng-container>

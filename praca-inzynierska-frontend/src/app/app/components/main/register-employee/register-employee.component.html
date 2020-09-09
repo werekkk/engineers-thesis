@@ -1,3 +1,95 @@
+<div class="full-height form-box-container">
+    <div class="form-box">
+        <form [formGroup]="employeeForm" (ngSubmit)="onRegisterClicked()">
+            <div>
+                <h4>Rejestracja konta pracownika</h4>
+            </div>
+            <div class="form-sections">
+                <div>
+                    <h6>Dane konta</h6>
+                    <div>
+                        <div class="form-group">
+                            <label>
+                                Nazwa użytkownika:
+                                <input class="form-control" type="text" formControlName="username" id="username" placeholder="Nazwa użytkownika" maxlength="20" autocomplete="off" (ngModelChange)="usernameTakenError = false">
+                            </label>
+                            <div class="form-errors" *ngIf="username.invalid && (username.dirty || username.touched)">
+                                <div *ngIf="username.errors.required">Nazwa użytkownika jest wymagana.</div>
+                                <div *ngIf="username.errors.minlength">Nazwa użytkownika musi składać się z przynajmniej 3 znaków.</div>
+                            </div>
+                            <div class="form-errors">
+                                <div *ngIf="usernameTakenError">Podana nazwa użytkownika jest już zajęta.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Hasło:
+                                <input class="form-control" type="password" formControlName="password" id="password" placeholder="Hasło" maxlength="20" autocomplete="off">
+                            </label>
+                            <div class="form-errors" *ngIf="password.invalid && (password.dirty || password.touched)">
+                                <div *ngIf="password.errors.required">Hasło jest wymagane.</div>
+                                <div *ngIf="password.errors.minlength">Nazwa użytkownika musi składać się z przynajmniej 4 znaków.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Powtórz hasło:
+                                <input class="form-control" type="password" formControlName="repeatPassword" id="repeatPassword" placeholder="Powtórzone hasło" maxlength="20" autocomplete="off">
+                            </label>
+                            <div class="form-errors" *ngIf="(repeatPassword.invalid || employeeForm.errors?.passwordNotMatching) && (repeatPassword.dirty || repeatPassword.touched)">
+                                <div *ngIf="repeatPassword.errors?.required">Wymagane jest wprowadzenie powtórzonego hasła.</div>
+                                <div *ngIf="employeeForm.errors?.passwordNotMatching">Hasła muszą się zgadzać.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Adres e-mail:
+                                <input class="form-control" type="email" formControlName="email" id="email" placeholder="Adres e-mail" maxlength="50" autocomplete="off" (ngModelChange)="emailTakenError = false; invalidEmailError = false">
+                            </label>
+                            <div class="form-errors" *ngIf="email.invalid && (email.dirty || email.touched)">
+                                <div *ngIf="email.errors.required">Adres e-mail jest wymagany.</div>
+                                <div *ngIf="email.errors.email">Adres e-mail musi być poprawny.</div>
+                            </div>
+                            <div class="form-errors">
+                                <div *ngIf="invalidEmailError">Adres e-mail musi być poprawny.</div>
+                                <div *ngIf="emailTakenError">Podany adres e-mail jest już zajęty.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h6>Dane pracownika</h6>
+                    <div>
+                        <div class="form-group">
+                            <label>
+                                Imię:
+                                <input class="form-control" type="text" disabled="true" [value]="employee?.firstName" id="firstName" placeholder="Imię" maxlength="50" autocomplete="off">
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Nazwisko:
+                                <input class="form-control" type="text" disabled="true" [value]="employee?.lastName" id="lastName" placeholder="Nazwisko" maxlength="50" autocomplete="off">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>
+                    <button class="btn btn-success" type="submit" [disabled]="isRegistering">
+                        Utwórz konto
+                    </button>
+                </div>
+                <div *ngIf="isRegistering">
+                    <div class="spinner-border" style="width: 2rem; height: 2rem;" role="status">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div>
     <div>
         Pracownik:
