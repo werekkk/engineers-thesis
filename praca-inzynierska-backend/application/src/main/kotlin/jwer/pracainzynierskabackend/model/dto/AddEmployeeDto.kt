@@ -7,7 +7,4 @@ data class AddEmployeeDto(
         val firstName: String,
         val middleName: String? = "",
         val lastName: String,
-
-        val employmentDate: LocalDate?,
-        val employeeStatus: EmployeeStatus
 )

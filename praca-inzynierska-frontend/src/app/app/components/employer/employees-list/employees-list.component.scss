@@ -1,3 +1,43 @@
 .hidden-row {
     padding: 0;
 }
+
+.positions-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.positions-container > span:not(:last-child) {
+    margin-right: 12px;
+}
+
+.position-pill {
+    text-transform: uppercase;
+    background-color: #44b17d;
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+    border-radius: 10px;
+    padding: 2px 8px;
+    margin: 2px 0;
+}
+
+.no-positions {
+    font-style: italic;
+}
+
+.options > button:not(:last-child) {
+    margin-right: 8px;
+}
+
+.employee-label_first-name {
+    font-size: 14px;
+}
+
+.employee-label_last-name {
+    font-size: 16px;
+}
+
+tr > td, tr > th {
+    vertical-align: middle;
+}

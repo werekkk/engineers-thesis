@@ -44,18 +44,18 @@ class SampleData @Autowired constructor(
                 PositionDto(null, "Kelner"),
                 PositionDto(null, "Kucharz"),
                 PositionDto(null, "Dostawca"),
-                PositionDto(null, "Sprzątający")
+                PositionDto(null, "Osoba sprzątająca")
         ))
         private val SAMPLE_EMPLOYEES = listOf(
-                AddEmployeeDto("Filip", null, "Sikorski", null, EmployeeStatus.INVITED),
-                AddEmployeeDto("Marcin", "Gustaw", "Szczepański", null, EmployeeStatus.INVITED),
-                AddEmployeeDto("Bolesław", null, "Kucharski", null, EmployeeStatus.INVITED),
-                AddEmployeeDto("Jerzy", "Andrzej", "Zawadzki", null, EmployeeStatus.INVITED),
-                AddEmployeeDto("Kamila", null, "Urbańska", null, EmployeeStatus.INVITED),
-                AddEmployeeDto("Łucja", "Antonina", "Krajewska", null, EmployeeStatus.INVITED),
-                AddEmployeeDto("Aleksandra", null, "Kalinowska", null, EmployeeStatus.INVITED),
-                AddEmployeeDto("Gabriela", "Honorata", "Andrzejewska", null, EmployeeStatus.INVITED),
-                AddEmployeeDto("Diana", null, "Górecka", null, EmployeeStatus.INVITED)
+                AddEmployeeDto("Filip", null, "Sikorski"),
+                AddEmployeeDto("Marcin", "Gustaw", "Szczepański"),
+                AddEmployeeDto("Bolesław", null, "Kucharski"),
+                AddEmployeeDto("Jerzy", "Andrzej", "Zawadzki"),
+                AddEmployeeDto("Kamila", null, "Urbańska"),
+                AddEmployeeDto("Łucja", "Antonina", "Krajewska"),
+                AddEmployeeDto("Aleksandra", null, "Kalinowska"),
+                AddEmployeeDto("Gabriela", "Honorata", "Andrzejewska"),
+                AddEmployeeDto("Diana", null, "Górecka")
         )
     }
 

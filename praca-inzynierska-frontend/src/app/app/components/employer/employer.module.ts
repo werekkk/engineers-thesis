@@ -26,6 +26,8 @@ import { SchedulePositionDayLabelCellComponent } from './schedule-position-day-l
 import { ScheduleGeneratorComponent } from './schedule-generator/schedule-generator.component';
 import { ScheduleGeneratorResultComponent } from './schedule-generator-result/schedule-generator-result.component';
 import { ScheduleGeneratorResultPositionComponent } from './schedule-generator-result-position/schedule-generator-result-position.component';
+import { ConfirmDeleteEmployeeModalComponent } from './confirm-delete-employee-modal/confirm-delete-employee-modal.component';
+import { ConfirmDeletePositionModalComponent } from './confirm-delete-position-modal/confirm-delete-position-modal.component';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { ScheduleGeneratorResultPositionComponent } from './schedule-generator-r
     SchedulePositionDayLabelCellComponent,
     ScheduleGeneratorComponent,
     ScheduleGeneratorResultComponent,
-    ScheduleGeneratorResultPositionComponent
+    ScheduleGeneratorResultPositionComponent,
+    ConfirmDeleteEmployeeModalComponent,
+    ConfirmDeletePositionModalComponent
   ],
   imports: [
     CommonModule,

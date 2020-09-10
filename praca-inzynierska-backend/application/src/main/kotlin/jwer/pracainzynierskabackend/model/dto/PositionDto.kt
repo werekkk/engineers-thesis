@@ -8,4 +8,8 @@ data class PositionDto(
 ) {
     constructor(position: Position)
     : this(position.id, position.name)
+
+    fun validate(): Boolean {
+        return name.length in 1..200
+    }
 }

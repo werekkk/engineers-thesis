@@ -20,4 +20,7 @@ interface ShiftRepository : JpaRepository<Shift, Long> {
 
     @Query("SELECT s FROM Shift s WHERE s.position.id = ?1")
     fun getAllByPositionId(positionId: Long): List<Shift>
+
+    @Query("SELECT s FROM Shift s WHERE s.employee.id = ?1")
+    fun getAllByEmployeeId(employeeId: Long): List<Shift>
 }

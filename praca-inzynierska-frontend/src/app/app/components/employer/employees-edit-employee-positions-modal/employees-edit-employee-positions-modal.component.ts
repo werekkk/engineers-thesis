@@ -5,6 +5,10 @@ import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import { Utils } from 'src/app/app/shared/utils/utils';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
+interface FromParentData {
+  employee: EmployeeDto
+}
+
 @Component({
   selector: 'employees-edit-employee-positions-modal',
   templateUrl: './employees-edit-employee-positions-modal.component.html',
@@ -22,16 +26,22 @@ export class EmployeesEditEmployeePositionsModalComponent implements OnInit {
   positionSelected: boolean[]
 
   constructor(
-    private activeModal: NgbActiveModal,
+    public activeModal: NgbActiveModal,
     private positionService: PositionService
   ) {
-    positionService.getAllPositions().subscribe()
   }
 
   ngOnInit(): void {
+    if (!this.positionService.positionsLoaded) {
+      this.positionService.getAllPositions().subscribe()
+    }
     this.positionService.positions.subscribe(newPositions => {
+      newPositions.sort((a, b) => a.name.localeCompare(b.name))
       this.positions = newPositions
       this.positionSelected = Utils.emptyBooleanArray(newPositions.length)
+      this.fromParent.employee.positions.forEach(ep => {
+        this.positionSelected[this.positions.findIndex(p => ep.id == p.id)] = true
+      })
     })
   }
 
@@ -45,8 +55,4 @@ export class EmployeesEditEmployeePositionsModalComponent implements OnInit {
     })
   }
 
-}
-
-interface FromParentData {
-  employee: EmployeeDto
 }

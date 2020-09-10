@@ -26,11 +26,6 @@ class EmployeeController @Autowired constructor(
         return ControllerUtils.createResponse(employeeService.getAllEmployees(principal))
     }
 
-    @PostMapping("/discharge/{id}")
-    fun dischargeEmployee(@PathVariable id: Long, principal: Principal): ResponseEntity<EmployeeDto> {
-        return ControllerUtils.createResponse(employeeService.dischargeEmployee(id, principal))
-    }
-
     @DeleteMapping("/delete/{id}")
     fun deleteEmployee(@PathVariable id: Long, principal: Principal): ResponseEntity<Long> {
         return ControllerUtils.createResponse(employeeService.deleteEmployee(id, principal))

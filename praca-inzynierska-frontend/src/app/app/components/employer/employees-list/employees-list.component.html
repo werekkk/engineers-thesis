@@ -3,49 +3,54 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Pracownik</th>
+            <th scope="col" style="width: 20%;">Stanowiska</th>
             <th scope="col">Status</th>
+            <th scope="col">Operacje</th>
         </tr>
     </thead>
     <tbody>
         <ng-container  *ngFor="let e of employees; let i = index">
             <tr (click)="onRowClicked(i)">
-                <th scope="row">{{i + 1}}</th>
-                <td>{{ e.account.firstName }} {{ e.account.lastName }}</td>
-                <td>{{ e.employeeStatus }}</td>
-                <div>
-                </div>
+                <th scope="row">
+                    {{i + 1}}
+                </th>
+                <td>
+                    <div>
+                        <div class="employee-label_first-name">{{e.account.firstName}}</div>
+                        <div class="employee-label_last-name">{{e.account.lastName}}</div>
+                    </div>
+                </td>
+                <td>
+                    <ng-container *ngIf="e.positions.length > 0; else noPositions">
+                        <div class="positions-container">
+                            <span class="position-pill unselectable" *ngFor="let p of e.positions">{{p.name}} </span>
+                        </div>
+                    </ng-container>
+                    <ng-template #noPositions>
+                        <div class="no-positions unselectable">
+                            brak stanowisk
+                        </div>
+                    </ng-template>
+                </td>
+                <td>
+                    {{ statusToString(e.employeeStatus) }}
+                </td>
+                <td>
+                    <div class="options">
+                        <button class="btn btn-sm btn-primary" (click)="onEditPositionsClicked(e)">
+                            Edytuj stanowiska
+                        </button>
+                        <button class="btn btn-sm btn-danger" (click)="onDeleteClicked(e)">
+                            Usuń
+                        </button>
+                    </div>
+                </td>
             </tr>
             <tr >
-                <td class="hidden-row" colspan="3">
+                <td class="hidden-row" colspan="5">
                     <div *ngIf="isCollapsed[i]">
-                        <div>
-                            Data zatrudnienia: {{e.employmentDate ? e.employmentDate : '---'}}
-                        </div>
-                        <div>
-                            Data zwolnienia: {{e.dischargeDate ? e.dischargeDate : '---'}}
-                        </div>
                         <div *ngIf="e.employeeStatus === 'INVITED'">
                             Link aktywacyjny: {{e | invitationLink}}
-                        </div>
-                        <div>
-                            Stanowiska:
-                            <ng-container *ngIf="e.positions.length == 0;else positions">
-                                BRAK
-                            </ng-container>
-                            <ng-template #positions>
-                                <span *ngFor="let p of e.positions">{{p.name}} </span>
-                            </ng-template>
-                        </div>
-                        <div>
-                            <button (click)="onEditPositionsClicked(e)">
-                                Edytuj stanowiska
-                            </button>
-                            <button (click)="onDischargeClicked(e)" [disabled]="e.employeeStatus === 'DISCHARGED'">
-                                Zwolnij
-                            </button>
-                            <button (click)="onDeleteClicked(e)">
-                                Usuń
-                            </button>
                         </div>
                     </div>
                 </td>

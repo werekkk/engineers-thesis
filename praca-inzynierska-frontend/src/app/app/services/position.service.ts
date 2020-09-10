@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { PositionsDto } from '../model/dto/PositionsDto';
 import { PositionDto } from '../model/dto/PositionDto';
 import { AccountDto } from '../model/dto/AccountDto';
 import { environment } from '../../../environments/environment';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, mergeMap, switchMap } from 'rxjs/operators';
 import { EmployeeService } from './employee.service'
 import { SetPositionsDto } from '../model/dto/SetPositionsDto';
 import { EmployeeDto } from '../model/dto/EmployeeDto';
@@ -35,7 +35,7 @@ export class PositionService {
     )
   }
 
-  savePosition(newPosition: PositionDto): Observable<PositionDto> {
+  savePosition(newPosition: PositionDto, reloadEmployees: boolean = false): Observable<PositionDto> {
     return this.http.post(`${environment.serverUrl}/position`, newPosition, {withCredentials: true})
     .pipe(
       map((response: PositionDto) => {
@@ -47,6 +47,13 @@ export class PositionService {
         }
         this.positions.next(currentPositions)
         return response
+      }),
+      switchMap(p => {
+        if (reloadEmployees) {
+          return this.employeeService.getAllEmployees().pipe(map(() => p))
+        } else {
+          return of(p)
+        }
       })
     )
   }

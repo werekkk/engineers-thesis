@@ -38,9 +38,21 @@ class PositionService @Autowired constructor(
 
     fun savePosition(principal: Principal, position: PositionDto): PositionDto? {
         workplaceService.getWorkplaceByEmployer(principal)?.let {
-            val position = Position(position.id?:0, position.name, "", it)
-            val savedPosition = positionRepository.save(position)
-            return PositionDto(savedPosition)
+            if (position.validate()) {
+                if (position.id != null && position.id != 0L) {
+                    if (getPositionsByEmployer(principal).any {it.id == position.id}) {
+                        positionRepository.getById(position.id)?.let {
+                            val updatedPosition = it.copy(name = position.name)
+                            val savedPosition = positionRepository.save(updatedPosition)
+                            return PositionDto(savedPosition)
+                        }
+                    }
+                } else {
+                    val position = Position(position.id?:0, position.name, "", it)
+                    val savedPosition = positionRepository.save(position)
+                    return PositionDto(savedPosition)
+                }
+            }
         }
         return null
     }

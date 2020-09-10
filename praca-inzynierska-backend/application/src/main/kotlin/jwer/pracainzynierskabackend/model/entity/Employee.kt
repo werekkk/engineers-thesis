@@ -15,11 +15,6 @@ data class Employee(
         @JoinColumn(name = "account_id")
         val account: Account,
 
-        @Column(name = "employment_date")
-        val employmentDate: LocalDate?,
-        @Column(name = "discharge_date")
-        var dischargeDate: LocalDate?,
-
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "workplace_id")
         val workplace: Workplace,

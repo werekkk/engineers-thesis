@@ -11,11 +11,11 @@ import jwer.pracainzynierskabackend.model.entity.Workplace
 import jwer.pracainzynierskabackend.repository.AccountRepository
 import jwer.pracainzynierskabackend.repository.CredentialsRepository
 import jwer.pracainzynierskabackend.repository.EmployeeRepository
+import jwer.pracainzynierskabackend.repository.ShiftRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.security.Principal
-import java.time.LocalDate
 
 @Service
 class EmployeeService @Autowired constructor(
@@ -24,6 +24,7 @@ class EmployeeService @Autowired constructor(
         private val workplaceService: WorkplaceService,
         private val employeeRepository: EmployeeRepository,
         private val accountRepository: AccountRepository,
+        private val shiftRepository: ShiftRepository,
         private val credentialsRepository: CredentialsRepository
 ){
 
@@ -31,27 +32,21 @@ class EmployeeService @Autowired constructor(
     fun addEmployee(employeeDetails: AddEmployeeDto, principal: Principal): EmployeeDto? {
         val workplace = workplaceService.getWorkplaceByPrincipal(principal)
         workplace?.let {
-            return when(employeeDetails.employeeStatus) {
-                EmployeeStatus.WITHOUT_ACCOUNT -> addEmployee(employeeDetails, workplace, false)
-                EmployeeStatus.INVITED -> addEmployee(employeeDetails, workplace, true)
-                else -> null
-            }
+            return addEmployee(employeeDetails, workplace)
         }
         return null
     }
 
-    private fun addEmployee(ed: AddEmployeeDto, w: Workplace, withAccount: Boolean): EmployeeDto {
+    private fun addEmployee(ed: AddEmployeeDto, w: Workplace): EmployeeDto {
         val newAccount = accountRepository.save(Account(ed))
         val invitationToken = utilsService.generateRandomString(Employee.INVITATION_TOKEN_LENGTH)
         val newEmployee = Employee(
                 newAccount.id,
                 newAccount,
-                ed.employmentDate,
-                null,
                 w,
                 listOf(),
-                if (withAccount) invitationToken else null,
-                if (withAccount) EmployeeStatus.INVITED else EmployeeStatus.WITHOUT_ACCOUNT
+                invitationToken,
+                EmployeeStatus.INVITED
         )
         return EmployeeDto(employeeRepository.save(newEmployee))
     }
@@ -68,19 +63,10 @@ class EmployeeService @Autowired constructor(
     }
 
     @Transactional
-    fun dischargeEmployee(employeeId: Long, principal: Principal): EmployeeDto? {
-        getEmployeeByIdAndPrincipal(employeeId, principal)?.let {
-            it.employeeStatus = EmployeeStatus.DISCHARGED
-            it.dischargeDate = LocalDate.now()
-            credentialsRepository.removeByAccountId(it.account.id)
-            return EmployeeDto(employeeRepository.save(it))
-        }
-        return null
-    }
-
-    @Transactional
     fun deleteEmployee(employeeId: Long, principal: Principal): Long? {
         getEmployeeByIdAndPrincipal(employeeId, principal)?.let {
+            shiftRepository.getAllByEmployeeId(it.id).forEach { shiftRepository.delete(it) }
+            credentialsRepository.removeByAccountId(it.id)
             employeeRepository.delete(it)
             return it.id
         }

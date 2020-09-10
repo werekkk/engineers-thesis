@@ -54,22 +54,6 @@ export class EmployeeService {
     )
   }
 
-  dischargeEmployee(employeeId: number): Observable<EmployeeDto> {
-    return this.http.post(
-      `${environment.serverUrl}/employee/discharge/${employeeId}`,
-      null,
-      {withCredentials: true}
-    ).pipe(
-      map((dischargedEmployee: EmployeeDto) => {
-        let employees = this.employees.value
-        let dischargedEmployeePosition = employees.findIndex(e => e.employeeId == employeeId)
-        employees.splice(dischargedEmployeePosition, 1, dischargedEmployee)
-        this.employees.next(employees)
-        return dischargedEmployee
-      })
-    )
-  }
-
   deleteEmployee(employeeId: number): Observable<number> {
     return this.http.delete(
       `${environment.serverUrl}/employee/delete/${employeeId}`,

@@ -8,8 +8,6 @@ import java.time.LocalDate
 data class EmployeeDto(
         val employeeId: Long,
         val account: AccountDto,
-        val employmentDate: LocalDate?,
-        val dischargeDate: LocalDate?,
         val employeeStatus: EmployeeStatus,
         val positions: List<PositionDto>,
         val invitationToken: String?
@@ -17,8 +15,6 @@ data class EmployeeDto(
     constructor(e: Employee) : this(
             e.id,
             AccountDto(e.account, AccountType.EMPLOYEE),
-            e.employmentDate,
-            e.dischargeDate,
             e.employeeStatus,
             e.positions.map { PositionDto(it.id, it.name) },
             e.invitationToken

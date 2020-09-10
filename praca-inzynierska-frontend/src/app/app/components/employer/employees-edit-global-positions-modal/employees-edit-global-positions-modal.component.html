@@ -1,17 +1,50 @@
 <div *ngIf="!isLoading">
     <div class="modal-header">
-        Edytuj stanowiska
+        <h3>Edytuj stanowiska</h3>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()" tabindex="-1">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <div class="modal-body">   
-        <div *ngFor="let position of positions">
-            {{position.name}}
-            <button (click)="onDeletePositionClicked(position)">Usuń</button>
-        </div> 
-        <div>
-            <input type="text" [(ngModel)]="newPositionName">
-            <button (click)="onAddPositionClicked()">Dodaj stanowisko</button>
+        <div class="position-rows">
+            <div class="position-row" *ngFor="let position of positions; let i = index">
+                <div *ngIf="currentlyEditedPositionIndex == i">
+                    <input class="form-control" placeholder="Nowa nazwa stanowiska" id="editedName" [(ngModel)]="editedName">
+                </div>
+                <div *ngIf="currentlyEditedPositionIndex != i">
+                    {{position.name}}
+                </div>
+                <div *ngIf="currentlyEditedPositionIndex == i" class="position-options">
+                    <div>
+                        <button class="btn btn-secondary btn-sm" (click)="setEditedPosition(null)">Powrót</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-success btn-sm" (click)="onSaveEditClicked()">Zapisz</button>
+                    </div>
+                </div>
+                <div *ngIf="currentlyEditedPositionIndex != i" class="position-options">
+                    <div>
+                        <button class="btn btn-primary btn-sm" (click)="setEditedPosition(i)">Edytuj</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-danger btn-sm" (click)="onDeletePositionClicked(position)">Usuń</button>
+                    </div>
+                </div>
+            </div> 
         </div>
     </div> 
+    <div class="modal-footer">
+        <div class="new-position">
+            <label>
+                Nowe stanowisko
+                <input class="form-control" type="text" [(ngModel)]="newPositionName" placeholder="Nowe stanowisko">
+            </label>
+            <button class="btn btn-success" (click)="onAddPositionClicked()">Dodaj</button>
+        </div>
+        <div>
+            <button class="btn btn-primary" (click)="modal.close()">Powrót</button>
+        </div>
+    </div>
 </div>
 <div *ngIf="isLoading" class="loading-modal">
     <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">

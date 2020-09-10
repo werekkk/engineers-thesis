@@ -4,3 +4,38 @@
     align-items: center;
     justify-content: center;
 }
+
+.new-position {
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+}
+
+.new-position > *:not(:last-child) {
+    margin-right: 16px;
+}
+
+.position-rows > div:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+.position-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: calc(1.5em + 0.75rem + 2px); // from 'form-control' bootstrap class
+}
+
+.position-row
+
+.position-options {
+    display: flex;
+}
+
+.position-options > div:not(:last-child) > button {
+    margin-right: 12px;
+}
+
+.position-options > div > button {
+    width: 60px;
+}

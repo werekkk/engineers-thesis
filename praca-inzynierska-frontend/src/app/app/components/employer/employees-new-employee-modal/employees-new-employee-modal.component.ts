@@ -17,20 +17,18 @@ export class EmployeesNewEmployeeModalComponent implements OnInit {
   showLink = false
   isLoading = false
 
-  withoutAccount = EmployeeStatus.WITHOUT_ACCOUNT
-  withAccount = EmployeeStatus.INVITED
-
   savedEmployee: EmployeeDto
   invitationLink: string = ''
 
   // Corresponds with 'AddEmployeeDto'
   employeeForm = new FormGroup({
-    firstName: new FormControl('', Validators.required),
+    firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     middleName: new FormControl(''),
-    lastName: new FormControl('', Validators.required),
-    employmentDate: new FormControl(''),
-    employeeStatus: new FormControl(this.withAccount, Validators.required)
+    lastName: new FormControl('', [Validators.required, Validators.minLength(2)])
   })
+
+  get firstName(): FormControl { return this.employeeForm.get('firstName') as FormControl }
+  get lastName(): FormControl { return this.employeeForm.get('lastName') as FormControl }
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -41,6 +39,7 @@ export class EmployeesNewEmployeeModalComponent implements OnInit {
   }
 
   onSaveClicked() {
+    this.employeeForm.markAllAsTouched()
     if (this.employeeForm.valid) {
       let newEmployee: AddEmployeeDto = this.employeeForm.value
       this.showForm = false
@@ -53,14 +52,10 @@ export class EmployeesNewEmployeeModalComponent implements OnInit {
   }
 
   private onEmployeeAdded(employee: EmployeeDto) {
-    if (employee.employeeStatus == EmployeeStatus.WITHOUT_ACCOUNT) {
-      this.activeModal.close(employee)
-    } else {
-      this.isLoading = false
-      this.showLink = true
-      this.savedEmployee = employee
-      this.invitationLink = EmployeeService.generateInvitationLink(employee.invitationToken)
-    }
+    this.isLoading = false
+    this.showLink = true
+    this.savedEmployee = employee
+    this.invitationLink = EmployeeService.generateInvitationLink(employee.invitationToken)
   }
 
   onInvitatationLinkCloseClicked() {

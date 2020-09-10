@@ -4,8 +4,6 @@ export class AddEmployeeDto {
     constructor( 
         public firstName: String,
         public middleName: String,
-        public lastName: String,
-        public employmentDate: Date,
-        public employeeStatus: EmployeeStatus
+        public lastName: String
     ) {}
 }

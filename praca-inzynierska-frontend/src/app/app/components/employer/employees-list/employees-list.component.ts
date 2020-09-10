@@ -4,6 +4,8 @@ import { AccountDto } from 'src/app/app/model/dto/AccountDto';
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeesEditEmployeePositionsModalComponent } from '../employees-edit-employee-positions-modal/employees-edit-employee-positions-modal.component';
+import { EmployeeStatus } from 'src/app/app/model/EmployeeStatus';
+import { ConfirmDeleteEmployeeModalComponent } from '../confirm-delete-employee-modal/confirm-delete-employee-modal.component';
 
 @Component({
   selector: 'employees-list',
@@ -39,18 +41,27 @@ export class EmployeesListComponent implements OnInit {
   }
 
   onEditPositionsClicked(employee: EmployeeDto) {
-    let modalRef = this.modalService.open(EmployeesEditEmployeePositionsModalComponent, {windowClass: 'modal-appear', size: 'lg'})
+    let modalRef = this.modalService.open(EmployeesEditEmployeePositionsModalComponent, {windowClass: 'modal-appear', centered: true, size: 'md'})
     modalRef.componentInstance.fromParent = {
       employee: employee
     }
   }
 
-  onDischargeClicked(employee: EmployeeDto) {
-    this.employerService.dischargeEmployee(employee.employeeId).subscribe()
+  onDeleteClicked(employee: EmployeeDto) {
+    let modalRef = this.modalService.open(ConfirmDeleteEmployeeModalComponent, {windowClass: 'modal-appear', centered: true, size: 'md'})
+    modalRef.componentInstance.fromParent = { employee: employee }
+    modalRef.result.then((shouldDelete: boolean) => {
+      if (shouldDelete) {
+        this.employerService.deleteEmployee(employee.employeeId).subscribe()
+      }
+    })
   }
 
-  onDeleteClicked(employee: EmployeeDto) {
-    this.employerService.deleteEmployee(employee.employeeId).subscribe()
+  statusToString(status: EmployeeStatus): string {
+    switch (status) {
+      case EmployeeStatus.INVITED: return 'Bez konta'
+      case EmployeeStatus.HAS_ACCOUNT: return 'Posiada konto'
+    }
   }
 
 }

@@ -27,11 +27,11 @@ export class EmployeesComponent implements OnInit {
   }
 
   onAddEmployeeClicked() {
-    let modalRef = this.modalService.open(EmployeesNewEmployeeModalComponent, {windowClass: 'modal-appear', centered: true, size: 'lg'})
+    let modalRef = this.modalService.open(EmployeesNewEmployeeModalComponent, {windowClass: 'modal-appear modal-dynamic-width', centered: true, size: 'sm'})
   }
 
   onEditPositionsClicked() {
-    let modalRef = this.modalService.open(EmployeesEditGlobalPositionsModalComponent, {windowClass: 'modal-appear', centered: true, size: 'lg'})
+    let modalRef = this.modalService.open(EmployeesEditGlobalPositionsModalComponent, {windowClass: 'modal-appear', centered: true, size: 'md'})
   }
 
 }

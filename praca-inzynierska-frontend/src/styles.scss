@@ -48,6 +48,17 @@ body, html {
     100% {transform: scale(1);}
 }
 
+.modal-dynamic-width .modal-sm {
+    max-width: 100%;
+    width: auto !important;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-dynamic-width .modal-content {
+    width: auto;
+}
+
 .wide-modal .modal-lg {
     max-width: 80%;
     width: 80%;

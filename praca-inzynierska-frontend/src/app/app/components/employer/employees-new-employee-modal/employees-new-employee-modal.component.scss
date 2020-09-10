@@ -4,6 +4,11 @@
     padding: 40px;
 }
 
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
 .invitation-link-input {
     display: flex;
     justify-content: center;
@@ -12,4 +17,22 @@
 .invitation-link-input input {
     width: 45em;
     text-align: center;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form-errors {
+    margin-top: -8px;
+    max-width: fit-content;
+    color: red;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.form-group {
+    margin: 0 0;
 }
