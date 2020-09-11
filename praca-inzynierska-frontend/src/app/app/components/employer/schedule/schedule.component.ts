@@ -20,7 +20,6 @@ export class ScheduleComponent implements OnInit {
     private positionService: PositionService,
     private router: Router
   ) { 
-    
     positionService.positions.subscribe(newPositions => {
       this.positions = newPositions
     })

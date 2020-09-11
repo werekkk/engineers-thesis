@@ -34,6 +34,7 @@ export class EmployeeService {
         map((newEmployee: EmployeeDto) => {
           let newEmployees = this.employees.value
           newEmployees.push(newEmployee)
+          newEmployees.sort(EmployeeDto.compare)
           this.employees.next(newEmployees)
           return newEmployee
         })
@@ -46,6 +47,7 @@ export class EmployeeService {
       {withCredentials: true}
     ).pipe(
       map((response: EmployeesDto) => {
+        response.employees.sort(EmployeeDto.compare)
         this.employer.next(response.employer)
         this.employees.next(response.employees)
         this.employeesLoaded = true

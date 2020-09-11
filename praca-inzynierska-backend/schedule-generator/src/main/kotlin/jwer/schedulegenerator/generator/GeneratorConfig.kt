@@ -42,5 +42,10 @@ class GeneratorConfig(
         }
         return map
     }
+
+    fun isValid(): Boolean {
+        return employees.any { e -> e.positions.filter { p -> positions.any { it.id == p.id } }.isNotEmpty() }
+    }
+
 }
 

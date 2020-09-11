@@ -1,0 +1,68 @@
+.generator {
+    margin: 10px 20px;
+}
+
+.spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
+
+.highlighted {
+    background-color: #ffffe4;
+}
+
+.disabled {
+    color: #777;
+}
+
+.period-picker {
+    display: flex;
+    align-items: center;
+}
+
+.period-picker > div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+}
+
+.period-picker > div:nth-child(1) > div:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+.period-picker > div:nth-child(2) {
+    margin-left: 20px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.day-picker {
+    width: 22em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.checkboxes {
+    margin-top: 20px;
+}
+
+.checkboxes .col > *:nth-child(2) {
+    margin-top: 8px;
+}
+
+.checkboxes .col > *:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    top: -3.5px;
+    left: 0px;
+    height: 1px;
+    width: 200px;
+    border-radius: 6px;
+    background-color: #777;
+}
+
+.checkbox-options > button:not(:last-child) {
+    margin-right: 8px;
+}

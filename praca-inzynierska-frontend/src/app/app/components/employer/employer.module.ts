@@ -28,6 +28,8 @@ import { ScheduleGeneratorResultComponent } from './schedule-generator-result/sc
 import { ScheduleGeneratorResultPositionComponent } from './schedule-generator-result-position/schedule-generator-result-position.component';
 import { ConfirmDeleteEmployeeModalComponent } from './confirm-delete-employee-modal/confirm-delete-employee-modal.component';
 import { ConfirmDeletePositionModalComponent } from './confirm-delete-position-modal/confirm-delete-position-modal.component';
+import { ActivationLinkModalComponent } from './activation-link-modal/activation-link-modal.component';
+import { ConfirmPositionChangeModalComponent } from './confirm-position-change-modal/confirm-position-change-modal.component';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import { ConfirmDeletePositionModalComponent } from './confirm-delete-position-m
     ScheduleGeneratorResultComponent,
     ScheduleGeneratorResultPositionComponent,
     ConfirmDeleteEmployeeModalComponent,
-    ConfirmDeletePositionModalComponent
+    ConfirmDeletePositionModalComponent,
+    ActivationLinkModalComponent,
+    ConfirmPositionChangeModalComponent
   ],
   imports: [
     CommonModule,

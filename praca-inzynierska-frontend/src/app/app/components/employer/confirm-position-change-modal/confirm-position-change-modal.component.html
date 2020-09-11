@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h4>Zmiana stanowisk</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.close(false)" tabindex="-1">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">   
+    <p>
+        Przy zmianie stanowisk pracownika "{{ fromParent?.employee.account.firstName}} {{ fromParent?.employee.account.lastName }}"
+        pracownik utraci następujące stanowiska:
+    </p>
+    <ul>
+        <li *ngFor="let p of fromParent?.deletedPositions">{{p.name}}</li>
+    </ul>
+    <p>
+        Po zaakceptowaniu zmiany stanowisk, wszystkie zmiany przypisane temu pracownikowi na powyższych stanowiskach zostaną
+        usunięte. Zmiany pracownika na tych stanowiskach nie będą uwzględnione na grafiku pracy, ani w sekcji statystyk.
+    </p>
+    <p>
+        Tej operacji nie będzie można cofnąć.
+    </p>
+</div> 
+<div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modal.close(false)">Powrót</button>
+    <button class="btn btn-danger" (click)="modal.close(true)">Zaakceptuj zmiany</button>
+</div>

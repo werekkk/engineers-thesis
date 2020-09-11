@@ -9,7 +9,7 @@ import { TimeStep } from 'src/app/app/model/TimeStep';
   templateUrl: './staff-requirements.component.html',
   styleUrls: ['./staff-requirements.component.scss']
 })
-export class StaffRequirementsComponent implements OnInit {
+export class StaffRequirementsComponent {
 
   isLoading: boolean = undefined
 
@@ -19,31 +19,16 @@ export class StaffRequirementsComponent implements OnInit {
   @Input('timeStep')
   timeStep: TimeStep
 
-  @Output('timeStepChange')
-  timeStepChange: EventEmitter<TimeStep> = new EventEmitter()
-
+  @Input('staffRequirements')
   staffRequirements: RequiredStaffDto
 
-  constructor(
-    private staffRequirementsService: StaffRequirementsService
-  ) { }
+  @Output('staffRequirementsChange')
+  staffRequirementsChange: EventEmitter<RequiredStaffDto> = new EventEmitter()
 
-  ngOnInit(): void {
-    this.isLoading = true
-    this.staffRequirementsService.getPositionRequirements(this.position.id)
-    .subscribe(rs => {
-      this.isLoading = false
-      this.staffRequirements = rs
-    })
-  }
+  constructor() { }
 
-  onSaveClicked() {
-    this.isLoading = true
-    this.staffRequirementsService.savePositionRequirements(this.position.id, this.staffRequirements)
-    .subscribe(rs => {
-      this.isLoading = false
-      this.staffRequirements = rs
-    }, err => {this.isLoading = false})
+  emitRequirementsChange() {
+    this.staffRequirementsChange.emit(this.staffRequirements)
   }
 
 }

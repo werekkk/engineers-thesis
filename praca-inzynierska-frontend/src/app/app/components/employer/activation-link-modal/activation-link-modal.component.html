@@ -1,0 +1,21 @@
+<div>
+    <div class="modal-header">
+        <h4 class="modal-title">Link aktywacyjny - {{ fromParent?.employee.account.firstName }} {{ fromParent?.employee.account.lastName }}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            Wyślij pracownikowi poniższy link, aby uzupełnił on swoje dane do logowania:
+        </div>
+        <div class="invitation-link-input">
+            <label>
+                <input class="invitation-link-input" type="text" disabled [ngModel]="fromParent.employee | invitationLink">
+            </label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="btn btn-secondary" class="btn btn-secondary" (click)="modal.dismiss()">Zamknij</button>
+    </div>
+</div>

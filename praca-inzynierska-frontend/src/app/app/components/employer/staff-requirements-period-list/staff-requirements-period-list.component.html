@@ -1,6 +1,11 @@
-<div *ngFor="let period of timePeriods; let i = index" (mouseenter)="onMouseEnterPeriod(i)" (mouseleave)="onMouseLeave()">
-    {{period.timePeriod.start | time}} - {{period.timePeriod.finish | time}}. Liczba pracowników: {{period.employeeCount}}
-    <button (click)="onDeletePeriodClicked(i)">
-        Usuń
-    </button>
+<div *ngFor="let period of timePeriods; let i = index" class="requirement-row" (mouseenter)="onMouseEnterPeriod(i)" (mouseleave)="onMouseLeave()">
+    <div class="period">
+        {{period.timePeriod.start | time}} - {{period.timePeriod.finish | time}} 
+    </div>
+    <div class="employee-count_container">
+        Liczba pracowników: <span class="employee-count">{{period.employeeCount}}</span>
+    </div>
+    <div>
+        <span class="delete-requirement-button" (click)="onDeletePeriodClicked(i)">USUŃ</span>
+    </div>
 </div>

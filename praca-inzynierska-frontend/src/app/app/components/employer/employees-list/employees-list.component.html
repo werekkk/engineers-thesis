@@ -33,7 +33,17 @@
                     </ng-template>
                 </td>
                 <td>
-                    {{ statusToString(e.employeeStatus) }}
+                    <div *ngIf="e.employeeStatus == 'HAS_ACCOUNT'">
+                        Posiada konto
+                    </div>
+                    <div *ngIf="e.employeeStatus == 'INVITED'">
+                        <div>
+                            Bez konta
+                        </div>
+                        <div class="activation-link" (click)="onActivationLinkClicked(e)">
+                            Link aktywacyjny
+                        </div>
+                    </div>
                 </td>
                 <td>
                     <div class="options">
@@ -43,15 +53,6 @@
                         <button class="btn btn-sm btn-danger" (click)="onDeleteClicked(e)">
                             Usuń
                         </button>
-                    </div>
-                </td>
-            </tr>
-            <tr >
-                <td class="hidden-row" colspan="5">
-                    <div *ngIf="isCollapsed[i]">
-                        <div *ngIf="e.employeeStatus === 'INVITED'">
-                            Link aktywacyjny: {{e | invitationLink}}
-                        </div>
                     </div>
                 </td>
             </tr>

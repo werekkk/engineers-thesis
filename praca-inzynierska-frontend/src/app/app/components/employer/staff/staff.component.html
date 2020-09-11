@@ -1,18 +1,31 @@
-<div *ngIf="isPositionsLoading; else ngbNavContainer" >
+<div *ngIf="isPositionsLoading; else ngbNavContainer" class="spinner">
     <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
     </div>
 </div>
 <ng-template #ngbNavContainer>
-    <ul ngbNav #nav="ngbNav" [(activeId)]="activeId" class="nav-tabs">
-        <ng-container *ngFor="let position of positions; let i = index">
-            <li [ngbNavItem]="i">
-                <a ngbNavLink>{{position.name}}</a>
-                <ng-template ngbNavContent>
-                    <staff-requirements [position]="position" [(timeStep)]="timeStep"></staff-requirements>
-                </ng-template>
-            </li>
-        </ng-container>
-    </ul>
+    <div class="sticky-nav">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="activeId" (activeIdChange)="onPositionChange()" class="nav-tabs">
+            <ng-container *ngFor="let position of positions; let i = index">
+                <li [ngbNavItem]="i">
+                    <a ngbNavLink>{{position.name}}</a>
+                    <ng-template ngbNavContent>
+                        <staff-requirements [position]="position" [(timeStep)]="timeStep" [staffRequirements]="staffRequirements"></staff-requirements>
+                    </ng-template>
+                </li>
+            </ng-container>
+        </ul>
+        <div class="top-options">
+            <div>
+                <button class="btn btn-success" (click)="onSaveClicked()">Zapisz</button>
+            </div>
+            <div>
+                <div>
+                    Szczegółowość edytora
+                </div>
+                <time-step-picker [(timeStep)]="timeStep"></time-step-picker>
+            </div>
+        </div>
+    </div>
     <div [ngbNavOutlet]="nav"></div>
 </ng-template>
 

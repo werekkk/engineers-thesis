@@ -1,7 +1,29 @@
-.options {
-    margin: 10px;
+.schedule {
+    margin: 10px 20px;
+}
+
+.week-picker {
+    position: sticky;
+    top: -0.1px;
+    z-index: 1;
+    background-color: white;
+    padding: 4px 0;
+    box-shadow: 0px 4px 5px -5px black;
 }
 
 .options > button:not(:last-child) {
     margin-right: 16px;
+}
+
+.position-schedules > div:not(:last-child)::after {
+    content: '';
+    display: inline-block;
+    position: relative;
+    top: 100%;
+    left: 0%;
+    background-color: #777;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    height: 2px;
 }

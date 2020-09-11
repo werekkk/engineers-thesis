@@ -28,6 +28,7 @@ export class PositionService {
     return this.http.get(`${environment.serverUrl}/position/all`, {withCredentials: true})
     .pipe(
       map((response: PositionsDto) => {
+        response.positions.sort(PositionDto.compare)
         this.positions.next(response.positions)
         this.positionsLoaded = true
         return response.positions
@@ -45,6 +46,7 @@ export class PositionService {
         } else {
           currentPositions = Utils.replaceArray(currentPositions, response, p => p.id == response.id)
         }
+        currentPositions.sort(PositionDto.compare)
         this.positions.next(currentPositions)
         return response
       }),

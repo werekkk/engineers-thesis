@@ -3,16 +3,30 @@ h5 {
     @extend .unselectable;
 }
 
-.top-options {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;  
+.requirements {
+    margin: 10px 20px;
 }
 
-.top-options > div {
-    padding-right: 20px;
+.spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
 }
 
 .editors-container {
-    margin: 0 20px 0 20px;
+    margin: 20px 20px 0 20px;
+}
+
+.editors-container > div:not(:last-child)::after {
+    content: '';
+    display: inline-block;
+    position: relative;
+    top: 100%;
+    left: 0%;
+    background-color: #777;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    height: 2px;
 }

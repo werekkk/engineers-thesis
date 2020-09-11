@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeesEditEmployeePositionsModalComponent } from '../employees-edit-employee-positions-modal/employees-edit-employee-positions-modal.component';
 import { EmployeeStatus } from 'src/app/app/model/EmployeeStatus';
 import { ConfirmDeleteEmployeeModalComponent } from '../confirm-delete-employee-modal/confirm-delete-employee-modal.component';
+import { ActivationLinkModalComponent } from '../activation-link-modal/activation-link-modal.component';
 
 @Component({
   selector: 'employees-list',
@@ -56,12 +57,10 @@ export class EmployeesListComponent implements OnInit {
       }
     })
   }
-
-  statusToString(status: EmployeeStatus): string {
-    switch (status) {
-      case EmployeeStatus.INVITED: return 'Bez konta'
-      case EmployeeStatus.HAS_ACCOUNT: return 'Posiada konto'
-    }
+  
+  onActivationLinkClicked(employee: EmployeeDto) {
+    let modalRef = this.modalService.open(ActivationLinkModalComponent, {windowClass: 'modal-appear modal-dynamic-width', centered: true, size: 'sm'})
+    modalRef.componentInstance.fromParent = { employee: employee }
   }
 
 }

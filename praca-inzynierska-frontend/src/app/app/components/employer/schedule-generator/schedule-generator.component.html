@@ -1,42 +1,63 @@
-<div *ngIf="!(positionsLoaded && employeesLoaded); else generatorConfig">
-    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
-    </div>
-</div>
-<ng-template #generatorConfig>
-        <div>
-            Pierwszy dzień grafiku:
-            <input 
-            type="date" 
-            [ngModel]="startDate | date:'yyyy-MM-dd'" 
-            (ngModelChange)="startDate = $event; onDurationChange()">
-            Ostatni dzień grafiku:
-            <input 
-            type="date" 
-            [ngModel]="finishDate | date:'yyyy-MM-dd'" 
-            (ngModelChange)="finishDate = $event; onDurationChange()">
-            {{durationInDays}} dni
+<div class="generator">
+    <div *ngIf="!(positionsLoaded && employeesLoaded); else generatorConfig" class="spinner">
+        <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col">
-                    <div *ngFor="let position of positionService.positions.value; let i = index">
-                        <label>
-                            <input type="checkbox" [(ngModel)]="positionChecked[i]">
-                            {{position.name}}
-                        </label>
+    </div>
+    <ng-template #generatorConfig>
+            <div class="period-picker">
+                <div>
+                    <div class="day-picker">
+                        Pierwszy dzień grafiku:
+                        <input 
+                        type="date" 
+                        [ngModel]="startDate | date:'yyyy-MM-dd'" 
+                        (ngModelChange)="startDate = $event; onDurationChange()">
                     </div>
+                    <div class="day-picker">
+                        Ostatni dzień grafiku:
+                        <input 
+                        type="date" 
+                        [ngModel]="finishDate | date:'yyyy-MM-dd'" 
+                        (ngModelChange)="finishDate = $event; onDurationChange()">
+                    </div>
+                    
                 </div>
-                <div class="col">
-                    <div *ngFor="let employee of employeeService.employees.value; let i = index">
-                        <label>
-                            <input type="checkbox" [(ngModel)]="employeeChecked[i]">
-                            {{employee.account.firstName}} {{employee.account.lastName}}
-                        </label>
+                <div>
+                    {{durationInDays}} {{ durationInDays == 1 ? 'dzień' : 'dni' }}
+                </div>
+            </div>
+            <div class="container-fluid checkboxes">
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <h5>Stanowiska</h5>
+                            <div class="checkbox-options">
+                                <button class="btn btn-sm btn-secondary" (click)="setAll(true, positionChecked)">Zaznacz wszystkie</button>    
+                                <button class="btn btn-sm btn-secondary" (click)="setAll(false, positionChecked)">Odznacz wszystkie</button>        
+                            </div>
+                         </div>
+                        <div *ngFor="let position of positionService.positions.value; let i = index" class="form-check" (mouseenter)="highlightedPosition = position" (mouseleave)="highlightedPosition = null">
+                            <input class="form-check-input" type="checkbox" [id]="'position' + i" [(ngModel)]="positionChecked[i]" (ngModelChange)="onSelectedPositionsChange()">
+                            <label class="form-check-label" [for]="'position' + i">{{position.name}}</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <h5>Pracownicy</h5>
+                            <div class="checkbox-options">
+                                <button class="btn btn-sm btn-secondary" (click)="setAll(true, employeeChecked)">Zaznacz wszystkich</button>    
+                                <button class="btn btn-sm btn-secondary" (click)="setAll(false, employeeChecked)">Odznacz wszystkich</button>        
+                            </div>
+                        </div>
+                        <div *ngFor="let employee of employeeService.employees.value; let i = index" class="form-check" [class.highlighted]="shouldHighlight(employee)">
+                            <input class="form-check-input" type="checkbox" [id]="'employee' + i" [ngModel]="employeeChecked[i] && employeeEnabled[i]" (ngModelChange)="employeeChecked[i] = $event" [disabled]="!employeeEnabled[i]">
+                            <label class="form-check-label" [for]="'employee' + i">{{employee.account.firstName}} {{employee.account.lastName}}</label>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <button class="btn btn-success" (click)="onGenerateClicked()">Generuj</button>
-        </div>
-</ng-template>
+            <div>
+                <button class="btn btn-success" (click)="onGenerateClicked()">Generuj</button>
+            </div>
+    </ng-template>    
+</div>

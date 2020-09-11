@@ -1,15 +1,21 @@
-<div class="options">
-    <button class="btn btn-success" (click)="onGenerateScheduleClicked()">Generuj grafik</button>
-</div>
-<week-date-picker [(date)]="firstDate"></week-date-picker>
-<div *ngIf="!positionsLoaded; else schedules">
-    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+<div class="schedule">
+    <div class="options">
+        <button class="btn btn-success" (click)="onGenerateScheduleClicked()">Generuj grafik</button>
     </div>
 </div>
-<ng-template #schedules>
-    <ng-container *ngFor="let position of positions">
-        <div>
-            <schedule-position-week-edit [position]="position" [firstDay]="firstDate"></schedule-position-week-edit>
+<div class="week-picker">
+    <week-date-picker [(date)]="firstDate"></week-date-picker>
+</div>
+<div class="schedule">
+    <div *ngIf="!positionsLoaded; else schedules">
+        <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
         </div>
-    </ng-container>
-</ng-template>
+    </div>
+    <ng-template #schedules>
+        <div class="position-schedules">
+            <div *ngFor="let position of positions">
+                <schedule-position-week-edit [position]="position" [firstDay]="firstDate"></schedule-position-week-edit>
+            </div>
+        </div>
+    </ng-template>
+</div>

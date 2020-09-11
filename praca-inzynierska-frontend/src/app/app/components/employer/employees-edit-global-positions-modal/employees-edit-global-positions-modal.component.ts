@@ -27,7 +27,6 @@ export class EmployeesEditGlobalPositionsModalComponent {
   ) {
     positionService.positions.subscribe(p => {
       this.positions = p
-      p.sort((a, b) => a.name.localeCompare(b.name))
     })
     if (!positionService.positionsLoaded) {
       this.isLoading = true

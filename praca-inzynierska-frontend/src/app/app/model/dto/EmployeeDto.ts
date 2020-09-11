@@ -10,4 +10,9 @@ export class EmployeeDto {
         public positions: PositionDto[],
         public invitationToken: string
     ) {}
+
+    static compare = (a: EmployeeDto, b: EmployeeDto) => {
+        let c = a.account.lastName.localeCompare(b.account.lastName)
+        return c != 0 ? c : a.account.firstName.localeCompare(b.account.firstName)
+    }
 }

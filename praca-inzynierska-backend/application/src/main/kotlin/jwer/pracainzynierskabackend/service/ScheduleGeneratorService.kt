@@ -34,7 +34,11 @@ class ScheduleGeneratorService @Autowired constructor(
         userService.getAccount(employerPrincipal).let { acc ->
             if (acc.accountType == AccountType.EMPLOYER) {
                 createConfig(acc, generatorConfigDto)?.let { c ->
-                    return shiftsFromSchedule(scheduleGenerator.generate(c), generatorConfigDto)
+                    return if (c.isValid()) {
+                        shiftsFromSchedule(scheduleGenerator.generate(c), generatorConfigDto)
+                    } else {
+                        ShiftsDto(listOf())
+                    }
                 }
             }
         }
