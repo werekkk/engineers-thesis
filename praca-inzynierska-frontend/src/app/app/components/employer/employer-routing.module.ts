@@ -7,6 +7,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { StaffComponent } from './staff/staff.component';
 import { ScheduleGeneratorComponent } from './schedule-generator/schedule-generator.component';
 import { ScheduleGeneratorResultComponent } from './schedule-generator-result/schedule-generator-result.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
       {path: 'schedule', component: ScheduleComponent},
       {path: 'schedule-generator', component: ScheduleGeneratorComponent},
       {path: 'schedule-generator-result', component: ScheduleGeneratorResultComponent},
-      {path: 'staff', component: StaffComponent}
+      {path: 'staff', component: StaffComponent},
+      {path: 'statistics', component: StatisticsComponent}
     ]
   }
 ];

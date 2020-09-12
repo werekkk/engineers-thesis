@@ -30,6 +30,9 @@ import { ConfirmDeleteEmployeeModalComponent } from './confirm-delete-employee-m
 import { ConfirmDeletePositionModalComponent } from './confirm-delete-position-modal/confirm-delete-position-modal.component';
 import { ActivationLinkModalComponent } from './activation-link-modal/activation-link-modal.component';
 import { ConfirmPositionChangeModalComponent } from './confirm-position-change-modal/confirm-position-change-modal.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { StatisticsYearComponent } from './statistics-year/statistics-year.component';
+import { StatisticsMonthCellComponent } from './statistics-month-cell/statistics-month-cell.component';
 
 
 @NgModule({
@@ -58,7 +61,10 @@ import { ConfirmPositionChangeModalComponent } from './confirm-position-change-m
     ConfirmDeleteEmployeeModalComponent,
     ConfirmDeletePositionModalComponent,
     ActivationLinkModalComponent,
-    ConfirmPositionChangeModalComponent
+    ConfirmPositionChangeModalComponent,
+    StatisticsComponent,
+    StatisticsYearComponent,
+    StatisticsMonthCellComponent
   ],
   imports: [
     CommonModule,

@@ -3,10 +3,10 @@ package jwer.pracainzynierskabackend.utils
 import java.time.LocalDateTime
 
 fun LocalDateTime.totalMinutesInDay(): Int {
-    if (isSavedAsMidnight()) {
-        return 24 * 60
+    return if (isSavedAsMidnight()) {
+        24 * 60
     } else {
-        return hour * 60 + minute
+        hour * 60 + minute
     }
 }
 

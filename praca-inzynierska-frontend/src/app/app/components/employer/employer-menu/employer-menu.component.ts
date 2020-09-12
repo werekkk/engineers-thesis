@@ -27,4 +27,8 @@ export class EmployerMenuComponent implements OnInit {
     this.router.navigate(['employer', 'staff'])
   }
 
+  onStatisticsClicked() {
+    this.router.navigate(['employer', 'statistics'])
+  }
+
 }

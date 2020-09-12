@@ -14,6 +14,7 @@ body, html {
 .module-container {
     background-image: linear-gradient(to bottom right, #36F9A5, #1C9C8C);
     overflow-y: scroll;
+    z-index: 0;
 }
 
 .content-card-container {
@@ -32,6 +33,7 @@ body, html {
     box-shadow: 4px 4px 5px 2px rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 1200px;
+    z-index: 0;
 }
 
 .justify-end {

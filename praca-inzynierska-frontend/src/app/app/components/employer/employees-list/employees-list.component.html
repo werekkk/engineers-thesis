@@ -15,10 +15,7 @@
                     {{i + 1}}
                 </th>
                 <td>
-                    <div>
-                        <div class="employee-label_first-name">{{e.account.firstName}}</div>
-                        <div class="employee-label_last-name">{{e.account.lastName}}</div>
-                    </div>
+                    <account-label [account]="e.account"></account-label>
                 </td>
                 <td>
                     <ng-container *ngIf="e.positions.length > 0; else noPositions">

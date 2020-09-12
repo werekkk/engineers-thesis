@@ -20,6 +20,9 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
 import { PeriodLengthPipe } from '../../pipes/period-length.pipe';
 import { OnEscapePressedDirective } from '../../directives/on-escape-pressed.directive';
 import { OnEnterPressedDirective } from '../../directives/on-enter-pressed.directive';
+import { YearPickerComponent } from './year-picker/year-picker.component';
+import { AccountLabelComponent } from './account-label/account-label.component';
+import { HoverGroupDirective } from '../../directives/hover-group.directive';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { OnEnterPressedDirective } from '../../directives/on-enter-pressed.direc
     ClickOutsideDirective,
     PeriodLengthPipe,
     OnEscapePressedDirective,
-    OnEnterPressedDirective
+    OnEnterPressedDirective,
+    YearPickerComponent,
+    AccountLabelComponent,
+    HoverGroupDirective
   ],
   imports: [
     CommonModule,
@@ -63,7 +69,10 @@ import { OnEnterPressedDirective } from '../../directives/on-enter-pressed.direc
     ClickOutsideDirective,
     PeriodLengthPipe,
     OnEscapePressedDirective,
-    OnEnterPressedDirective
+    OnEnterPressedDirective,
+    YearPickerComponent,
+    AccountLabelComponent,
+    HoverGroupDirective
   ]
 })
 export class SharedModule { }

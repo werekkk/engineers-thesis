@@ -28,8 +28,7 @@
         <ng-container *ngFor="let employee of employeesWithPosition; let employeeIndex = index">
                 <tr class="data-row">
                     <td>
-                        <div class="employee-label_first-name">{{employee.account.firstName}}</div>
-                        <div class="employee-label_last-name">{{employee.account.lastName}}</div>
+                        <account-label [account]="employee.account"></account-label>
                     </td>
                     <ng-container *ngFor="let day of days; let dayIndex = index">
                         <td>
