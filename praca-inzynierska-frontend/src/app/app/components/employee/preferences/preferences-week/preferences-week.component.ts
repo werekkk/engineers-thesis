@@ -25,7 +25,7 @@ export class PreferencesWeekComponent implements OnInit {
   ) {
     hourPreferencesService.preferencesWeek.subscribe(newWeek => {
       if (newWeek) {
-        this.preferencesWeek = newWeek.copy()
+        this.preferencesWeek = newWeek
       } else {
         this.preferencesWeek = newWeek
       }
@@ -36,7 +36,7 @@ export class PreferencesWeekComponent implements OnInit {
     if (!this.hourPreferencesService.preferencesWeekLoaded) {
       this.loadPreferences()
     } else {
-      this.preferencesWeek = this.hourPreferencesService.preferencesWeek.value.copy()
+      this.preferencesWeek = this.hourPreferencesService.preferencesWeek.value
       this.preferencesLoaded = true
     }
   }
@@ -58,7 +58,7 @@ export class PreferencesWeekComponent implements OnInit {
   handleNewPreferenceCreated(event: PreferenceCreatedEvent) {
     let preferencesDay = this.preferencesWeek.getDay(event.day)
     preferencesDay.preferences = PeriodUtils.insertPeriodAndOptimize(preferencesDay.preferences, event.preference) as HourPreferenceDto[]
-    this.preferencesWeek = this.preferencesWeek.copy()
+    this.preferencesWeek = this.preferencesWeek.shallowCopy()
   }
 
 }

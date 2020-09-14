@@ -16,21 +16,29 @@ th {
     text-align: center;
 }
 
+.table thead th {
+    border-bottom: 0;
+}
+
 th::after {
     content: '';
     position: absolute;
     left: 0;
     width: 100%;
     bottom: 0px;
-    border-bottom: 2px solid #21ae91;
+    border-bottom: 3px solid #21ae91;
 }
 
 th.highlighted {
     background-color: #ffffe4;
 }
 
-tr>td:not(:first-child), tr>td:not(:first-child){
+tr>td:not(:first-child) {
     width: 6%;
+}
+
+tr.details {
+    cursor: pointer;
 }
 
 tr:hover{
@@ -39,4 +47,43 @@ tr:hover{
 
 tr > td, tr > th {
     vertical-align: middle;
+}
+
+.hidden-row {
+    padding: 0;
+}
+
+tr.details-row{
+    background-color: #F2F2F2;
+}
+
+tr.details-row:hover {
+    background-color: #ffffe4;
+}
+
+tr > td {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+tr.details-row > * {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: smaller;
+}
+
+svg {
+    cursor: pointer;
+}
+
+.header { 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+td.details-row-label {
+    font-style: italic;
+    padding-left: 25px;
 }

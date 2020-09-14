@@ -6,14 +6,11 @@ import { Router } from '@angular/router';
   templateUrl: './employee-menu.component.html',
   styleUrls: ['./employee-menu.component.scss']
 })
-export class EmployeeMenuComponent implements OnInit {
+export class EmployeeMenuComponent {
 
   constructor(
-    private router: Router
+    public router: Router
   ) { }
-
-  ngOnInit(): void {
-  }
 
   onScheduleClicked() {
     this.router.navigate(['employee', 'schedule'])

@@ -51,6 +51,7 @@ fun sa(config: GeneratorConfig,
 
     var it = 0
     var lastPercent = 0
+    var previousCheckCost: Double = -1.0
     while (temperature >= tempFinal) {
         if (log && (100.0 * it / iterations) >= lastPercent) {
             schedule.recalcHourCount()
@@ -59,6 +60,10 @@ fun sa(config: GeneratorConfig,
             }
             println("${(100.0 * it / iterations).roundToInt()}%, current cost: ${cost}")
             lastPercent += 5
+            if (cost == previousCheckCost) {
+                return schedule
+            }
+            previousCheckCost = cost
         }
         val transition = createTransition(schedule)
         schedule.applyTransition(transition)

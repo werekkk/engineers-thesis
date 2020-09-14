@@ -27,3 +27,14 @@
     background-color: white;
     border-radius: 0 0 8px 8px;
 }
+
+.settings {
+    cursor: pointer;
+    font-size: 13px;
+    color: #4287f5;
+    transition: 0.2s;
+}
+
+.settings:hover {
+    color: blue;
+}

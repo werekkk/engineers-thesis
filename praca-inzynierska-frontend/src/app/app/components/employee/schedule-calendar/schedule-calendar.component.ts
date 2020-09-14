@@ -4,16 +4,18 @@ import { Utils } from 'src/app/app/shared/utils/utils';
 import * as moment from 'moment';
 import { ShiftService } from 'src/app/app/services/shift.service';
 import { ShiftDto } from 'src/app/app/model/dto/ShiftDto';
+import { PositionService } from 'src/app/app/services/position.service';
 
 @Component({
   selector: 'schedule-calendar',
   templateUrl: './schedule-calendar.component.html',
   styleUrls: ['./schedule-calendar.component.scss']
 })
-export class ScheduleCalendarComponent {
+export class ScheduleCalendarComponent implements OnInit {
 
   month: Moment
   shiftsLoaded: boolean = false
+  positionsLoaded: boolean = false
 
   @Input('month')
   set monthDate(val: Date) {
@@ -28,8 +30,19 @@ export class ScheduleCalendarComponent {
   today: Date = new Date()
 
   constructor(
-    private shiftService: ShiftService
+    private shiftService: ShiftService,
+    private positionService: PositionService
   ) { }
+
+  ngOnInit() {
+    if (!this.positionService.positionsLoaded) {
+      this.positionService.getLoggedInEmployeePositions().subscribe(() => {
+        this.positionsLoaded = true
+      })
+    } else {
+      this.positionsLoaded = true
+    }
+  }
 
   loadShiftsForMonth() {
     this.shiftsLoaded = false

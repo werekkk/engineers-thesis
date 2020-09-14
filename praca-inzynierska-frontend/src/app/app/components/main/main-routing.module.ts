@@ -7,6 +7,7 @@ import { MainComponent } from './main/main.component';
 import { RequireLoggedOutGuard } from '../../services/guards/require-logged-out-guard.service'
 import { IsLoggedInGuard } from '../../services/guards/is-logged-in-guard.service';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { RegisterSuccessComponent } from './register-success/register-success.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,8 @@ const routes: Routes = [
         component: RegisterEmployerComponent,
         canActivate: [IsLoggedInGuard]
       },
-      { path: 'unauthorized', component: UnauthorizedComponent }
+      { path: 'unauthorized', component: UnauthorizedComponent },
+      { path: 'register-success', component: RegisterSuccessComponent }
     ]
   }
 ];

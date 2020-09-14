@@ -1,15 +1,13 @@
 package jwer.pracainzynierskabackend.controller
 
-import jwer.pracainzynierskabackend.model.dto.AccountDto
-import jwer.pracainzynierskabackend.model.dto.RegisterEmployeeDetailsDto
-import jwer.pracainzynierskabackend.model.dto.RegisterResponseDto
-import jwer.pracainzynierskabackend.model.dto.RegisterWorkplaceDetailsDto
+import jwer.pracainzynierskabackend.model.dto.*
 import jwer.pracainzynierskabackend.service.UserService
 import jwer.pracainzynierskabackend.utils.ControllerUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.security.Principal
 
 @RestController
 @RequestMapping("/user")
@@ -30,5 +28,15 @@ class UserController @Autowired constructor(
     @PostMapping("/register-employee")
     fun registerEmployee(@RequestBody registerDetails: RegisterEmployeeDetailsDto): ResponseEntity<RegisterResponseDto> {
         return ControllerUtils.createResponse(userService.registerEmployee(registerDetails))
+    }
+
+    @PostMapping("/change-details")
+    fun changeAccountDetails(principal: Principal, @RequestBody newAccountDetails: ChangeAccountDetailsDto): ResponseEntity<AccountDto> {
+        TODO()
+    }
+
+    @PostMapping("/change-password")
+    fun changePassword(principal: Principal, @RequestBody changePasswordDetails: ChangePasswordDto): ResponseEntity<AccountDto> {
+        TODO()
     }
 }

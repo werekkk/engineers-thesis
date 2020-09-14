@@ -12,10 +12,6 @@ export class UnauthorizedComponent {
     private router: Router
   ) { }
 
-  onEnterPressed() {
-    this.navigateToLoginPage()
-  }
-
   onReturnClicked() {
     this.navigateToLoginPage()
   }

@@ -24,7 +24,7 @@ export class HourPreferenceService {
   getPreferencesWeek(): Observable<PreferencesWeekDto> {
     return this.http.get(`${environment.serverUrl}/preference/week`, {withCredentials: true})
     .pipe(
-      map((response: PreferencesWeekBackendDto) => PreferencesWeekDto.of(response)),
+      map((response: PreferencesWeekBackendDto) => PreferencesWeekDto.of(response).copy()),
       tap(pw => this.handleNewPreferencesWeek(pw))
     )
   }

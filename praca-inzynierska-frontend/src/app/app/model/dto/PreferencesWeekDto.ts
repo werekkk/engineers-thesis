@@ -76,4 +76,16 @@ export class PreferencesWeekDto {
         )
     }
 
+    shallowCopy(): PreferencesWeekDto {
+        return new PreferencesWeekDto(
+            this.mondayPreferences,
+            this.tuesdayPreferences,
+            this.wednesdayPreferences,
+            this.thursdayPreferences,
+            this.fridayPreferences,
+            this.saturdayPreferences,
+            this.sundayPreferences
+        )
+    }
+
 }

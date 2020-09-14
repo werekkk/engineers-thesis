@@ -40,10 +40,10 @@ export namespace Utils {
         return moment(date).utc(true).toDate()
     }
 
-    export function emptyBooleanArray(length: number): boolean[] {
+    export function emptyBooleanArray(length: number, val: boolean = false): boolean[] {
         let arr = []
         for (let i = 0; i < length; i++) {
-            arr.push(false)
+            arr.push(val)
         }
         return arr
     }

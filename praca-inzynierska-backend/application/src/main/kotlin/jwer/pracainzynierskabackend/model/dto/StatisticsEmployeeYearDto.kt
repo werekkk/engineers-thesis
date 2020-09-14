@@ -7,15 +7,15 @@ data class StatisticsEmployeeYearDto(
         val totalMonths: List<StatisticsDto> =
                 Array(12) {StatisticsDto(it)}.toList(),
         val positions: List<StatisticsPositionYearDto> =
-                employee.positions.map { StatisticsPositionYearDto(it) },
+                employee.positions.map { StatisticsPositionYearDto(it, listOf()) },
         val total: StatisticsDto = StatisticsDto(null)
 ) {
 
     fun add(shift: Shift) {
         val month = shift.period.start.monthValue - 1
         totalMonths[month] += shift
-        positions.find { it.position.id == shift.position.id }?.let {it.add(shift)}
         total += shift
+        positions.find { it.position.id == shift.position.id }?.add(shift)
     }
 
 }

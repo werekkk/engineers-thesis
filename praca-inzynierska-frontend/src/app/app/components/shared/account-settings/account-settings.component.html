@@ -1,0 +1,67 @@
+<div class="settings-container">
+    <div class="settings">
+        <h4>Ustawienia konta</h4>
+        <div *ngIf="!accountDetailsChanging; else spinner">
+            <h5>
+                Zmiana danych osobowych
+            </h5>
+            <form [formGroup]="detailsForm">
+                <div class="form-group">
+                    <label>
+                        Adres e-mail:
+                        <input class="form-control" type="email" formControlName="newEmail" id="newEmail" placeholder="Adres e-mail" maxlength="50" autocomplete="off" [ngModel]="userService.user.value.email" (ngModelChange)="emailTakenError = false; invalidEmailError = false">
+                    </label>
+                    <div class="form-errors" *ngIf="newEmail.invalid && (newEmail.dirty || newEmail.touched)">
+                        <div *ngIf="newEmail.errors.required">Adres e-mail jest wymagany.</div>
+                        <div *ngIf="newEmail.errors.email">Adres e-mail musi być poprawny.</div>
+                    </div>
+                    <div class="form-errors">
+                        <div *ngIf="invalidEmailError">Adres e-mail musi być poprawny.</div>
+                        <div *ngIf="emailTakenError">Podany adres e-mail jest już zajęty.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Imię:
+                        <input class="form-control" type="text" formControlName="newFirstName" id="newFirstName" placeholder="Imię" maxlength="50" autocomplete="off" [ngModel]="userService.user.value.firstName">
+                    </label>
+                    <div class="form-errors" *ngIf="newFirstName.invalid && (newFirstName.dirty || newFirstName.touched)">
+                        <div *ngIf="newFirstName.errors.required">Imię jest wymagane.</div>
+                        <div *ngIf="newFirstName.errors.minlength">Imię musi składać się z przynajmniej 2 znaków.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Nazwisko:
+                        <input class="form-control" type="text" formControlName="newLastName" id="newLastName" placeholder="Nazwisko" maxlength="50" autocomplete="off" [ngModel]="userService.user.value.lastName">
+                    </label>
+                    <div class="form-errors" *ngIf="newLastName.invalid && (newLastName.dirty || newLastName.touched)">
+                        <div *ngIf="newLastName.errors.required">Nazwisko jest wymagane.</div>
+                        <div *ngIf="newLastName.errors.minlength">Nazwisko musi składać się z przynajmniej 2 znaków.</div>
+                    </div>
+                </div>
+                <div class="submit-button">
+                    <button class="btn btn-primary">
+                        Zmień dane
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="!passwordChanging; else spinner">
+            <h5>
+                Zmiana hasła
+            </h5>
+        </div>
+        <div *ngIf="!deletingAccount; else spinner">
+            <h5>
+                Usunięcie konta
+            </h5>
+        </div>
+    </div>
+</div>
+<ng-template #spinner>
+    <div class="spinner-container">
+        <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+        </div>
+    </div>
+</ng-template>

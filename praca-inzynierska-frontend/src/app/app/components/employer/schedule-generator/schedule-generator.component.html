@@ -11,14 +11,14 @@
                         <input 
                         type="date" 
                         [ngModel]="startDate | date:'yyyy-MM-dd'" 
-                        (ngModelChange)="startDate = $event; onDurationChange()">
+                        (ngModelChange)="startDate = $event; onDurationChange('start')">
                     </div>
                     <div class="day-picker">
                         Ostatni dzień grafiku:
                         <input 
                         type="date" 
                         [ngModel]="finishDate | date:'yyyy-MM-dd'" 
-                        (ngModelChange)="finishDate = $event; onDurationChange()">
+                        (ngModelChange)="finishDate = $event; onDurationChange('finish')">
                     </div>
                     
                 </div>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="generator-options">
                 <button class="btn btn-success" (click)="onGenerateClicked()">Generuj</button>
             </div>
     </ng-template>    

@@ -5,7 +5,6 @@ import jwer.pracainzynierskabackend.controller.EmployeeController
 import jwer.pracainzynierskabackend.controller.PositionController
 import jwer.pracainzynierskabackend.controller.UserController
 import jwer.pracainzynierskabackend.model.dto.*
-import jwer.pracainzynierskabackend.model.entity.EmployeeStatus
 import jwer.pracainzynierskabackend.repository.CredentialsRepository
 import jwer.pracainzynierskabackend.repository.EmployerRepository
 import jwer.pracainzynierskabackend.service.UserService
@@ -64,7 +63,7 @@ class SampleData @Autowired constructor(
         initSampleWorkplace()
         login()
         initSampleWorkplacePositions()
-        initSampleWorkers()
+        initSampleEmployees()
         logout()
         println("Sample data initialization finished.")
     }
@@ -93,7 +92,7 @@ class SampleData @Autowired constructor(
         }
     }
 
-    private fun initSampleWorkers() {
+    private fun initSampleEmployees() {
         val existingEmployees = employeeController.getAllEmployees(principal).body!!.employees
         SAMPLE_EMPLOYEES.forEach {
             if (!existingEmployees.any { e -> e.account.firstName == it.firstName && e.account.middleName == it.middleName && e.account.lastName == it.lastName }) {

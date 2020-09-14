@@ -17,8 +17,8 @@
                                 <div *ngIf="username.errors.required">Nazwa użytkownika jest wymagana.</div>
                                 <div *ngIf="username.errors.minlength">Nazwa użytkownika musi składać się z przynajmniej 3 znaków.</div>
                             </div>
-                            <div class="form-errors">
-                                <div *ngIf="usernameTakenError">Podana nazwa użytkownika jest już zajęta.</div>
+                            <div class="form-errors" *ngIf="usernameTakenError">
+                                <div>Podana nazwa użytkownika jest już zajęta.</div>
                             </div>
                         </div>
                         <div class="form-group">

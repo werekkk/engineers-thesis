@@ -23,6 +23,7 @@ import { OnEnterPressedDirective } from '../../directives/on-enter-pressed.direc
 import { YearPickerComponent } from './year-picker/year-picker.component';
 import { AccountLabelComponent } from './account-label/account-label.component';
 import { HoverGroupDirective } from '../../directives/hover-group.directive';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { HoverGroupDirective } from '../../directives/hover-group.directive';
     OnEnterPressedDirective,
     YearPickerComponent,
     AccountLabelComponent,
-    HoverGroupDirective
+    HoverGroupDirective,
+    AccountSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -72,7 +74,8 @@ import { HoverGroupDirective } from '../../directives/hover-group.directive';
     OnEnterPressedDirective,
     YearPickerComponent,
     AccountLabelComponent,
-    HoverGroupDirective
+    HoverGroupDirective,
+    AccountSettingsComponent
   ]
 })
 export class SharedModule { }

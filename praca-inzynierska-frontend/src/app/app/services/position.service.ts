@@ -36,6 +36,19 @@ export class PositionService {
     )
   }
 
+  getLoggedInEmployeePositions(): Observable<PositionDto[]> {
+    return this.http.get(`${environment.serverUrl}/position/employee`, {withCredentials: true})
+    .pipe(
+      map((response: PositionsDto) => {
+        response.positions.sort(PositionDto.compare)
+        response.positions.sort(PositionDto.compare)
+        this.positions.next(response.positions)
+        this.positionsLoaded = true
+        return response.positions
+      })
+    )
+  }
+
   savePosition(newPosition: PositionDto, reloadEmployees: boolean = false): Observable<PositionDto> {
     return this.http.post(`${environment.serverUrl}/position`, newPosition, {withCredentials: true})
     .pipe(

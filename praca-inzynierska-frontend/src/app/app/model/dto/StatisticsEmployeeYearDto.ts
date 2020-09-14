@@ -1,6 +1,7 @@
 import { StatisticsDto } from './StatisticsDto';
 import { EmployeeDto } from './EmployeeDto';
 import { StatisticsPositionYearDto } from './StatisticsPositionYearDto';
+import { PositionDto } from './PositionDto';
 
 export class StatisticsEmployeeYearDto {
 
@@ -10,6 +11,10 @@ export class StatisticsEmployeeYearDto {
         public positions: StatisticsPositionYearDto[],
         public total: StatisticsDto
     ) {}
+
+    sort() {
+        this.positions.sort((a, b) => PositionDto.compare(a.position, b.position))
+    }
 
     static copyOf(other: StatisticsEmployeeYearDto): StatisticsEmployeeYearDto {
         return new StatisticsEmployeeYearDto(

@@ -13,12 +13,15 @@ export class HomeComponent implements OnInit {
   loginInput = ''
   passwordInput = ''
 
+  errors: boolean = false
+
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.errors = false
   }
 
   onRegisterClicked() {
@@ -32,7 +35,7 @@ export class HomeComponent implements OnInit {
   onLoginClicked() {
     if (this.areCredentialsPresent()) {
       this.authenticationService.login(this.getCredentials())
-      .subscribe()
+      .subscribe(() => {}, err => {this.errors = true})
     }
   }
 

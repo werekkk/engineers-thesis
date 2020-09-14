@@ -36,7 +36,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   onGenerateScheduleClicked() {
-    this.router.navigate(['employer', 'schedule-generator'])
+    this.router.navigate(['employer', 'schedule', 'generator'])
   }
 
 }

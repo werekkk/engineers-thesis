@@ -22,7 +22,7 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
   @Input('timePeriods')
   set timePeriods(value: RequiredStaffTimePeriodDto[]) {
     this._timePeriods = value
-    this.adjustMaxWorkersByTimePeriods()
+    this.adjustMaxEmployeesByTimePeriods()
     this.requestRedraw()
   }
   get timePeriods(): RequiredStaffTimePeriodDto[] {
@@ -53,45 +53,45 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
   canvas: Canvas
   yTranslate = 25
 
-  highlightedWorkerCount = 0
+  highlightedEmployeeCount = 0
   highlightedHour: TimeDto = null
 
-  minMaxWorkers = 5
-  maxMaxWorkers = 20
+  minMaxEmployees = 5
+  maxMaxEmployees = 20
 
-  _maxWorkers = this.minMaxWorkers
-  set maxWorkers(value: number) {
-    if (value != this._maxWorkers && value >= this.minMaxWorkers && value <= this.maxMaxWorkers) {
-      this._maxWorkers = value
-      this.gridHeight = this.maxWorkers * this.workerLineHeight
+  _maxEmployees = this.minMaxEmployees
+  set maxEmployees(value: number) {
+    if (value != this._maxEmployees && value >= this.minMaxEmployees && value <= this.maxMaxEmployees) {
+      this._maxEmployees = value
+      this.gridHeight = this.maxEmployees * this.employeeLineHeight
       if (this.canvas) {
         this.initCanvas()
       }
     }
   }
-  get maxWorkers(): number {
-    return this._maxWorkers
+  get maxEmployees(): number {
+    return this._maxEmployees
   }
 
-  adjustMaxWorkersByTimePeriods() {
-    let newMaxWorkers = this.timePeriods.length > 0 ? this.timePeriods.map(tp => tp.employeeCount).reduceRight((prev, cur) => prev > cur ? prev : cur) : 0
-    this.maxWorkers = newMaxWorkers > this.minMaxWorkers ? newMaxWorkers : this.minMaxWorkers
+  adjustMaxEmployeesByTimePeriods() {
+    let newMaxEmployees = this.timePeriods.length > 0 ? this.timePeriods.map(tp => tp.employeeCount).reduceRight((prev, cur) => prev > cur ? prev : cur) : 0
+    this.maxEmployees = newMaxEmployees > this.minMaxEmployees ? newMaxEmployees : this.minMaxEmployees
   }
 
-  _workerLineHeight = 20
-  set workerLineHeight(value: number) {
-    this._workerLineHeight = value
-    this.gridHeight = this.maxWorkers * this.workerLineHeight
+  _employeeLineHeight = 20
+  set employeeLineHeight(value: number) {
+    this._employeeLineHeight = value
+    this.gridHeight = this.maxEmployees * this.employeeLineHeight
   }
-  get workerLineHeight(): number {
-    return this._workerLineHeight
+  get employeeLineHeight(): number {
+    return this._employeeLineHeight
   }
 
   get totalCanvasHeight(): number {
     return this.yTranslate + this.gridHeight + this.valueLabelHeight + this.labelFontSize
   }
 
-  gridHeight = this.maxWorkers * this.workerLineHeight
+  gridHeight = this.maxEmployees * this.employeeLineHeight
   gridPadding = 30
   gridLeftPadding = 80
   gridStickOutSize = 3
@@ -153,13 +153,13 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
   handleOnMouseMove(ev: MouseEvent) {
     this.latestMove = ev
     this.mouseMoveChange = false
-    this.setHighlightedWorkerCount(ev.offsetY)
+    this.setHighlightedEmployeeCount(ev.offsetY)
     this.setHighlightedHour(ev.offsetX, ev.offsetY)
     if (this.createdBlockStart) {
-      if (this.isAboveHighestWorkerCountLine()) {
-        this.startIncreasingMaxWorkers()
+      if (this.isAboveHighestEmployeeCountLine()) {
+        this.startIncreasingMaxEmployees()
       }
-      this.createdBlockStart.y = this.getYFromWorkerCount(Math.min(this.highlightedWorkerCount, this.maxWorkers))
+      this.createdBlockStart.y = this.getYFromEmployeeCount(Math.min(this.highlightedEmployeeCount, this.maxEmployees))
       this.updateCreatedBlockFinish(ev)
     }
     if (this.mouseMoveChange) {
@@ -169,11 +169,11 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
 
   increasingTimer = undefined
   
-  startIncreasingMaxWorkers() {
+  startIncreasingMaxEmployees() {
     if (!this.increasingTimer) {
       this.increasingTimer = timer(0, 200).subscribe(() => {
-        if (this.createdBlockStart && this.isAboveHighestWorkerCountLine() && this.maxWorkers < this.maxMaxWorkers) {
-          this.maxWorkers++
+        if (this.createdBlockStart && this.isAboveHighestEmployeeCountLine() && this.maxEmployees < this.maxMaxEmployees) {
+          this.maxEmployees++
         } else {
           this.increasingTimer.unsubscribe()
           this.increasingTimer = undefined
@@ -182,14 +182,14 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
     }
   }
 
-  isAboveHighestWorkerCountLine(): boolean {
+  isAboveHighestEmployeeCountLine(): boolean {
     let y: number
     if (this.canvas.canvas.offsetTop > this.latestMove['layerY']) { 
       y = this.latestMove['layerY']                                   // Firefox
     } else {
       y = this.latestMove['layerY'] - this.canvas.canvas.offsetTop    // Chrome
     }
-    return this.getWorkerCountFromY(y) > this.maxWorkers
+    return this.getEmployeeCountFromY(y) > this.maxEmployees
   }
 
   updateCreatedBlockFinish(ev: MouseEvent) {
@@ -203,10 +203,10 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
     }
   }
 
-  setHighlightedWorkerCount(y: number) {
-    let newHighlightedWorker = this.getWorkerCountFromY(y)
-    if (newHighlightedWorker != this.highlightedWorkerCount) {
-      this.highlightedWorkerCount = newHighlightedWorker
+  setHighlightedEmployeeCount(y: number) {
+    let newHighlightedEmployee = this.getEmployeeCountFromY(y)
+    if (newHighlightedEmployee != this.highlightedEmployeeCount) {
+      this.highlightedEmployeeCount = newHighlightedEmployee
       this.mouseMoveChange = true
     }
   }
@@ -222,18 +222,18 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
   }
 
   handleOnMouseLeave(this: StaffRequirementsDayEditorComponent, ev: MouseEvent) {
-    this.highlightedWorkerCount = undefined
+    this.highlightedEmployeeCount = undefined
     this.highlightedHour = undefined
     this.createdBlockStart = null
     this.createdBlockFinish = null
-    this.adjustMaxWorkersByTimePeriods()
+    this.adjustMaxEmployeesByTimePeriods()
     this.requestRedraw()
   }
 
   handleOnMouseDown(this: StaffRequirementsDayEditorComponent, ev: MouseEvent) {
       let newCreatedBlockStart = {
         x: this.getXFromTime(this.highlightedHour, this.canvas), 
-        y: this.getYFromWorkerCount(this.highlightedWorkerCount)
+        y: this.getYFromEmployeeCount(this.highlightedEmployeeCount)
       }
       this.createdBlockStart = newCreatedBlockStart
   }
@@ -245,7 +245,7 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
     }
     this.createdBlockStart = null
     this.createdBlockFinish = null
-    this.adjustMaxWorkersByTimePeriods()
+    this.adjustMaxEmployeesByTimePeriods()
   }
 
   createRequirement(start: Position, finish: Position) {
@@ -256,9 +256,9 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
         start.x = temp
       }
       let period = new TimePeriodDto(this.getTimeFromX(start.x), this.getTimeFromX(finish.x))
-      let workerCount = this.getWorkerCountFromY(start.y, false)
-      if (workerCount != undefined) {
-        let requirement = new RequiredStaffTimePeriodDto(0, this.getWorkerCountFromY(start.y, false), period)
+      let employeeCount = this.getEmployeeCountFromY(start.y, false)
+      if (employeeCount != undefined) {
+        let requirement = new RequiredStaffTimePeriodDto(0, this.getEmployeeCountFromY(start.y, false), period)
         let newRequirements = this._timePeriods.concat([requirement])
         this.timePeriodsChange.emit(newRequirements)
       }
@@ -275,9 +275,9 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
     this.drawHourLabel(canvas)
     this.drawHourValueLabels(canvas)
     
-    this.drawWorkerLines(canvas)
-    this.drawWorkerCountLabel(canvas)
-    this.drawWorkerValueLabels(canvas)
+    this.drawEmployeeLines(canvas)
+    this.drawEmployeeCountLabel(canvas)
+    this.drawEmployeeValueLabels(canvas)
 
     this.drawHighlightedHourLine(canvas)
     this.drawHighlightedHour(canvas)
@@ -313,7 +313,7 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
 
   drawCreatedPeriodBlock(canvas: Canvas) {
     if (this.createdBlockStart && this.createdBlockFinish) {
-      let isDeleting = this.highlightedWorkerCount == 0
+      let isDeleting = this.highlightedEmployeeCount == 0
       let ctx = canvas.context
       ctx.save()
       ctx.fillStyle = isDeleting ? '#f75a4f' : '#ebe534'
@@ -376,12 +376,12 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
     }
   }
 
-  drawWorkerLines(canvas: Canvas) {
+  drawEmployeeLines(canvas: Canvas) {
     let ctx = canvas.context
     let width = canvas.width
-    for (let i = 0; i <= this.maxWorkers; i++) {
-      let heigth = this.getYFromWorkerCount(i)
-      let drawingHighlighted = i == this.highlightedWorkerCount
+    for (let i = 0; i <= this.maxEmployees; i++) {
+      let heigth = this.getYFromEmployeeCount(i)
+      let drawingHighlighted = i == this.highlightedEmployeeCount
       if (drawingHighlighted) {
         ctx.save()
         ctx.lineWidth = 1
@@ -397,7 +397,7 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
     }
   }
 
-  drawWorkerCountLabel(canvas: Canvas) {
+  drawEmployeeCountLabel(canvas: Canvas) {
     let ctx = canvas.context
     this.setLabelFont(ctx)
     ctx.save()
@@ -408,18 +408,18 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
     ctx.restore()
   }
 
-  drawWorkerValueLabels(canvas: Canvas) {
+  drawEmployeeValueLabels(canvas: Canvas) {
     let ctx = canvas.context
     ctx.save()
     ctx.textBaseline = 'middle'
     this.setLabelFont(ctx)
-    for (let i = 0; i <= this.maxWorkers; i++) {
-      if (i == this.highlightedWorkerCount) {
+    for (let i = 0; i <= this.maxEmployees; i++) {
+      if (i == this.highlightedEmployeeCount) {
         this.setLabelFont(ctx, 'bold', 17)
-        ctx.fillText(i+'', this.gridLeftPadding - (this.valueLabelHeight / 2) - this.gridStickOutSize, this.getYFromWorkerCount(i))
+        ctx.fillText(i+'', this.gridLeftPadding - (this.valueLabelHeight / 2) - this.gridStickOutSize, this.getYFromEmployeeCount(i))
         this.setLabelFont(ctx)
       } else {
-        ctx.fillText(i+'', this.gridLeftPadding - (this.valueLabelHeight / 2) - this.gridStickOutSize, this.getYFromWorkerCount(i))
+        ctx.fillText(i+'', this.gridLeftPadding - (this.valueLabelHeight / 2) - this.gridStickOutSize, this.getYFromEmployeeCount(i))
       }
     }
     ctx.restore()
@@ -428,8 +428,8 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
   getRectFromPeriod(period: RequiredStaffTimePeriodDto, canvas: Canvas): Rect {
     let x1 = this.getXFromTime(period.timePeriod.start, canvas)
     let x2 = this.getXFromTime(period.timePeriod.finish, canvas)
-    let y1 = this.getYFromWorkerCount(period.employeeCount)
-    let y2 = this.getYFromWorkerCount(0)
+    let y1 = this.getYFromEmployeeCount(period.employeeCount)
+    let y2 = this.getYFromEmployeeCount(0)
     return {x: x1, y: y1, w: (x2 - x1), h: (y2 - y1)}
   }
 
@@ -444,19 +444,19 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
     return this.coerceXInGrid(x)
   }
 
-  getYFromWorkerCount(workerCount: number) {
-    return this.gridHeight - (this.gridHeight / this.maxWorkers) * workerCount
+  getYFromEmployeeCount(employeeCount: number) {
+    return this.gridHeight - (this.gridHeight / this.maxEmployees) * employeeCount
   }
 
   getTimeFromX(x: number): TimeDto {
     return TimeStep.toTimeDto(this.timeStep, (x - this.gridLeftPadding) / (this.canvas.width - this.gridLeftPadding - this.gridPadding))
   }
 
-  getWorkerCountFromY(y: number, includeTranslation: boolean = true): number {
+  getEmployeeCountFromY(y: number, includeTranslation: boolean = true): number {
     y = y - (includeTranslation ? this.yTranslate : 0)
-    let gridMaxHeigth = this.gridHeight + (this.gridHeight / this.maxWorkers)
-    let gridY = -(y + Math.floor((this.gridHeight / this.maxWorkers) / 2) - gridMaxHeigth)
-    return (gridY > 0) ? Math.floor(gridY / (gridMaxHeigth / (this.maxWorkers + 1))) : undefined
+    let gridMaxHeigth = this.gridHeight + (this.gridHeight / this.maxEmployees)
+    let gridY = -(y + Math.floor((this.gridHeight / this.maxEmployees) / 2) - gridMaxHeigth)
+    return (gridY > 0) ? Math.floor(gridY / (gridMaxHeigth / (this.maxEmployees + 1))) : undefined
   }
 
   coerceXInGrid(x: number): number {

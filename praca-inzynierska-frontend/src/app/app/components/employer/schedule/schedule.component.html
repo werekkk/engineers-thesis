@@ -12,10 +12,20 @@
         </div>
     </div>
     <ng-template #schedules>
-        <div class="position-schedules">
-            <div *ngFor="let position of positions">
-                <schedule-position-week-edit [position]="position" [firstDay]="firstDate"></schedule-position-week-edit>
+        <ng-container *ngIf="positions.length > 0; else noPositions">
+            <div class="position-schedules">
+                <div *ngFor="let position of positions">
+                    <schedule-position-week-edit [position]="position" [firstDay]="firstDate"></schedule-position-week-edit>
+                </div>
             </div>
-        </div>
+        </ng-container>
+    </ng-template>
+    <ng-template #noPositions>
+        <h6>
+            Brak stanowisk!
+        </h6>
+        <p>
+            Dodaj stanowiska w sekcji <a routerLink="/employer/employees">Pracownicy</a> i przydziel do nich pracowników, aby rozpocząć tworzenie grafiku.
+        </p>
     </ng-template>
 </div>

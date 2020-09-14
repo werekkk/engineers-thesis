@@ -61,7 +61,7 @@ class ShiftService @Autowired constructor(
                 deleteShiftsByPeriodAndEmployee(w, it.employeeId, shifts.generatorConfig.firstDay, shifts.generatorConfig.lastDay)
             }
             shifts.shifts.shifts.forEach {
-                saveShift(principal, it, it.shiftType ?: ShiftType.GENERATED)
+                saveShift(principal, it.copy(creationDate = LocalDateTime.now()), it.shiftType ?: ShiftType.GENERATED)
             }
             return shifts.shifts
         }
@@ -72,8 +72,10 @@ class ShiftService @Autowired constructor(
     fun deleteShiftsByPeriodAndEmployee(workplace: Workplace, employeeId: Long, firstDay: LocalDate, lastDay: LocalDate) {
         if (workplace.employees.any { it.id == employeeId }) {
             shiftRepository
-                    .getShiftsByEmployeeAndPeriod(employeeId, firstDay.atStartOfDay(), lastDay.atTime(LocalTime.MIDNIGHT))
-                    .forEach { shiftRepository.delete(it) }
+                    .getShiftsByEmployeeAndPeriod(employeeId, firstDay.atStartOfDay(), lastDay.plusDays(1).atStartOfDay())
+                    .forEach {
+                        shiftRepository.delete(it)
+                    }
         }
     }
 
@@ -89,7 +91,7 @@ class ShiftService @Autowired constructor(
     @Transactional
     fun saveShift(principal: Principal, shift: ShiftDto, type: ShiftType = ShiftType.MANUALLY_ASSIGNED): SavedShiftResponseDto? {
         if (canPersistShift(principal, shift) && shift.start.isBefore(shift.finish)) {
-            val shiftsToBeDeleted = getOverlappingShifts(shift)
+            val shiftsToBeDeleted = getOverlappingShifts(shift).filter { !(it.position.id != shift.positionId && shift.boundOverlap(ShiftDto(it))) }
             if (shiftsToBeDeleted.any {it.position.id != shift.positionId}) {
                 return null
             }

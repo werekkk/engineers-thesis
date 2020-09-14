@@ -86,13 +86,13 @@ class Schedule(
 
         schedule.forEach {
             var currentPosition: Long? = it[rangeStart]
+            if (currentPosition.isTruthy()) shifts++
             for (i in rangeStart..rangeFinish) {
                 if (it[i] != currentPosition) {
-                    if (currentPosition.isTruthy() && !it[i].isTruthy()) shifts++
+                    if (it[i].isTruthy()) shifts++
                     currentPosition = it[i]
                 }
             }
-            if (currentPosition.isTruthy()) shifts++
         }
 
         return shifts

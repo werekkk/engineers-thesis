@@ -1,16 +1,18 @@
 import { PositionDto } from './PositionDto';
 import { StatisticsDto } from './StatisticsDto';
+import { StatisticsEmployeeYearDto } from './StatisticsEmployeeYearDto';
 
 export class StatisticsPositionYearDto {
 
     constructor(
         public position: PositionDto,
-        public months: StatisticsDto[],
+        public employees: StatisticsEmployeeYearDto[],
+        public totalMonths: StatisticsDto[],
         public total: StatisticsDto
     ) {}
 
     static copyOf(other: StatisticsPositionYearDto): StatisticsPositionYearDto {
-        return new StatisticsPositionYearDto(other.position, other.months.map(m => StatisticsDto.copyOf(m)), StatisticsDto.copyOf(other.total))
+        return new StatisticsPositionYearDto(other.position, other.employees.map(e => StatisticsEmployeeYearDto.copyOf(e)),other.totalMonths.map(m => StatisticsDto.copyOf(m)), StatisticsDto.copyOf(other.total))
     }
 
 }

@@ -59,9 +59,14 @@ export class ScheduleGeneratorComponent implements OnInit {
     this.initCheckboxArrays()
   }
 
-  onDurationChange() {
+  onDurationChange(source: 'start' | 'finish' = 'finish') {
+    console.log('change')
     if (moment(this.finishDate).isBefore(this.startDate)) {
-      this.startDate = this.finishDate
+      if (source == 'start') {
+        this.finishDate = this.startDate
+      } else if (source == 'finish') {
+        this.startDate = this.finishDate
+      }
     }
     this.durationInDays = moment(this.finishDate).add(1, 'day').diff(this.startDate, 'day')
   }
@@ -79,7 +84,7 @@ export class ScheduleGeneratorComponent implements OnInit {
     let employees: EmployeeDto[] = []
     this.positionChecked.forEach((val, i) => {if (val) positions.push(this.positionService.positions.value[i])})
     this.employeeChecked.forEach((val, i) => {if (val && this.employeeEnabled[i]) employees.push(this.employeeService.employees.value[i])})
-    if (this.canGenerate(positions, employees)) {
+    if (this.canGenerate(positions, employees) && this.durationInDays > 0 && this.durationInDays <= 31) {
       let state: GeneratorState = { config: new GeneratorConfigDto(employees, positions, Utils.fixDateToBackendFormat(this.startDate), Utils.fixDateToBackendFormat(this.finishDate)) }
       this.router.navigate(['employer','schedule-generator-result'], {state: state})
     }

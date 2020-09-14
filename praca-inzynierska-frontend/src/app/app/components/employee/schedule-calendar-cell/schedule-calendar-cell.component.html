@@ -6,9 +6,12 @@
         </div>
         <ng-template #shiftList>
             <div class="shifts">
-                <div *ngFor="let shift of shifts">
-                    <time-period-cell [timePeriod]="shift.period"></time-period-cell>
-                </div>
+                <ng-container *ngFor="let shift of shifts">
+                        <time-period-cell [timePeriod]="shift.period"></time-period-cell>
+                        <div class="shift-tooltip">
+                            {{lookupPositionName(shift)}}
+                        </div>
+                </ng-container>
             </div>
         </ng-template>
 </div>

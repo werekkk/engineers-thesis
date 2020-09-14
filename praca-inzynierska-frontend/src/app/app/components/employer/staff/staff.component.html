@@ -3,29 +3,41 @@
     </div>
 </div>
 <ng-template #ngbNavContainer>
-    <div class="sticky-nav">
-        <ul ngbNav #nav="ngbNav" [(activeId)]="activeId" (activeIdChange)="onPositionChange()" class="nav-tabs">
-            <ng-container *ngFor="let position of positions; let i = index">
-                <li [ngbNavItem]="i">
-                    <a ngbNavLink>{{position.name}}</a>
-                    <ng-template ngbNavContent>
-                        <staff-requirements [position]="position" [(timeStep)]="timeStep" [staffRequirements]="staffRequirements"></staff-requirements>
-                    </ng-template>
-                </li>
-            </ng-container>
-        </ul>
-        <div class="top-options">
-            <div>
-                <button class="btn btn-success" (click)="onSaveClicked()">Zapisz</button>
-            </div>
-            <div>
+    <ng-container *ngIf="positions.length > 0; else noPositions">
+        <div class="sticky-nav">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="activeId" (activeIdChange)="onPositionChange()" class="nav-tabs">
+                <ng-container *ngFor="let position of positions; let i = index">
+                    <li [ngbNavItem]="i">
+                        <a ngbNavLink>{{position.name}}</a>
+                        <ng-template ngbNavContent>
+                            <staff-requirements [position]="position" [(timeStep)]="timeStep" [staffRequirements]="staffRequirements"></staff-requirements>
+                        </ng-template>
+                    </li>
+                </ng-container>
+            </ul>
+            <div class="top-options">
                 <div>
-                    Szczegółowość edytora
+                    <button class="btn btn-success" (click)="onSaveClicked()">Zapisz</button>
                 </div>
-                <time-step-picker [(timeStep)]="timeStep"></time-step-picker>
+                <div>
+                    <div>
+                        Szczegółowość edytora
+                    </div>
+                    <time-step-picker [(timeStep)]="timeStep"></time-step-picker>
+                </div>
             </div>
         </div>
+        <div [ngbNavOutlet]="nav"></div>
+    </ng-container>
+</ng-template>
+<ng-template #noPositions>
+    <div class="no-positions">
+        <h6>
+            Brak stanowisk!
+        </h6>
+        <p>
+            Dodaj stanowisko w sekcji <a routerLink="/employer/employees">Pracownicy</a> aby zdefiniować wymaganą dla niego obsadę.
+        </p>
     </div>
-    <div [ngbNavOutlet]="nav"></div>
 </ng-template>
 

@@ -26,8 +26,13 @@ class StatisticsService @Autowired constructor(
 
             val statistics = StatisticsYearDto(
                     year,
-                    positions.map { StatisticsPositionYearDto(PositionDto(it)) },
-                    employees.employees.map { StatisticsEmployeeYearDto(it) }
+                    positions.map { p ->
+                        StatisticsPositionYearDto(
+                            PositionDto(p),
+                            employees.employees.filter { it.positions.any { it.id == p.id } }.map { StatisticsEmployeeYearDto(it) })
+                        },
+                        employees.employees.map { StatisticsEmployeeYearDto(it)
+                    }
             )
 
             shifts.forEach {

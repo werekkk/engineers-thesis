@@ -70,7 +70,7 @@ export class RegisterEmployerComponent implements OnInit {
         }
         this.isRegistering = false
         if (!response.error && response.account) {
-          this.router.navigate([''])
+          this.router.navigate(['register-success'])
         }
       }, err => {
         console.log(err)

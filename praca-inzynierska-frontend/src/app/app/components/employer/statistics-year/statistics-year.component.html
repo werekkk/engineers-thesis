@@ -5,74 +5,150 @@
 <ng-template #statisticsTable>
     <div class="table-container">
         <table class="table">
-            <tr>
-                <th scope="col" [hoverGroup]="[0, 14]" [classOnHover]="'highlighted'">Stanowisko</th>
-                <th scope="col" [hoverGroup]="[1, 14]" [classOnHover]="'highlighted'">I</th>
-                <th scope="col" [hoverGroup]="[2, 14]" [classOnHover]="'highlighted'">II</th>
-                <th scope="col" [hoverGroup]="[3, 14]" [classOnHover]="'highlighted'">III</th>
-                <th scope="col" [hoverGroup]="[4, 14]" [classOnHover]="'highlighted'">IV</th>
-                <th scope="col" [hoverGroup]="[5, 14]" [classOnHover]="'highlighted'">V</th>
-                <th scope="col" [hoverGroup]="[6, 14]" [classOnHover]="'highlighted'">VI</th>
-                <th scope="col" [hoverGroup]="[7, 14]" [classOnHover]="'highlighted'">VII</th>
-                <th scope="col" [hoverGroup]="[8, 14]" [classOnHover]="'highlighted'">VIII</th>
-                <th scope="col" [hoverGroup]="[9, 14]" [classOnHover]="'highlighted'">IX</th>
-                <th scope="col" [hoverGroup]="[10, 14]" [classOnHover]="'highlighted'">X</th>
-                <th scope="col" [hoverGroup]="[11, 14]" [classOnHover]="'highlighted'">XI</th>
-                <th scope="col" [hoverGroup]="[12, 14]" [classOnHover]="'highlighted'">XII</th>
-                <th scope="col" [hoverGroup]="[13, 14]" [classOnHover]="'highlighted'">Razem</th>
-            </tr>
-            <ng-container *ngFor="let p of statistics.positionStatistics">
+            <thead>
                 <tr>
-                    <td [hoverGroup]="0" [classOnHover]="'highlighted'">{{ p.position.name }}</td>
-                    <td [hoverGroup]="1" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.months[0]"></statistics-month-cell></td>
-                    <td [hoverGroup]="2" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.months[1]"></statistics-month-cell></td>
-                    <td [hoverGroup]="3" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.months[2]"></statistics-month-cell></td>
-                    <td [hoverGroup]="4" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.months[3]"></statistics-month-cell></td>
-                    <td [hoverGroup]="5" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.months[4]"></statistics-month-cell></td>
-                    <td [hoverGroup]="6" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.months[5]"></statistics-month-cell></td>
-                    <td [hoverGroup]="7" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.months[6]"></statistics-month-cell></td>
-                    <td [hoverGroup]="8" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.months[7]"></statistics-month-cell></td>
-                    <td [hoverGroup]="9" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.months[8]"></statistics-month-cell></td>
-                    <td [hoverGroup]="10" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.months[9]"></statistics-month-cell></td>
-                    <td [hoverGroup]="11" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.months[10]"></statistics-month-cell></td>
-                    <td [hoverGroup]="12" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.months[11]"></statistics-month-cell></td>
-                    <td [hoverGroup]="13" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.total"></statistics-month-cell></td>
+                    <th scope="col" [hoverGroup]="[14]" [classOnHover]="'highlighted'">
+                        <div class="header">
+                            Stanowisko
+                            <ng-container *ngIf="!allPositionDetailsShown">
+                                <svg (click)="setAllPositionDetailsShown(true)" width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                            </ng-container>
+                            <ng-container *ngIf="allPositionDetailsShown">
+                                <svg (click)="setAllPositionDetailsShown(false)" width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-dash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                                </svg>
+                            </ng-container>
+                        </div>
+                    </th>&#9;
+                    <th scope="col" [hoverGroup]="[1, 14]" [classOnHover]="'highlighted'">I</th>&#9;
+                    <th scope="col" [hoverGroup]="[2, 14]" [classOnHover]="'highlighted'">II</th>&#9;
+                    <th scope="col" [hoverGroup]="[3, 14]" [classOnHover]="'highlighted'">III</th>&#9;
+                    <th scope="col" [hoverGroup]="[4, 14]" [classOnHover]="'highlighted'">IV</th>&#9;
+                    <th scope="col" [hoverGroup]="[5, 14]" [classOnHover]="'highlighted'">V</th>&#9;
+                    <th scope="col" [hoverGroup]="[6, 14]" [classOnHover]="'highlighted'">VI</th>&#9;
+                    <th scope="col" [hoverGroup]="[7, 14]" [classOnHover]="'highlighted'">VII</th>&#9;
+                    <th scope="col" [hoverGroup]="[8, 14]" [classOnHover]="'highlighted'">VIII</th>&#9;
+                    <th scope="col" [hoverGroup]="[9, 14]" [classOnHover]="'highlighted'">IX</th>&#9;
+                    <th scope="col" [hoverGroup]="[10, 14]" [classOnHover]="'highlighted'">X</th>&#9;
+                    <th scope="col" [hoverGroup]="[11, 14]" [classOnHover]="'highlighted'">XI</th>&#9;
+                    <th scope="col" [hoverGroup]="[12, 14]" [classOnHover]="'highlighted'">XII</th>&#9;
+                    <th scope="col" [hoverGroup]="[13, 14]" [classOnHover]="'highlighted'">Razem</th>&#9;
                 </tr>
-            </ng-container>
-            <tr class="sticky">
-                <th scope="col" [hoverGroup]="[0, 15]" [classOnHover]="'highlighted'">Pracownik</th>
-                <th scope="col" [hoverGroup]="[1, 15]" [classOnHover]="'highlighted'">I</th>
-                <th scope="col" [hoverGroup]="[2, 15]" [classOnHover]="'highlighted'">II</th>
-                <th scope="col" [hoverGroup]="[3, 15]" [classOnHover]="'highlighted'">III</th>
-                <th scope="col" [hoverGroup]="[4, 15]" [classOnHover]="'highlighted'">IV</th>
-                <th scope="col" [hoverGroup]="[5, 15]" [classOnHover]="'highlighted'">V</th>
-                <th scope="col" [hoverGroup]="[6, 15]" [classOnHover]="'highlighted'">VI</th>
-                <th scope="col" [hoverGroup]="[7, 15]" [classOnHover]="'highlighted'">VII</th>
-                <th scope="col" [hoverGroup]="[8, 15]" [classOnHover]="'highlighted'">VIII</th>
-                <th scope="col" [hoverGroup]="[9, 15]" [classOnHover]="'highlighted'">IX</th>
-                <th scope="col" [hoverGroup]="[10, 15]" [classOnHover]="'highlighted'">X</th>
-                <th scope="col" [hoverGroup]="[11, 15]" [classOnHover]="'highlighted'">XI</th>
-                <th scope="col" [hoverGroup]="[12, 15]" [classOnHover]="'highlighted'">XII</th>
-                <th scope="col" [hoverGroup]="[13, 15]" [classOnHover]="'highlighted'">Razem</th>
-            </tr>
-            <ng-container *ngFor="let e of statistics.employeeStatistics">
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let p of statistics.positionStatistics; let i = index">
+                    <tr [class.details]="p.employees.length > 0" (click)="positionDetailsShown[i]=!positionDetailsShown[i]">
+                        <td>{{ p.position.name }}</td>
+                        <td [hoverGroup]="1" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[0]"></statistics-month-cell></td>
+                        <td [hoverGroup]="2" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[1]"></statistics-month-cell></td>
+                        <td [hoverGroup]="3" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[2]"></statistics-month-cell></td>
+                        <td [hoverGroup]="4" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[3]"></statistics-month-cell></td>
+                        <td [hoverGroup]="5" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[4]"></statistics-month-cell></td>
+                        <td [hoverGroup]="6" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[5]"></statistics-month-cell></td>
+                        <td [hoverGroup]="7" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[6]"></statistics-month-cell></td>
+                        <td [hoverGroup]="8" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[7]"></statistics-month-cell></td>
+                        <td [hoverGroup]="9" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[8]"></statistics-month-cell></td>
+                        <td [hoverGroup]="10" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[9]"></statistics-month-cell></td>
+                        <td [hoverGroup]="11" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[10]"></statistics-month-cell></td>
+                        <td [hoverGroup]="12" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[11]"></statistics-month-cell></td>
+                        <td [hoverGroup]="13" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.total"></statistics-month-cell></td>
+                    </tr>
+                    <ng-container *ngIf="positionDetailsShown[i]">
+                        <ng-container *ngFor="let e of p.employees">
+                            <tr class="details-row">
+                                <td class="details-row-label">{{e.employee.account.firstName}} {{e.employee.account.lastName}}</td>
+                                <td [hoverGroup]="1" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[0]"></statistics-month-cell></td>
+                                <td [hoverGroup]="2" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[1]"></statistics-month-cell></td>
+                                <td [hoverGroup]="3" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[2]"></statistics-month-cell></td>
+                                <td [hoverGroup]="4" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[3]"></statistics-month-cell></td>
+                                <td [hoverGroup]="5" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[4]"></statistics-month-cell></td>
+                                <td [hoverGroup]="6" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[5]"></statistics-month-cell></td>
+                                <td [hoverGroup]="7" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[6]"></statistics-month-cell></td>
+                                <td [hoverGroup]="8" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[7]"></statistics-month-cell></td>
+                                <td [hoverGroup]="9" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[8]"></statistics-month-cell></td>
+                                <td [hoverGroup]="10" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[9]"></statistics-month-cell></td>
+                                <td [hoverGroup]="11" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[10]"></statistics-month-cell></td>
+                                <td [hoverGroup]="12" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[11]"></statistics-month-cell></td>
+                                <td [hoverGroup]="13" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.total"></statistics-month-cell></td>
+                            </tr>
+                        </ng-container>
+                    </ng-container> 
+                </ng-container>
+            </tbody>  
+            <thead>
                 <tr>
-                    <td [hoverGroup]="0" [classOnHover]="'highlighted'"><account-label [account]="e.employee.account"></account-label></td>
-                    <td [hoverGroup]="1" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[0]"></statistics-month-cell></td>
-                    <td [hoverGroup]="2" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[1]"></statistics-month-cell></td>
-                    <td [hoverGroup]="3" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[2]"></statistics-month-cell></td>
-                    <td [hoverGroup]="4" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[3]"></statistics-month-cell></td>
-                    <td [hoverGroup]="5" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[4]"></statistics-month-cell></td>
-                    <td [hoverGroup]="6" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[5]"></statistics-month-cell></td>
-                    <td [hoverGroup]="7" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[6]"></statistics-month-cell></td>
-                    <td [hoverGroup]="8" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[7]"></statistics-month-cell></td>
-                    <td [hoverGroup]="9" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[8]"></statistics-month-cell></td>
-                    <td [hoverGroup]="10" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[9]"></statistics-month-cell></td>
-                    <td [hoverGroup]="11" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[10]"></statistics-month-cell></td>
-                    <td [hoverGroup]="12" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[11]"></statistics-month-cell></td>
-                    <td [hoverGroup]="13" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.total"></statistics-month-cell></td>
+                    <th scope="col" [hoverGroup]="[15]" [classOnHover]="'highlighted'">
+                        <div class="header">
+                            Pracownik
+                            <ng-container *ngIf="!allEmployeeDetailsShown">
+                                <svg (click)="setAllEmployeeDetailsShown(true)" width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                            </ng-container>
+                            <ng-container *ngIf="allEmployeeDetailsShown">
+                                <svg (click)="setAllEmployeeDetailsShown(false)" width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-dash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                                </svg>
+                            </ng-container>
+                        </div>
+                    </th>
+                    <th scope="col" [hoverGroup]="[1, 15]" [classOnHover]="'highlighted'">I</th>
+                    <th scope="col" [hoverGroup]="[2, 15]" [classOnHover]="'highlighted'">II</th>
+                    <th scope="col" [hoverGroup]="[3, 15]" [classOnHover]="'highlighted'">III</th>
+                    <th scope="col" [hoverGroup]="[4, 15]" [classOnHover]="'highlighted'">IV</th>
+                    <th scope="col" [hoverGroup]="[5, 15]" [classOnHover]="'highlighted'">V</th>
+                    <th scope="col" [hoverGroup]="[6, 15]" [classOnHover]="'highlighted'">VI</th>
+                    <th scope="col" [hoverGroup]="[7, 15]" [classOnHover]="'highlighted'">VII</th>
+                    <th scope="col" [hoverGroup]="[8, 15]" [classOnHover]="'highlighted'">VIII</th>
+                    <th scope="col" [hoverGroup]="[9, 15]" [classOnHover]="'highlighted'">IX</th>
+                    <th scope="col" [hoverGroup]="[10, 15]" [classOnHover]="'highlighted'">X</th>
+                    <th scope="col" [hoverGroup]="[11, 15]" [classOnHover]="'highlighted'">XI</th>
+                    <th scope="col" [hoverGroup]="[12, 15]" [classOnHover]="'highlighted'">XII</th>
+                    <th scope="col" [hoverGroup]="[13, 15]" [classOnHover]="'highlighted'">Razem</th>
                 </tr>
-            </ng-container>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let e of statistics.employeeStatistics; let i = index">
+                    <tr [class.details]="e.positions.length > 0" (click)="employeeDetailsShown[i] = !employeeDetailsShown[i]">
+                        <td><account-label [account]="e.employee.account"></account-label></td>
+                        <td [hoverGroup]="1" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[0]"></statistics-month-cell></td>
+                        <td [hoverGroup]="2" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[1]"></statistics-month-cell></td>
+                        <td [hoverGroup]="3" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[2]"></statistics-month-cell></td>
+                        <td [hoverGroup]="4" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[3]"></statistics-month-cell></td>
+                        <td [hoverGroup]="5" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[4]"></statistics-month-cell></td>
+                        <td [hoverGroup]="6" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[5]"></statistics-month-cell></td>
+                        <td [hoverGroup]="7" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[6]"></statistics-month-cell></td>
+                        <td [hoverGroup]="8" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[7]"></statistics-month-cell></td>
+                        <td [hoverGroup]="9" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[8]"></statistics-month-cell></td>
+                        <td [hoverGroup]="10" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[9]"></statistics-month-cell></td>
+                        <td [hoverGroup]="11" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[10]"></statistics-month-cell></td>
+                        <td [hoverGroup]="12" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.totalMonths[11]"></statistics-month-cell></td>
+                        <td [hoverGroup]="13" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="e.total"></statistics-month-cell></td>
+                    </tr>
+                    <ng-container *ngIf="employeeDetailsShown[i]">
+                        <ng-container *ngFor="let p of e.positions">
+                            <tr class="details-row">
+                                <td class="details-row-label">{{p.position.name}}</td>
+                                <td [hoverGroup]="1" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[0]"></statistics-month-cell></td>
+                                <td [hoverGroup]="2" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[1]"></statistics-month-cell></td>
+                                <td [hoverGroup]="3" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[2]"></statistics-month-cell></td>
+                                <td [hoverGroup]="4" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[3]"></statistics-month-cell></td>
+                                <td [hoverGroup]="5" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[4]"></statistics-month-cell></td>
+                                <td [hoverGroup]="6" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[5]"></statistics-month-cell></td>
+                                <td [hoverGroup]="7" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[6]"></statistics-month-cell></td>
+                                <td [hoverGroup]="8" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[7]"></statistics-month-cell></td>
+                                <td [hoverGroup]="9" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[8]"></statistics-month-cell></td>
+                                <td [hoverGroup]="10" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[9]"></statistics-month-cell></td>
+                                <td [hoverGroup]="11" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[10]"></statistics-month-cell></td>
+                                <td [hoverGroup]="12" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.totalMonths[11]"></statistics-month-cell></td>
+                                <td [hoverGroup]="13" [classOnHover]="'highlighted'"><statistics-month-cell [monthStatistics]="p.total"></statistics-month-cell></td>
+                            </tr>
+                        </ng-container>
+                    </ng-container> 
+                </ng-container>
+            </tbody>
         </table>
     </div>
 </ng-template>

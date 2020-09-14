@@ -32,16 +32,21 @@
     align-items: center;
 }
 
+.day-card--current-date {
+    box-shadow: 0px 0px 10px 2px rgb(43 179 92 / 40%)
+}
+
 .day-card--current-date > .day-card_label {
-    background: #4ca78f;
+    background: #44b17d;
     border-radius: 30px;
-    width: 40px;
+    width: 36px;
     color: white;
 }
 
 .day-card_label {
     @extend .unselectable;
     margin-top: 4px;
+    margin-bottom: 4px;
     text-align: center;
 }
 

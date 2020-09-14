@@ -1,11 +1,11 @@
 <div class="menu">
     <div class="option">
-        <button class="btn" (click)="onScheduleClicked()">
+        <button class="btn" [class.active]="router.isActive('/employee/schedule', false)" (click)="onScheduleClicked()">
             Grafik
         </button>
     </div>
     <div ngbDropdown class="option">
-        <button class="btn" id="hour-preferences" ngbDropdownToggle>Preferencje godzinowe</button>
+        <button class="btn" [class.active]="router.isActive('/employee/preferences', false)" id="hour-preferences" ngbDropdownToggle>Preferencje godzinowe</button>
         <div ngbDropdownMenu aria-labelledby="hour-preferences">
           <button ngbDropdownItem (click)="onPreferenceWeekClicked()">Preferencje tygodniowe</button>
           <button ngbDropdownItem (click)="onOneTimePreferencesClicked()">Preferencje jednorazowe</button>

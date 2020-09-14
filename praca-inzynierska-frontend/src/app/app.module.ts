@@ -9,6 +9,7 @@ import { EmployerModule } from './app/components/employer/employer.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NoBasicAuthPopupInterceptor } from './app/interceptors/no-basic-auth-popup.interceptor';
+import { ResponseUnauthorizedInterceptor } from './app/interceptors/response-unauthorized.interceptor';
 import { SharedModule } from './app/components/shared/shared.module';
 import localePl from '@angular/common/locales/pl'
 import { registerLocaleData } from '@angular/common';
@@ -32,6 +33,11 @@ registerLocaleData(localePl)
     {
       provide: HTTP_INTERCEPTORS,
       useClass: NoBasicAuthPopupInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ResponseUnauthorizedInterceptor,
       multi: true
     }
   ],

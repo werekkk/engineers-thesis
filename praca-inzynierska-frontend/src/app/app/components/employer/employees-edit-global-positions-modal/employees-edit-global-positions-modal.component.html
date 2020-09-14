@@ -6,32 +6,39 @@
         </button>
     </div>
     <div class="modal-body">   
-        <div class="position-rows">
-            <div class="position-row" *ngFor="let position of positions; let i = index">
-                <div *ngIf="currentlyEditedPositionIndex == i">
-                    <input class="form-control" placeholder="Nowa nazwa stanowiska" id="editedName" [(ngModel)]="editedName">
-                </div>
-                <div *ngIf="currentlyEditedPositionIndex != i">
-                    {{position.name}}
-                </div>
-                <div *ngIf="currentlyEditedPositionIndex == i" class="position-options">
-                    <div>
-                        <button class="btn btn-secondary btn-sm" (click)="setEditedPosition(null)">Powrót</button>
+        <ng-container *ngIf="positions.length > 0; else noPositions">
+            <div class="position-rows">
+                <div class="position-row" *ngFor="let position of positions; let i = index">
+                    <div *ngIf="currentlyEditedPositionIndex == i">
+                        <input class="form-control" placeholder="Nowa nazwa stanowiska" id="editedName" [(ngModel)]="editedName">
                     </div>
-                    <div>
-                        <button class="btn btn-success btn-sm" (click)="onSaveEditClicked()">Zapisz</button>
+                    <div *ngIf="currentlyEditedPositionIndex != i">
+                        {{position.name}}
                     </div>
-                </div>
-                <div *ngIf="currentlyEditedPositionIndex != i" class="position-options">
-                    <div>
-                        <button class="btn btn-primary btn-sm" (click)="setEditedPosition(i)">Edytuj</button>
+                    <div *ngIf="currentlyEditedPositionIndex == i" class="position-options">
+                        <div>
+                            <button class="btn btn-secondary btn-sm" (click)="setEditedPosition(null)">Powrót</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-success btn-sm" (click)="onSaveEditClicked()">Zapisz</button>
+                        </div>
                     </div>
-                    <div>
-                        <button class="btn btn-danger btn-sm" (click)="onDeletePositionClicked(position)">Usuń</button>
+                    <div *ngIf="currentlyEditedPositionIndex != i" class="position-options">
+                        <div>
+                            <button class="btn btn-primary btn-sm" (click)="setEditedPosition(i)">Edytuj</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-danger btn-sm" (click)="onDeletePositionClicked(position)">Usuń</button>
+                        </div>
                     </div>
-                </div>
-            </div> 
-        </div>
+                </div> 
+            </div>
+        </ng-container>
+        <ng-template #noPositions>
+            <div class="no-positions">
+                Nie dodano jeszcze żadnego stanowiska.
+            </div>
+        </ng-template>
     </div> 
     <div class="modal-footer">
         <div class="new-position">

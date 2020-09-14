@@ -4,6 +4,7 @@
     justify-content: left;
     background-color: white;
     border-radius: 8px;
+    margin: 8px;
 }
 
 .option {
@@ -18,8 +19,21 @@ button.option:hover {
 .option > button {
     width: 100%;
     font-weight: 600;
+    transition: 0s;
 }
 
 .option:hover > button {
-    background-color: #DDD;    
+    background-color: #DDD;
+    transition: 0s;
+}
+
+.option > .btn.active {
+    background-color: #44b17d;
+    color: white;
+}
+
+.option:hover > .btn.active {
+    background-color: #399469;
+    color: white;
+    transition: 0.2s;
 }

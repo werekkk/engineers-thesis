@@ -22,6 +22,11 @@ class PositionController @Autowired constructor(
         return ControllerUtils.createResponse(positionService.getPositionsDtoByEmployer(principal))
     }
 
+    @GetMapping("/employee")
+    fun getEmployeePositions(principal: Principal): ResponseEntity<PositionsDto> {
+        return ControllerUtils.createResponse(positionService.getEmployeePositions(principal))
+    }
+
     @PostMapping
     fun savePosition(principal: Principal, @RequestBody position: PositionDto): ResponseEntity<PositionDto> {
         return ControllerUtils.createResponse(positionService.savePosition(principal, position))

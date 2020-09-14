@@ -1,4 +1,4 @@
-<div *ngIf="!shiftsLoaded; else calendar" class="spinner">
+<div *ngIf="!(shiftsLoaded && positionsLoaded); else calendar" class="spinner">
     <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
     </div>
 </div>

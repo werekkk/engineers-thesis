@@ -1,14 +1,14 @@
 <div class="menu">
-    <button class="btn" (click)="onScheduleClicked()">
+    <button class="btn" [class.active]="router.isActive('employer/schedule', false)" (click)="onScheduleClicked()">
         Grafik
     </button>
-    <button  class="btn"(click)="onEmployeesClicked()">
+    <button class="btn" [class.active]="router.isActive('employer/employees', false)" (click)="onEmployeesClicked()">
         Pracownicy
     </button>
-    <button  class="btn" (click)="onStaffClicked()">
+    <button class="btn" [class.active]="router.isActive('employer/staff', false)" (click)="onStaffClicked()">
         Obsada
     </button>
-    <button  class="btn" (click)="onStatisticsClicked()">
+    <button class="btn" [class.active]="router.isActive('employer/statistics', false)" (click)="onStatisticsClicked()">
         Statystyki
     </button>
     <div class="justify-end">

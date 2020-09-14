@@ -28,6 +28,8 @@ class ScheduleGeneratorService @Autowired constructor(
         const val TIME_STEP_IN_MINUTES = 5
         const val TIME_POINTS_PER_DAY = 24 * 60 / TIME_STEP_IN_MINUTES
 
+        const val MAX_DAYS = 31
+
     }
 
     fun generateSchedule(employerPrincipal: Principal, generatorConfigDto: GeneratorConfigDto): ShiftsDto? {
@@ -55,7 +57,7 @@ class ScheduleGeneratorService @Autowired constructor(
         if (employees.size != nullableEmployees.size) return null
 
         val dayCount = ChronoUnit.DAYS.between(configDto.firstDay, configDto.lastDay) + 1
-        return GeneratorConfig(employees, positions, dayCount.toInt(), TIME_POINTS_PER_DAY)
+        return if (dayCount in 1..MAX_DAYS) GeneratorConfig(employees, positions, dayCount.toInt(), TIME_POINTS_PER_DAY) else null
     }
 
     private fun mapFromPositionDto(acc: AccountDto, position: PositionDto, config: GeneratorConfigDto): Position? {

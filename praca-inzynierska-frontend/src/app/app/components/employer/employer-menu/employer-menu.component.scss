@@ -4,13 +4,27 @@
     justify-content: left;
     background-color: white;
     border-radius: 8px;
+    margin: 8px;
 }
 
 .btn {
-    width: 15%;
+    width: 18%;
     font-weight: 600;
+    transition: 0s;
 }
 
 .btn:hover {
     background-color: #DDD;
+    transition: 0s;
+}
+
+.active {
+    background-color: #44b17d;
+    color: white;
+}
+
+.btn.active:hover {
+    background-color: #399469;
+    color: white;
+    transition: 0.2s;
 }

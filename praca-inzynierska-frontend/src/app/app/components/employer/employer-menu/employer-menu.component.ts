@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'employer-menu',
   templateUrl: './employer-menu.component.html',
   styleUrls: ['./employer-menu.component.scss']
 })
-export class EmployerMenuComponent implements OnInit {
+export class EmployerMenuComponent {
 
   constructor(
-    private router: Router
+    public router: Router
   ) { }
-
-  ngOnInit(): void {
-  }
 
   onScheduleClicked() {
     this.router.navigate(['employer', 'schedule'])

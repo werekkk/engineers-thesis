@@ -6,7 +6,7 @@
 <ng-template #modal>
     <div class="modal-header">
         <h4>{{day.format('D MMMM')}}</h4>
-        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()" tabindex="-1">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>

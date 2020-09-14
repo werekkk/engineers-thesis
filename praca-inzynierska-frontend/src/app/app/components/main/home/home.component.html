@@ -13,6 +13,9 @@
             <label for="passwordInput unselectable">Hasło</label>
             <input class="form-control" type="password" placeholder="Hasło" id="passwordInput" [(ngModel)]="passwordInput">
         </div>
+        <div *ngIf="errors" class="form-errors">
+            Nieprawidłowa nazwa użytkownika lub hasło.
+        </div>
         <div class="login-box_segment">
             <button class="btn btn-primary btn-block" type="submit" (click)="onLoginClicked()">
                 Zaloguj

@@ -9,6 +9,7 @@ import { RegisterEmployerComponent } from './register-employer/register-employer
 import { MainComponent } from './main/main.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { SharedModule } from '../shared/shared.module';
+import { RegisterSuccessComponent } from './register-success/register-success.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SharedModule } from '../shared/shared.module';
     RegisterEmployeeComponent,
     RegisterEmployerComponent,
     MainComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    RegisterSuccessComponent
   ],
   imports: [
     CommonModule,

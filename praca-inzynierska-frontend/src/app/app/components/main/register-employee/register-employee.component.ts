@@ -20,12 +20,12 @@ export class RegisterEmployeeComponent implements OnInit {
   invitationToken: String = ''
 
   // Corresponds with `RegisterEmployeeDetailsDto`
-  // expect the `invitationToken` attribute
+  // except the `invitationToken` attribute
   employeeForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-    repeatPassword: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email])
+    username: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    repeatPassword: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(3)])
   }, matchingPasswordValidator)
 
   get username(): FormControl { return this.employeeForm.get('username') as FormControl}
@@ -74,7 +74,7 @@ export class RegisterEmployeeComponent implements OnInit {
         }
         this.isRegistering = false
         if (!response.error && response.account) {
-          this.router.navigate([''])
+          this.router.navigate(['register-success'])
         }
       })
     }

@@ -14,6 +14,7 @@ export class StatisticsYearDto {
     sort() {
         this.positionStatistics.sort((a, b) => PositionDto.compare(a.position, b.position))
         this.employeeStatistics.sort((a, b) => EmployeeDto.compare(a.employee, b.employee))
+        this.employeeStatistics.forEach(e => e.sort())
     }
 
     static copyOf(other: StatisticsYearDto): StatisticsYearDto {

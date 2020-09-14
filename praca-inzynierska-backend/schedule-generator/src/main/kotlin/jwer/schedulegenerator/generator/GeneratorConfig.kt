@@ -18,7 +18,7 @@ class GeneratorConfig(
     val totalTimePoints get() = days * timePointsPerDay
 
     init {
-        if (!(days in 1..30 && timePointsPerDay in 1..288
+        if (!(days in 1..31 && timePointsPerDay in 1..288
             && !employees.any { e -> !e.isCorrect(days, timePointsPerDay) }
             && !positions.any { p -> !p.isCorrect(days, timePointsPerDay)})) {
             throw Exception("Generator config initialized with incorrect data!")

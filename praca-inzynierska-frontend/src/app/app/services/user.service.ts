@@ -9,6 +9,8 @@ import { map, catchError } from 'rxjs/operators';
 import { RegisterWorkplaceDetailsDto } from '../model/dto/RegisterWorkplaceDetailsDto';
 import { RegisterEmployeeDetailsDto } from '../model/dto/RegisterEmployeeDetailsDto';
 import { RegisterResponseDto } from '../model/dto/RegisterResponseDto';
+import { ChangeAccountDetailsDto } from '../model/dto/ChangeAccountDetailsDto';
+import { ChangePasswordDto } from '../model/dto/ChangePasswordDto';
 
 @Injectable({
   providedIn: 'root'
@@ -109,5 +111,21 @@ export class UserService {
       `${environment.serverUrl}/user/register-employee`,
       registerDetails
     ) as Observable<RegisterResponseDto>
+  }
+
+  changeAccountDetails(newAccountDetails: ChangeAccountDetailsDto): Observable<AccountDto> {
+    return this.http.post(
+      `${environment.serverUrl}/user/change-details`,
+      newAccountDetails,
+      {withCredentials: true}
+    ) as Observable<AccountDto>
+  }
+
+  changePassword(newPasswordDetails: ChangePasswordDto): Observable<AccountDto> {
+    return this.http.post(
+      `${environment.serverUrl}/user/change-password`,
+      newPasswordDetails,
+      {withCredentials: true}
+    ) as Observable<AccountDto>
   }
 }
