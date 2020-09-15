@@ -55,7 +55,7 @@ export class EmployeesListComponent implements OnInit {
       if (shouldDelete) {
         this.employerService.deleteEmployee(employee.employeeId).subscribe()
       }
-    })
+    }, () => null)
   }
   
   onActivationLinkClicked(employee: EmployeeDto) {

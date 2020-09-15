@@ -7,7 +7,7 @@
 .settings {
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 500px;
 }
 
 .settings > *:not(:last-child) {
@@ -25,6 +25,12 @@
     background-color: #BBB;
 }
 
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .form-group {
     margin: 0 0;
 }
@@ -37,19 +43,23 @@
     font-weight: 600;
 }
 
-form > div:not(:last-child) {
-    display: flex;
-    justify-content: center;
-}
-
 .submit-button {
     display: flex;
     justify-content: flex-end;
 }
 
 .spinner-container {
+    position: relative;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 200px;
+}
+
+.spinner-container > * {
+    position: absolute;
+}
+
+.delete-account-warning {
+    text-align: justify;
 }

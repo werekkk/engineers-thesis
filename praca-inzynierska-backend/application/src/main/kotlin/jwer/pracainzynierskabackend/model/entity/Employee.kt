@@ -11,7 +11,7 @@ data class Employee(
         val id: Long,
 
         @MapsId("account_id")
-        @OneToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+        @OneToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL], orphanRemoval = true)
         @JoinColumn(name = "account_id")
         val account: Account,
 
@@ -31,7 +31,7 @@ data class Employee(
         @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], mappedBy = "employee")
         val oneTimeHourPreferences: MutableList<OneTimeHourPreference> = mutableListOf(),
 
-        @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+        @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
         @JoinColumn(name = "preferences_week_id")
         val preferencesWeek: PreferencesWeek = PreferencesWeek()
 ) {

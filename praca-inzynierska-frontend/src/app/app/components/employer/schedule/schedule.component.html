@@ -8,7 +8,9 @@
 </div>
 <div class="schedule">
     <div *ngIf="!positionsLoaded; else schedules">
-        <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+        <div class="spinner">
+            <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+            </div>
         </div>
     </div>
     <ng-template #schedules>

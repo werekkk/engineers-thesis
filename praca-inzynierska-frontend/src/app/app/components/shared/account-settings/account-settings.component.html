@@ -1,61 +1,140 @@
+<!-- <ng-container *ngIf="false; else spinner"></ng-container > -->
 <div class="settings-container">
     <div class="settings">
         <h4>Ustawienia konta</h4>
-        <div *ngIf="!accountDetailsChanging; else spinner">
-            <h5>
-                Zmiana danych osobowych
-            </h5>
-            <form [formGroup]="detailsForm">
-                <div class="form-group">
-                    <label>
-                        Adres e-mail:
-                        <input class="form-control" type="email" formControlName="newEmail" id="newEmail" placeholder="Adres e-mail" maxlength="50" autocomplete="off" [ngModel]="userService.user.value.email" (ngModelChange)="emailTakenError = false; invalidEmailError = false">
-                    </label>
-                    <div class="form-errors" *ngIf="newEmail.invalid && (newEmail.dirty || newEmail.touched)">
-                        <div *ngIf="newEmail.errors.required">Adres e-mail jest wymagany.</div>
-                        <div *ngIf="newEmail.errors.email">Adres e-mail musi być poprawny.</div>
+        <div>
+            <div *ngIf="!accountDetailsChanging; else spinner">
+                <h5>
+                    Zmiana danych osobowych
+                </h5>
+                <form [formGroup]="detailsForm">
+                    <div class="form-fields">
+                        <div class="form-group">
+                            <label>
+                                Adres e-mail:
+                                <input class="form-control" type="email" formControlName="newEmail" id="newEmail" placeholder="Adres e-mail" maxlength="50" autocomplete="off" (ngModelChange)="emailTakenError = false; invalidEmailError = false">
+                            </label>
+                            <div class="form-errors" *ngIf="newEmail.invalid && (newEmail.dirty || newEmail.touched)">
+                                <div *ngIf="newEmail.errors.required">Adres e-mail jest wymagany.</div>
+                                <div *ngIf="newEmail.errors.email">Adres e-mail musi być poprawny.</div>
+                            </div>
+                            <div class="form-errors" *ngIf="invalidEmailError || emailTakenError">
+                                <div *ngIf="invalidEmailError">Adres e-mail musi być poprawny.</div>
+                                <div *ngIf="emailTakenError">Podany adres e-mail jest już zajęty.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Imię:
+                                <input class="form-control" type="text" formControlName="newFirstName" id="newFirstName" placeholder="Imię" maxlength="50" autocomplete="off">
+                            </label>
+                            <div class="form-errors" *ngIf="newFirstName.invalid && (newFirstName.dirty || newFirstName.touched)">
+                                <div *ngIf="newFirstName.errors.required">Imię jest wymagane.</div>
+                                <div *ngIf="newFirstName.errors.minlength">Imię musi składać się z przynajmniej 2 znaków.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Nazwisko:
+                                <input class="form-control" type="text" formControlName="newLastName" id="newLastName" placeholder="Nazwisko" maxlength="50" autocomplete="off">
+                            </label>
+                            <div class="form-errors" *ngIf="newLastName.invalid && (newLastName.dirty || newLastName.touched)">
+                                <div *ngIf="newLastName.errors.required">Nazwisko jest wymagane.</div>
+                                <div *ngIf="newLastName.errors.minlength">Nazwisko musi składać się z przynajmniej 2 znaków.</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-errors">
-                        <div *ngIf="invalidEmailError">Adres e-mail musi być poprawny.</div>
-                        <div *ngIf="emailTakenError">Podany adres e-mail jest już zajęty.</div>
+                    <div class="submit-button">
+                        <button class="btn btn-primary"(click)="onChangeDetailsClicked()">
+                            Zmień dane
+                        </button>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>
-                        Imię:
-                        <input class="form-control" type="text" formControlName="newFirstName" id="newFirstName" placeholder="Imię" maxlength="50" autocomplete="off" [ngModel]="userService.user.value.firstName">
-                    </label>
-                    <div class="form-errors" *ngIf="newFirstName.invalid && (newFirstName.dirty || newFirstName.touched)">
-                        <div *ngIf="newFirstName.errors.required">Imię jest wymagane.</div>
-                        <div *ngIf="newFirstName.errors.minlength">Imię musi składać się z przynajmniej 2 znaków.</div>
+                </form>
+            </div>
+        </div>
+        <div>
+            <div *ngIf="!passwordChanging; else spinner">
+                <h5>
+                    Zmiana hasła
+                </h5>
+                <form [formGroup]="newPasswordForm">
+                    <div class="form-fields">
+                        <div class="form-group">
+                            <label>
+                                Stare hasło:
+                                <input class="form-control" type="password" formControlName="oldPassword" id="oldPassword" placeholder="Hasło" maxlength="20" autocomplete="off" (ngModelChange)="incorrectPasswordError = false">
+                            </label>
+                            <div class="form-errors" *ngIf="oldPassword.invalid && (oldPassword.dirty || oldPassword.touched)">
+                                <div *ngIf="oldPassword.errors.required">Stare hasło jest wymagane.</div>
+                                <div *ngIf="oldPassword.errors.minlength">Stare hasło musi składać się z przynajmniej 4 znaków.</div>
+                            </div>
+                            <div class="form-errors" *ngIf="incorrectPasswordError">
+                                <div>Stare hasło jest niepoprawne</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Nowe hasło:
+                                <input class="form-control" type="password" formControlName="newPassword" id="newPassword" placeholder="Hasło" maxlength="20" autocomplete="off">
+                            </label>
+                            <div class="form-errors" *ngIf="newPassword.invalid && (newPassword.dirty || newPassword.touched)">
+                                <div *ngIf="newPassword.errors.required">Nowe hasło jest wymagane.</div>
+                                <div *ngIf="newPassword.errors.minlength">Nowe hasło musi składać się z przynajmniej 4 znaków.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Powtórz nowe hasło:
+                                <input class="form-control" type="password" formControlName="newPasswordRepeat" id="newPasswordRepeat" placeholder="Powtórzone hasło" maxlength="20" autocomplete="off">
+                            </label>
+                            <div class="form-errors" *ngIf="(newPasswordRepeat.invalid || newPasswordForm.errors?.passwordNotMatching) && (newPasswordRepeat.dirty || newPasswordRepeat.touched)">
+                                <div *ngIf="newPasswordRepeat.errors?.required">Wymagane jest wprowadzenie powtórzonego nowego hasła.</div>
+                                <div *ngIf="newPasswordForm.errors?.passwordNotMatching">Hasła muszą się zgadzać.</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>
-                        Nazwisko:
-                        <input class="form-control" type="text" formControlName="newLastName" id="newLastName" placeholder="Nazwisko" maxlength="50" autocomplete="off" [ngModel]="userService.user.value.lastName">
-                    </label>
-                    <div class="form-errors" *ngIf="newLastName.invalid && (newLastName.dirty || newLastName.touched)">
-                        <div *ngIf="newLastName.errors.required">Nazwisko jest wymagane.</div>
-                        <div *ngIf="newLastName.errors.minlength">Nazwisko musi składać się z przynajmniej 2 znaków.</div>
+                    <div class="submit-button">
+                        <button class="btn btn-primary"(click)="onChangePasswordClicked()">
+                            Zmień hasło
+                        </button>
                     </div>
+                </form>
+            </div>
+        </div>
+        <div>
+            <div *ngIf="!deletingAccount; else spinner">
+                <h5>
+                    Usunięcie konta
+                </h5>
+                <div class="delete-account-warning">
+                    <p *ngIf="userService.user.value.accountType == 'EMPLOYER'">
+                        Usunięcie konta spowoduje usunięcie wszystkich danych pracodawcy,
+                        zakładu pracy oraz przypisanych do niego pracowników. Po usunięciu konta
+                        nie będzie możliwe jego ponowne przywrócenie lub odtworzenie powiązanych
+                        z nim danych.
+                    </p>
+                    <ng-container *ngIf="userService.user.value.accountType == 'EMPLOYEE'">
+                        <p>
+                            Usunięcie konta spowoduje usunięcie Twoich danych logowania oraz danych
+                            o preferencjach godzinowych. Twoje pozostałe dane osobowe i dane o twoich zmianach
+                            dalej będą znajdować się w systemie, o ile Twój pracodawca ich nie usunie.  
+                        </p>
+                        <p>
+                            Po usunięciu konta będziesz mógł je odnowić przy pomocy linku
+                            aktywacyjnego otrzymanego od pracodawcy. Po odnowieniu konta 
+                            nie zostaną przywrócone dane o preferencjach godzinowych.
+                        </p>
+                    </ng-container>
+                    <p>
+                        Tej operacji nie będzie można cofnąć.
+                    </p>
                 </div>
                 <div class="submit-button">
-                    <button class="btn btn-primary">
-                        Zmień dane
+                    <button class="btn btn-danger" (click)="onDeleteAccountClicked()">
+                        Usuń konto
                     </button>
                 </div>
-            </form>
-        </div>
-        <div *ngIf="!passwordChanging; else spinner">
-            <h5>
-                Zmiana hasła
-            </h5>
-        </div>
-        <div *ngIf="!deletingAccount; else spinner">
-            <h5>
-                Usunięcie konta
-            </h5>
+            </div>
         </div>
     </div>
 </div>

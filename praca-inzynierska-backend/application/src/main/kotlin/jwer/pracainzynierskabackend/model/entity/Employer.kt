@@ -13,11 +13,11 @@ data class Employer(
         val id: Long,
 
         @MapsId("account_id")
-        @OneToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+        @OneToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL], orphanRemoval = true)
         @JoinColumn(name = "account_id")
         val account: Account,
 
-        @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+        @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
         @JoinColumn(name = "workplace_id")
         val workplace: Workplace
 ) {

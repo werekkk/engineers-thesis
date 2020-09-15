@@ -5,9 +5,8 @@ import { RegisterWorkplaceDetailsDto } from '../../../model/dto/RegisterWorkplac
 import { matchingPasswordValidator } from '../../../shared/validators/matching-password.validator'
 import { UserService } from 'src/app/app/services/user.service';
 import { Router } from '@angular/router';
-import { RegisterResponseDto } from 'src/app/app/model/dto/RegisterResponseDto';
-import { RegisterError } from 'src/app/app/model/RegisterError';
-import { ɵBrowserPlatformLocation } from '@angular/common';
+import { AccountResponseDto } from 'src/app/app/model/dto/AccountResponseDto';
+import { FormError } from 'src/app/app/model/FormError';
 
 @Component({
   selector: 'register-employer',
@@ -26,7 +25,7 @@ export class RegisterEmployerComponent implements OnInit {
       firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
       middleName: new FormControl(''),
       lastName: new FormControl('', [Validators.required, Validators.minLength(2)])
-    }, matchingPasswordValidator),
+    }, matchingPasswordValidator('password', 'repeatPassword')),
     workplaceName: new FormControl('', [Validators.required, Validators.minLength(3)])
   })
 
@@ -41,7 +40,7 @@ export class RegisterEmployerComponent implements OnInit {
   get employer(): FormGroup { return this.employerForm.get('employer') as FormGroup }
 
   isRegistering: boolean = false
-  registerResponse: RegisterResponseDto = null
+  registerResponse: AccountResponseDto = null
 
   invalidEmailError = false
   usernameTakenError = false
@@ -64,9 +63,9 @@ export class RegisterEmployerComponent implements OnInit {
       .subscribe((response) => {
         this.registerResponse = response
         switch (this.registerResponse.error) {
-          case RegisterError.INVALID_EMAIL: this.invalidEmailError = true; break
-          case RegisterError.EMAIL_TAKEN: this.emailTakenError = true; break
-          case RegisterError.USERNAME_TAKEN: this.usernameTakenError = true; break
+          case FormError.INVALID_EMAIL: this.invalidEmailError = true; break
+          case FormError.EMAIL_TAKEN: this.emailTakenError = true; break
+          case FormError.USERNAME_TAKEN: this.usernameTakenError = true; break
         }
         this.isRegistering = false
         if (!response.error && response.account) {

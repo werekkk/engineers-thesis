@@ -62,7 +62,7 @@ export class EmployeesEditEmployeePositionsModalComponent implements OnInit {
         if (shouldSave) {
           this.savePositionsAndClose(selectedPositions)
         }
-      })
+      }, () => null)
     } else {
       this.savePositionsAndClose(selectedPositions)
     }

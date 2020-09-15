@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { Utils } from '../shared/utils/utils';
 import { trimTrailingNulls } from '@angular/compiler/src/render3/view/util';
 import { SetPositionsDto } from '../model/dto/SetPositionsDto';
+import { PositionDto } from '../model/dto/PositionDto';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,7 @@ export class EmployeeService {
           let newEmployees = this.employees.value
           newEmployees.push(newEmployee)
           newEmployees.sort(EmployeeDto.compare)
+          newEmployees.forEach(e => e.positions.sort(PositionDto.compare))
           this.employees.next(newEmployees)
           return newEmployee
         })
@@ -48,6 +50,7 @@ export class EmployeeService {
     ).pipe(
       map((response: EmployeesDto) => {
         response.employees.sort(EmployeeDto.compare)
+        response.employees.forEach(e => e.positions.sort(PositionDto.compare))
         this.employer.next(response.employer)
         this.employees.next(response.employees)
         this.employeesLoaded = true

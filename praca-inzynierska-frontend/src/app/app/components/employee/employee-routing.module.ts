@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EmployeeComponent } from './employee/employee.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { PreferencesComponent } from './preferences/preferences/preferences.component';
+import { AccountSettingsComponent } from '../shared/account-settings/account-settings.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
       {
         path: 'preferences',
         loadChildren: () => import('./preferences/preferences.module').then(m => m.PreferencesModule)
-      }
+      },
+      { path: 'settings', component: AccountSettingsComponent}
     ]
   }
 ];

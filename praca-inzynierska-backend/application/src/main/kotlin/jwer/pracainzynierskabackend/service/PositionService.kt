@@ -71,17 +71,27 @@ class PositionService @Autowired constructor(
         return null
     }
 
+    @Transactional
     fun setEmployeePositions(principal: Principal, positionDetails: SetPositionsDto): EmployeeDto? {
         workplaceService.getWorkplaceByEmployer(principal)?.let { w ->
             employeeRepository.findByAccountIdAndWorkplaceId(positionDetails.employeeId, w.id)?.let {
                 val newPositions = positionDetails.positionIds.mapNotNull { posId ->
                     positionRepository.getById(posId)
                 }
+                findLostPositions(it.positions, newPositions).forEach {p ->
+                    shiftRepository.getAllByPositionIdAndEmployeeId(p.id, it.id).forEach {
+                        shiftRepository.delete(it)
+                    }
+                }
                 val savedEmployee = employeeRepository.save(it.copy(positions = newPositions))
                 return EmployeeDto(savedEmployee)
             }
         }
         return null
+    }
+
+    private fun findLostPositions(oldPositions: List<Position>, newPositions: List<Position>): List<Position> {
+        return oldPositions.filter { op -> !newPositions.any { it.id == op.id } }
     }
 
     fun getEmployeePositions(employeePrincipal: Principal): PositionsDto? {

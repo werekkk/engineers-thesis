@@ -50,7 +50,7 @@ export class EmployeesEditGlobalPositionsModalComponent {
         this.isLoading = true
         this.positionService.deletePosition(position.id).subscribe(() => this.isLoading = false)
       }
-    })
+    }, () => null)
   }
 
   setEditedPosition(index: number) {

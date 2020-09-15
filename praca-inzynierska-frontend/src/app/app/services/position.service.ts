@@ -41,7 +41,6 @@ export class PositionService {
     .pipe(
       map((response: PositionsDto) => {
         response.positions.sort(PositionDto.compare)
-        response.positions.sort(PositionDto.compare)
         this.positions.next(response.positions)
         this.positionsLoaded = true
         return response.positions

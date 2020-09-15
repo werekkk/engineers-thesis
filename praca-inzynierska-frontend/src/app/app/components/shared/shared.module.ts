@@ -24,6 +24,7 @@ import { YearPickerComponent } from './year-picker/year-picker.component';
 import { AccountLabelComponent } from './account-label/account-label.component';
 import { HoverGroupDirective } from '../../directives/hover-group.directive';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { ConfirmDeleteAccountModalComponent } from './confirm-delete-account-modal/confirm-delete-account-modal.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     YearPickerComponent,
     AccountLabelComponent,
     HoverGroupDirective,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    ConfirmDeleteAccountModalComponent
   ],
   imports: [
     CommonModule,

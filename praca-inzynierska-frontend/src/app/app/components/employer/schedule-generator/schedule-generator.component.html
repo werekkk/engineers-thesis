@@ -20,10 +20,12 @@
                         [ngModel]="finishDate | date:'yyyy-MM-dd'" 
                         (ngModelChange)="finishDate = $event; onDurationChange('finish')">
                     </div>
-                    
                 </div>
                 <div>
                     {{durationInDays}} {{ durationInDays == 1 ? 'dzień' : 'dni' }}
+                </div>
+                <div *ngIf="durationInDays > 31" class="error">
+                    Maksymalna liczba dni generowanego grafiku to 31.
                 </div>
             </div>
             <div class="container-fluid checkboxes">

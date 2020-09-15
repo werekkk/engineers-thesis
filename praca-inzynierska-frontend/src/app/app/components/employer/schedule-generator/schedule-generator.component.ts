@@ -60,7 +60,6 @@ export class ScheduleGeneratorComponent implements OnInit {
   }
 
   onDurationChange(source: 'start' | 'finish' = 'finish') {
-    console.log('change')
     if (moment(this.finishDate).isBefore(this.startDate)) {
       if (source == 'start') {
         this.finishDate = this.startDate

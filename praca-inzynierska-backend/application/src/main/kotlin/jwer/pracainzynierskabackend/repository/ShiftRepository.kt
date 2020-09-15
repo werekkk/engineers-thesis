@@ -26,4 +26,7 @@ interface ShiftRepository : JpaRepository<Shift, Long> {
 
     @Query("SELECT s FROM Shift s WHERE s.employee.workplace.id = ?1 AND s.period.start >= ?2 AND s.period.finish <= ?3")
     fun getAllByWorkplaceIdAndPeriod(workplaceId: Long, start: LocalDateTime, finish: LocalDateTime): List<Shift>
+
+    @Query("SELECT s FROM Shift s WHERE s.position.id = ?1 AND s.employee.id = ?2")
+    fun getAllByPositionIdAndEmployeeId(positionId: Long, employeeId: Long): List<Shift>
 }

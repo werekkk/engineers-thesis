@@ -18,7 +18,6 @@ class WorkplaceService @Autowired constructor(
             return when(it.accountType) {
                 AccountType.EMPLOYEE -> workplaceRepository.findByEmployeeUsername(it.username!!)
                 AccountType.EMPLOYER -> workplaceRepository.findByEmployerUsername(it.username!!)
-                AccountType.ADMIN -> null
             }
         }
     }

@@ -1,7 +1,9 @@
 import { ValidatorFn, FormGroup, ValidationErrors } from '@angular/forms/forms'
 
-export const matchingPasswordValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
-    let password = control.get('password').value
-    let repeatPassword = control.get('repeatPassword').value
-    return password === repeatPassword ? null : {'passwordNotMatching': true}
+export function matchingPasswordValidator(passwordControl: string, repeatPasswordControl: string): ValidatorFn {
+    return (control: FormGroup): ValidationErrors | null => {
+        let password = control.get(passwordControl).value
+        let repeatPassword = control.get(repeatPasswordControl).value
+        return password === repeatPassword ? null : {'passwordNotMatching': true}
+    }
 }

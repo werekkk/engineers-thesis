@@ -16,10 +16,10 @@ data class Workplace (
         @JoinColumn(name = "employer_id", nullable = false)
         var employer: Employer?,
 
-        @OneToMany(fetch = FetchType.LAZY, mappedBy = "workplace", cascade = [CascadeType.ALL])
+        @OneToMany(fetch = FetchType.LAZY, mappedBy = "workplace", cascade = [CascadeType.ALL], orphanRemoval = true)
         val employees: List<Employee>,
 
-        @OneToMany(fetch = FetchType.LAZY, mappedBy = "workplace", cascade = [CascadeType.ALL])
+        @OneToMany(fetch = FetchType.LAZY, mappedBy = "workplace", cascade = [CascadeType.ALL], orphanRemoval = true)
         val positions: List<Position>,
 
 ) {

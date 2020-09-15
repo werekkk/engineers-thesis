@@ -1,8 +1,9 @@
 package jwer.pracainzynierskabackend.model.dto
 
-enum class RegisterError {
+enum class FormError {
     INVALID_FIELDS,
     INVALID_EMAIL,
     USERNAME_TAKEN,
-    EMAIL_TAKEN
+    EMAIL_TAKEN,
+    INCORRECT_PASSWORD
 }

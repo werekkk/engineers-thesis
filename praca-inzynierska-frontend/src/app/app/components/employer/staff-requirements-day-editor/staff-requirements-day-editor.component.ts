@@ -108,7 +108,6 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.adjustCanvasWidth()
     this.initCanvas()
-    // interval(1000).subscribe(() => console.log(this.latestMove, this.latestMove?.offsetY))
   }
 
   adjustCanvasWidth() {

@@ -8,7 +8,7 @@ import { Observable, BehaviorSubject, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { RegisterWorkplaceDetailsDto } from '../model/dto/RegisterWorkplaceDetailsDto';
 import { RegisterEmployeeDetailsDto } from '../model/dto/RegisterEmployeeDetailsDto';
-import { RegisterResponseDto } from '../model/dto/RegisterResponseDto';
+import { AccountResponseDto } from '../model/dto/AccountResponseDto';
 import { ChangeAccountDetailsDto } from '../model/dto/ChangeAccountDetailsDto';
 import { ChangePasswordDto } from '../model/dto/ChangePasswordDto';
 
@@ -85,11 +85,11 @@ export class UserService {
    * 
    * @param registerDetails Register details of the employer and the workplace.
    */
-  registerWorkplace(registerDetails: RegisterWorkplaceDetailsDto): Observable<RegisterResponseDto> {
+  registerWorkplace(registerDetails: RegisterWorkplaceDetailsDto): Observable<AccountResponseDto> {
     return this.http.post(
       `${environment.serverUrl}/user/register-workplace`, 
       registerDetails
-    ) as Observable<RegisterResponseDto>
+    ) as Observable<AccountResponseDto>
   }
 
   /**
@@ -106,25 +106,32 @@ export class UserService {
     ) as Observable<AccountDto>
   }
 
-  registerEmployee(registerDetails: RegisterEmployeeDetailsDto): Observable<RegisterResponseDto> {
+  registerEmployee(registerDetails: RegisterEmployeeDetailsDto): Observable<AccountResponseDto> {
     return this.http.post(
       `${environment.serverUrl}/user/register-employee`,
       registerDetails
-    ) as Observable<RegisterResponseDto>
+    ) as Observable<AccountResponseDto>
   }
 
-  changeAccountDetails(newAccountDetails: ChangeAccountDetailsDto): Observable<AccountDto> {
+  changeAccountDetails(newAccountDetails: ChangeAccountDetailsDto): Observable<AccountResponseDto> {
     return this.http.post(
       `${environment.serverUrl}/user/change-details`,
       newAccountDetails,
       {withCredentials: true}
-    ) as Observable<AccountDto>
+    ) as Observable<AccountResponseDto>
   }
 
-  changePassword(newPasswordDetails: ChangePasswordDto): Observable<AccountDto> {
+  changePassword(newPasswordDetails: ChangePasswordDto): Observable<AccountResponseDto> {
     return this.http.post(
       `${environment.serverUrl}/user/change-password`,
       newPasswordDetails,
+      {withCredentials: true}
+    ) as Observable<AccountResponseDto>
+  }
+
+  deleteAccount(): Observable<AccountDto> {
+    return this.http.delete(
+      `${environment.serverUrl}/user`,
       {withCredentials: true}
     ) as Observable<AccountDto>
   }

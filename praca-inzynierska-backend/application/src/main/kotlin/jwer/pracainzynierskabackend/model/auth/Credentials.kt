@@ -23,5 +23,5 @@ data class Credentials(
         @OneToMany(fetch = FetchType.EAGER, mappedBy = "credentials", cascade = [CascadeType.ALL])
         val accountRoles: MutableList<AccountRole>
 ) {
-        fun withoutPassword(): Credentials = this.copy(password = " ")
+        fun withoutPassword(): Credentials = this.copy(password = "")
 }
