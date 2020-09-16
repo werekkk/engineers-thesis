@@ -50,7 +50,6 @@ export class AccountSettingsComponent {
   constructor(
     public userService: UserService,
     private authenticationService: AuthenticationService,
-    private router: Router,
     private modalService: NgbModal
   ) {
     userService.user.subscribe(user => {

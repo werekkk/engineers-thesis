@@ -5,6 +5,7 @@ import jwer.pracainzynierskabackend.model.dto.EmployeeDto
 import jwer.pracainzynierskabackend.model.dto.EmployeesDto
 import jwer.pracainzynierskabackend.service.EmployeeService
 import jwer.pracainzynierskabackend.utils.ControllerUtils
+import jwer.pracainzynierskabackend.utils.createResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -18,17 +19,17 @@ class EmployeeController @Autowired constructor(
 
     @PostMapping("/add")
     fun addEmployee(@RequestBody employeeDetails: AddEmployeeDto, principal: Principal): ResponseEntity<EmployeeDto> {
-        return ControllerUtils.createResponse(employeeService.addEmployee(employeeDetails, principal))
+        return employeeService.addEmployee(employeeDetails, principal).createResponse()
     }
 
     @GetMapping("/getAll")
     fun getAllEmployees(principal: Principal): ResponseEntity<EmployeesDto> {
-        return ControllerUtils.createResponse(employeeService.getAllEmployees(principal))
+        return employeeService.getAllEmployees(principal).createResponse()
     }
 
     @DeleteMapping("/delete/{id}")
     fun deleteEmployee(@PathVariable id: Long, principal: Principal): ResponseEntity<Long> {
-        return ControllerUtils.createResponse(employeeService.deleteEmployee(id, principal))
+        return employeeService.deleteEmployee(id, principal).createResponse()
     }
 
 

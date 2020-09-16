@@ -19,27 +19,27 @@ class PositionController @Autowired constructor(
 
     @GetMapping("/all")
     fun getAllPositions(principal: Principal): ResponseEntity<PositionsDto> {
-        return ControllerUtils.createResponse(positionService.getPositionsDtoByEmployer(principal))
+        return positionService.getPositionsDtoByEmployer(principal).createResponse()
     }
 
     @GetMapping("/employee")
     fun getEmployeePositions(principal: Principal): ResponseEntity<PositionsDto> {
-        return ControllerUtils.createResponse(positionService.getEmployeePositions(principal))
+        return positionService.getEmployeePositions(principal).createResponse()
     }
 
     @PostMapping
     fun savePosition(principal: Principal, @RequestBody position: PositionDto): ResponseEntity<PositionDto> {
-        return ControllerUtils.createResponse(positionService.savePosition(principal, position))
+        return positionService.savePosition(principal, position).createResponse()
     }
 
     @DeleteMapping("/{id}")
     fun deletePosition(principal: Principal, @PathVariable("id") positionId: Long): ResponseEntity<PositionDto> {
-        return ControllerUtils.createResponse(positionService.deletePosition(principal, positionId))
+        return positionService.deletePosition(principal, positionId).createResponse()
     }
 
     @PostMapping("/employee")
     fun setEmployeePositions(principal: Principal, @RequestBody positions: SetPositionsDto): ResponseEntity<EmployeeDto> {
-        return ControllerUtils.createResponse(positionService.setEmployeePositions(principal, positions))
+        return positionService.setEmployeePositions(principal, positions).createResponse()
     }
 
 }

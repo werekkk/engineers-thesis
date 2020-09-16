@@ -7,37 +7,37 @@
     <ng-template #requirements>  
         <div class="editors-container">
             <div>
-                <h5>Poniedziałek</h5>
+                <h5 class="unselectable">Poniedziałek</h5>
                 <staff-requirements-day [timeStep]="timeStep" [(timePeriods)]="staffRequirements?.mondayStaff.timePeriods" 
                 (timePeriodsChange)="emitRequirementsChange()"></staff-requirements-day>    
             </div>
             <div>
-                <h5>Wtorek</h5>
+                <h5 class="unselectable">Wtorek</h5>
                 <staff-requirements-day [timeStep]="timeStep" [(timePeriods)]="staffRequirements?.tuesdayStaff.timePeriods" 
                 (timePeriodsChange)="emitRequirementsChange()"></staff-requirements-day>
             </div>
             <div>
-                <h5>Środa</h5>
+                <h5 class="unselectable">Środa</h5>
                 <staff-requirements-day [timeStep]="timeStep" [(timePeriods)]="staffRequirements?.wednesdayStaff.timePeriods" 
                 (timePeriodsChange)="emitRequirementsChange()"></staff-requirements-day>
             </div>
             <div>
-                <h5>Czwartek</h5>
+                <h5 class="unselectable">Czwartek</h5>
                 <staff-requirements-day [timeStep]="timeStep" [(timePeriods)]="staffRequirements?.thursdayStaff.timePeriods" 
                 (timePeriodsChange)="emitRequirementsChange()"></staff-requirements-day>
             </div>
             <div>
-                <h5>Piątek</h5>
+                <h5 class="unselectable">Piątek</h5>
                 <staff-requirements-day [timeStep]="timeStep" [(timePeriods)]="staffRequirements?.fridayStaff.timePeriods" 
                 (timePeriodsChange)="emitRequirementsChange()"></staff-requirements-day>
             </div>
             <div>            
-                <h5>Sobota</h5>
+                <h5 class="unselectable">Sobota</h5>
                 <staff-requirements-day [timeStep]="timeStep" [(timePeriods)]="staffRequirements?.saturdayStaff.timePeriods" 
                 (timePeriodsChange)="emitRequirementsChange()"></staff-requirements-day>
             </div>
             <div>
-                <h5>Niedziela</h5>
+                <h5 class="unselectable">Niedziela</h5>
                 <staff-requirements-day [timeStep]="timeStep" [(timePeriods)]="staffRequirements?.sundayStaff.timePeriods" 
                 (timePeriodsChange)="emitRequirementsChange()"></staff-requirements-day>
             </div>

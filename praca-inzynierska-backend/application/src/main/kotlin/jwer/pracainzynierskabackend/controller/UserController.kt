@@ -3,6 +3,7 @@ package jwer.pracainzynierskabackend.controller
 import jwer.pracainzynierskabackend.model.dto.*
 import jwer.pracainzynierskabackend.service.UserService
 import jwer.pracainzynierskabackend.utils.ControllerUtils
+import jwer.pracainzynierskabackend.utils.createResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -16,22 +17,22 @@ class UserController @Autowired constructor(
 
     @PostMapping("/register-workplace")
     fun registerWorkplace(@RequestBody registerDetails: RegisterWorkplaceDetailsDto): ResponseEntity<AccountResponseDto> {
-        return ControllerUtils.createResponse(userService.registerWorkplace(registerDetails))
+        return userService.registerWorkplace(registerDetails).createResponse()
     }
 
     @GetMapping("/invitation/{invitationToken}")
     fun lookupInvitationToken(@PathVariable invitationToken: String): ResponseEntity<AccountDto> {
-        return ControllerUtils.createResponse(userService.findEmployeeAccountByInvitationToken(invitationToken))
+        return userService.findEmployeeAccountByInvitationToken(invitationToken).createResponse()
     }
 
     @PostMapping("/register-employee")
     fun registerEmployee(@RequestBody registerDetails: RegisterEmployeeDetailsDto): ResponseEntity<AccountResponseDto> {
-        return ControllerUtils.createResponse(userService.registerEmployee(registerDetails))
+        return userService.registerEmployee(registerDetails).createResponse()
     }
 
     @PostMapping("/change-details")
     fun changeAccountDetails(principal: Principal, @RequestBody newAccountDetails: ChangeAccountDetailsDto): ResponseEntity<AccountResponseDto> {
-        return ControllerUtils.createResponse(userService.changeAccountDetails(principal, newAccountDetails))
+        return userService.changeAccountDetails(principal, newAccountDetails).createResponse()
     }
 
     @PostMapping("/change-password")

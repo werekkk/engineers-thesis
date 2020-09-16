@@ -4,10 +4,10 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
 fun <T> T?.createResponse(): ResponseEntity<T> {
-    this?.let {
-        TODO() // zrobić coś z tym
+    return when (this) {
+        null -> ResponseEntity(HttpStatus.BAD_REQUEST)
+        else -> ResponseEntity.ok(this)
     }
-    return ControllerUtils.createResponse(this)
 }
 
 class ControllerUtils {

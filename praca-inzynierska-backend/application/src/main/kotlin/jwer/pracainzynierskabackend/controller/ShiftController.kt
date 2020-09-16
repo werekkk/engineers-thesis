@@ -6,6 +6,7 @@ import jwer.pracainzynierskabackend.model.dto.ShiftsDto
 import jwer.pracainzynierskabackend.model.dto.ShiftsWithGeneratorConfigDto
 import jwer.pracainzynierskabackend.service.ShiftService
 import jwer.pracainzynierskabackend.utils.ControllerUtils
+import jwer.pracainzynierskabackend.utils.createResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.http.ResponseEntity
@@ -25,7 +26,7 @@ class ShiftController @Autowired constructor(
             @RequestParam(name = "positionId") positionId: Long,
             @RequestParam(name = "firstDay") @DateTimeFormat(pattern = "ddMMyyyy") firstDay: LocalDate,
             @RequestParam(name = "days", defaultValue = "7") days: Int): ResponseEntity<ShiftsDto> {
-        return ControllerUtils.createResponse(shiftService.getShiftsByPosition(principal, positionId, firstDay, days))
+        return shiftService.getShiftsByPosition(principal, positionId, firstDay, days).createResponse()
     }
 
     @GetMapping("/employee")
@@ -33,22 +34,22 @@ class ShiftController @Autowired constructor(
             principal: Principal,
             @RequestParam(name = "firstDay") @DateTimeFormat(pattern = "ddMMyyyy") firstDay: LocalDate,
             @RequestParam(name = "days", defaultValue = "7") days: Int): ResponseEntity<ShiftsDto> {
-        return ControllerUtils.createResponse(shiftService.getEmployeeShifts(principal, firstDay, days))
+        return shiftService.getEmployeeShifts(principal, firstDay, days).createResponse()
     }
 
     @PostMapping()
     fun saveShift(principal: Principal, @RequestBody shift: ShiftDto): ResponseEntity<SavedShiftResponseDto> {
-        return ControllerUtils.createResponse(shiftService.saveShift(principal, shift))
+        return shiftService.saveShift(principal, shift).createResponse()
     }
 
     @PostMapping("/generated")
     fun saveShifts(principal: Principal, @RequestBody shifts: ShiftsWithGeneratorConfigDto): ResponseEntity<ShiftsDto> {
-        return ControllerUtils.createResponse(shiftService.saveGeneratedShifts(principal, shifts))
+        return shiftService.saveGeneratedShifts(principal, shifts).createResponse()
     }
 
     @DeleteMapping("/{id}")
     fun deleteShift(principal: Principal, @PathVariable("id") shiftId: Long): ResponseEntity<ShiftDto> {
-        return ControllerUtils.createResponse(shiftService.deleteShift(principal, shiftId))
+        return shiftService.deleteShift(principal, shiftId).createResponse()
     }
 
 }

@@ -17,7 +17,7 @@
             <div *ngFor="let day of week; let dayIndex = index" 
             class="col day-card" [class.day-card--current-date]="day.getMonth() == today.getMonth() && day.getDate() == today.getDate() && day.getFullYear() == today.getFullYear()"
             (click)="onDayClicked({weekIndex: weekIndex, dayIndex: dayIndex})">
-                <div class="day-card_label" 
+                <div class="day-card_label unselectable" 
                 [class.day-card_label--current-month]="day.getMonth() == month.month()">
                     {{day.getDate()}}
                 </div>

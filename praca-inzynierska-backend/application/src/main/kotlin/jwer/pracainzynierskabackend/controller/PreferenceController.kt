@@ -4,6 +4,7 @@ import jwer.pracainzynierskabackend.model.dto.OneTimeHourPreferencesDto
 import jwer.pracainzynierskabackend.model.dto.PreferencesWeekDto
 import jwer.pracainzynierskabackend.service.PreferenceService
 import jwer.pracainzynierskabackend.utils.ControllerUtils
+import jwer.pracainzynierskabackend.utils.createResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.http.ResponseEntity
@@ -19,12 +20,12 @@ class PreferenceController @Autowired constructor(
 
     @GetMapping("/week")
     fun getPreferencesWeekByPrincipal(principal: Principal): ResponseEntity<PreferencesWeekDto> {
-        return ControllerUtils.createResponse(preferenceService.getPreferencesByEmployeePrincipal(principal))
+        return preferenceService.getPreferencesByEmployeePrincipal(principal).createResponse()
     }
 
     @PostMapping("/week")
     fun savePreferencesWeekByPrincipal(principal: Principal, @RequestBody newPreferencesWeek: PreferencesWeekDto): ResponseEntity<PreferencesWeekDto> {
-        return ControllerUtils.createResponse(preferenceService.savePreferencesByEmployeePrincipal(principal, newPreferencesWeek))
+        return preferenceService.savePreferencesByEmployeePrincipal(principal, newPreferencesWeek).createResponse()
     }
 
     @GetMapping("/one-time")
@@ -32,7 +33,7 @@ class PreferenceController @Autowired constructor(
             principal: Principal,
             @RequestParam(name = "start") @DateTimeFormat(pattern = "ddMMyyyy") start: LocalDate,
             @RequestParam(name = "finish") @DateTimeFormat(pattern = "ddMMyyyy") finish: LocalDate): ResponseEntity<OneTimeHourPreferencesDto> {
-        return ControllerUtils.createResponse(preferenceService.getOneTimeHourPreferencesInPeriod(principal, start, finish))
+        return preferenceService.getOneTimeHourPreferencesInPeriod(principal, start, finish).createResponse()
     }
 
     @PostMapping("/one-time")

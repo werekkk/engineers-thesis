@@ -1,5 +1,3 @@
-@import './../../../../../../styles.scss';
-
 .spinner {
     height: 500px;
     display: flex;
@@ -44,7 +42,6 @@
 }
 
 .day-card_label {
-    @extend .unselectable;
     margin-top: 4px;
     text-align: center;
 }

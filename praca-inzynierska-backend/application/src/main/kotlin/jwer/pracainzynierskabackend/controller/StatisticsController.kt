@@ -3,6 +3,7 @@ package jwer.pracainzynierskabackend.controller
 import jwer.pracainzynierskabackend.model.dto.StatisticsYearDto
 import jwer.pracainzynierskabackend.service.StatisticsService
 import jwer.pracainzynierskabackend.utils.ControllerUtils
+import jwer.pracainzynierskabackend.utils.createResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,7 +20,7 @@ class StatisticsController @Autowired constructor(
 
     @GetMapping("/{year}")
     fun getYearStatistics(employerPrincipal: Principal, @PathVariable year: Int): ResponseEntity<StatisticsYearDto> {
-        return ControllerUtils.createResponse(statisticsService.getYearStatistics(employerPrincipal, year))
+        return statisticsService.getYearStatistics(employerPrincipal, year).createResponse()
     }
 
 }

@@ -2,6 +2,7 @@ package jwer.pracainzynierskabackend.controller
 
 import jwer.pracainzynierskabackend.model.dto.AccountDto
 import jwer.pracainzynierskabackend.service.UserService
+import jwer.pracainzynierskabackend.utils.createResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -28,12 +29,8 @@ class AuthenticationController @Autowired constructor(
     @GetMapping("/user")
     fun getUser(principal: Principal?): ResponseEntity<AccountDto> {
         principal?.let {
-            val account = userService.getAccount(principal)
-            account?.let {
-                return ResponseEntity.ok(it)
-            }
-            return ResponseEntity(HttpStatus.BAD_REQUEST)
+            return userService.getAccount(principal).createResponse()
         }
-        return ResponseEntity(HttpStatus.OK)
+        return ResponseEntity(HttpStatus.BAD_REQUEST)
     }
 }
