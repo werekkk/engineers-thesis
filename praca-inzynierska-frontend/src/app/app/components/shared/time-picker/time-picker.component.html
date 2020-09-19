@@ -5,6 +5,7 @@
     maxlength="10"
     (focus)="handleFocusIn()"
     (focusout)="handleFocusOut($event)"
+    [tabIndex]="pickerType == 'shiftStart' ? 100 : 101"
     >
     <div *ngIf="showSuggestions" class="suggestions">
         <time-picker-suggestions 

@@ -8,6 +8,7 @@ import { matchingPasswordValidator } from 'src/app/app/shared/validators/matchin
 import { RegisterEmployeeDetailsDto } from '../../../model/dto/RegisterEmployeeDetailsDto'
 import { FormError } from 'src/app/app/model/FormError';
 import { AccountResponseDto } from 'src/app/app/model/dto/AccountResponseDto';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'register-employee',
@@ -43,10 +44,12 @@ export class RegisterEmployeeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
+    this.modalService.dismissAll()
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.invitationToken = params.get('invitationToken')

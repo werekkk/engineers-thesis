@@ -4,12 +4,8 @@ import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
 import { ShiftService } from 'src/app/app/services/shift.service';
 import { TimePeriodDto } from 'src/app/app/model/dto/TimePeriodDto';
-import { ShiftsDto } from 'src/app/app/model/dto/ShiftsDto';
 import { TimeDto } from 'src/app/app/model/dto/TimeDto';
 import { ShiftType } from 'src/app/app/model/ShiftType';
-import { Utils } from 'src/app/app/shared/utils/utils';
-import { interval } from 'rxjs';
-import { ClickService } from 'src/app/app/services/click.service';
 import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
 
 @Component({

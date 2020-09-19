@@ -34,7 +34,7 @@ export class TimePeriodPickerComponent implements OnInit {
   @Output('periodChange')
   periodChange: EventEmitter<TimePeriodDto> = new EventEmitter()
 
-  beginTime: TimeDto
+  beginTime: TimeDto = new TimeDto(0, 0)
 
   constructor() { }
 

@@ -82,6 +82,6 @@ export class EmployeeService {
   }
 
   static generateInvitationLink(invitationToken: string): string {
-    return `${window.location.origin}/invitation/${invitationToken}`
+    return `${window.location.origin}${environment.baseHref}/#/invitation/${invitationToken}`
   }
 }

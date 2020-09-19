@@ -1,5 +1,7 @@
-<div *ngIf="!scheduleGenerated || savingShifts; else results" class="spinner">
-    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+<div class="schedule">
+    <div *ngIf="!scheduleGenerated || savingShifts; else results" class="spinner">
+        <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+        </div>
     </div>
 </div>
 <ng-template #results>
@@ -14,14 +16,15 @@
             Zapisz
         </button>
     </div>
-    <week-date-picker [(date)]="weekStart" [periodStart]="config.firstDay" [periodFinish]="config.lastDay"></week-date-picker>
-    <div *ngFor="let position of positions; let i = index">
-        <schedule-generator-result-position 
-        [position]="position" 
-        [shifts]="shiftsByPosition[i]" 
-        [employees]="config.employees" 
-        [firstDay]="weekStart"
-        [config]="config"
-        (shiftsTableChange)="shiftsTablesByPosition[i]=$event"></schedule-generator-result-position>
+    <week-date-picker [(date)]="weekStart" [periodStart]="config.firstDayStart" [periodFinish]="config.lastDayStart"></week-date-picker>
+    <div class="position-schedules">
+        <div *ngFor="let position of positions; let i = index">
+            <schedule-generator-result-position 
+            [position]="position" 
+            [(shifts)]="shiftsByPosition[i]" 
+            [employees]="config.employees" 
+            [firstDay]="weekStart"
+            [config]="config"></schedule-generator-result-position>
+        </div>
     </div>
 </ng-template>

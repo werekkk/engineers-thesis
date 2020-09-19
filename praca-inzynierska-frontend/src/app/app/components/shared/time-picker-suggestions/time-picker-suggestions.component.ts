@@ -127,7 +127,7 @@ export class TimePickerSuggestionsComponent implements OnInit, AfterViewInit {
 
   highlightHour(hour: TimeDto) {
     let elem = document.getElementById(hour ? hour.toHHMMString() : '') as HTMLElement
-    if (elem) {
+    if (elem && this.suggestionsDiv) {
       this.highlightedHour = hour
       this.suggestionsDiv.nativeElement.scrollTop = elem.offsetTop
     } else {

@@ -11,8 +11,12 @@ export class GeneratorConfigDto {
         public lastDay: Date
     ) {}
 
+    get firstDayStart(): Date { return moment(this.firstDay).startOf('day').toDate() }
+    get lastDayStart(): Date { return moment(this.lastDay).startOf('day').toDate() }
+
     isDateInPeriod(date: Date): boolean {
-        return moment(date).isBetween(moment(this.firstDay).startOf('day'), moment(this.lastDay).endOf('day'))
+        let m = moment(date)
+        return !(m.isBefore(this.firstDayStart) || m.isAfter(moment(this.lastDay).endOf('day')))
     }
 
     static copyOf(other: GeneratorConfigDto): GeneratorConfigDto {

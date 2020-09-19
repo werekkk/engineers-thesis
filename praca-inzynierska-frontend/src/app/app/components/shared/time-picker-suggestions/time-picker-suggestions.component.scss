@@ -8,9 +8,13 @@
     overflow: auto;
 }
 
+.wider {
+    width: 15.5em;
+}
+
 .option {
-    padding-left: 10px;
-    padding-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     display: flex;
     align-items: center;
 }

@@ -8,6 +8,7 @@ import { ShiftDto } from 'src/app/app/model/dto/ShiftDto';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import { Utils } from 'src/app/app/shared/utils/utils';
 import { ShiftService } from 'src/app/app/services/shift.service';
+import * as moment from 'moment';
 
 export type GeneratorState = { config: GeneratorConfigDto }
 
@@ -20,8 +21,6 @@ export class ScheduleGeneratorResultComponent implements OnInit {
 
   config: GeneratorConfigDto
 
-  firstDay: Date
-
   weekStart: Date
 
   scheduleGenerated: boolean = false
@@ -29,7 +28,6 @@ export class ScheduleGeneratorResultComponent implements OnInit {
   generatedShifts: ShiftDto[] = []
   positions: PositionDto[] = []
   shiftsByPosition: ShiftDto[][] = []
-  shiftsTablesByPosition: ShiftDto[][][][] = []
 
   savingShifts: boolean = false
 
@@ -45,9 +43,7 @@ export class ScheduleGeneratorResultComponent implements OnInit {
       this.router.navigate([''])
     } else {
       this.config = GeneratorConfigDto.copyOf(request.config)
-      this.weekStart = Utils.firstDayOfWeekFrom(this.config.firstDay)
-      this.shiftsTablesByPosition = []
-      this.config.positions.forEach(() => this.shiftsTablesByPosition.push([]))
+      this.weekStart = Utils.firstDayOfWeekFrom(request.config.firstDayStart)
       this.generateSchedule()
     }
   }
@@ -78,7 +74,7 @@ export class ScheduleGeneratorResultComponent implements OnInit {
   }
 
   onBackPressed() {
-    this.router.navigate(['employer', 'schedule-generator'])
+    this.router.navigate(['employer', 'schedule', 'generator'])
   }
 
   onGeneratePressed() {
@@ -88,7 +84,7 @@ export class ScheduleGeneratorResultComponent implements OnInit {
   onSavePressed() {
     this.savingShifts = true
     let shiftsToSave: ShiftDto[] = []
-    this.shiftsTablesByPosition.forEach(s => s.forEach(s => s.forEach(s => s.forEach(s => shiftsToSave.push(s)))))
+    this.shiftsByPosition.forEach(s => s.forEach(s => shiftsToSave.push(s)))
     this.shfitService.saveGeneratedShifts(shiftsToSave, this.config)
     .subscribe(() => {
       this.savingShifts = false

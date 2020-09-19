@@ -49,8 +49,8 @@ export class ScheduleGeneratorResultPositionComponent implements OnInit {
 
   shiftsTable: ShiftDto[][][] = undefined
 
-  @Output('shiftsTableChange')
-  shiftsTableChange: EventEmitter<ShiftDto[][][]> = new EventEmitter()
+  @Output('shiftsChange')
+  shiftsChange: EventEmitter<ShiftDto[]> = new EventEmitter()
 
   constructor(
     private staffRequirementsService: StaffRequirementsService
@@ -76,15 +76,19 @@ export class ScheduleGeneratorResultPositionComponent implements OnInit {
     let employeeMap = this.createEmployeeIdToIndexMap()
     let dayMap = this.createFirstDayDiffToIndexMap()
 
+    let mStart = moment(this.days[0]).startOf('day')
+    let mFinish = moment(this.days[this.days.length - 1]).endOf('day')
+
     this.shifts.forEach(s => {
-      if (moment(s.start).isAfter(this.days[0]) && moment(s.start).subtract(1, 'day').isBefore(this.days[this.days.length-1])) {
+      let ms = moment(s.start)
+      if (!(ms.isBefore(mStart) || ms.isAfter(mFinish))) {
         let empId = employeeMap.get(s.employeeId)
         let dayId = dayMap.get(Utils.daysDiff(this.days[0], s.start))
-        this.shiftsTable[empId][dayId].push(s)
+        if(dayId != undefined) {
+          this.shiftsTable[empId][dayId].push(s)
+        }
       }
     })
-
-    this.shiftsTableChange.emit(this.shiftsTable)
   }
 
   private initShiftsTableSize() {
@@ -112,9 +116,18 @@ export class ScheduleGeneratorResultPositionComponent implements OnInit {
   private createFirstDayDiffToIndexMap(): Map<number, number> {
     let map = new Map()
     this.days.forEach((d, i) => {
-      map.set(Utils.daysDiff(this.firstDay, d), i)
+      map.set(Utils.daysDiff(this.days[0], d), i)
     })
     return map
+  }
+
+  onShiftsTableUpdated(newShifts: ShiftDto[], employeeIndex: number, dayIndex: number) {
+    let existingShifts = this.shifts.filter(s => 
+      this.employees[employeeIndex].employeeId != s.employeeId || Utils.daysDiff(this.days[dayIndex], s.start) != 0
+      )
+    newShifts.forEach(s => existingShifts.push(s))
+    existingShifts.sort(ShiftDto.compareDates)
+    this.shiftsChange.emit(existingShifts)
   }
 
 }

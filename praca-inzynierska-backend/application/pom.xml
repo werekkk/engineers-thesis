@@ -9,13 +9,13 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>jwer</groupId>
-	<artifactId>praca-inzynierska-backend</artifactId>
+	<artifactId>praca-inzynierska-backend-application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>praca-inzynierska-backend-application</name>
 	<description>Aplikacja 'backend' hostująca serwisy potrzebne do działania systemu tworzonego w ramach pracy inżynierskiej</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 		<kotlin.version>1.4.0</kotlin.version>
 	</properties>
 
@@ -83,6 +83,7 @@
 			<version>1.4.200</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>

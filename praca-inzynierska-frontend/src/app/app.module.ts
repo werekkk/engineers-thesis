@@ -12,7 +12,7 @@ import { NoBasicAuthPopupInterceptor } from './app/interceptors/no-basic-auth-po
 import { ResponseUnauthorizedInterceptor } from './app/interceptors/response-unauthorized.interceptor';
 import { SharedModule } from './app/components/shared/shared.module';
 import localePl from '@angular/common/locales/pl'
-import { registerLocaleData } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
 registerLocaleData(localePl)
 
 @NgModule({
@@ -39,6 +39,10 @@ registerLocaleData(localePl)
       provide: HTTP_INTERCEPTORS,
       useClass: ResponseUnauthorizedInterceptor,
       multi: true
+    },
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
     }
   ],
   bootstrap: [AppComponent]

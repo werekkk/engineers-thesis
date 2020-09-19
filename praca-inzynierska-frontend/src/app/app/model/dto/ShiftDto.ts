@@ -34,6 +34,10 @@ export class ShiftDto {
         )
     }
 
+    static compareDates(a: ShiftDto, b: ShiftDto): number {
+        return a.start.getTime() - b.start.getTime()
+    } 
+
     addTimeZoneToDates(): ShiftDto {
         return new ShiftDto(
             this.id, this.employeeId, this.positionId,

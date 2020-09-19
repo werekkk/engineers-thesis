@@ -5,6 +5,7 @@ import { UserService } from 'src/app/app/services/user.service';
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Router } from '@angular/router';
 import { AccountType } from 'src/app/app/model/AccountType';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'logout',
@@ -28,7 +29,7 @@ export class LogoutComponent {
   onLogoutClicked() {
     this.authenticationService.logout()
     .subscribe(() => {
-      window.location.replace(window.location.origin)
+      window.location.replace(window.location.origin + environment.baseHref)
     })
   }
 

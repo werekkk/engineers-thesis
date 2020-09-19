@@ -7,6 +7,7 @@ import { FormError } from 'src/app/app/model/FormError';
 import { AuthenticationService } from 'src/app/app/services/authentication.service';
 import { UserService } from 'src/app/app/services/user.service';
 import { matchingPasswordValidator } from 'src/app/app/shared/validators/matching-password.validator';
+import { environment } from 'src/environments/environment';
 import { ConfirmDeleteAccountModalComponent } from '../confirm-delete-account-modal/confirm-delete-account-modal.component'
 
 @Component({
@@ -106,8 +107,8 @@ export class AccountSettingsComponent {
         this.deletingAccount = true
         this.userService.deleteAccount().subscribe(() => {
           this.authenticationService.logout().subscribe(
-            () => window.location.replace(window.location.origin),
-            () => window.location.replace(window.location.origin)
+            () => window.location.replace(window.location.origin + environment.baseHref),
+            () => window.location.replace(window.location.origin + environment.baseHref)
           )
         })
       }

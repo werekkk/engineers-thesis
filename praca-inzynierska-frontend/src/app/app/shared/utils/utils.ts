@@ -23,7 +23,7 @@ export namespace Utils {
     }
 
     export function firstDayOfWeekFrom(a: Date): Date {
-        return moment(a).isoWeekday('monday').toDate()
+        return moment(a).isoWeekday('monday').startOf('day').toDate()
     }
 
     export function daysDiff(a: Date, b: Date): number {

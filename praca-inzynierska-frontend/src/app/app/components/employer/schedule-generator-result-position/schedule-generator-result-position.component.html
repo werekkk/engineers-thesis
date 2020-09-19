@@ -1,4 +1,4 @@
-{{position.name}}
+<h5>{{position.name}}</h5>
 <div *ngIf="!(requiredStaffLoaded); else schedule" class="spinner">
     <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
     </div>
@@ -30,7 +30,7 @@
                             <td>
                                 <schedule-employee-day-cell 
                                 [(shifts)]="shiftsTable[employeeIndex][dayIndex]"
-                                (shiftsChange)="shiftsTableChange.emit(shiftsTable)"
+                                (shiftsChange)="onShiftsTableUpdated($event, employeeIndex, dayIndex)"
                                 [shiftsTable]="shiftsTable"
                                 [position]="position"
                                 [employee]="employee"
