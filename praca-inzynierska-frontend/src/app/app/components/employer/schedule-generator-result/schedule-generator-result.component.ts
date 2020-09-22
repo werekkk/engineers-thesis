@@ -43,7 +43,7 @@ export class ScheduleGeneratorResultComponent implements OnInit {
       this.router.navigate([''])
     } else {
       this.config = GeneratorConfigDto.copyOf(request.config)
-      this.weekStart = Utils.firstDayOfWeekFrom(request.config.firstDayStart)
+      this.weekStart = Utils.firstDayOfWeekFrom(request.config.firstDay)
       this.generateSchedule()
     }
   }
