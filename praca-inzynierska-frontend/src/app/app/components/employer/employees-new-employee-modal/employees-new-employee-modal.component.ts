@@ -5,6 +5,8 @@ import { EmployeeStatus } from '../../../model/EmployeeStatus'
 import { AddEmployeeDto } from '../../../model/dto/AddEmployeeDto'
 import { EmployeeService } from '../../../services/employee.service'
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
+import { InvitationLinkPipe } from 'src/app/app/pipes/invitation-link.pipe';
+import { Utils } from 'src/app/app/shared/utils/utils';
 
 @Component({
   selector: 'employees-new-employee-modal',
@@ -19,6 +21,8 @@ export class EmployeesNewEmployeeModalComponent implements OnInit {
 
   savedEmployee: EmployeeDto
   invitationLink: string = ''
+
+  copyLinkText: 'Kopiuj link' | 'Skopiowano!'
 
   // Corresponds with 'AddEmployeeDto'
   employeeForm = new FormGroup({
@@ -36,6 +40,7 @@ export class EmployeesNewEmployeeModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.copyLinkText = 'Kopiuj link'
   }
 
   onSaveClicked() {
@@ -60,6 +65,12 @@ export class EmployeesNewEmployeeModalComponent implements OnInit {
 
   onInvitatationLinkCloseClicked() {
     this.activeModal.close(this.savedEmployee)
+  }
+
+  onCopyLinkClicked() {
+    let linkPipe = new InvitationLinkPipe()
+    Utils.copyToClipboard(this.invitationLink)
+    this.copyLinkText = 'Skopiowano!'
   }
 
 }

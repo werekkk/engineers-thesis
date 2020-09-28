@@ -5,12 +5,12 @@
 <ng-template #ngbNavContainer>
     <ng-container *ngIf="positions.length > 0; else noPositions">
         <div class="sticky-nav">
-            <ul ngbNav #nav="ngbNav" [(activeId)]="activeId" (activeIdChange)="onPositionChange()" class="nav-tabs">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="activeId" (navChange)="onTabChange($event)" (activeIdChange)="onPositionChange()" class="nav-tabs">
                 <ng-container *ngFor="let position of positions; let i = index">
                     <li [ngbNavItem]="i">
                         <a ngbNavLink>{{position.name}}</a>
                         <ng-template ngbNavContent>
-                            <staff-requirements [position]="position" [(timeStep)]="timeStep" [staffRequirements]="staffRequirements"></staff-requirements>
+                            <staff-requirements [position]="position" [(timeStep)]="timeStep" [staffRequirements]="staffRequirements" (staffRequirementsChange)="unsavedChanges = true"></staff-requirements>
                         </ng-template>
                     </li>
                 </ng-container>
@@ -36,7 +36,7 @@
             Brak stanowisk!
         </h6>
         <p>
-            Dodaj stanowisko w sekcji <a routerLink="/employer/employees">Pracownicy</a> aby zdefiniować wymaganą dla niego obsadę.
+            Dodaj stanowisko w sekcji <a routerLink="/employer/employees">Pracownicy</a>, aby móc zdefiniować wymaganą dla niego obsadę.
         </p>
     </div>
 </ng-template>

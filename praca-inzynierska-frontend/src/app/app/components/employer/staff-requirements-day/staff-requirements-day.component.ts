@@ -9,6 +9,12 @@ import { TimeStep } from 'src/app/app/model/TimeStep';
   styleUrls: ['./staff-requirements-day.component.scss']
 })
 export class StaffRequirementsDayComponent{
+  
+  @Input('dayExpression')
+  dayExpression: string = ''
+  
+  @Input('positionName')
+  positionName: string = ''
 
   @Input('timeStep')
   timeStep: TimeStep

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModal, NgbDate, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeesNewEmployeeModalComponent } from '../employees-new-employee-modal/employees-new-employee-modal.component';
 import { EmployeesEditGlobalPositionsModalComponent } from '../employees-edit-global-positions-modal/employees-edit-global-positions-modal.component';
 import { EmployeeService } from 'src/app/app/services/employee.service';

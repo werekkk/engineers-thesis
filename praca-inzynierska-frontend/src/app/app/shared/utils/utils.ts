@@ -6,6 +6,21 @@ import { TimeDto } from '../../model/dto/TimeDto'
 import { Moment } from 'moment'
 
 export namespace Utils {
+       
+    // https://stackblitz.com/edit/angular-6-copy-to-clipboard
+    export function copyToClipboard(text: string) {
+        let selBox = document.createElement('textarea');
+        selBox.style.position = 'fixed';
+        selBox.style.left = '0';
+        selBox.style.top = '0';
+        selBox.style.opacity = '0';
+        selBox.value = text;
+        document.body.appendChild(selBox);
+        selBox.focus();
+        selBox.select();
+        document.execCommand('copy');
+        document.body.removeChild(selBox);
+    }
 
     export function createMap<K, V>(objects: V[], extractKey: (object: V) => K): Map<K, V> {
         let map = new Map()

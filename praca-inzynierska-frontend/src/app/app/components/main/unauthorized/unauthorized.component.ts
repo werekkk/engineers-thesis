@@ -1,22 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from 'src/app/app/services/authentication.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'unauthorized',
   templateUrl: './unauthorized.component.html',
   styleUrls: ['./unauthorized.component.scss']
 })
-export class UnauthorizedComponent {
+export class UnauthorizedComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private modalService: NgbModal
   ) { }
+
+  ngOnInit() {
+    this.modalService.dismissAll()
+  }
 
   onReturnClicked() {
     this.navigateToLoginPage()
   }
 
   private navigateToLoginPage() {
-    this.router.navigate(['./'])
+    window.location.replace(window.location.origin + environment.baseHref)
   }
 }

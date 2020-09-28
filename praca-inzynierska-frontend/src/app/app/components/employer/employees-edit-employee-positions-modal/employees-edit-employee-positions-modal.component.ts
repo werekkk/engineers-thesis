@@ -5,8 +5,6 @@ import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import { Utils } from 'src/app/app/shared/utils/utils';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmPositionChangeModalComponent } from '../confirm-position-change-modal/confirm-position-change-modal.component';
-import { pipe, of } from 'rxjs';
-import { tap, map, mergeMap } from 'rxjs/operators';
 
 interface FromParentData {
   employee: EmployeeDto

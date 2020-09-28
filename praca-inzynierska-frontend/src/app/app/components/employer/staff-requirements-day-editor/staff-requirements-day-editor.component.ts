@@ -354,9 +354,9 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
       let ctx = canvas.context
       let x = this.getXFromTime(this.highlightedHour, canvas)
       ctx.save()
-      this.setLabelFont(ctx, 'bold', 10)
+      this.setLabelFont(ctx, 'bold', 12)
       ctx.fillStyle = '#F00'
-      ctx.fillText(this.highlightedHour.toHHMMString(), x, -5)
+      ctx.fillText(this.highlightedHour.toHHMMString(), x, -8)
       ctx.restore()
     }
   }

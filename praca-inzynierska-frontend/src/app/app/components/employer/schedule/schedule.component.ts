@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PositionService } from 'src/app/app/services/position.service';
+import { StateService } from 'src/app/app/services/state.service';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import * as moment from 'moment';
 
@@ -18,7 +19,8 @@ export class ScheduleComponent implements OnInit {
 
   constructor(
     private positionService: PositionService,
-    private router: Router
+    private router: Router,
+    private stateService: StateService
   ) { 
     positionService.positions.subscribe(newPositions => {
       this.positions = newPositions
@@ -36,6 +38,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   onGenerateScheduleClicked() {
+    this.stateService.startingDate = this.firstDate
     this.router.navigate(['employer', 'schedule', 'generator'])
   }
 

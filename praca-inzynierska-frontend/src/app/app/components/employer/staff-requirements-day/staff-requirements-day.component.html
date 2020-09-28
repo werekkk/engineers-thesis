@@ -7,3 +7,14 @@
 [(timePeriods)]="timePeriods" 
 (timePeriodsChange)="handleNewTimePeriods($event)"
 [(highlightedPeriodIndex)]="highlightedPeriodIndex"></staff-requirements-period-list>
+<div *ngIf="timePeriods.length == 0" class="no-time-periods unselectable">
+    <div>
+        <p>
+            Brak zaplanowanej obsady {{dayExpression}} na stanowisku {{positionName}}.
+        </p>
+        <p>
+            Aby zaplanować obsadę zaznacz na wykresie prostokąt odpowiadający wymaganej liczbie pracowników (wysokość prostokąta)
+            w określonym czasie (szerokość prostokąta).
+        </p>
+    </div>
+</div>

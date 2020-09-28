@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h4>{{fromParent?.title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.close('cancel')" tabindex="-1">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">   
+    <ng-container *ngFor="let paragraph of fromParent?.paragraphs">
+        <p>
+            {{paragraph}}
+        </p>
+    </ng-container>
+</div> 
+<div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modal.close('cancel')">Anuluj</button>
+    <button class="btn btn-danger" (click)="modal.close('dismiss')">Odrzuć</button>
+    <button class="btn btn-success" (click)="modal.close('save')">Zapisz</button>
+</div>

@@ -2,15 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { PositionService } from 'src/app/app/services/position.service';
 import { EmployeeService } from 'src/app/app/services/employee.service';
-import { ScheduleGeneratorService } from 'src/app/app/services/schedule-generator.service';
 import { Utils } from 'src/app/app/shared/utils/utils';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
 import { Router } from '@angular/router';
 import { GeneratorState } from '../schedule-generator-result/schedule-generator-result.component';
 import { GeneratorConfigDto } from 'src/app/app/model/dto/GeneratorConfigDto';
-import { NgbCalendar, NgbDateParserFormatter, NgbDate } from '@ng-bootstrap/ng-bootstrap';
-
+import { StateService } from 'src/app/app/services/state.service';
 
 @Component({
   selector: 'schedule-generator',
@@ -36,11 +34,13 @@ export class ScheduleGeneratorComponent implements OnInit {
   constructor(
     public positionService: PositionService,
     public employeeService: EmployeeService,
+    private stateService: StateService,
     private router: Router
   ) {
   }
 
   ngOnInit(): void {
+    this.getStartingAndEndingDates()
     this.onDurationChange()
     this.positionsLoaded = this.positionService.positionsLoaded
     this.employeesLoaded = this.employeeService.employeesLoaded
@@ -57,6 +57,12 @@ export class ScheduleGeneratorComponent implements OnInit {
       })
     }
     this.initCheckboxArrays()
+  }
+
+  getStartingAndEndingDates() {
+    this.startDate = moment(this.stateService.startingDate).startOf('day').toDate()
+    this.finishDate = moment(this.stateService.startingDate).startOf('day').add(6, 'days').toDate()
+    this.stateService.startingDate = new Date()
   }
 
   onDurationChange(source: 'start' | 'finish' = 'finish') {

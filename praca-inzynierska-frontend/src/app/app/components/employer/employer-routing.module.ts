@@ -9,6 +9,8 @@ import { ScheduleGeneratorComponent } from './schedule-generator/schedule-genera
 import { ScheduleGeneratorResultComponent } from './schedule-generator-result/schedule-generator-result.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { AccountSettingsComponent } from '../shared/account-settings/account-settings.component';
+import { CheckUnsavedStaffChangesGuard } from './staff/check-unsaved-staff-changes.guard'
+import { CheckUnsavedGeneratedScheduleGuard } from './schedule-generator-result/check-unsaved-generated-schedule.guard'
 
 const routes: Routes = [
   {
@@ -17,8 +19,8 @@ const routes: Routes = [
       {path: 'employees', component: EmployeesComponent},
       {path: 'schedule', component: ScheduleComponent},
       {path: 'schedule/generator', component: ScheduleGeneratorComponent},
-      {path: 'schedule-generator-result', component: ScheduleGeneratorResultComponent},
-      {path: 'staff', component: StaffComponent},
+      {path: 'schedule-generator-result', component: ScheduleGeneratorResultComponent, canDeactivate: [CheckUnsavedGeneratedScheduleGuard]},
+      {path: 'staff', component: StaffComponent, canDeactivate: [CheckUnsavedStaffChangesGuard]},
       {path: 'statistics', component: StatisticsComponent},
       {path: 'settings', component: AccountSettingsComponent}
     ]

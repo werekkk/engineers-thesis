@@ -41,7 +41,7 @@ export class EmployeesListComponent implements OnInit {
     }
   }
 
-  onEditPositionsClicked(employee: EmployeeDto) {
+  onAssignPositionsClicked(employee: EmployeeDto) {
     let modalRef = this.modalService.open(EmployeesEditEmployeePositionsModalComponent, {windowClass: 'modal-appear', centered: true, size: 'md'})
     modalRef.componentInstance.fromParent = {
       employee: employee

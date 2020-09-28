@@ -9,6 +9,7 @@ import { PositionDto } from 'src/app/app/model/dto/PositionDto';
 import { Utils } from 'src/app/app/shared/utils/utils';
 import { ShiftService } from 'src/app/app/services/shift.service';
 import * as moment from 'moment';
+import { tap } from 'rxjs/operators';
 
 export type GeneratorState = { config: GeneratorConfigDto }
 
@@ -30,6 +31,7 @@ export class ScheduleGeneratorResultComponent implements OnInit {
   shiftsByPosition: ShiftDto[][] = []
 
   savingShifts: boolean = false
+  shiftsSaved: boolean = false
 
   constructor(
     private router: Router,
@@ -38,6 +40,7 @@ export class ScheduleGeneratorResultComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.shiftsSaved = false
     let request: GeneratorState = window.history.state as GeneratorState
     if (request.config == null) {
       this.router.navigate([''])
@@ -82,13 +85,21 @@ export class ScheduleGeneratorResultComponent implements OnInit {
   }
 
   onSavePressed() {
+    this.saveShifts().subscribe(() => {
+      this.router.navigate([''])
+    })
+  }
+
+  saveShifts(): Observable<any> {
     this.savingShifts = true
     let shiftsToSave: ShiftDto[] = []
     this.shiftsByPosition.forEach(s => s.forEach(s => shiftsToSave.push(s)))
-    this.shfitService.saveGeneratedShifts(shiftsToSave, this.config)
-    .subscribe(() => {
-      this.savingShifts = false
-      this.router.navigate([''])
-    })
+    return this.shfitService.saveGeneratedShifts(shiftsToSave, this.config)
+    .pipe(
+      tap(() => {
+        this.savingShifts = false
+        this.shiftsSaved = true
+      })
+    )
   }
 }

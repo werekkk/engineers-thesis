@@ -1,9 +1,30 @@
 .invitation-link-input {
+    margin-top: 8px;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.invitation-link-input > *:not(:last-child) {
+    margin-right: 8px;
 }
 
 .invitation-link-input input {
     width: 45em;
+    font-size: 14px;
     text-align: center;
+}
+
+.invitation-link-input button {
+    width: 8.5em;
+}
+
+.invitation-link-input button div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.invitation-link-input button div > *:not(:last-child){
+    margin-right: 4px;
 }

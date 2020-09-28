@@ -3,9 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { PositionsDto } from '../model/dto/PositionsDto';
 import { PositionDto } from '../model/dto/PositionDto';
-import { AccountDto } from '../model/dto/AccountDto';
 import { environment } from '../../../environments/environment';
-import { map, tap, mergeMap, switchMap } from 'rxjs/operators';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { EmployeeService } from './employee.service'
 import { SetPositionsDto } from '../model/dto/SetPositionsDto';
 import { EmployeeDto } from '../model/dto/EmployeeDto';

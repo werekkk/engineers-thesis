@@ -63,6 +63,7 @@ export class RegisterEmployeeComponent implements OnInit {
   }
 
   onRegisterClicked() {
+    this.employeeForm.markAllAsTouched()
     if (this.employeeForm.valid) {
       this.isRegistering = true
       let registerDetails: RegisterEmployeeDetailsDto = this.employeeForm.value

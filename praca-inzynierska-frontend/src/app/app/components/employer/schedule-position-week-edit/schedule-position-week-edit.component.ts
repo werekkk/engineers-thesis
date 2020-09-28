@@ -1,14 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { PositionDto } from 'src/app/app/model/dto/PositionDto';
-import { Router } from '@angular/router';
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
 import { EmployeeService } from 'src/app/app/services/employee.service';
 import { ShiftService } from '../../../services/shift.service'
 import { Utils } from 'src/app/app/shared/utils/utils';
 import { ShiftDto } from 'src/app/app/model/dto/ShiftDto';
-import * as moment from 'moment';
-import { mergeAll, tap, map, flatMap } from 'rxjs/operators';
-import { merge, Observable, of, noop } from 'rxjs';
+import { tap, mergeMap } from 'rxjs/operators';
+import { Observable, of, Subscription } from 'rxjs';
 import { EmployeesDto } from 'src/app/app/model/dto/EmployeesDto';
 import { StaffRequirementsService } from 'src/app/app/services/staff-requirements.service';
 import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
@@ -44,6 +42,8 @@ export class SchedulePositionWeekEditComponent implements OnInit {
   employeesWithPosition: EmployeeDto[]
   shiftsTable: ShiftDto[][][] = []
   requiredStaff: RequiredStaffDto = undefined 
+  
+  loadingSubscription: Subscription
 
   constructor(
     private employeeService: EmployeeService,
@@ -60,12 +60,13 @@ export class SchedulePositionWeekEditComponent implements OnInit {
   }
 
   handleNewFirstDay() {
-    this.loadEmployees().pipe(
+    this.loadingSubscription?.unsubscribe()
+    this.loadingSubscription = this.loadEmployees().pipe(
       tap(() => {
         this.initDays()
         this.initShiftsTableSize()
-        this.loadShifts().subscribe()
-      })
+      }),
+      mergeMap(() => this.loadShifts())
     ).subscribe()
   }
 

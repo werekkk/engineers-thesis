@@ -25,6 +25,7 @@ import { AccountLabelComponent } from './account-label/account-label.component';
 import { HoverGroupDirective } from '../../directives/hover-group.directive';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { ConfirmDeleteAccountModalComponent } from './confirm-delete-account-modal/confirm-delete-account-modal.component';
+import { ChangesWillBeLostModalComponent } from './changes-will-be-lost-modal/changes-will-be-lost-modal.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ConfirmDeleteAccountModalComponent } from './confirm-delete-account-mod
     AccountLabelComponent,
     HoverGroupDirective,
     AccountSettingsComponent,
-    ConfirmDeleteAccountModalComponent
+    ConfirmDeleteAccountModalComponent,
+    ChangesWillBeLostModalComponent
   ],
   imports: [
     CommonModule,
@@ -77,7 +79,8 @@ import { ConfirmDeleteAccountModalComponent } from './confirm-delete-account-mod
     YearPickerComponent,
     AccountLabelComponent,
     HoverGroupDirective,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    ChangesWillBeLostModalComponent
   ]
 })
 export class SharedModule { }
