@@ -11,5 +11,5 @@ data class RequiredStaffTimePeriodDto(
 
 ) {
     constructor(requiredStaff: RequiredStaffTimePeriod)
-    : this(requiredStaff.id, requiredStaff.employeeCount, requiredStaff.timePeriod)
+    : this(requiredStaff.id, requiredStaff.employeeCount, requiredStaff.period)
 }

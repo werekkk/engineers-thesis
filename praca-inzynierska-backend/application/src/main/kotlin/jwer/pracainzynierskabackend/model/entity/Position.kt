@@ -12,8 +12,6 @@ data class Position(
 
     @Column(name = "name")
     val name: String,
-    @Column(name = "description")
-    val description: String,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workplace_id")
@@ -25,5 +23,5 @@ data class Position(
 
 ) {
     constructor(positionDto: PositionDto, workplace: Workplace) :
-            this(positionDto.id ?: 0, positionDto.name, "", workplace)
+            this(positionDto.id ?: 0, positionDto.name, workplace)
 }

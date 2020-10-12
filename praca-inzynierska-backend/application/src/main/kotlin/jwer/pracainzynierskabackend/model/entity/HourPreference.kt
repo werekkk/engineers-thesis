@@ -15,7 +15,7 @@ data class HourPreference(
         @JoinColumn(name = "preferences_day_id")
         val day: PreferencesDay,
 
-        @Column(name = "type")
+        @Column(name = "preference_type")
         val type: PreferenceType,
 
         @Embedded

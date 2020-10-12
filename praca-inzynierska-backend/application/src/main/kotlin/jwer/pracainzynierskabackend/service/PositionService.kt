@@ -48,7 +48,7 @@ class PositionService @Autowired constructor(
                         }
                     }
                 } else {
-                    val position = Position(position.id?:0, position.name, "", it)
+                    val position = Position(position.id?:0, position.name, it)
                     val savedPosition = positionRepository.save(position)
                     return PositionDto(savedPosition)
                 }

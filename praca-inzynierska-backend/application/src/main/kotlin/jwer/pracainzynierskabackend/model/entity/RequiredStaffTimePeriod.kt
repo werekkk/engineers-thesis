@@ -20,13 +20,13 @@ data class RequiredStaffTimePeriod(
         val employeeCount: Int,
 
         @Embedded
-        @Column(name = "time_period")
-        val timePeriod: TimePeriod
+        @Column(name = "period")
+        val period: TimePeriod
 ) {
         constructor(dto: RequiredStaffTimePeriodDto, day: RequiredStaffDay)
         : this(dto.id, day, dto.employeeCount, dto.timePeriod)
 
         override fun toString(): String {
-                return "<RequiredStaffTimePeriod>{id: ${id}; employeeCount: ${employeeCount}; day_id: ${day.id}; timePeriod: ${timePeriod}}"
+                return "<RequiredStaffTimePeriod>{id: ${id}; employeeCount: ${employeeCount}; day_id: ${day.id}; timePeriod: ${period}}"
         }
 }
