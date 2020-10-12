@@ -27,7 +27,6 @@ export class EmployeesNewEmployeeModalComponent implements OnInit {
   // Corresponds with 'AddEmployeeDto'
   employeeForm = new FormGroup({
     firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    middleName: new FormControl(''),
     lastName: new FormControl('', [Validators.required, Validators.minLength(2)])
   })
 

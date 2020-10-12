@@ -8,7 +8,6 @@ data class AccountDto(
         val username: String?,
         val email: String?,
         val firstName: String,
-        val middleName: String?,
         val lastName: String,
         val accountType: AccountType
 ) {
@@ -16,7 +15,6 @@ data class AccountDto(
             c.username,
             c.email,
             a.firstName,
-            a.middleName,
             a.lastName,
             a.accountType
     )
@@ -25,7 +23,6 @@ data class AccountDto(
             null,
             null,
             a.firstName,
-            a.middleName,
             a.lastName,
             t
     )

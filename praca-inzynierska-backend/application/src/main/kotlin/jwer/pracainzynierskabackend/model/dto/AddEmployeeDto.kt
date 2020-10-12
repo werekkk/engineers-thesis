@@ -5,6 +5,5 @@ import java.time.LocalDate
 
 data class AddEmployeeDto(
         val firstName: String,
-        val middleName: String? = "",
-        val lastName: String,
+        val lastName: String
 )

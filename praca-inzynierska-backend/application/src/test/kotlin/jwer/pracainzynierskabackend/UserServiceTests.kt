@@ -130,7 +130,7 @@ class UserServiceTests @Autowired constructor(
         val user = registerTestWorkplace()
 
         val empUser = object : Principal { override fun getName(): String = "emp" }
-        val emp = employeeController.addEmployee(AddEmployeeDto("fn1", null, "ln1"), user).body!!
+        val emp = employeeController.addEmployee(AddEmployeeDto("fn1", "ln1"), user).body!!
         userController.registerEmployee(RegisterEmployeeDetailsDto("emp","test","emp@test.com", emp.invitationToken!!))
         val savedEmployeeCredentials = credentialsRepository.findByUsername("emp")!!
 
@@ -181,7 +181,7 @@ class UserServiceTests @Autowired constructor(
         val user = object : Principal { override fun getName(): String = EMPLOYER_LOGIN }
         userController.registerWorkplace(RegisterWorkplaceDetailsDto(
                 RegisterAccountDetailsDto(
-                        EMPLOYER_LOGIN, EMPLOYER_LOGIN, "test@test.com", "Jan", null, "Kowalski"
+                        EMPLOYER_LOGIN, EMPLOYER_LOGIN, "test@test.com", "Jan", "Kowalski"
                 ),
                 "Workplace name"
         )).body
@@ -196,8 +196,8 @@ class UserServiceTests @Autowired constructor(
     }
 
     private fun addTwoEmployees(employerPrincipal: Principal): List<Employee> {
-        employeeController.addEmployee(AddEmployeeDto("fn1", null, "ln1"), employerPrincipal)
-        employeeController.addEmployee(AddEmployeeDto("fn2", null, "ln2"), employerPrincipal)
+        employeeController.addEmployee(AddEmployeeDto("fn1", "ln1"), employerPrincipal)
+        employeeController.addEmployee(AddEmployeeDto("fn2", "ln2"), employerPrincipal)
         return employeeController.getAllEmployees(employerPrincipal).body!!.employees.map { employeeRepository.getById(it.employeeId)!! }
     }
 }

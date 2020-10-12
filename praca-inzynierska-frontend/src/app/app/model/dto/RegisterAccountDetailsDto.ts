@@ -4,7 +4,6 @@ export class RegisterAccountDetailsDto {
         public password: string,
         public email: string,
         public firstName: string,
-        public middleName: string,
         public lastName: string
     ) {}
 }

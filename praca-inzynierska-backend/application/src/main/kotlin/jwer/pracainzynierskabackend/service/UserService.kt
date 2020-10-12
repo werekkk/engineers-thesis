@@ -58,9 +58,7 @@ class UserService @Autowired constructor(
                 employerDetails.email,
                 Account(0,
                         employerDetails.firstName,
-                        employerDetails.middleName,
                         employerDetails.lastName,
-                        LocalDateTime.now(),
                         AccountType.EMPLOYER
                 ),
                 mutableListOf()

@@ -97,8 +97,7 @@ export class UserService {
    * account details.
    * 
    * @param invitationToken Invitation token of the invited employee.
-   * @returns An `Observable` containing the account information (first name, middle name, 
-   * last name)
+   * @returns An `Observable` containing the account information (first name, last name)
    */
   lookupInvitationToken(invitationToken: String): Observable<AccountDto> {
     return this.http.get(

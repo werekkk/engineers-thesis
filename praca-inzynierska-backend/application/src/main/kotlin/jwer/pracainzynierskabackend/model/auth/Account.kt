@@ -13,13 +13,8 @@ data class Account(
 
         @Column(name = "first_name", nullable = false)
         val firstName: String,
-        @Column(name = "middle_name")
-        val middleName: String?,
         @Column(name = "last_name", nullable = false)
         val lastName: String,
-
-        @Column(name = "registration_date")
-        val registrationDate: LocalDateTime,
 
         @Column(name = "account_type")
         val accountType: AccountType
@@ -27,9 +22,7 @@ data class Account(
         constructor(ed: AddEmployeeDto): this(
                 0,
                 ed.firstName,
-                ed.middleName,
                 ed.lastName,
-                LocalDateTime.now(),
                 AccountType.EMPLOYEE
         )
 }

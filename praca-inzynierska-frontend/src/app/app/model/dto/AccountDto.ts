@@ -5,7 +5,6 @@ export class AccountDto {
         public username: string,
         public email: string,
         public firstName: string,
-        public middleName: string,
         public lastName: string,
         public accountType: AccountType
     ) {}

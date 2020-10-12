@@ -12,7 +12,6 @@ data class RegisterWorkplaceDetailsDto(
                 employer.password.length in 4..20 &&
                 employer.email.length in 3..50 &&
                 employer.firstName.length in 2..50 &&
-                employer.middleName?.length ?: 1 in 0..50 &&
                 employer.lastName.length in 2..50 &&
                 workplaceName.length in 3..100
     }

@@ -34,7 +34,6 @@ class SampleData @Autowired constructor(
                         "test",
                         "jan.kowalski@test.com",
                         "Jan",
-                        "Bonifacy",
                         "Kowalski"
                 ),
                 "Przykładowy zakład pracy"
@@ -46,15 +45,15 @@ class SampleData @Autowired constructor(
                 PositionDto(null, "Osoba sprzątająca")
         ))
         private val SAMPLE_EMPLOYEES = listOf(
-                AddEmployeeDto("Filip", null, "Sikorski"),
-                AddEmployeeDto("Marcin", "Gustaw", "Szczepański"),
-                AddEmployeeDto("Bolesław", null, "Kucharski"),
-                AddEmployeeDto("Jerzy", "Andrzej", "Zawadzki"),
-                AddEmployeeDto("Kamila", null, "Urbańska"),
-                AddEmployeeDto("Łucja", "Antonina", "Krajewska"),
-                AddEmployeeDto("Aleksandra", null, "Kalinowska"),
-                AddEmployeeDto("Gabriela", "Honorata", "Andrzejewska"),
-                AddEmployeeDto("Diana", null, "Górecka")
+                AddEmployeeDto("Filip", "Sikorski"),
+                AddEmployeeDto("Marcin", "Szczepański"),
+                AddEmployeeDto("Bolesław", "Kucharski"),
+                AddEmployeeDto("Jerzy", "Zawadzki"),
+                AddEmployeeDto("Kamila", "Urbańska"),
+                AddEmployeeDto("Łucja", "Krajewska"),
+                AddEmployeeDto("Aleksandra", "Kalinowska"),
+                AddEmployeeDto("Gabriela", "Andrzejewska"),
+                AddEmployeeDto("Diana", "Górecka")
         )
     }
 
@@ -95,7 +94,7 @@ class SampleData @Autowired constructor(
     private fun initSampleEmployees() {
         val existingEmployees = employeeController.getAllEmployees(principal).body!!.employees
         SAMPLE_EMPLOYEES.forEach {
-            if (!existingEmployees.any { e -> e.account.firstName == it.firstName && e.account.middleName == it.middleName && e.account.lastName == it.lastName }) {
+            if (!existingEmployees.any { e -> e.account.firstName == it.firstName && e.account.lastName == it.lastName }) {
                 employeeController.addEmployee(it, principal)
             }
         }

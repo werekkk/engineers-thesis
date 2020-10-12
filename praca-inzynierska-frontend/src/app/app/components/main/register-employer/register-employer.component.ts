@@ -23,7 +23,6 @@ export class RegisterEmployerComponent implements OnInit {
       repeatPassword: new FormControl('', [Validators.required, Validators.minLength(4)]),
       email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(3)]),
       firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      middleName: new FormControl(''),
       lastName: new FormControl('', [Validators.required, Validators.minLength(2)])
     }, matchingPasswordValidator('password', 'repeatPassword')),
     workplaceName: new FormControl('', [Validators.required, Validators.minLength(3)])
@@ -34,7 +33,6 @@ export class RegisterEmployerComponent implements OnInit {
   get repeatPassword(): FormControl { return this.employerForm.get('employer').get('repeatPassword') as FormControl }
   get email(): FormControl { return this.employerForm.get('employer').get('email') as FormControl }
   get firstName(): FormControl { return this.employerForm.get('employer').get('firstName') as FormControl }
-  get middleName(): FormControl { return this.employerForm.get('employer').get('middleName') as FormControl }
   get lastName(): FormControl { return this.employerForm.get('employer').get('lastName') as FormControl }
   get workplaceName(): FormControl { return this.employerForm.get('workplaceName') as FormControl }
   get employer(): FormGroup { return this.employerForm.get('employer') as FormGroup }
