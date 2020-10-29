@@ -15,7 +15,7 @@ export class RequiredStaffDayDto {
     static of(requiredStaffDay: RequiredStaffDayBackendDto) {
         return new RequiredStaffDayDto(
             requiredStaffDay.id,
-            requiredStaffDay.timePeriods.map(tp => RequiredStaffTimePeriodDto.of(tp))
+            requiredStaffDay.timePeriods.map(tp => RequiredStaffTimePeriodDto.of(tp)).sort(RequiredStaffTimePeriodDto.comparePeriods)
         )
     }
 

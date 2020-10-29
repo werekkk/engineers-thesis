@@ -20,6 +20,7 @@
             <schedule-position-edit-popup
             [(shifts)]="shifts"
             (shiftsChange)="shiftsChange.emit($event)"
+            (showPopup)="showPopup=$event"
             [position]="position"
             [employee]="employee"
             [date]="day"

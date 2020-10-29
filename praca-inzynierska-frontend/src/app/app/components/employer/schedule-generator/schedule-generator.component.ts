@@ -22,6 +22,7 @@ export class ScheduleGeneratorComponent implements OnInit {
 
   positionsLoaded: boolean = false
   employeesLoaded: boolean = false
+  noPositionsSelected: boolean = true  
 
   positionChecked: boolean[] = []
   employeeChecked: boolean[] = []
@@ -112,6 +113,11 @@ export class ScheduleGeneratorComponent implements OnInit {
         }
       }
     })
+    if (this.positionChecked.some(value => value)) {
+      this.noPositionsSelected = false
+    } else {
+      this.noPositionsSelected = true
+    }
   }
 
   private canGenerate(positions: PositionDto[], employees: EmployeeDto[]): boolean {

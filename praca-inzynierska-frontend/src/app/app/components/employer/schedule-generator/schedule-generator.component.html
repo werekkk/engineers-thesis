@@ -46,9 +46,12 @@
                     <div class="col">
                         <div>
                             <h5>Pracownicy</h5>
+                            <div *ngIf="noPositionsSelected" class="no-positions-selected-error">
+                                Aby zaznaczyć pracowników, wybierz najpierw odpowiednie stanowiska.
+                            </div>
                             <div class="checkbox-options">
-                                <button class="btn btn-sm btn-secondary" (click)="setAll(true, employeeChecked)">Zaznacz wszystkich</button>    
-                                <button class="btn btn-sm btn-secondary" (click)="setAll(false, employeeChecked)">Odznacz wszystkich</button>        
+                                <button class="btn btn-sm btn-secondary" (click)="setAll(true, employeeChecked)" [disabled]="noPositionsSelected">Zaznacz wszystkich</button>    
+                                <button class="btn btn-sm btn-secondary" (click)="setAll(false, employeeChecked)" [disabled]="noPositionsSelected">Odznacz wszystkich</button>        
                             </div>
                         </div>
                         <div *ngFor="let employee of employeeService.employees.value; let i = index" class="form-check" [class.highlighted]="shouldHighlight(employee)">

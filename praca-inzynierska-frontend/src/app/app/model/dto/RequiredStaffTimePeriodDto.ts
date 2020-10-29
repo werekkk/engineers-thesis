@@ -21,6 +21,10 @@ export class RequiredStaffTimePeriodDto implements HasTimePeriod {
             requiredStaff.employeeCount, 
             TimePeriodDto.of(requiredStaff.timePeriod))
     }
+
+    static comparePeriods(a: RequiredStaffTimePeriodDto, b: RequiredStaffTimePeriodDto): number {
+        return a.timePeriod.compare(b.timePeriod);
+    }
     
     seconds() {
         return this.timePeriod.seconds() * this.employeeCount

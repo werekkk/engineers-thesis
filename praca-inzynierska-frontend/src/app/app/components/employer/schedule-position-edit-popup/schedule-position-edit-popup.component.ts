@@ -13,7 +13,7 @@ import { RequiredStaffDto } from 'src/app/app/model/dto/RequiredStaffDto';
   templateUrl: './schedule-position-edit-popup.component.html',
   styleUrls: ['./schedule-position-edit-popup.component.scss']
 })
-export class SchedulePositionEditPopupComponent implements OnInit {
+export class SchedulePositionEditPopupComponent {
 
   
   _shifts: ShiftDto[] = []
@@ -33,7 +33,7 @@ export class SchedulePositionEditPopupComponent implements OnInit {
   
   periods: TimePeriodDto[] = []
 
-  @Input('showPopup')
+  @Output('showPopup')
   showPopup: EventEmitter<boolean> = new EventEmitter()
 
   @Input('position')
@@ -62,9 +62,6 @@ export class SchedulePositionEditPopupComponent implements OnInit {
   constructor(
     private shiftService: ShiftService
   ) { 
-  }
-
-  ngOnInit(): void {
   }
 
   handleNewShifts(newShifts: ShiftDto[]) {
@@ -117,11 +114,14 @@ export class SchedulePositionEditPopupComponent implements OnInit {
     this.showPopup.emit(false)
     if (this.instantUpdate) {
       this.shiftService.deleteShift(shiftToBeDeleted.id)
-      .subscribe(null, err => {
-        this.shifts.push(shiftToBeDeleted)
-        this.shifts = this.shifts.sort((a, b) => a.period.compare(b.period))
-        this.emitShiftChange()
-        this.showPopup.emit(true)
+      .subscribe({
+        next: null,
+        error: err => {
+          this.shifts.push(shiftToBeDeleted)
+          this.shifts = this.shifts.sort((a, b) => a.period.compare(b.period))
+          this.emitShiftChange()
+          this.showPopup.emit(true)
+        }
       })
     }
   }
