@@ -16,7 +16,7 @@ export class ScheduleEmployeeWeekComponent implements OnInit {
   get firstDay(): Date {
     return this._firstDay
   }
-  @Input('firstDay')
+  @Input()
   set firstDay(val: Date) {
     this._firstDay = val
     this.lastDay = moment(val).add(6, 'day').toDate()

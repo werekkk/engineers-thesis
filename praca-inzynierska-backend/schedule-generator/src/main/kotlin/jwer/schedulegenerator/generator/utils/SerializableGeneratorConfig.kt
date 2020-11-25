@@ -1,6 +1,7 @@
-package jwer.schedulegenerator.generator
+package jwer.schedulegenerator.generator.utils
 
 import jwer.schedulegenerator.generator.model.Employee
+import jwer.schedulegenerator.generator.model.GeneratorConfig
 import jwer.schedulegenerator.generator.model.Position
 import kotlinx.serialization.Serializable
 

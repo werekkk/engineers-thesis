@@ -8,10 +8,10 @@ import { TimeStep } from 'src/app/app/model/TimeStep';
 })
 export class TimeStepPickerComponent {
 
-  @Input('timeStep')
+  @Input()
   timeStep: TimeStep = TimeStep.DEFAULT
 
-  @Output('timeStepChange')
+  @Output()
   timeStepChange: EventEmitter<TimeStep> = new EventEmitter()
 
 }

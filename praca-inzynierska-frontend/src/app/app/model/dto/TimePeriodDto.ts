@@ -1,5 +1,5 @@
 import { TimeDto } from './TimeDto';
-import { TimePeriod } from '../TimePeriod'
+import { TimePeriod } from './backend/TimePeriod'
 
 export class TimePeriodDto {
   

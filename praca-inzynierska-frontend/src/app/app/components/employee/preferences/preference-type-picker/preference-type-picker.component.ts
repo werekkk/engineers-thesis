@@ -9,10 +9,10 @@ import { HourPreferenceDto } from 'src/app/app/model/dto/HourPreferenceDto';
 })
 export class PreferenceTypePickerComponent implements OnInit {
 
-  @Input('preferenceType')
+  @Input()
   preferenceType: PreferenceType
   
-  @Output('preferenceTypeChange')
+  @Output()
   preferenceTypeChange: EventEmitter<PreferenceType> = new EventEmitter()
 
   willing = PreferenceType.WILLING

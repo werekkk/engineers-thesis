@@ -3,7 +3,6 @@ package jwer.pracainzynierskabackend.model.dto
 import jwer.pracainzynierskabackend.model.auth.AccountType
 import jwer.pracainzynierskabackend.model.entity.Employee
 import jwer.pracainzynierskabackend.model.entity.EmployeeStatus
-import java.time.LocalDate
 
 data class EmployeeDto(
         val employeeId: Long,

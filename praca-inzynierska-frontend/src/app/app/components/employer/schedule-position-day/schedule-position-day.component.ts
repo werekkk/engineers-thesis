@@ -10,7 +10,7 @@ import { RequiredStaffDayDto } from 'src/app/app/model/dto/RequiredStaffDayDto';
 export class SchedulePositionDayComponent implements OnInit {
 
   _date: Date
-  @Input('date')
+  @Input()
   set date(value: Date) {
     this._date = value
   }

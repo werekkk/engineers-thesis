@@ -2,7 +2,7 @@ package jwer.pracainzynierskabackend.service
 
 import jwer.pracainzynierskabackend.model.auth.AccountType
 import jwer.pracainzynierskabackend.model.dto.*
-import jwer.schedulegenerator.generator.GeneratorConfig
+import jwer.schedulegenerator.generator.model.GeneratorConfig
 import jwer.schedulegenerator.generator.ScheduleGenerator
 import jwer.schedulegenerator.generator.model.Employee
 import jwer.schedulegenerator.generator.model.Position

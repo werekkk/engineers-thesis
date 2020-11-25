@@ -1,5 +1,7 @@
-package jwer.schedulegenerator.generator.model
+package jwer.schedulegenerator.generator.transition
 
+import jwer.schedulegenerator.generator.model.HourCount
+import jwer.schedulegenerator.generator.model.Schedule
 import kotlin.random.Random
 
 class SingleBlockChangeTransition(

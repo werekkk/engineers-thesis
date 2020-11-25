@@ -8,7 +8,7 @@ import { PreferencesWeekDto } from 'src/app/app/model/dto/PreferencesWeekDto';
 })
 export class PreferencesWeekTableComponent implements OnInit {
 
-  @Input('preferencesWeek')
+  @Input()
   preferencesWeek: PreferencesWeekDto 
 
   days: number[] = [0, 1, 2, 3, 4, 5, 6]

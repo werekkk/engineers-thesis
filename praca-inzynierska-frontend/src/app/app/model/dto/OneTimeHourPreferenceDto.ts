@@ -2,7 +2,6 @@ import { PreferenceType } from '../PreferenceType';
 import { HasTimePeriod } from '../HasTimePeriod';
 import { TimePeriodDto } from './TimePeriodDto';
 import { TimeDto } from './TimeDto';
-import { TimePeriod } from '../TimePeriod';
 import { Utils } from '../../shared/utils/utils';
 
 export class OneTimeHourPreferenceDto implements HasTimePeriod {

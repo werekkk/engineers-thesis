@@ -1,9 +1,6 @@
 package jwer.pracainzynierskabackend.model.entity
 
 import jwer.pracainzynierskabackend.model.auth.Account
-import jwer.pracainzynierskabackend.model.auth.Credentials
-import jwer.pracainzynierskabackend.model.dto.RegisterEmployeeDetailsDto
-import jwer.pracainzynierskabackend.model.dto.RegisterWorkplaceDetailsDto
 import javax.persistence.*
 
 @Entity

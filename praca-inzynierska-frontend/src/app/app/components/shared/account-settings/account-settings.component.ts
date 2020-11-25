@@ -54,9 +54,11 @@ export class AccountSettingsComponent {
     private modalService: NgbModal
   ) {
     userService.user.subscribe(user => {
-      this.newEmail.setValue(user.email)
-      this.newFirstName.setValue(user.firstName)
-      this.newLastName.setValue(user.lastName)
+      if (user) {
+        this.newEmail.setValue(user.email)
+        this.newFirstName.setValue(user.firstName)
+        this.newLastName.setValue(user.lastName)
+      }
     })
   }
 

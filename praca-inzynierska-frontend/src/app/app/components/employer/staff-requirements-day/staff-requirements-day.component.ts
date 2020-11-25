@@ -10,19 +10,19 @@ import { TimeStep } from 'src/app/app/model/TimeStep';
 })
 export class StaffRequirementsDayComponent{
   
-  @Input('dayExpression')
+  @Input()
   dayExpression: string = ''
   
-  @Input('positionName')
+  @Input()
   positionName: string = ''
 
-  @Input('timeStep')
+  @Input()
   timeStep: TimeStep
 
-  @Input('timePeriods')
+  @Input()
   timePeriods: RequiredStaffTimePeriodDto[] = []
 
-  @Output('timePeriodsChange')
+  @Output()
   timePeriodsChange: EventEmitter<RequiredStaffTimePeriodDto[]> = new EventEmitter()
 
   highlightedPeriodIndex = undefined

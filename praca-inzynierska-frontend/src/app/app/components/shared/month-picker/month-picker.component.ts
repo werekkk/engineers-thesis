@@ -14,12 +14,12 @@ export class MonthPickerComponent {
   get month(): Moment {
     return this._month
   }
-  @Input('month')
+  @Input()
   set month(val: Moment) {
     this._month = val
   }
   
-  @Output('monthChange')
+  @Output()
   monthChange: EventEmitter<Moment> = new EventEmitter()
 
   constructor() { }

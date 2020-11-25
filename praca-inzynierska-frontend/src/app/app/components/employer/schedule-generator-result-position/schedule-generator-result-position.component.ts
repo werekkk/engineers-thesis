@@ -19,7 +19,7 @@ export class ScheduleGeneratorResultPositionComponent implements OnInit {
   get firstDay(): Date {
     return this._firstDay
   }
-  @Input('firstDay')
+  @Input()
   set firstDay(val: Date) {
     this._firstDay = val
     this.days = Utils.weekFrom(this.firstDay)
@@ -30,16 +30,16 @@ export class ScheduleGeneratorResultPositionComponent implements OnInit {
   
   days: Date[] = []
 
-  @Input('position')
+  @Input()
   position: PositionDto
 
-  @Input('shifts')
+  @Input()
   shifts: ShiftDto[]
 
-  @Input('employees')
+  @Input()
   employees: EmployeeDto[]
 
-  @Input('config')
+  @Input()
   config: GeneratorConfigDto
 
   employeesWithPosition: EmployeeDto[]
@@ -49,7 +49,7 @@ export class ScheduleGeneratorResultPositionComponent implements OnInit {
 
   shiftsTable: ShiftDto[][][] = undefined
 
-  @Output('shiftsChange')
+  @Output()
   shiftsChange: EventEmitter<ShiftDto[]> = new EventEmitter()
 
   constructor(

@@ -19,7 +19,6 @@ import { TimePeriodCellComponent } from './time-period-cell/time-period-cell.com
 import { ClickOutsideDirective } from '../../directives/click-outside.directive'
 import { PeriodLengthPipe } from '../../pipes/period-length.pipe';
 import { OnEscapePressedDirective } from '../../directives/on-escape-pressed.directive';
-import { OnEnterPressedDirective } from '../../directives/on-enter-pressed.directive';
 import { YearPickerComponent } from './year-picker/year-picker.component';
 import { AccountLabelComponent } from './account-label/account-label.component';
 import { HoverGroupDirective } from '../../directives/hover-group.directive';
@@ -45,7 +44,6 @@ import { ChangesWillBeLostModalComponent } from './changes-will-be-lost-modal/ch
     ClickOutsideDirective,
     PeriodLengthPipe,
     OnEscapePressedDirective,
-    OnEnterPressedDirective,
     YearPickerComponent,
     AccountLabelComponent,
     HoverGroupDirective,
@@ -75,7 +73,6 @@ import { ChangesWillBeLostModalComponent } from './changes-will-be-lost-modal/ch
     ClickOutsideDirective,
     PeriodLengthPipe,
     OnEscapePressedDirective,
-    OnEnterPressedDirective,
     YearPickerComponent,
     AccountLabelComponent,
     HoverGroupDirective,

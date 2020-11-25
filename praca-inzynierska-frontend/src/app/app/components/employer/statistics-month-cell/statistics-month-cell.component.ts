@@ -8,7 +8,7 @@ import { StatisticsDto } from 'src/app/app/model/dto/StatisticsDto';
 })
 export class StatisticsMonthCellComponent {
 
-  @Input('monthStatistics')
+  @Input()
   monthStatistics: StatisticsDto
 
   constructor() { }

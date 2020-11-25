@@ -9,7 +9,7 @@ import { PositionService } from 'src/app/app/services/position.service';
 })
 export class ScheduleCalendarCellComponent {
 
-  @Input('shifts')
+  @Input()
   shifts: ShiftDto[]
 
   constructor(

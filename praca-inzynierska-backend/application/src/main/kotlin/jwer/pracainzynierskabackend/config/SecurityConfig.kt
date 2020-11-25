@@ -22,7 +22,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
-        http?.authorizeRequests()
+        http.authorizeRequests()
                 ?.antMatchers("/auth/user")?.permitAll()
                 ?.antMatchers("/auth/**")?.hasAnyRole(AccountRole.EMPLOYEE, AccountRole.EMPLOYER)
                 ?.antMatchers("/user/change-details")?.hasAnyRole(AccountRole.EMPLOYEE, AccountRole.EMPLOYER)

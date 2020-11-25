@@ -1,7 +1,6 @@
 package jwer.pracainzynierskabackend.model.auth
 
 import jwer.pracainzynierskabackend.model.dto.AddEmployeeDto
-import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity

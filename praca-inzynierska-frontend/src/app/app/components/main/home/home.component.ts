@@ -28,10 +28,6 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['register-employer'])
   }
 
-  onEnterPressed() {
-    this.onLoginClicked()
-  }
-
   onLoginClicked() {
     if (this.areCredentialsPresent()) {
       this.authenticationService.login(this.getCredentials())

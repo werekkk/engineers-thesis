@@ -1,10 +1,13 @@
 package jwer.schedulegenerator.generator
 
+import jwer.schedulegenerator.generator.model.GeneratorConfig
 import jwer.schedulegenerator.generator.model.Schedule
-import jwer.schedulegenerator.generator.model.ShiftTakeoverTransition
-import jwer.schedulegenerator.generator.model.SingleBlockChangeTransition
-import jwer.schedulegenerator.generator.model.Transition
+import jwer.schedulegenerator.generator.transition.ShiftTakeoverTransition
+import jwer.schedulegenerator.generator.transition.SingleBlockChangeTransition
+import jwer.schedulegenerator.generator.transition.Transition
+import jwer.schedulegenerator.generator.utils.RandomScheduleGenerator
 import jwer.schedulegenerator.generator.utils.RandomSelector
+import jwer.schedulegenerator.generator.utils.SerializableGeneratorConfig
 import jwer.schedulegenerator.generator.utils.standardDeviation
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -31,7 +34,6 @@ private const val ITERATIONS = 3000000
 private const val TEMP_START: Double = 9.7
 private const val TEMP_FINAL: Double = 0.1
 
-// http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.589.3061&rep=rep1&type=pdf - strona 5, 3.3
 private val E: Double = (TEMP_FINAL / TEMP_START).pow(1.0 / ITERATIONS)
 
 fun sa(config: GeneratorConfig,
@@ -47,18 +49,18 @@ fun sa(config: GeneratorConfig,
     var schedule = RandomScheduleGenerator.generate(config)
     var cost = cost(schedule)
 
-    if (log) println("Initial cost: ${cost}")
+    if (log) println("Initial cost: $cost")
 
     var it = 0
     var lastPercent = 0
     var previousCheckCost: Double = -1.0
     while (temperature >= tempFinal) {
         if (log && (100.0 * it / iterations) >= lastPercent) {
-            schedule.recalcHourCount()
+            schedule.recalculateHourCount()
             if (cost != cost(schedule)) {
                 println("COST CALCULATION ERROR! \\/")
             }
-            println("${(100.0 * it / iterations).roundToInt()}%, current cost: ${cost}")
+            println("${(100.0 * it / iterations).roundToInt()}%, current cost: $cost")
             lastPercent += 5
             if (cost == previousCheckCost) {
                 return schedule
@@ -77,7 +79,7 @@ fun sa(config: GeneratorConfig,
         temperature *= e
         it++
     }
-    if (log) println("Final cost: ${cost}")
+    if (log) println("Final cost: $cost")
     if (log) println("Generation finished in ${System.currentTimeMillis() - time} ms")
     return schedule
 }
@@ -107,18 +109,19 @@ private fun createTransition(schedule: Schedule): Transition {
     return transitionSelector.getRandom().invoke(schedule)
 }
 
-fun main() {
+
+fun findOptimalTemperatures() {
     println("tempFinish;tempStart;costMin;costMax;costAvg")
     val config = Json.decodeFromString<SerializableGeneratorConfig>(
             File("sprzatajacy.json").readText()
     ).toConfig()
-    val tempFinal: Double = 0.1
-    val multiplier: Double = 1.1
-    var tempStart: Double = tempFinal * multiplier
+    val tempFinal = 0.1
+    val multiplier = 1.1
+    var tempStart = tempFinal * multiplier
     while (tempStart < 100000) {
         val deferred = (1..20).map {
             GlobalScope.async {
-                cost(sa(config, tempStart = tempStart, tempFinal = tempFinal, log = false)).toDouble()
+                cost(sa(config, tempStart = tempStart, tempFinal = tempFinal, log = false))
             }
         }
         runBlocking {

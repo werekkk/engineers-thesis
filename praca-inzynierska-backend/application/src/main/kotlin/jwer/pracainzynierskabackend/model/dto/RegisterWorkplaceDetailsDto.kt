@@ -1,7 +1,5 @@
 package jwer.pracainzynierskabackend.model.dto
 
-import org.apache.commons.validator.routines.EmailValidator
-
 data class RegisterWorkplaceDetailsDto(
         val employer: RegisterAccountDetailsDto,
         val workplaceName: String

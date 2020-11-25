@@ -22,16 +22,16 @@ type Canvas = CanvasUtils.Canvas
 })
 export class PreferencesOneTimeDayEditorComponent implements AfterViewInit {
 
-  @Input('day')
+  @Input()
   day: Date
 
-  @Input('timeStep')
+  @Input()
   timeStep: TimeStep
 
-  @Input('preferenceType')
+  @Input()
   preferenceType: PreferenceType
 
-  @Input('preferencesWeek')
+  @Input()
   preferencesWeek: PreferencesWeekDto
   preferenceWeekBlocks: PreferenceBlock[] = []
 
@@ -39,7 +39,7 @@ export class PreferencesOneTimeDayEditorComponent implements AfterViewInit {
   get oneTimePreferences(): OneTimeHourPreferenceDto[] {
     return this._oneTimePreferences
   }
-  @Input('oneTimePreferences')
+  @Input()
   set oneTimePreferences(val: OneTimeHourPreferenceDto[]) {
     if (this.canvas) {
       this.mapOneTimePreferenceBlocks()
@@ -49,7 +49,7 @@ export class PreferencesOneTimeDayEditorComponent implements AfterViewInit {
   }
   preferenceOneTimeBlocks: PreferenceBlock[] = []
 
-  @Output('onPreferenceCreated')
+  @Output()
   onPreferenceCreated: EventEmitter<OneTimeHourPreferenceDto> = new EventEmitter()
 
   canvas: Canvas

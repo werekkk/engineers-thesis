@@ -5,7 +5,7 @@ import { Directive, Output, EventEmitter, HostListener } from '@angular/core';
 })
 export class OnEscapePressedDirective {
 
-  @Output('onEscapePressed')
+  @Output()
   onEscapePressed: EventEmitter<null> = new EventEmitter()
 
   constructor() { }

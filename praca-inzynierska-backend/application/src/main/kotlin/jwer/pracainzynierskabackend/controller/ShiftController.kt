@@ -5,7 +5,6 @@ import jwer.pracainzynierskabackend.model.dto.ShiftDto
 import jwer.pracainzynierskabackend.model.dto.ShiftsDto
 import jwer.pracainzynierskabackend.model.dto.ShiftsWithGeneratorConfigDto
 import jwer.pracainzynierskabackend.service.ShiftService
-import jwer.pracainzynierskabackend.utils.ControllerUtils
 import jwer.pracainzynierskabackend.utils.createResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.annotation.DateTimeFormat

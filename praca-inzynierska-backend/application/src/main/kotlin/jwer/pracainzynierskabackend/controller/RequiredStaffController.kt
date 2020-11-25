@@ -2,7 +2,6 @@ package jwer.pracainzynierskabackend.controller
 
 import jwer.pracainzynierskabackend.model.dto.RequiredStaffDto
 import jwer.pracainzynierskabackend.service.RequiredStaffService
-import jwer.pracainzynierskabackend.utils.ControllerUtils
 import jwer.pracainzynierskabackend.utils.createResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity

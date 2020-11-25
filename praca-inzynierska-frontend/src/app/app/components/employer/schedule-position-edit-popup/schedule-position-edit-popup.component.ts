@@ -20,41 +20,41 @@ export class SchedulePositionEditPopupComponent {
   get shifts(): ShiftDto[] {
     return this._shifts
   }
-  @Input('shifts')
+  @Input()
   set shifts(val: ShiftDto[]) {
     this._shifts = val
     this.handleNewShifts(val)
   }
 
-  @Output('shiftsChange')
+  @Output()
   shiftsChange: EventEmitter<ShiftDto[]> = new EventEmitter()
 
   newPeriod: TimePeriodDto = new TimePeriodDto(new TimeDto(0, 0), new TimeDto(0, 0))
   
   periods: TimePeriodDto[] = []
 
-  @Output('showPopup')
+  @Output()
   showPopup: EventEmitter<boolean> = new EventEmitter()
 
-  @Input('position')
+  @Input()
   position: PositionDto
 
-  @Input('employee')
+  @Input()
   employee: EmployeeDto
 
-  @Input('date')
+  @Input()
   date: Date
 
-  @Input('dayIndex')
+  @Input()
   dayIndex: number
 
-  @Input('requiredStaff')
+  @Input()
   requiredStaff: RequiredStaffDto
 
-  @Input('shiftsTable')
+  @Input()
   shiftsTable: ShiftDto[][][]
 
-  @Input('instantUpdate')
+  @Input()
   instantUpdate: boolean = true
 
   mouseIn: boolean = false

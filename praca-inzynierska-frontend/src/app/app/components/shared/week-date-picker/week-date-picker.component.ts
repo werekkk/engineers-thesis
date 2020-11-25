@@ -12,7 +12,7 @@ export class WeekDatePickerComponent implements OnInit {
   get date(): Date {
     return this._date
   }
-  @Input('date')
+  @Input()
   set date(val: Date) {
     this._date = val
     this.lastDate = moment(val).add(6, 'day').toDate()
@@ -20,12 +20,12 @@ export class WeekDatePickerComponent implements OnInit {
 
   lastDate: Date
 
-  @Output('dateChange')
+  @Output()
   dateChange: EventEmitter<Date> = new EventEmitter()
 
-  @Input('periodStart')
+  @Input()
   periodStart: Date = null
-  @Input('periodFinish')
+  @Input()
   periodFinish: Date = null
 
   canPickPreviousWeek: boolean = true

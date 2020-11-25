@@ -1,6 +1,6 @@
 package jwer.pracainzynierskabackend.model.dto
 
-import jwer.pracainzynierskabackend.model.TimePointArray
+import jwer.pracainzynierskabackend.utils.TimePointArray
 import jwer.pracainzynierskabackend.model.entity.ShiftType
 import jwer.pracainzynierskabackend.utils.isMidnight
 import jwer.schedulegenerator.generator.model.Schedule

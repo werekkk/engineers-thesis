@@ -1,12 +1,10 @@
-package jwer.pracainzynierskabackend.model
+package jwer.pracainzynierskabackend.utils
 
 import jwer.pracainzynierskabackend.model.embeddable.DateTimePeriod
 import jwer.pracainzynierskabackend.service.ScheduleGeneratorService
-import jwer.pracainzynierskabackend.utils.totalMinutesInDay
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
-import java.util.concurrent.TimeUnit
 
 class TimePointArray<T> constructor(
         private val start: LocalDate,

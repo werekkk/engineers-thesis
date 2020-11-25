@@ -1,6 +1,5 @@
 package jwer.pracainzynierskabackend.service
 
-import jwer.pracainzynierskabackend.model.auth.Account
 import jwer.pracainzynierskabackend.model.auth.AccountType
 import jwer.pracainzynierskabackend.model.dto.AccountDto
 import jwer.pracainzynierskabackend.model.dto.RequiredStaffDto

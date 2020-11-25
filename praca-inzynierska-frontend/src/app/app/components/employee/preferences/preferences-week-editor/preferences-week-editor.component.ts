@@ -34,10 +34,10 @@ export class PreferencesWeekEditorComponent implements AfterViewInit {
   @ViewChild('canvas', {static: false})
   canvasElement: ElementRef<HTMLCanvasElement>
   
-  @Input('timeStep')
+  @Input()
   timeStep: TimeStep
 
-  @Input('preferenceType')
+  @Input()
   preferenceType: PreferenceType
 
   preferenceBlocks: PreferenceBlock[]
@@ -46,17 +46,17 @@ export class PreferencesWeekEditorComponent implements AfterViewInit {
   get preferenceWeek(): PreferencesWeekDto {
     return this._preferenceWeek
   }
-  @Input('preferencesWeek')
+  @Input()
   set preferenceWeek(val: PreferencesWeekDto) {
     this._preferenceWeek = val
     if (this.canvas) {
       this.mapPreferenceBlocks()
     }
   }
-  @Output('preferencesWeekChange')
+  @Output()
   preferencesWeekChange: EventEmitter<PreferencesWeekDto> = new EventEmitter()
 
-  @Output('newPreferenceCreated')
+  @Output()
   newPreferenceCreated: EventEmitter<PreferenceCreatedEvent> = new EventEmitter()
 
   highlightedDay: number = undefined

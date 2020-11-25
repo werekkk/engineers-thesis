@@ -11,19 +11,19 @@ import { Subscription } from 'rxjs';
 })
 export class SchedulePositionDayLabelCellComponent implements OnInit, OnDestroy {
 
-  @Input('day')
+  @Input()
   day: Date
 
-  @Input('dayIndex')
+  @Input()
   dayIndex: number
 
-  @Input('requiredStaff')
+  @Input()
   requiredStaff: RequiredStaffDto
 
-  @Input('shiftsTable')
+  @Input()
   shiftsTable: ShiftDto[][][]
 
-  @Input('disabled')
+  @Input()
   disabled: boolean = false
 
   allocatedHours: number

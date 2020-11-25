@@ -1,10 +1,7 @@
-package jwer.schedulegenerator.generator
+package jwer.schedulegenerator.generator.utils
 
-import jwer.schedulegenerator.generator.model.Employee
-import jwer.schedulegenerator.generator.model.PreferenceType
+import jwer.schedulegenerator.generator.model.GeneratorConfig
 import jwer.schedulegenerator.generator.model.Schedule
-import java.io.File
-import kotlin.random.Random
 
 class RandomScheduleGenerator {
 
@@ -17,7 +14,7 @@ class RandomScheduleGenerator {
                 val emp = schedule.scheduleIndexToEmployee[i]!!
                 arr.forEachIndexed { j, _ -> arr[j] = emp.randomPosition()?.id }
             }
-            schedule.recalcHourCount()
+            schedule.recalculateHourCount()
             return schedule
         }
 

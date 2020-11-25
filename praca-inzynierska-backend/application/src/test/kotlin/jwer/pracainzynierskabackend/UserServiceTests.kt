@@ -1,13 +1,14 @@
 package jwer.pracainzynierskabackend
 
-import jwer.pracainzynierskabackend.controller.*
+import jwer.pracainzynierskabackend.controller.EmployeeController
+import jwer.pracainzynierskabackend.controller.PositionController
+import jwer.pracainzynierskabackend.controller.ShiftController
+import jwer.pracainzynierskabackend.controller.UserController
 import jwer.pracainzynierskabackend.model.dto.*
 import jwer.pracainzynierskabackend.model.entity.Employee
 import jwer.pracainzynierskabackend.model.entity.EmployeeStatus
 import jwer.pracainzynierskabackend.model.entity.Position
 import jwer.pracainzynierskabackend.repository.*
-import jwer.pracainzynierskabackend.service.EmployeeService
-import jwer.pracainzynierskabackend.service.UserService
 import jwer.pracainzynierskabackend.service.WorkplaceService
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
@@ -17,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import java.security.Principal
 import java.time.LocalDateTime
-import javax.persistence.EntityManager
 import javax.sql.DataSource
 
 @SpringBootTest
@@ -88,11 +88,11 @@ class UserServiceTests @Autowired constructor(
         assert(savedPositions.size == 2)
         assert(savedPositions.any { it.name == POSITION_1_NAME })
         assert(savedPositions.any { it.name == POSITION_2_NAME })
-        savedPositions.forEach { assert(positionRepository.existsById(it.id!!)) }
+        savedPositions.forEach { assert(positionRepository.existsById(it.id)) }
 
         userController.deleteAccount(user)
 
-        savedPositions.forEach { assert(!positionRepository.existsById(it.id!!)) }
+        savedPositions.forEach { assert(!positionRepository.existsById(it.id)) }
     }
 
     @Test
@@ -118,9 +118,9 @@ class UserServiceTests @Autowired constructor(
 
         userController.deleteAccount(user)
 
-        savedPositions.forEach { assert(!positionRepository.existsById(it.id!!)) }
-        savedEmployees.forEach { assert(!employeeRepository.existsById(it.id!!)) }
-        savedEmployees.forEach { assert(!accountRepository.existsById(it.id!!)) }
+        savedPositions.forEach { assert(!positionRepository.existsById(it.id)) }
+        savedEmployees.forEach { assert(!employeeRepository.existsById(it.id)) }
+        savedEmployees.forEach { assert(!accountRepository.existsById(it.id)) }
         assert(!credentialsRepository.existsById(savedEmployeeCredentialsId))
     }
 

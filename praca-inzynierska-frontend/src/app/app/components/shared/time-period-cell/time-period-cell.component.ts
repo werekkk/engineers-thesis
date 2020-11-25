@@ -8,7 +8,7 @@ import { TimePeriodDto } from 'src/app/app/model/dto/TimePeriodDto';
 })
 export class TimePeriodCellComponent implements OnInit {
 
-  @Input('timePeriod')
+  @Input()
   timePeriod: TimePeriodDto
 
   constructor() { }

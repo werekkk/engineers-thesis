@@ -13,25 +13,25 @@ import { Time } from '@angular/common';
 })
 export class TimePeriodPickerComponent implements OnInit {
 
-  @Input('requiredStaff')
+  @Input()
   requiredStaff: RequiredStaffDto
   
-  @Input('shiftsTable')
+  @Input()
   shiftsTable: ShiftDto[][][]
 
-  @Input('employee')
+  @Input()
   employee: EmployeeDto
   
-  @Input('day')
+  @Input()
   day: Date
 
-  @Input('dayIndex')
+  @Input()
   dayIndex: number
 
-  @Input('period')
+  @Input()
   period: TimePeriodDto = new TimePeriodDto(new TimeDto(0, 0), new TimeDto(0, 0))
 
-  @Output('periodChange')
+  @Output()
   periodChange: EventEmitter<TimePeriodDto> = new EventEmitter()
 
   beginTime: TimeDto = new TimeDto(0, 0)

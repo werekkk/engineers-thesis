@@ -9,16 +9,16 @@ import { Utils } from 'src/app/app/shared/utils/utils';
 })
 export class StaffRequirementsPeriodListComponent implements OnInit {
 
-  @Input('timePeriods')
+  @Input()
   timePeriods: RequiredStaffTimePeriodDto[] = []
 
-  @Output('timePeriodsChange')
+  @Output()
   timePeriodsChange: EventEmitter<RequiredStaffTimePeriodDto[]> = new EventEmitter()
 
-  @Input('highlightedPeriodIndex')
+  @Input()
   highlightedPeriodIndex: number = undefined
 
-  @Output('highlightedPeriodIndexChange')
+  @Output()
   highlightedPeriodIndexChange: EventEmitter<number> = new EventEmitter()
 
   constructor() { }

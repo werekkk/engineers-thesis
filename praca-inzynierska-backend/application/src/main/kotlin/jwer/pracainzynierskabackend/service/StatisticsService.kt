@@ -36,8 +36,8 @@ class StatisticsService @Autowired constructor(
             )
 
             shifts.forEach {
-                statistics.positionStatistics.find { p -> p.position.id == it.position.id }?.let { p -> p.add(it) }
-                statistics.employeeStatistics.find { e -> e.employee.employeeId == it.employee.id}?.let { e -> e.add(it) }
+                statistics.positionStatistics.find { p -> p.position.id == it.position.id }?.add(it)
+                statistics.employeeStatistics.find { e -> e.employee.employeeId == it.employee.id}?.add(it)
             }
 
             return statistics

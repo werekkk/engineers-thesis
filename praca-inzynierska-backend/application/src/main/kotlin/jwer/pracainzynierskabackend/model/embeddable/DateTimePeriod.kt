@@ -1,7 +1,5 @@
 package jwer.pracainzynierskabackend.model.embeddable
 
-import jwer.pracainzynierskabackend.utils.createResponse
-import jwer.pracainzynierskabackend.utils.isSavedAsMidnight
 import jwer.pracainzynierskabackend.utils.totalMinutesInDay
 import java.time.LocalDateTime
 import javax.persistence.Embeddable

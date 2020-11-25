@@ -1,14 +1,11 @@
 import { Directive, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 
-//https://christianliebel.com/2016/05/angular-2-a-simple-click-outside-directive/
-//https://stackoverflow.com/a/46656671/9861229
-
 @Directive({
   selector: '[clickOutside]'
 })
 export class ClickOutsideDirective {
 
-  @Output('clickOutside')
+  @Output()
   clickOutside = new EventEmitter()
 
   private wasInside = true

@@ -1,5 +1,5 @@
 import { PreferenceType } from '../../PreferenceType'
-import { TimePeriod } from '../../TimePeriod'
+import { TimePeriod } from './TimePeriod'
 import { HourPreferenceDto } from '../HourPreferenceDto'
 
 /**

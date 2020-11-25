@@ -18,29 +18,29 @@ export type PickerType = 'shiftStart' | 'shiftFinish'
 })
 export class TimePickerComponent implements OnInit {
 
-  @Input('pickerType')
+  @Input()
   pickerType: PickerType
 
-  @Input('shiftsTable')
+  @Input()
   shiftsTable: ShiftDto[][][]
 
-  @Input('employee')
+  @Input()
   employee: EmployeeDto
 
-  @Input('day')
+  @Input()
   day: Date
 
-  @Input('dayIndex')
+  @Input()
   dayIndex: number
 
-  @Input('requiredStaff')
+  @Input()
   requiredStaff: RequiredStaffDto
 
-  @Input('beginTime')
+  @Input()
   beginTime: TimeDto
 
   _time: TimeDto = new TimeDto(0, 0, 0)
-  @Input('time')
+  @Input()
   set time(val: TimeDto) {
     this._time = val
     if (val.isMidnight()) {
@@ -53,7 +53,7 @@ export class TimePickerComponent implements OnInit {
     return this._time
   }
 
-  @Output('timeChange')
+  @Output()
   timeChange: EventEmitter<TimeDto> = new EventEmitter()
 
   timeStep: TimeStep = TimeStep.FIVE_MINUTES

@@ -16,7 +16,7 @@ export class StatisticsYearComponent implements OnInit {
   get year(): number {
     return this._year
   }
-  @Input('year')
+  @Input()
   set year(val: number) {
     this._year = val
     this.onYearChange(val)

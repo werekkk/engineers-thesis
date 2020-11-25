@@ -22,13 +22,13 @@ export class SchedulePositionWeekEditComponent implements OnInit {
   get firstDay(): Date {
     return this._firstDay
   }
-  @Input('firstDay')
+  @Input()
   set firstDay(val: Date) {
     this._firstDay = val
     this.handleNewFirstDay()
   }
 
-  @Input('position')
+  @Input()
   position: PositionDto
 
   days: Date[] = []

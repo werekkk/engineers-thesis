@@ -8,7 +8,7 @@ import { ShiftDto } from 'src/app/app/model/dto/ShiftDto';
 })
 export class ScheduleEmployeeDayCellComponent implements OnInit {
 
-  @Input('shifts')
+  @Input()
   shifts: ShiftDto[]
 
   constructor() { }

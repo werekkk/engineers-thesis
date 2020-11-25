@@ -1,4 +1,4 @@
-import { TimePeriod } from '../../TimePeriod'
+import { TimePeriod } from './TimePeriod'
 import { RequiredStaffTimePeriodDto } from '../RequiredStaffTimePeriodDto';
 
 /**

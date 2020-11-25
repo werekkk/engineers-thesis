@@ -1,9 +1,10 @@
-package jwer.schedulegenerator.generator
+package jwer.schedulegenerator.generator.utils
 
+import jwer.schedulegenerator.generator.model.GeneratorConfig
 import jwer.schedulegenerator.generator.model.PreferenceType
 import jwer.schedulegenerator.generator.model.Schedule
 
-class ConstraintedRandomScheduleGenerator {
+class ConstrainedRandomScheduleGenerator {
 
     companion object {
 

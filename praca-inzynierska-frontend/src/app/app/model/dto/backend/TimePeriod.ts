@@ -1,4 +1,4 @@
-import { TimePeriodDto } from './dto/TimePeriodDto';
+import { TimePeriodDto } from '../TimePeriodDto';
 
 export class TimePeriod {
     constructor(

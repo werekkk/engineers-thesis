@@ -13,34 +13,34 @@ import { interval } from 'rxjs';
 })
 export class ScheduleEmployeeDayCellComponent {
 
-  @Input('shifts')
+  @Input()
   shifts: ShiftDto[]
 
-  @Output('shiftsChange')
+  @Output()
   shiftsChange: EventEmitter<ShiftDto[]> = new EventEmitter()
 
-  @Input('shiftsTable')
+  @Input()
   shiftsTable: ShiftDto[][][]
 
-  @Input('position')
+  @Input()
   position: PositionDto
 
-  @Input('employee')
+  @Input()
   employee: EmployeeDto
 
-  @Input('requiredStaff')
+  @Input()
   requiredStaff: RequiredStaffDto
 
-  @Input('day')
+  @Input()
   day: Date
 
-  @Input('dayIndex')
+  @Input()
   dayIndex: number
 
-  @Input('instantUpdate')
+  @Input()
   instantUpdate: boolean = true
 
-  @Input('disabled')
+  @Input()
   disabled: boolean = false
 
   showPopup = false

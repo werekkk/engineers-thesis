@@ -15,11 +15,10 @@ type Canvas = CanvasUtils.Canvas
 })
 export class StaffRequirementsDayEditorComponent implements AfterViewInit {
 
-
-  @Input('timeStep')
+  @Input()
   timeStep: TimeStep = TimeStep.FIFTEEN_MINUTES
 
-  @Input('timePeriods')
+  @Input()
   set timePeriods(value: RequiredStaffTimePeriodDto[]) {
     this._timePeriods = value
     this.adjustMaxEmployeesByTimePeriods()
@@ -31,10 +30,10 @@ export class StaffRequirementsDayEditorComponent implements AfterViewInit {
 
   _timePeriods: RequiredStaffTimePeriodDto[] = []
 
-  @Output('timePeriodsChange')
+  @Output()
   timePeriodsChange: EventEmitter<RequiredStaffTimePeriodDto[]> = new EventEmitter()
 
-  @Input('highlightedPeriodIndex')
+  @Input()
   set highlightedPeriodIndex(value: number) {
     this._highlightedPeriodIndex = value
     this.requestRedraw()

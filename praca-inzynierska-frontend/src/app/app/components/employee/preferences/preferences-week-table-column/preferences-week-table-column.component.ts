@@ -10,10 +10,10 @@ import { PreferenceType } from 'src/app/app/model/PreferenceType';
 })
 export class PreferencesWeekTableColumnComponent implements OnInit {
 
-  @Input('day')
+  @Input()
   day: number
 
-  @Input('preferencesDay')
+  @Input()
   preferencesDay: PreferencesDayDto
 
   constructor() { }

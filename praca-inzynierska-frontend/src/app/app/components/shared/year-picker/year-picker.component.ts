@@ -14,12 +14,12 @@ export class YearPickerComponent  {
   get year(): number {
     return this._year
   }
-  @Input('year')
+  @Input()
   set year(val: number) {
     this._year = val
   }
   
-  @Output('yearChange')
+  @Output()
   yearChange: EventEmitter<number> = new EventEmitter()
 
   constructor() { }

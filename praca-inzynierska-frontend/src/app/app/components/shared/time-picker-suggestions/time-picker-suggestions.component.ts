@@ -17,36 +17,36 @@ export class TimePickerSuggestionsComponent implements OnInit, AfterViewInit {
   @ViewChild('suggestions')
   suggestionsDiv: ElementRef<HTMLDivElement>
 
-  @Output('mouseOver')
+  @Output()
   mouseOver: EventEmitter<boolean> = new EventEmitter()
 
-  @Input('allHours')
+  @Input()
   allHours: TimeDto[]
 
-  @Input('userInput')
+  @Input()
   set userInput(val: string) {
     this.handleUserInput(val)
   }
 
-  @Input('pickerType')
+  @Input()
   pickerType: PickerType
 
-  @Input('shiftsTable')
+  @Input()
   shiftsTable: ShiftDto[][][]
 
-  @Input('employee')
+  @Input()
   employee: EmployeeDto
 
-  @Input('day')
+  @Input()
   day: Date
 
-  @Input('dayIndex')
+  @Input()
   dayIndex: number
 
-  @Input('requiredStaff')
+  @Input()
   requiredStaff: RequiredStaffDto
 
-  @Input('beginTime')
+  @Input()
   beginTime: TimeDto
 
   highlightedHour: TimeDto = null

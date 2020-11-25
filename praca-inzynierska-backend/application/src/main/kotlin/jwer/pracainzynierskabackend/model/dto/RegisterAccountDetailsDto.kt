@@ -7,5 +7,4 @@ data class RegisterAccountDetailsDto(
 
         val firstName: String,
         val lastName: String
-) {
-}
+)

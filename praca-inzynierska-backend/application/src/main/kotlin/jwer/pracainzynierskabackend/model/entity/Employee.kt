@@ -1,7 +1,6 @@
 package jwer.pracainzynierskabackend.model.entity
 
 import jwer.pracainzynierskabackend.model.auth.Account
-import java.time.LocalDate
 import javax.persistence.*
 
 @Entity

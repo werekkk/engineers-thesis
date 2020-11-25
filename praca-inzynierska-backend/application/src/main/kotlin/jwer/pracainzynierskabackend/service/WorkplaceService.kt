@@ -14,7 +14,7 @@ class WorkplaceService @Autowired constructor(
 ){
 
     fun getWorkplaceByPrincipal(principal: Principal): Workplace? {
-        userService.getAccount(principal)?.let {
+        userService.getAccount(principal).let {
             return when(it.accountType) {
                 AccountType.EMPLOYEE -> workplaceRepository.findByEmployeeUsername(it.username!!)
                 AccountType.EMPLOYER -> workplaceRepository.findByEmployerUsername(it.username!!)
@@ -23,7 +23,7 @@ class WorkplaceService @Autowired constructor(
     }
 
     fun getWorkplaceByEmployer(principal: Principal): Workplace? {
-        userService.getAccount(principal)?.let {
+        userService.getAccount(principal).let {
             return workplaceRepository.findByEmployerUsername(it.username!!)
         }
     }

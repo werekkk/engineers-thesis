@@ -4,7 +4,6 @@ import jwer.pracainzynierskabackend.model.dto.AddEmployeeDto
 import jwer.pracainzynierskabackend.model.dto.EmployeeDto
 import jwer.pracainzynierskabackend.model.dto.EmployeesDto
 import jwer.pracainzynierskabackend.service.EmployeeService
-import jwer.pracainzynierskabackend.utils.ControllerUtils
 import jwer.pracainzynierskabackend.utils.createResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity

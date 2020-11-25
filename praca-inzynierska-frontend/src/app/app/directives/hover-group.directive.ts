@@ -8,7 +8,7 @@ export class HoverGroupDirective implements OnDestroy {
 
   private static currentGroup: EventEmitter<number[]> = new EventEmitter()
 
-  @Input('hoverGroup')
+  @Input()
   hoverGroup: number | number[] = 0
 
   @Input('classOnHover')

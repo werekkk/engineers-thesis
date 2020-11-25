@@ -13,16 +13,16 @@ export class StaffRequirementsComponent {
 
   isLoading: boolean = undefined
 
-  @Input('position')
+  @Input()
   position: PositionDto
 
-  @Input('timeStep')
+  @Input()
   timeStep: TimeStep
 
-  @Input('staffRequirements')
+  @Input()
   staffRequirements: RequiredStaffDto
 
-  @Output('staffRequirementsChange')
+  @Output()
   staffRequirementsChange: EventEmitter<RequiredStaffDto> = new EventEmitter()
 
   constructor() { }

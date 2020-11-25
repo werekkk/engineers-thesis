@@ -1,4 +1,6 @@
-package jwer.schedulegenerator.generator.model
+package jwer.schedulegenerator.generator.transition
+
+import jwer.schedulegenerator.generator.model.Schedule
 
 interface Transition {
 

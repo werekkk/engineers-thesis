@@ -2,7 +2,6 @@ package jwer.pracainzynierskabackend.controller
 
 import jwer.pracainzynierskabackend.model.dto.StatisticsYearDto
 import jwer.pracainzynierskabackend.service.StatisticsService
-import jwer.pracainzynierskabackend.utils.ControllerUtils
 import jwer.pracainzynierskabackend.utils.createResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity

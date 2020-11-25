@@ -1,6 +1,6 @@
 package jwer.schedulegenerator.generator.model
 
-import jwer.schedulegenerator.generator.GeneratorConfig
+import jwer.schedulegenerator.generator.transition.Transition
 import jwer.schedulegenerator.generator.utils.isTruthy
 
 class Schedule(
@@ -72,7 +72,7 @@ class Schedule(
         return hourCount
     }
 
-    fun recalcHourCount() {
+    fun recalculateHourCount() {
         hourCount = HourCount(schedule.size)
         configuration.positions.forEach { hourCount += it.countHours(this) }
         hourCount.shifts = countShiftsOnPeriod(0, configuration.totalTimePoints - 1)

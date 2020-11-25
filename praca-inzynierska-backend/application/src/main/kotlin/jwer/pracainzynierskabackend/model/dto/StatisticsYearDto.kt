@@ -11,9 +11,7 @@ data class StatisticsYearDto(
     fun add(shift: Shift) {
         val month = shift.period.start.monthValue - 1
         positionStatistics.find { it.position.id == shift.position.id }!!.totalMonths[month] += shift
-        employeeStatistics.find { it.employee.employeeId == shift.employee.id }!!.let {
-            it.total += shift
-        }
+        employeeStatistics.find { it.employee.employeeId == shift.employee.id }!!.total += shift
     }
 
 }
