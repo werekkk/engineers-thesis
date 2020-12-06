@@ -49,4 +49,8 @@ export class RequiredStaffTimePeriodDto implements HasTimePeriod {
     setFinishTime(newFinish: TimeDto) {
         this.timePeriod.finish = newFinish
     }
+
+    equalsWithoutId(other: RequiredStaffTimePeriodDto): boolean {
+        return this.employeeCount == other.employeeCount && this.timePeriod.compare(other.timePeriod) == 0
+    }
 }

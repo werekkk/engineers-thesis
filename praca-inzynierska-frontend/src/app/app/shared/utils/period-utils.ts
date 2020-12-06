@@ -3,7 +3,7 @@ import { TimePeriodDto } from '../../model/dto/TimePeriodDto'
 import { HasTimePeriod } from '../../model/HasTimePeriod'
 import { TimeDto } from '../../model/dto/TimeDto'
 
-export namespace PeriodUtils {
+export class PeriodUtils {
 
     /**
      * Time period array is optimized when:
@@ -20,7 +20,7 @@ export namespace PeriodUtils {
      *  
      * @returns Optimized `reqs` array
      */
-    export function insertPeriodAndOptimize(pers: HasTimePeriod[], newPer: HasTimePeriod): HasTimePeriod[] {
+    static insertPeriodAndOptimize(pers: HasTimePeriod[], newPer: HasTimePeriod): HasTimePeriod[] {
         if (newPer.timePeriod.start.equals(newPer.timePeriod.finish)) {
             return pers
         }
@@ -52,12 +52,12 @@ export namespace PeriodUtils {
             }
         }
         if (!newPer.doNotKeep()) {
-            pers = insertPeriodInGap(pers, newPer)
+            pers = PeriodUtils.insertPeriodInGap(pers, newPer)
         }
         return pers
     }
 
-    function insertPeriodInGap(pers: HasTimePeriod[], newPer: HasTimePeriod): HasTimePeriod[] {
+    private static insertPeriodInGap(pers: HasTimePeriod[], newPer: HasTimePeriod): HasTimePeriod[] {
         let insertPosition = 0
         let shouldInsert = true
         while (pers.length > insertPosition &&
