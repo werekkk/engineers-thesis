@@ -31,6 +31,14 @@ export class ChangesWillBeLostModalComponent {
     ]
   }
 
+  static PREFERENCES_CHANGES_DATA = {
+    title: 'Czy chcesz zapisać preferencje tygodniowe?',
+    paragraphs: [
+      'Wprowadzono zmiany w preferencjach tygodniowych.',
+      'Zapisać zmiany?'
+    ]
+  }
+
   fromParent: FromParentData
 
   constructor(
