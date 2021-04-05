@@ -33,6 +33,7 @@
 			<groupId>jwer</groupId>
 			<artifactId>engineers-thesis-frontend</artifactId>
 			<version>0.1.0</version>
+			<type>pom</type>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
