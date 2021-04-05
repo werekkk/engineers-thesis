@@ -11,4 +11,4 @@ jobs:
 
     steps:
       - checkout
-      - run: ./mvnw clean install
+      - run: ./mvnw clean install -e
