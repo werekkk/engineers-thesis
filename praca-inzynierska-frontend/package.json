@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build --prod --base-href=\"/praca-inzynierska/\"",
     "test": "ng test",
-    "test-auto": "ng test --watch=false",
+    "test-auto": "ng test --no-watch --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
