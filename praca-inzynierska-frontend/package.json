@@ -1,11 +1,12 @@
 {
-  "name": "praca-inzynierska-frontend",
+  "name": "praca-inzynierska",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod --base-href=\"/praca-inzynierska/\"",
     "test": "ng test",
+    "test-auto": "ng test --no-watch --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
