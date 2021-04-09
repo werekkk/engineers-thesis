@@ -15,31 +15,18 @@ import { ActivationLinkModalComponent } from '../activation-link-modal/activatio
 })
 export class EmployeesListComponent implements OnInit {
 
-  employer: AccountDto
   employees: EmployeeDto[]
-  isCollapsed: boolean[]
 
   constructor(
     private employerService: EmployeeService,
     private modalService: NgbModal
   ) {
-    employerService.employer.subscribe(e => this.employer = e)
     employerService.employees.subscribe(e => {
-      this.isCollapsed = new Array(e.length)
-      this.employees = e
+      this.employees = e.sort(EmployeeDto.compare)
     })
   }
 
   ngOnInit(): void {}
-
-  onRowClicked(rowIndex: number) {
-    if (this.isCollapsed[rowIndex]) {
-      this.isCollapsed[rowIndex] = false
-    } else {
-      this.isCollapsed = this.isCollapsed.map(() => false)
-      this.isCollapsed[rowIndex] = true
-    }
-  }
 
   onAssignPositionsClicked(employee: EmployeeDto) {
     let modalRef = this.modalService.open(EmployeesEditEmployeePositionsModalComponent, {windowClass: 'modal-appear', centered: true, size: 'md'})

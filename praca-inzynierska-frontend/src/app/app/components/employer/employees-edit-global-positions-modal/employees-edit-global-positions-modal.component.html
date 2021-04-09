@@ -12,7 +12,7 @@
                     <div *ngIf="currentlyEditedPositionIndex == i">
                         <input class="form-control" placeholder="Nowa nazwa stanowiska" id="editedName" [(ngModel)]="editedName">
                     </div>
-                    <div *ngIf="currentlyEditedPositionIndex != i">
+                    <div id="positionNameLabel" *ngIf="currentlyEditedPositionIndex != i">
                         {{position.name}}
                     </div>
                     <div *ngIf="currentlyEditedPositionIndex == i" class="position-options">
@@ -20,15 +20,15 @@
                             <button class="btn btn-secondary btn-sm" (click)="setEditedPosition(null)">Powrót</button>
                         </div>
                         <div>
-                            <button class="btn btn-success btn-sm" (click)="onSaveEditClicked()">Zapisz</button>
+                            <button id="saveEditBtn" class="btn btn-success btn-sm" (click)="onSaveEditClicked()">Zapisz</button>
                         </div>
                     </div>
                     <div *ngIf="currentlyEditedPositionIndex != i" class="position-options">
                         <div>
-                            <button class="btn btn-primary btn-sm" (click)="setEditedPosition(i)">Edytuj</button>
+                            <button id="editPositionBtn" class="btn btn-primary btn-sm" (click)="setEditedPosition(i)">Edytuj</button>
                         </div>
                         <div>
-                            <button class="btn btn-danger btn-sm" (click)="onDeletePositionClicked(position)">Usuń</button>
+                            <button id="deletePositionBtn" class="btn btn-danger btn-sm" (click)="onDeletePositionClicked(position)">Usuń</button>
                         </div>
                     </div>
                 </div> 
@@ -44,9 +44,9 @@
         <div class="new-position">
             <label>
                 Nowe stanowisko
-                <input class="form-control" type="text" [(ngModel)]="newPositionName" placeholder="Nowe stanowisko">
+                <input id="newPosition" class="form-control" type="text" [(ngModel)]="newPositionName" placeholder="Nowe stanowisko">
             </label>
-            <button class="btn btn-success" (click)="onAddPositionClicked()">Dodaj</button>
+            <button id="addPositionBtn" class="btn btn-success" (click)="onAddPositionClicked()">Dodaj</button>
         </div>
         <div>
             <button class="btn btn-primary" (click)="modal.close()">Powrót</button>

@@ -9,8 +9,8 @@
         </tr>
     </thead>
     <tbody>
-        <ng-container  *ngFor="let e of employees; let i = index">
-            <tr (click)="onRowClicked(i)">
+        <ng-container *ngFor="let e of employees; let i = index">
+            <tr>
                 <th scope="row">
                     {{i + 1}}
                 </th>
@@ -47,7 +47,7 @@
                         <button class="btn btn-sm btn-primary" (click)="onAssignPositionsClicked(e)">
                             Przypisz stanowiska
                         </button>
-                        <button class="btn btn-sm btn-danger" (click)="onDeleteClicked(e)">
+                        <button id="deleteEmployeeBtn" class="btn btn-sm btn-danger" (click)="onDeleteClicked(e)">
                             Usuń
                         </button>
                     </div>

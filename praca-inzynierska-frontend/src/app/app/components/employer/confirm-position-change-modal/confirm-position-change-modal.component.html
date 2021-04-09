@@ -4,7 +4,7 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<div class="modal-body">   
+<div id="confirmChangePositionsModal" class="modal-body">   
     <p>
         Przy zmianie stanowisk pracownika "{{ fromParent?.employee.account.firstName}} {{ fromParent?.employee.account.lastName }}"
         pracownik utraci następujące stanowiska:
@@ -22,5 +22,5 @@
 </div> 
 <div class="modal-footer">
     <button class="btn btn-secondary" (click)="modal.close(false)">Powrót</button>
-    <button class="btn btn-danger" (click)="modal.close(true)">Zaakceptuj zmiany</button>
+    <button id="saveChangesBtn" class="btn btn-danger" (click)="modal.close(true)">Zaakceptuj zmiany</button>
 </div>

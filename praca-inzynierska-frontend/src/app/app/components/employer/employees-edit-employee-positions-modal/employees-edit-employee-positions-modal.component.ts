@@ -38,9 +38,9 @@ export class EmployeesEditEmployeePositionsModalComponent implements OnInit {
       this.positionService.getAllPositions().subscribe()
     }
     this.positionService.positions.subscribe(newPositions => {
-      this.positions = newPositions
+      this.positions = newPositions.sort((a, b) => a.name.localeCompare(b.name))
       this.positionSelected = Utils.emptyBooleanArray(newPositions.length)
-      this.fromParent.employee.positions.forEach(ep => {
+      this.fromParent?.employee.positions.forEach(ep => {
         this.positionSelected[this.positions.findIndex(p => ep.id == p.id)] = true
       })
     })

@@ -1,17 +1,19 @@
 <div *ngIf="!isLoading">
     <div class="modal-header">
-        <h4>Stanowiska - {{fromParent.employee.account.firstName}} {{fromParent.employee.account.lastName}}</h4>
+        <h4 id="title">Stanowiska - {{fromParent?.employee.account.firstName}} {{fromParent?.employee.account.lastName}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="activeModal.close(false)" tabindex="-1">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <ng-container *ngIf="positions.length > 0; else noPositions">
-            <div class=" form-check unselectable" *ngFor="let position of positions; let i = index">
-                <input class="form-check-input" type="checkbox" [id]="'checkbox' + i" [(ngModel)]="positionSelected[i]">
-                <label class="form-check-label" [for]="'checkbox' + i">{{position.name}}</label>
-            </div>
-        </ng-container>
+        <div class="position-rows">
+            <ng-container *ngIf="positions.length > 0; else noPositions">
+                <div class="form-check unselectable" *ngFor="let position of positions; let i = index">
+                    <input class="form-check-input" type="checkbox" [id]="'checkbox' + i" [(ngModel)]="positionSelected[i]">
+                    <label class="form-check-label" [for]="'checkbox' + i">{{position.name}}</label>
+                </div>
+            </ng-container>
+        </div>
         <ng-template #noPositions>
             <div class="no-positions">
                 <div>
@@ -27,7 +29,7 @@
         <button class="btn btn-secondary" (click)="activeModal.dismiss()">
             Anuluj
         </button>
-        <button class="btn btn-success" (click)="onSavePositionsClicked()">
+        <button id="saveBtn" class="btn btn-success" (click)="onSavePositionsClicked()">
             Zapisz
         </button>
     </div>

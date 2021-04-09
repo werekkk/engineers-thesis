@@ -1,11 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { EmployeeStatus } from '../../../model/EmployeeStatus'
 import { AddEmployeeDto } from '../../../model/dto/AddEmployeeDto'
 import { EmployeeService } from '../../../services/employee.service'
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto';
-import { InvitationLinkPipe } from 'src/app/app/pipes/invitation-link.pipe';
 import { Utils } from 'src/app/app/shared/utils/utils';
 
 @Component({
@@ -20,7 +18,7 @@ export class EmployeesNewEmployeeModalComponent implements OnInit {
   isLoading = false
 
   savedEmployee: EmployeeDto
-  invitationLink: string = ''
+  invitationLink = ''
 
   copyLinkText: 'Kopiuj link' | 'Skopiowano!'
 
@@ -45,7 +43,7 @@ export class EmployeesNewEmployeeModalComponent implements OnInit {
   onSaveClicked() {
     this.employeeForm.markAllAsTouched()
     if (this.employeeForm.valid) {
-      let newEmployee: AddEmployeeDto = this.employeeForm.value
+      const newEmployee: AddEmployeeDto = this.employeeForm.value
       this.showForm = false
       this.isLoading = true
       this.employerService.addEmployee(newEmployee)
@@ -67,7 +65,6 @@ export class EmployeesNewEmployeeModalComponent implements OnInit {
   }
 
   onCopyLinkClicked() {
-    let linkPipe = new InvitationLinkPipe()
     Utils.copyToClipboard(this.invitationLink)
     this.copyLinkText = 'Skopiowano!'
   }
