@@ -51,7 +51,7 @@ Aby uruchomić system należy wykonać następujące kroki:
 
     Uruchomienie tasków Mavena:
 
-    ```mvnw install```
+    ```mvnw clean install```
 
     System jest budowany do pojedynczego pliku praca-inzynierska.war w katalogu /praca-inzynierska-backend/application/target/
   
