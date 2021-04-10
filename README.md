@@ -63,7 +63,7 @@ Aby uruchomić system należy wykonać następujące kroki:
      1. Wdrażając plik praca-inzynierska.war do kontenera aplikacji webowych (np. Tomcat).
      2. Uruchamiając aplikację z poziomu IDE (funkcja main w pliku jwer.backend.BackendApplikation.kt) - należy pamiętać o ustawieniu odpowiednich parametrów (url bazy, nazwa i hasło użytkownika Postgresa) w pliku application.properties w module application.
      3. Z lini poleceń:
-     ```mvn spring-boot:run -pl jwer:engineers-thesis-application```
+     ```mvnw spring-boot:run -pl jwer:engineers-thesis-application```
     
     Uruchomiona za pomocą sposobu 2. albo 3. aplikacja jest dostępna pod adresem [localhost:8080](http://localhost:8080/index.html)
     
