@@ -18,12 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import java.security.Principal
 import java.time.LocalDateTime
-import javax.sql.DataSource
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class UserServiceTests @Autowired constructor(
-        private val dataSource: DataSource,
         private val credentialsRepository: CredentialsRepository,
         private val employerRepository: EmployerRepository,
         private val accountRepository: AccountRepository,
@@ -50,14 +48,8 @@ class UserServiceTests @Autowired constructor(
 
     }
 
-    @Test()
+    @Test
     @Order(1)
-    fun checkDatabaseDriver() {
-        assert(dataSource.connection.metaData.driverName == "H2 JDBC Driver")
-    }
-
-    @Test()
-    @Order(2)
     fun deleteEmptyWorkplace() {
         val user = registerTestWorkplace()
 
@@ -79,8 +71,8 @@ class UserServiceTests @Autowired constructor(
         assert(!credentialsRepository.existsById(employerCredentialsId))
     }
 
-    @Test()
-    @Order(3)
+    @Test
+    @Order(2)
     fun deleteWorkplaceWithPositions() {
         val user = registerTestWorkplace()
         val savedPositions = addTwoPositions(user)
@@ -96,7 +88,7 @@ class UserServiceTests @Autowired constructor(
     }
 
     @Test
-    @Order(4)
+    @Order(3)
     fun deleteWorkplaceWithEmployeesAndPositions() {
         val user = registerTestWorkplace()
         val savedPositions = addTwoPositions(user)
@@ -125,7 +117,7 @@ class UserServiceTests @Autowired constructor(
     }
 
     @Test
-    @Order(5)
+    @Order(4)
     fun deleteEmployerAccount() {
         val user = registerTestWorkplace()
 
@@ -153,7 +145,7 @@ class UserServiceTests @Autowired constructor(
     }
 
     @Test
-    @Order(6)
+    @Order(5)
     fun deleteWorkplaceWithShifts() {
         val user = registerTestWorkplace()
         val savedPositions = addTwoPositions(user)

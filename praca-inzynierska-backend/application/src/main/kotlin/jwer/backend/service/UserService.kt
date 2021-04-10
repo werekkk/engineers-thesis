@@ -71,8 +71,7 @@ class UserService @Autowired constructor(
 
         val savedEmployer = employerRepository.save(employer)
 
-        return AccountResponseDto(AccountDto(savedCredentials, savedEmployer.account)
-        )
+        return AccountResponseDto(AccountDto(savedCredentials, savedEmployer.account))
     }
 
     @Transactional

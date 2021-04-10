@@ -1,6 +1,6 @@
 import { IterableDiffers } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, of } from 'rxjs'
 import { AccountType } from 'src/app/app/model/AccountType'
 import { AccountDto } from 'src/app/app/model/dto/AccountDto'
 import { EmployeeDto } from 'src/app/app/model/dto/EmployeeDto'
@@ -13,7 +13,7 @@ import { EmployeesListComponent } from './employees-list.component'
 
 class MockEmployeeService {
   employees = new BehaviorSubject<EmployeeDto[]>([])
-  deleteEmployee(id: number){}
+  deleteEmployee(id: number){ return of(null)}
 }
 
 describe('EmployeesListComponent', () => {
