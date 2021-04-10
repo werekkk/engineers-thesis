@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   serverUrl: 'http://localhost:8080',
   baseHref: ''
-};
+}
 
 /*
  * For easier debugging in development mode, you can import the following file
