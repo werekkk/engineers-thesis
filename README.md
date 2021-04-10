@@ -72,7 +72,7 @@ Aby uruchomić system należy wykonać następujące kroki:
 
 ## Testy
   
-Sporządzone testy systemu obejmowały między innymi funkcjonalności związane z prezentowanego pracodawcy widokiem pracowników (```/employer/employees```). Umożliwia on dodawanie i usuwanie pracowników i stanowisk oraz przypisywanie stanowisk poszczególnym pracownikom.
+Sporządzone testy systemu obejmowały między innymi funkcjonalności związane z prezentowanym pracodawcy widokiem pracowników (```/employer/employees```). Umożliwia on dodawanie i usuwanie pracowników i stanowisk oraz przypisywanie stanowisk poszczególnym pracownikom.
   
 W części frontendowej testy zamieszczono w plikach:
   
