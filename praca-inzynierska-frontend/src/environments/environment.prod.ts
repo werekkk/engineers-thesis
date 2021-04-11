@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  serverUrl: '',
-  baseHref: ''
+  serverUrl: '/praca-inzynierska',
+  baseHref: '/praca-inzynierska'
 }
