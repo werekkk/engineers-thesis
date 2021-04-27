@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { AuthenticationService } from 'src/app/app/services/authentication.service';
 import { Credentials } from 'src/app/app/model/Credentials';
 
@@ -17,11 +17,17 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.errors = false
+    this.route.queryParams
+      .subscribe(params => {
+        this.loginInput = params.login || ''
+        this.passwordInput = params.password || ''
+      })
   }
 
   onRegisterClicked() {

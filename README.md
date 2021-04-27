@@ -1,6 +1,10 @@
 # Engineer's Thesis
 [![CircleCI](https://circleci.com/gh/werekkk/engineers-thesis.svg?style=svg&circle-token=0cad18935bac5ee0aad15d9d2dcae8dc82b4e814)](https://circleci.com/gh/werekkk/engineers-thesis)
 
+[English](./README-en.md)
+
+![Przykładowe zrzuty ekranu systemu](./readme_media/image_array.jpg)
+
 ## Wstęp
 Repozytorium zawiera kod źródłowy systemu będącego przedmiotem mojej pracy inżynierskiej. System jest aplikacją webową stworzoną z wykorzystaniem technologii Angular i Spring Boot (z bazą danych PostgreSQL). System został wdrożony na zewnętrzny serwer www i jest dostępny na stronie [jwer.pl/praca-inzynierska](http://www.jwer.pl/praca-inzynierska)
 
@@ -103,4 +107,4 @@ Logikę aplikacji backendu podzielono na 2 moduły:
 * [schedule-generator](praca-inzynierska-backend/schedule-generator) - umożliwia automatyczne generowanie grafików z wykorzystaniem metaheurystyki symulowanego wyżarzania na podstawie zadanej konfiguracji wejściowej 
 
 
-Jacek Wernikowski
+_Jacek Wernikowski_
